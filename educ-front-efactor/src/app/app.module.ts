@@ -9,20 +9,16 @@ import { HeaderComponent } from './shared/header/header.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CardComponent } from './shared/card/card.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SidebarComponent,
-    FooterComponent,
-    AddressComponent,
-    HomeComponent,
-    HeaderComponent,
-    CardComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
