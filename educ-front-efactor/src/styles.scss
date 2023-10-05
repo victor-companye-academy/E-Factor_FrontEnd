@@ -1,16 +1,70 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap");
 
-$primary-color: #FAAE42;
-$primary-color50: #FAAE4280;
-$background-elements: #F2F4F7;
-$background: #FFF;
-$font: 'Inter', sans-serif;
+:root {
+    --primary: rgba(250, 174, 66, 1);
+    --secondary: rgba(250, 166, 26, 0.5);
+    --tertiary: rgba(242, 244, 247, 1);
+    --quaternary:rgba(91, 94, 119, 0.7);
 
-:root{
+    --body: rgba(255, 255, 255, 1);
+
+    --background: var(--tertiary);
+    --border: var(--primary);
+
+    --text: var(--quaternary);
+    --text-button: var(--quaternary);
+    --text-input: var(--quaternary);
+}
+
+:root .dark-theme {
+
+    //Definir as cores do modo Dark
+
+    --primary: rgb(0, 72, 114);
+    --secondary: rgba(26, 97, 250, 0.5);
+    --tertiary: rgb(79, 80, 80);
+    --quaternary:rgba(255, 255, 255, 0.7);
+    
+    --background: rgb(0, 0, 0);
+
+    --background-card: var(--tertiary);
+    --border: var(--primary);
+
+    --text: var(--quaternary);
+    --text-button: var(--tertiary);
+    --text-input: var(--tertiary);
+}
+
+* {
     padding: 0;
-    box-sizing: border-box;
     margin: 0;
-    font-family: $font;
+    box-sizing: border-box;
     text-decoration: none;
     list-style: none;
+    font-family: "Inter", sans-serif, 'Courier New', Courier, monospace;
+
+    //estilização scroll
+    ::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+        background: transparent;
+        padding: 2px;
+    }    
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--quaternary);
+        border-radius: 5px;
+    }
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--body);
+
+    width: 100vw;
+    height: 100vh;
 }

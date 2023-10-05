@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class SidebarComponent {
 
+  public isActive = [false, false, false, false, false];
+
+  activateLink(index: number){
+    this.isActive = [false, false, false, false, false]
+    this.isActive[index] = true;
+  }
 }
