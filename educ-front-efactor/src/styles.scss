@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap");
 
+@function calcRem($px){
+    $font-size-base: 16;
+    @return $px/$size-base;
+}
+
 :root {
     --primary: rgba(250, 174, 66, 1);
     --secondary: rgba(250, 166, 26, 0.5);
