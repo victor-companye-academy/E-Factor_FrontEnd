@@ -1,14 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap");
 
 :root {
-    --primary: rgba(250, 174, 66, 1);
+    --primary: #FAA61A;
     --secondary: rgba(250, 166, 26, 0.5);
-    --tertiary: rgba(242, 244, 247, 1);
-    --quaternary:rgba(91, 94, 119, 0.7);
+    --tertiary: #F2F4F7;
+    --quaternary:#5B5E77B2;
 
     --body: rgba(255, 255, 255, 1);
 
-    --background: var(--tertiary);
+    --background: var(--tertiary) ;
     --border: var(--primary);
 
     --text: var(--quaternary);

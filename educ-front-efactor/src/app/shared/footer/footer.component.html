@@ -1,52 +1,23 @@
 <footer class="footer">
 
     <div class="div-main">
-        <section class="logo">
-            <img src="assets/icons/logo-site.svg" alt="Logo E-Factor">
-            <p>O seu profissional ou sua vaga na palma da sua mão de um jeito diferente.</p>
+        <section class="section-figure">
+            <figure>
+                <img src="assets/icons/logo-site.svg" alt="Logo E-Factor" title="E-Factor">
+                <figcaption>
+                    <p>O seu profissional ou sua vaga na palma da sua mão de um jeito diferente.</p>
+                </figcaption>
+            </figure>
         </section>
 
         <section>
             <nav class="nav">
-                <ul>
-                    <li id="nav-empresa">
-                        <h2>Empresa</h2>
+                <ul *ngIf="arrayMenu">
+                    <li *ngFor="let menu of arrayMenu">
+                        <h2>{{menu.title}}</h2>
                         <ul>
-                            <li>
-                                <a>Criar vaga</a>
-                            </li>
-
-                            <li>
-                                <a>Buscar profissional</a>
-                            </li>
-                            <li>
-                                <a>Criar conta</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li id="nav-profissional">
-                        <h2>Profissional</h2>
-                        <ul>
-                            <li>
-                                <a>Buscar vaga</a>
-                            </li>
-
-                            <li>
-                                <a>Criar conta</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <h2>Outros</h2>
-                        <ul>
-                            <li>
-                                <a>Novidades</a>
-                            </li>
-
-                            <li>
-                                <a>Sobre</a>
+                            <li *ngFor="let direct of menu.routers">
+                                <a [href]="direct[0]">{{direct[1]}}</a>
                             </li>
                         </ul>
                     </li>
@@ -56,7 +27,7 @@
     </div>
 
     <section>
-        <nav class="nav">
+        <nav class=" nav">
             <h3>© E-Factor 2023.</h3>
             <ul>
                 <li>
