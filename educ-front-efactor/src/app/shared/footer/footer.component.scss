@@ -1,0 +1,95 @@
+:host {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: var(--quaternary);
+    background: var(--background);
+    width: 100vw;
+    padding: 1.35rem 1rem 1.35rem 2.6rem;
+
+    a:hover{
+        color: var(--primary);
+        transition: 0.5s;
+    }
+  
+    .footer {
+      display: flex;
+      flex-direction: column;
+      min-width: 100%;
+  
+      & .div-main {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+  
+      & .logo {
+        display: flex;
+        flex-direction: column;
+        max-width: 13.375rem;
+  
+        & img {
+          max-width: 6.63rem;
+          margin-bottom: 1.63rem;
+        }
+  
+        & p {
+          font-size: 0.9rem;
+          font-style: normal;
+          font-weight: 300;
+          overflow: hidden;
+        }
+      }
+  
+      & .nav {
+        ul {
+          display: flex;
+          flex-wrap: wrap;
+  
+          & li {
+            min-width: 12rem;
+  
+            &:not(:last-child) {
+              margin-right: 2.6rem;
+            }
+  
+            & h2 {
+              font-size: 1.25rem;
+              font-style: normal;
+              font-weight: 600;
+              margin-bottom: 1.47rem;
+            }
+  
+            & a {
+              cursor: pointer;
+            }
+  
+            & ul {
+              display: flex;
+              flex-direction: column;
+  
+              & li:not(:last-child) {
+                margin-bottom: 0.83rem;
+              }
+            }
+          }
+        }
+      }
+  
+      & section {
+        margin-top: 3.07rem;
+  
+        & .nav {
+          display: flex;
+          justify-content: space-between;
+  
+          & h3 {
+            font-size: 0.75rem;
+            font-style: normal;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+  
