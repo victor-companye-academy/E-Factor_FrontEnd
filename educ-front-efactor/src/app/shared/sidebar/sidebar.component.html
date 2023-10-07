@@ -1,16 +1,18 @@
-<div id="sidebar">
-    <img src="assets/logo-efactor.svg" alt="logo e-factor" id="logo">
-    <div id="nav-links">
-        <span [ngClass]="{'active-link':isActive[0]}" (click)="activateLink(0)"><div></div><img src="assets/icons/sidebar/pagina-inicial.svg" alt="Página inicial" class="nav-icons"><a href="#">Página inicial</a></span>
-        <span [ngClass]="{'active-link':isActive[1]}" (click)="activateLink(1)"><div></div><img src="assets/icons/sidebar/profissionais.svg" alt="Profissionais" class="nav-icons"><a href="#">Profissionais</a></span>
-        <span [ngClass]="{'active-link':isActive[2]}" (click)="activateLink(2)"><div></div><img src="assets/icons/sidebar/vagas.svg" alt="Vagas" class="nav-icons"><a href="#">Vagas</a></span>
-        <span [ngClass]="{'active-link':isActive[3]}" (click)="activateLink(3)"><div></div><img src="assets/icons/sidebar/novidades.svg" alt="Novidades" class="nav-icons"><a href="#">Novidades</a></span>
-        <span [ngClass]="{'active-link':isActive[4]}" (click)="activateLink(4)"><div></div><img src="assets/icons/sidebar/sobre.svg" alt="Sobre" class="nav-icons"><a href="#">Sobre</a></span>
+<div id="sidebar" class="d-flex justify-content-between flex-column pt-5 pb-5 ps-4 pe-4">
+    <img src="assets/logo-efactor.svg" alt="logo e-factor" id="logo" class="mb-5">
+    <div id="nav-links" *ngFor="let link of arrayLinksSidebar; let i = index" class="p-2">
+        <span [ngClass]="{'active-link':isActive[i]}" (click)="activateLink(i)" class="d-flex justify-content-start align-items-center">
+            <div class="position-absolute"></div>
+            <img src="{{link.parameters[1]}}" alt="{{link.title}}" class="me-3">
+            <a>
+                {{link.title}}
+            </a>
+        </span>
     </div>
-    <div id="login">
+    <div id="login" class="d-flex justify-content-between align-items-center mt-5 p-3">
         <div>
-            <img src="assets/icons/sidebar/entrar.svg" alt="Entrar" class="nav-icons">
-            <button id="login-btn">Entrar</button>
+            <img src="assets/icons/sidebar/entrar.svg" alt="Entrar" class="nav-icons me-2">
+            <a>Entrar</a>
         </div>
         <img src="assets/icons/sidebar/arrow.svg" alt="Entrar" class="nav-icons">
     </div>
