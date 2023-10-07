@@ -7,12 +7,11 @@ import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
-  
     HomeComponent
   ],
   imports: [
     CommonModule,
-    PagesRoutingModule
+    PagesRoutingModule,
   ]
 })
 export class PagesModule { }
