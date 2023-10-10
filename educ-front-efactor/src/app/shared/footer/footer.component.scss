@@ -1,13 +1,13 @@
 :host {
-  position: absolute;
+  position: fixed;
+  width: 100%;
   bottom: 0;
-  left: 0;
-  color: var(--text);
-  background: var(--background);
-  width: 100vw;
-  padding: 1.68rem 1.35rem 1.35rem 2.6rem;
-
+  
   .footer {
+    color: var(--text);
+    background: var(--background);
+    padding: 1.68rem 1.35rem 1.35rem 2.6rem;
+
     .div-main > .section-figure {
       max-width: 13.375rem;
 

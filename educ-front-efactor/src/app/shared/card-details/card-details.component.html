@@ -1,1 +1,18 @@
-<p>card-details works!</p>
+<span *ngFor="let card of cards" class="card m-4 container rounded-3 border-0"
+    [ngStyle]="{'height': card.src != null ? '12rem' : '8.75rem', 'width': '19.75rem'}">
+
+    <div class="d-flex align-items-center mt-3">
+        <span class="ms-3" *ngIf="card.src">
+            <figure>
+                <img [src]="card.src" alt="img">
+            </figure>
+        </span>
+        <h2 class="mx-4 fw-medium">
+            {{card.title}}
+        </h2>
+    </div>
+
+    <p class="mx-3 mb-4 fw-light">
+        {{card.description}}
+    </p>
+</span>

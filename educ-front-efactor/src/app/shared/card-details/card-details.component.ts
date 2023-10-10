@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CardDetails } from 'src/app/core/interfaces/card-details';
 
 @Component({
-  selector: 'app-card-details',
+  selector: 'card-details',
   templateUrl: './card-details.component.html',
   styleUrls: ['./card-details.component.scss']
 })
 export class CardDetailsComponent {
+
+  @Input({alias:'cards'}) public cards?: Array<CardDetails> = []
 
 }

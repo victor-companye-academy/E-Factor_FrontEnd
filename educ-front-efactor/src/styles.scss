@@ -1,20 +1,19 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@100;300;400;700&display=swap");
 
 :root {
-    --primary: #FAA61A;
+    --primary: #faa61a;
     --secondary: rgba(250, 166, 26, 0.5);
-    --tertiary: #F2F4F7;
+    --tertiary: #f2f4f7;
 
     --body: rgba(255, 255, 255, 1);
 
-    --background: var(--tertiary) ;
+    --background: var(--tertiary);
     --border: var(--primary);
 
-    --text: #5B5E77B2;
+    --text: #5b5e77b2;
 }
 
 :root .dark-theme {
-
     //Definir as cores do modo Dark
 }
 
@@ -24,16 +23,12 @@
     box-sizing: border-box;
     text-decoration: none;
     list-style: none;
-    font-family: "Inter", sans-serif, 'Courier New', Courier, monospace;
+    font-family: "Inter", sans-serif, "Courier New", Courier, monospace;
 }
 
-body{
+body {
     display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background-color: var(--body);
-
-    width: 100vw;
+    flex-direction: column;
     height: 100vh;
+    background-color: var(--body);
 }

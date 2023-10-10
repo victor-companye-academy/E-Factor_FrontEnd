@@ -1,0 +1,24 @@
+:host {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .card {
+        background: var(--background);
+        color: var(--text);
+
+        img {
+            width: 60px;
+            height: 60px;
+        }
+    }
+
+    h2 {
+        font-size: 1.125rem;
+    }
+
+    p {
+        font-size: 0.75rem;
+        overflow-y: hidden;
+    }
+}

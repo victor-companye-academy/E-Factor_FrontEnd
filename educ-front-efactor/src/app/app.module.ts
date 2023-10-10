@@ -3,12 +3,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { CardComponent } from './shared/card/card.component';
 import { SharedModule } from './shared/shared.module';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent, HomeComponent
   ],
   imports: [
     BrowserModule,
