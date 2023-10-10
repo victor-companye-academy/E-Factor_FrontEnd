@@ -4,8 +4,9 @@
     --primary: #faa61a;
     --secondary: rgba(250, 166, 26, 0.5);
     --tertiary: #f2f4f7;
+    --quartetinnal : #fff;
 
-    --body: rgba(255, 255, 255, 1);
+    --body: var(--quartetinnal);
 
     --background: var(--tertiary);
     --border: var(--primary);

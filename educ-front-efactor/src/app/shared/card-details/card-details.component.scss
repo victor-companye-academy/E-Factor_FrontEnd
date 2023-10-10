@@ -15,10 +15,11 @@
 
     h2 {
         font-size: 1.125rem;
+        overflow: hidden;
     }
 
     p {
         font-size: 0.75rem;
-        overflow-y: hidden;
+        overflow: hidden;
     }
 }

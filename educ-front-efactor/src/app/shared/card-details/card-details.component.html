@@ -2,12 +2,12 @@
     [ngStyle]="{'height': card.src != null ? '12rem' : '8.75rem', 'width': '19.75rem'}">
 
     <div class="d-flex align-items-center mt-3 ps-3">
-        <span class="ms-0" *ngIf="card.src">
+        <span class="me-3" *ngIf="card.src">
             <figure>
                 <img [src]="card.src" alt="img">
             </figure>
         </span>
-        <h2 class="mx-4 fw-medium">
+        <h2 class="mx-0 fw-medium">
             {{card.title}}
         </h2>
     </div>

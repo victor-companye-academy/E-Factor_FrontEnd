@@ -1,0 +1,22 @@
+:host {
+    .card {
+        background-color: var(--background);
+        color: var(--text);
+
+        padding: 1.56rem 0 1.06rem 5.5rem;
+    }
+
+    .content {
+        position: relative;
+
+        .logo {
+
+            position: absolute;
+            top:10px;
+            left: -52px;
+
+            width: 50px;
+            height: 50px;
+        }
+    }
+}
