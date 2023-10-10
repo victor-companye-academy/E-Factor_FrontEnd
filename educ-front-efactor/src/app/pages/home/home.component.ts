@@ -9,7 +9,7 @@ import { CardDetails } from 'src/app/core/interfaces/card-details';
 export class HomeComponent {
   about: Array<CardDetails> = [
     {
-      src: null,
+      src: 'https://cdn3.iconfinder.com/data/icons/people-office-activities/50/11-512.png',
       title: "Buscar Profissional",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elementum curabitur vit..."
     },
@@ -27,7 +27,7 @@ export class HomeComponent {
 
   testimonials: Array<CardDetails> = [
     {
-      src: 'https://cdn3.iconfinder.com/data/icons/people-office-activities/50/11-512.png',
+      src: null,
       title: "Buscar Profissional",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elementum curabitur vit..."
     },
