@@ -2,25 +2,26 @@
     .card {
         background-color: var(--background);
         color: var(--text);
-        padding: 1.56rem 0 1.5rem 5.5rem;
+        max-height: 200px;
 
-        .bg-var-primary{
+        .bg-var-primary {
             background-color: var(--primary);
-            color: var(--quartetinnal);
+            color: var(--text-white);
+        }
+
+        .description {
+            max-height: 110px;
+        }
+
+        h2 {
+            font-size: 1.125rem;
+        }
+
+        p,
+        h3,
+        span {
+            padding: 2px;
+            font-size: 0.85rem;
         }
     }
-
-    .content {
-        position: relative;
-
-        .logo {
-            position: absolute;
-            top:0;
-            left: -60px;
-            width: 50px;
-            height: 50px;
-        }
-    }
-
-   
 }

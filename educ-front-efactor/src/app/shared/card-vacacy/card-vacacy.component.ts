@@ -1,4 +1,4 @@
-import { Component, HostListener} from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'card-vacacy',
@@ -6,10 +6,13 @@ import { Component, HostListener} from '@angular/core';
   styleUrls: ['./card-vacacy.component.scss']
 })
 export class CardVacacyComponent {
-  public screenWidth: number = window.innerWidth
 
-  @HostListener('window:resize',['$event'])
-  onResize(event:any){
-    this.screenWidth = window.innerWidth
+  public isShort: boolean = false;
+  private screenSize: number = 1000;
+  public isSmallScreen: boolean = window.innerWidth <= this.screenSize;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    this.isSmallScreen = window.innerWidth <= this.screenSize;
   }
 }
