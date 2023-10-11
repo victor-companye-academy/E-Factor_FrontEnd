@@ -4,16 +4,19 @@
         <div class="container d-flex ">
             <card-details [cards]='about'></card-details>
             <card-details [cards]='testimonials'></card-details>
+
+
         </div>
+        <section class="d-flex me-3 flex-wrap justify-content-evenly container">
+            <card-vacacy [short]='true' class="mb-4"></card-vacacy>
+            <card-vacacy [short]='false'></card-vacacy>
+        </section>
     </section>
 
     <br>
     <br>
 
-    <section class="d-flex me-3 flex-wrap justify-content-evenly">
-        <card-vacacy  [short]='true' class="mb-4"></card-vacacy>     
-        <card-vacacy [short]='false'></card-vacacy>      
-    </section>
+
     <br>
     <br>
 </main>

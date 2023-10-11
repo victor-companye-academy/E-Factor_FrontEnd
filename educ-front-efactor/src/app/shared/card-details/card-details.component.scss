@@ -6,6 +6,7 @@
     .card {
         background: var(--background);
         color: var(--text);
+        min-width: 21rem;
 
         img {
             width: 60px;
