@@ -3,9 +3,8 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   template: `
-  <app-sidebar></app-sidebar>
+  <app-address></app-address>
   <router-outlet></router-outlet>
-  <app-footer></app-footer>
   `,
 })
 export class AppComponent {
