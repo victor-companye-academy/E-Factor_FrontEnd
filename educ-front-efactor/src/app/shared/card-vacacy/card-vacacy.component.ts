@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 
 @Component({
   selector: 'card-vacacy',
@@ -7,7 +7,7 @@ import { Component, HostListener } from '@angular/core';
 })
 export class CardVacacyComponent {
 
-  public isShort: boolean = false;
+  @Input({alias:'short'}) public isShort?: boolean;
   private screenSize: number = 1000;
   public isSmallScreen: boolean = window.innerWidth <= this.screenSize;
 
