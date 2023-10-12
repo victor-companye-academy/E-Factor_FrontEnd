@@ -4,7 +4,7 @@
     <section class="content position-relative">
         <img src="https://cdn.icon-icons.com/icons2/1674/PNG/512/person_110935.png" alt="Logo"
             class="rounded-5 logo bg-white position-absolute" width="40px" height="40px"
-            [ngStyle]="{'left': isShort?'-5px': '-50px'}">
+            [ngStyle]="{'left': isShort?'0': '-55px'}">
 
         <div class="d-flex align-items-start flex-wrap" [ngClass]="{'flex-column': isShort}">
             <div class="title-company me-4" [ngClass]="{'ms-5':isShort}">
@@ -15,13 +15,14 @@
                 <img src="assets/icons/calendar.svg" alt="Icone de calendário" width="24px" height="24px"
                     class="me-3 mt-2">
                 <span class="bg-white px-3 rounded-5 me-3 fw-medium mt-2">Há 6 dias</span>
-                <span class="px-3 rounded-5 fw-medium bg-var-primary mt-2">Últimas vagas</span>
+                <span class="px-3 rounded-5 fw-medium bg-var-primary mt-2"
+                    [ngStyle]="{'max-width': !isShort?'200px':''}">Últimas vagas</span>
             </div>
         </div>
 
         <div class="description overflow-hidden" *ngIf="!isShort && !isSmallScreen">
-            <p class="m-0 pe-5 mt-4 fw-light text-start">
-                Lorem ipsum dolor sit amet consectetur. Suspendisse maecenas condimentum blandit vitae tortor dis nec
+            <p class="m-0 pe-5 mt-4 text-start border-0 overflow-hidden">Lorem ipsum dolor sit amet consectetur.
+                Suspendisse maecenas condimentu blandit vitae tortor dis nec
                 mattis. Ipsum eu praesent orci lacus. Sed lorem id duis tempor felis tempor molestie. Commodo nisl sed
                 massa varius magna interdum. Pulvinar nibh dignissim egestas ut. Nibh amet vitae sed duis sit diam.
                 Feugiat sit viverra habitant platea adipiscing amet in nisi cursus. Feugiat mi rutrum velit vitae.
@@ -58,7 +59,7 @@
                 <img src="assets/icons/desktop.svg" alt="Icone de computador" width="24px" height="24px" class="me-1">
                 <span class="rounded-5 bg-white px-3 fw-medium">Home Office</span>
             </div>
-            
+
             <div class="d-flex align-items-center justify-content-start flex-wrap mt-2" *ngIf="!isShort">
                 <img src="assets/icons/bag.svg" alt="Icone de maleta" class="me-2 " width="24px" height="24px"
                     class="me-1">

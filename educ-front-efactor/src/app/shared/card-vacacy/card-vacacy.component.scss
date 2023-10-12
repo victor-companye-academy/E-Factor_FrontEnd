@@ -9,10 +9,6 @@
             color: var(--text-white);
         }
 
-        .description {
-            max-height: 110px;
-        }
-
         h2 {
             font-size: 1.125rem;
         }
@@ -22,10 +18,11 @@
         span {
             text-align: center;
             font-size: 0.85rem;
+            background: none;
         }
 
-        span{
-            max-width: 100px;
+        span {
+            max-width: 114px;
             max-height: 20px;
             overflow: hidden;
         }
