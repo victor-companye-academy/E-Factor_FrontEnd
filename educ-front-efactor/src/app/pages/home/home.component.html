@@ -1,24 +1,16 @@
 <main class="container">
-
     <section>
-        <div class="container d-flex ">
+        <div class="d-flex flex-wrap">
             <card-details [cards]='about'></card-details>
             <card-details [cards]='testimonials'></card-details>
 
 
         </div>
-        <section class="d-flex flex-column  flex-wrap justify-content-evenly container">
-            <card-vacacy [short]='true' class="mb-4"></card-vacacy>
-            <card-vacacy [short]='false'></card-vacacy>
+        <section class="d-flex flex-wrap">
+            <card-vacacy [short]='true'  [cards]="cardVacacy"></card-vacacy>
+            <card-vacacy [short]='false' [cards]="cardVacacy"></card-vacacy>
         </section>
     </section>
-
-    <br>
-    <br>
-
-
-    <br>
-    <br>
 </main>
 
 <app-footer></app-footer>

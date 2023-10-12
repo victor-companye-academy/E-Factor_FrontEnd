@@ -1,4 +1,5 @@
 import { Component, HostListener, Input } from '@angular/core';
+import { CardVacacy } from 'src/app/core/interfaces/card-vacacy';
 
 @Component({
   selector: 'card-vacacy',
@@ -7,8 +8,9 @@ import { Component, HostListener, Input } from '@angular/core';
 })
 export class CardVacacyComponent {
 
-  @Input({alias:'short'}) public isShort?: boolean;
-  @Input({alias:'cards'}) public cards?: boolean;
+  @Input({ alias: 'short' }) public isShort?: boolean;
+  @Input({ alias: 'cards' }) public cards?: Array<CardVacacy>;
+
 
 
   private screenSize: number = 1000;
