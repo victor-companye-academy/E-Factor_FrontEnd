@@ -1,4 +1,4 @@
-<article *ngFor="let card of cards; let i = index" class="card d-flex border-0 rounded-4 card m-4 container"
+<article *ngFor="let card of cards; let i = index" class="card d-flex border-0 rounded-4 card m-4 container overflow-hidden"
     [ngClass]="{'flex-row': !isShort}"
     [ngStyle]="{'padding': isShort?'1rem': '1.56rem 0 1.5rem 5.5rem','width': isShort?'21rem':'auto'}">
 
@@ -7,7 +7,7 @@
             class="rounded-5 logo position-absolute object-fit-scale" width="40px" height="40px"
             [ngStyle]="{'left': isShort?'0': '-55px'}">
 
-        <div class="d-flex align-items-start flex-wrap" [ngClass]="{'flex-column': isShort}">
+        <div class="d-flex align-items-start flex-wrap overflow-hidden" [ngClass]="{'flex-column': isShort}">
             <div class="title-company me-4" [ngClass]="{'ms-5':isShort}">
                 <h3 class="me-0 fw-light mb-0 text-start">{{card.companyName}}</h3>
                 <h2 class="m-0 fw-medium text-start">{{card.title}}</h2>
@@ -28,16 +28,17 @@
 
     <!-- ------------------------- -->
 
-    <section class="d-flex pb-2 content-2 align-items-center"
+    <section class="d-flex pb-2 content-2 align-items-center "
         [ngClass]="{'flex-column': !isShort, 'justify-content-evenly': !isShort, 'me-2': !isShort,'flex-nowrap': isShort, 'mt-3':isShort, 'justify-content-between': isShort}">
 
-        <div [ngStyle]="{'min-width': !isShort?'11rem':'0'}">
+        <div>
             <div class="d-flex align-items-center justify-content-start flex-wrap mt-2" *ngIf="isShort">
                 <img src="assets/icons/calendar.svg" alt="Icone de calendário" width="24px" height="24px" class="me-1">
                 <span class="bg-white px-3 rounded-5 me-3 fw-medium">{{card.days}}</span>
             </div>
 
-            <div class="d-flex align-items-center justify-content-start flex-wrap mt-2" [ngClass]="{'mt-3':isShort}" *ngIf="isShort">
+            <div class="d-flex align-items-center justify-content-start flex-wrap mt-2" [ngClass]="{'mt-3':isShort}"
+                *ngIf="isShort">
                 <img src="assets/icons/map.svg" alt="Icone de mapa" class="me-2" width="24px" height="24px"
                     class="me-1">
                 <span class="rounded-5 bg-white px-3 fw-medium"
@@ -47,7 +48,7 @@
 
         </div>
 
-        <div [ngStyle]="{'min-width': !isShort?'11rem':'0'}">
+        <div>
             <div class="d-flex align-items-center justify-content-start flex-wrap mt-2" *ngIf="!isShort">
                 <img src="assets/icons/map.svg" alt="Icone de mapa" class="me-2" width="24px" height="24px"
                     class="me-1">
