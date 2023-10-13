@@ -8,6 +8,6 @@ import { Component, Input } from '@angular/core';
 export class CardProfessionalComponent {
   @Input({ alias: 'short' }) public isShort?: boolean;
   @Input({ alias: 'cards' }) public cards?: Array<any> =
-    [{ userName: 'Google', title: 'Desenvolxxxssssssssssssssxxxxxxxxvedor Senior', locality: 'São Paulo De Congonha- SP', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...', skills: ['Phyton', 'Javascript', 'Typescript', 'Spring','React','PHP','ww', '111 ']}]
+    [{ userName: 'Marcos Henrique', title: 'Desenvolvedor Senior', locality: 'São Paulo, SP', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...', skills: ['Phyton', 'Javascript', 'Typescript', 'Spring','React','PHP','HTML']}]
 
 }
