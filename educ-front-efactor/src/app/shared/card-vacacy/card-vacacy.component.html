@@ -22,7 +22,7 @@
         </div>
 
         <div class="description overflow-hidden" *ngIf="!isShort">
-            <p class="m-0 pe-5 mt-4 text-start border-0 overflow-hidden">{{card.description}}</p>
+            <p class="m-0 pe-5 mt-4 text-start border-0 overflow-hidden fw-light">{{card.description}}</p>
         </div>
     </section>
 
@@ -55,11 +55,13 @@
                     [ngStyle]="{'max-width': !isShort?'200px':''}">{{card.locality}}</span>
             </div>
 
-            <div class="d-flex align-items-center justify-content-start flex-wrap mt-2">
-                <img src="assets/icons/list.svg" alt="Icone de lista" width="24px" height="24px" class="me-1">
-                <span class="me-2 rounded-5 bg-white px-3 fw-medium">{{card.skills[0]}}</span>
-                <span class="rounded-5 bg-white px-2 fw-medium" [ngStyle]="{'max-width': !isShort?'200px':''}"
-                    *ngIf="!(card.skills.length < 2)">+{{card.skills.length - 1}}</span>
+            <div [ngStyle]="{'min-width': !isShort?'11rem':'0'}">
+                <div class="d-flex align-items-center justify-content-start flex-wrap mt-2">
+                    <img src="assets/icons/list.svg" alt="Icone de lista" width="24px" height="24px" class="me-1">
+                    <span class="me-2 rounded-5 bg-white px-3 fw-medium">{{card.skills[0]}}</span>
+                    <span class="rounded-5 bg-white px-2 fw-medium" [ngStyle]="{'max-width': !isShort?'200px':''}"
+                        *ngIf="!(card.skills.length < 2)">+{{card.skills.length - 1}}</span>
+                </div>
             </div>
 
             <div class="d-flex align-items-center justify-content-start flex-wrap mt-2" [ngClass]="{'mt-3':isShort}">
