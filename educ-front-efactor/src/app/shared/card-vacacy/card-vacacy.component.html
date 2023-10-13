@@ -3,8 +3,8 @@
     [ngStyle]="{'padding': isShort?'1rem': '1.56rem 0 1.5rem 5.5rem','width': isShort?'21rem':'auto'}">
 
     <section class="content position-relative">
-        <img src="{{card.src || 'assets/icons/company-default.png'}}" alt="Logo"
-            class="rounded-5 logo position-absolute" width="40px" height="40px"
+        <img src="{{card.src || 'assets/icons/bag.svg'}}" alt="Logo"
+            class="rounded-5 logo position-absolute object-fit-scale" width="40px" height="40px"
             [ngStyle]="{'left': isShort?'0': '-55px'}">
 
         <div class="d-flex align-items-start flex-wrap" [ngClass]="{'flex-column': isShort}">
