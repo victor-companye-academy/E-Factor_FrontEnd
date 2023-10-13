@@ -19,7 +19,7 @@ import { CardProfessionalComponent } from './card-professional/card-professional
     SidebarComponent,
     CardDetailsComponent,
     CardVacacyComponent,
-    CardProfessionalComponent
+    CardProfessionalComponent,
   ],
   imports: [
     CommonModule, RouterModule
@@ -30,7 +30,8 @@ import { CardProfessionalComponent } from './card-professional/card-professional
     HeaderComponent,
     SidebarComponent,
     CardDetailsComponent,
-    CardVacacyComponent
+    CardVacacyComponent,
+    CardProfessionalComponent
   ]
 })
 export class SharedModule { }
