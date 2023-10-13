@@ -1,9 +1,10 @@
-<article *ngFor="let card of cards; let i = index" class="card d-flex border-0 rounded-4 card m-4 container" [ngClass]="{'flex-row': !isShort}"
+<article *ngFor="let card of cards; let i = index" class="card d-flex border-0 rounded-4 card m-4 container"
+    [ngClass]="{'flex-row': !isShort}"
     [ngStyle]="{'padding': isShort?'1rem': '1.56rem 0 1.5rem 5.5rem','width': isShort?'21rem':'auto'}">
 
     <section class="content position-relative">
-        <img src="{{card.src || 'assets/icons/company-default.png'}}" alt="Logo"
-            class="rounded-5 logo position-absolute object-fit-container" width="40px" height="40px"
+        <img src="{{card.src || 'assets/icons/bag.svg'}}" alt="Logo"
+            class="rounded-5 logo position-absolute object-fit-scale" width="40px" height="40px"
             [ngStyle]="{'left': isShort?'0': '-55px'}">
 
         <div class="d-flex align-items-start flex-wrap" [ngClass]="{'flex-column': isShort}">
@@ -20,8 +21,8 @@
             </div>
         </div>
 
-        <div class="description overflow-hidden" *ngIf="!isShort && !isSmallScreen">
-            <p class="m-0 pe-5 mt-4 text-start border-0 overflow-hidden">{{card.description}}</p>
+        <div class="description overflow-hidden" *ngIf="!isShort">
+            <p class="m-0 pe-5 mt-4 text-start border-0 overflow-hidden fw-light">{{card.description}}</p>
         </div>
     </section>
 
@@ -36,18 +37,31 @@
                 <span class="bg-white px-3 rounded-5 me-3 fw-medium">{{card.days}}</span>
             </div>
 
-            <div class="d-flex align-items-center justify-content-start flex-wrap mt-2" [ngClass]="{'mt-3':isShort}">
+            <div class="d-flex align-items-center justify-content-start flex-wrap mt-2" [ngClass]="{'mt-3':isShort}" *ngIf="isShort">
                 <img src="assets/icons/map.svg" alt="Icone de mapa" class="me-2" width="24px" height="24px"
                     class="me-1">
-                <span class="rounded-5 bg-white px-3 fw-medium" [ngStyle]="{'max-width': !isShort?'200px':''}">{{card.locality}}</span>
+                <span class="rounded-5 bg-white px-3 fw-medium"
+                    [ngStyle]="{'max-width': !isShort?'200px':''}">{{card.locality}}</span>
             </div>
+
+
         </div>
 
         <div [ngStyle]="{'min-width': !isShort?'11rem':'0'}">
-            <div class="d-flex align-items-center justify-content-start flex-wrap mt-2">
-                <img src="assets/icons/list.svg" alt="Icone de lista" width="24px" height="24px" class="me-1">
-                <span class="me-2 rounded-5 bg-white px-3 fw-medium">{{card.skills[0]}}</span>
-                <span class="rounded-5 bg-white px-2 fw-medium" [ngStyle]="{'max-width': !isShort?'200px':''}" *ngIf="!(card.skills.length < 2)">+{{card.skills.length - 1}}</span>
+            <div class="d-flex align-items-center justify-content-start flex-wrap mt-2" *ngIf="!isShort">
+                <img src="assets/icons/map.svg" alt="Icone de mapa" class="me-2" width="24px" height="24px"
+                    class="me-1">
+                <span class="rounded-5 bg-white px-3 fw-medium"
+                    [ngStyle]="{'max-width': !isShort?'200px':''}">{{card.locality}}</span>
+            </div>
+
+            <div [ngStyle]="{'min-width': !isShort?'11rem':'0'}">
+                <div class="d-flex align-items-center justify-content-start flex-wrap mt-2">
+                    <img src="assets/icons/list.svg" alt="Icone de lista" width="24px" height="24px" class="me-1">
+                    <span class="me-2 rounded-5 bg-white px-3 fw-medium">{{card.skills[0]}}</span>
+                    <span class="rounded-5 bg-white px-2 fw-medium" [ngStyle]="{'max-width': !isShort?'200px':''}"
+                        *ngIf="!(card.skills.length < 2)">+{{card.skills.length - 1}}</span>
+                </div>
             </div>
 
             <div class="d-flex align-items-center justify-content-start flex-wrap mt-2" [ngClass]="{'mt-3':isShort}">
