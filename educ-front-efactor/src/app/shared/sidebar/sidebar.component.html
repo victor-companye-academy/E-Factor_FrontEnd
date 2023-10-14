@@ -4,15 +4,15 @@
         <span [ngClass]="{'active-link':isActive[i]}" (click)="activateLink(i)" class="d-flex justify-content-start align-items-center">
             <div class="position-absolute"></div>
             <img src="{{link.parameters[1]}}" alt="{{link.title}}" class="me-3">
-            <a>
+            <a class="text-decoration-none">
                 {{link.title}}
             </a>
         </span>
     </div>
-    <div id="login" class="d-flex justify-content-between align-items-center mt-5 p-3">
+    <div id="login" class="d-flex justify-content-between align-items-center mt-5 p-3" [routerLink]="['/login']">
         <div>
             <img src="assets/icons/sidebar/entrar.svg" alt="Entrar" class="nav-icons me-2">
-            <a>Entrar</a>
+            <a class="fw-bold text-decoration-none">Entrar</a>
         </div>
         <img src="assets/icons/sidebar/arrow.svg" alt="Entrar" class="nav-icons">
     </div>
