@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { CardProfessional } from 'src/app/core/interfaces/card-professional';
 
 @Component({
   selector: 'card-professional',
@@ -7,7 +8,5 @@ import { Component, Input } from '@angular/core';
 })
 export class CardProfessionalComponent {
   @Input({ alias: 'short' }) public isShort?: boolean;
-  @Input({ alias: 'cards' }) public cards?: Array<any> =
-    [{ userName: 'Marcos Henrique', title: 'Desenvolvedor Senior', locality: 'São Paulo, SP', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...', skills: ['Phyton', 'Javascript', 'Typescript', 'Spring','React','PHP','HTML']}]
-
+  @Input({ alias: 'cards' }) public cards?: Array<CardProfessional>;
 }

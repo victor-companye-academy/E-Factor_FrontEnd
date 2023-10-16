@@ -4,4 +4,5 @@ export interface CardProfessional {
     description:string;
     locality:string;
     skills:Array<string>;
+    src?:string;
 }
