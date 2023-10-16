@@ -1,4 +1,5 @@
 :host {
+    overflow: hidden;
     .card {
         background-color: var(--background);
         color: var(--text);
@@ -9,7 +10,7 @@
             background-color: var(--primary);
             color: var(--text-white);
         }
-        
+
         h2 {
             font-size: 1.125rem;
         }
