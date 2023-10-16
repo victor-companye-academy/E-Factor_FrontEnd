@@ -6,11 +6,10 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { CardDetailsComponent } from './card-details/card-details.component';
-import { CardVacancyComponent } from './card-vacancy/card-vacancy.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CardProfessionalComponent } from './card-professional/card-professional.component';
-
+import { CardVacancyComponent } from './card-vacancy/card-vacancy.component';
 
 @NgModule({
   declarations: [
@@ -19,8 +18,12 @@ import { CardProfessionalComponent } from './card-professional/card-professional
     HeaderComponent,
     SidebarComponent,
     CardDetailsComponent,
+
     CardVacancyComponent,
     CardProfessionalComponent,
+
+    CardVacancyComponent
+
   ],
   imports: [
     CommonModule,
