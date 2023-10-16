@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CardDetails } from 'src/app/core/interfaces/card-details';
-import { CardVacacy } from 'src/app/core/interfaces/card-vacacy';
+import { CardVacancy } from 'src/app/core/interfaces/card-vacancy';
 
 @Component({
   selector: 'app-home',
@@ -39,7 +39,7 @@ export class HomeComponent {
     }
   ]
 
-  protected cardVacacy: Array<CardVacacy> = [
+  protected cardVacacy: Array<CardVacancy> = [
     {
       companyName: 'Google', title: 'Desenvolvedor Senior', days: 'Há 6 dias', contract: 'CLT', locality: 'São Paulo - SP', description: 'Lorem ipsum dolor sit amet consectetur. Suspendisse maecenas condimentum blandit vitae tortor dis nec mattis. Ipsum eu praesent orci lacus. Sed lorem id duis tempor felis tempor molestie. Commodo nisl sed massa varius magna interdum. Pulvinar nibh dignissim egestas ut. Nibh amet vitae sed duis sit diam. Feugiat sit viverra habitant platea adipiscing amet in nisi cursus. Feugiat mi rutrum velit vitae.', mode: 'Home Office', skills: ['Angular', 'Javascript', 'Typescript', 'Spring'], status: 'Ultimas Vagas', 
     },
