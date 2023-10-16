@@ -17,8 +17,8 @@
 
     .section-professional,
     .section-vacancy {
-        max-width: 21rem;
-        h2 {
+        max-width: 22rem;
+        h3 {
             color: var(--primary);
         }
 
@@ -33,6 +33,13 @@
             a {
                 color: var(--text-white);
             }
+        }
+    }
+
+    @media (min-width: 1400px) {
+        .section-professional,
+        .section-vacancy {
+            max-width: 24rem;
         }
     }
 }
