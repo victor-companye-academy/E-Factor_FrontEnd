@@ -1,15 +1,31 @@
 
-    <main class="container-sm">
-        <section class="d-flex overflow-hidden">
-            <div class="background-students w-100 d-flex flex-column justify-content-center p-5 rounded-4">
-                <img src="../../../assets/icons/logo-site.svg" width="270px" alt="">
-                <p class="fw-bold fs-base">O seu profissional ou sua vaga na palma da sua mão de um jeito diferente.</p>
-            </div>
-        </section>
+<main class="container-sm">
+    <section class="d-flex overflow-hidden">
+        <div class="background-students w-100 d-flex flex-column justify-content-center p-5 m-4 rounded-4">
+            <img src="../../../assets/icons/logo-site.svg" width="270px" alt="">
+            <h1 class="fw-bold fs-6">O seu profissional ou sua vaga na palma da sua mão de um jeito diferente.</h1>
+        </div>
+    </section>
 
-        <section>
-            <div>
-            </div>
-        </section>
-    </main>
+    <section class="d-flex justify-content-between">
+        <div class="section-professional px-3 d-flex flex-column align-items-start justify-content-center overflow-hidden">
+            <h2 class="fw-bold fs-6">Um mundo de profissionais ao seu alcance.</h2>
+            <p class="fw-light mt-4">Encontre profissionais capacitados com a categoria de sua preferência.</p>
 
+            <button type="button" class="mt-4 border-0 fw-medium py-2 px-5 rounded-3 overflow-hidden text-nowrap">Ver tudo</button>
+        </div>
+        <card-professional [short]="true" [cards]="cardProfessional" class="d-flex"></card-professional>
+    </section>
+
+    <section class="d-flex justify-content-between mt-5">
+        <card-professional [short]="true" [cards]="cardProfessional" class="d-flex"></card-professional>
+        <div class="section-professional px-3 d-flex flex-column align-items-end justify-content-center overflow-hidden">
+            <h2 class="fw-bold fs-6 text-end">Um mundo de profissionais ao seu alcance.</h2>
+            <p class="fw-light mt-4 text-end">Encontre profissionais capacitados com a categoria de sua preferência.</p>
+
+            <button type="button" class="mt-4 border-0 fw-medium py-2 px-5 rounded-3 overflow-hidden text-nowrap">Ver tudo</button>
+        </div>
+    </section>
+</main>
+
+<app-footer></app-footer>
