@@ -5,7 +5,7 @@
     --secondary: rgba(250, 166, 26, 0.5);
     --tertiary: #f2f4f7;
     --text-white : #fff;
-
+    
     --body: var(--quartetinnal);
 
     --background: var(--tertiary);
@@ -24,7 +24,21 @@
     box-sizing: border-box;
     text-decoration: none;
     list-style: none;
-    font-family: "Inter", sans-serif, "Courier New", Courier, monospace;
+    font-family: "Inter", sans-serif, 'Courier New', Courier, monospace;
+
+    //estilização scroll
+    ::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+        background: transparent;
+        padding: 2px;
+    }    
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--quaternary);
+        border-radius: 5px;
+    }
 }
 
 body {
