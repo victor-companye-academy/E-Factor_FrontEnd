@@ -1,0 +1,12 @@
+:host {
+    .background-students {
+        height: 20rem;
+        background-image: url("../../../assets/imgs/background-students.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        p {
+            max-width: 320px;
+            color: var(--primary);
+        }
+    }
+}

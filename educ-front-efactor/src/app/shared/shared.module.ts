@@ -6,7 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { CardDetailsComponent } from './card-details/card-details.component';
-import { CardVacacyComponent } from './card-vacacy/card-vacacy.component';
+import { CardVacacyComponent } from './card-vacancy/card-vacacy.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 

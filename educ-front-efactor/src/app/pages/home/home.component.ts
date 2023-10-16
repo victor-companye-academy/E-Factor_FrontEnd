@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CardDetails } from 'src/app/core/interfaces/card-details';
-import { CardVacacy } from 'src/app/core/interfaces/card-vacacy';
+import { CardVacacy } from 'src/app/core/interfaces/card-vacancy';
 
 @Component({
   selector: 'app-home',
