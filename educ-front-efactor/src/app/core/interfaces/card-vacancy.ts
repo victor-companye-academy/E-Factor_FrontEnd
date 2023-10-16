@@ -1,4 +1,4 @@
-export interface CardVacacy {
+export interface CardVacancy {
     src?: string;
     companyName: string
     title: string;

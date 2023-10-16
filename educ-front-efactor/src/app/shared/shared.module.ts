@@ -6,9 +6,11 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { CardDetailsComponent } from './card-details/card-details.component';
-import { CardVacacyComponent } from './card-vacancy/card-vacacy.component';
+import { CardVacancyComponent } from './card-vacancy/card-vacancy.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CardProfessionalComponent } from './card-professional/card-professional.component';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     SidebarComponent,
     CardDetailsComponent,
-    CardVacacyComponent
+    CardVacancyComponent,
+    CardProfessionalComponent,
   ],
   imports: [
     CommonModule,
@@ -31,7 +34,8 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     SidebarComponent,
     CardDetailsComponent,
-    CardVacacyComponent
+    CardVacancyComponent,
+    CardProfessionalComponent
   ]
 })
 export class SharedModule { }
