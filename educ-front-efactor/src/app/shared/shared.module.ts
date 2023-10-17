@@ -18,10 +18,8 @@ import { CardVacancyComponent } from './card-vacancy/card-vacancy.component';
     HeaderComponent,
     SidebarComponent,
     CardDetailsComponent,
-
     CardVacancyComponent,
     CardProfessionalComponent,
-
     CardVacancyComponent
 
   ],

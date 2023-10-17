@@ -1,5 +1,5 @@
 export interface CardDetails {
-    src:string | null;
+    src?:string;
     title:string;
     description:string;
     

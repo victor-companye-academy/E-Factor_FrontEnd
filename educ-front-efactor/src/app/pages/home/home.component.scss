@@ -1,45 +1,75 @@
 :host {
     color: var(--text);
-    .background-students {
-        height: 20rem;
-        background-image: url("../../../assets/imgs/background-students.svg");
-        background-repeat: no-repeat;
-        background-size: cover;
-        h1 {
-            max-width: 320px;
-            color: var(--primary);
-        }
+
+    button {
+        background: none;
     }
 
-    section {
-        margin: 1.75rem;
+    .test{
+        background: blue;
+        width: 430px;
     }
 
-    .section-professional,
-    .section-vacancy {
-        max-width: 22rem;
+ 
+
+    main {
+        h2,
+        h1,
         h3 {
             color: var(--primary);
         }
+        div .tobble{
+            padding-right: 6rem;
+        }
 
-        button {
-            background: var(--secondary);
-
-            color: var(--text-white);
-            &:hover {
-                background: var(--primary);
+        .background-students {
+            height: 20rem;
+            background-image: url("../../../assets/imgs/background-students.svg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            max-width: 90%;
+            h1 {
+                max-width: 320px;
+                color: var(--primary);
             }
+        }
 
-            a {
+        section {
+            margin: 1.75rem;
+        }
+
+        .section-professional,
+        .section-vacancy {
+            max-width: 24rem;
+
+            button {
+                background: var(--secondary);
+
                 color: var(--text-white);
+                &:hover {
+                    background: var(--primary);
+                }
             }
+        }
+
+        .testimonials {
+            button {
+                background: none;
+            }
+        }
+
+        .aboult {
+            color: var(--primary);
+        }
+    }
+
+    @media (max-width: 1400px) {
+        .section-professional, 
+        .section-vacancy {
+            display: none;
         }
     }
 
     @media (min-width: 1400px) {
-        .section-professional,
-        .section-vacancy {
-            max-width: 24rem;
-        }
     }
 }

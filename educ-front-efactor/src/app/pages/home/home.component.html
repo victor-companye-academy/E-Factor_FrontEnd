@@ -1,32 +1,79 @@
+<main class="d-flex">
+    <div class="test">
+        <!-- <app-sidebar></app-sidebar> -->
+    </div>
 
-<main class="container-sm">
-    <section class="d-flex overflow-hidden">
-        <div class="background-students w-100 d-flex flex-column justify-content-center p-5 m-4 rounded-4">
-            <img src="../../../assets/icons/logo-site.svg" width="270px" alt="">
-            <h1 class="fw-bold fs-6">O seu profissional ou sua vaga na palma da sua mão de um jeito diferente.</h1>
-        </div>
-    </section>
+    <div>
+        <button type="button" class="border-0 mt-4 mb-4 tobble w-100 d-flex justify-content-end">
+            <img src="../../../assets/icons/tobble.svg" alt="Icone seta">
+        </button>
 
-    <section class="d-flex justify-content-center">
-        <div class="section-professional px-3 d-flex flex-column align-items-start justify-content-center overflow-hidden">
-            <h3 class="fw-bold fs-6">Um mundo de profissionais ao seu alcance.</h3>
-            <p class="fw-light mt-4">Encontre profissionais capacitados com a categoria de sua preferência.</p>
+        <section class="d-flex overflow-hidden align-items-center flex-column">
+            <div class="background-students w-100 d-flex flex-column justify-content-center px-5 mx-4 rounded-4">
+                <img src="../../../assets/icons/logo-site.svg" width="270px" alt="">
+                <h1 class="fw-bold fs-6">O seu profissional ou sua vaga na palma da sua mão de um jeito diferente.</h1>
+            </div>
+        </section>
 
-            <button type="button" class="mt-4 border-0 fw-medium py-2 px-5 rounded-3 overflow-hidden text-nowrap">Ver tudo</button>
-        </div>
-        <card-professional [short]="true" [cards]="cardProfessional" class="d-flex"></card-professional>
-    </section>
+        <section class="d-flex justify-content-center">
+            <div
+                class="section-professional px-3 d-flex flex-column align-items-start justify-content-center overflow-hidden">
+                <h3 class="fw-bold fs-6">Um mundo de profissionais ao seu alcance.</h3>
+                <p class="fw-light mt-4">Encontre profissionais capacitados com a categoria de sua preferência.</p>
 
-    <section class="d-flex justify-content-center">
-        <card-professional [short]="true" [cards]="cardProfessional" class="d-flex"></card-professional>
+                <button type="button"
+                    class="mt-4 border-0 fw-medium py-2 px-5 rounded-3 overflow-hidden text-nowrap">Ver
+                    tudo</button>
+            </div>
+            <card-professional [short]="true" [cards]="cardProfessional" class="d-flex"></card-professional>
+        </section>
 
-        <div class="section-professional px-3 d-flex flex-column align-items-end justify-content-center overflow-hidden">
-            <h3 class="fw-bold fs-6 text-end">Um mundo de vagas ao seu alcance.</h3>
-            <p class="fw-light mt-4 text-end">Encontre vagas da forma onde você se enquada com a categoria de sua preferência..</p>
+        <section class="d-flex justify-content-center">
+            <card-vacancy [short]="true" [cards]="cardVacancy" class="d-flex"></card-vacancy>
 
-            <button type="button" class="mt-4 border-0 fw-medium py-2 px-5 rounded-3 overflow-hidden text-nowrap">Ver tudo</button>
-        </div>
-    </section>
+            <div class="section-vacancy px-3 d-flex flex-column align-items-end justify-content-center overflow-hidden">
+                <h3 class="fw-bold fs-6 text-end">Um mundo de vagas ao seu alcance.</h3>
+                <p class="fw-light mt-4 text-end">Encontre vagas da forma onde você se enquada com a categoria de sua
+                    preferência..</p>
+
+                <button type="button"
+                    class="mt-4 border-0 fw-medium py-2 px-5 rounded-3 overflow-hidden text-nowrap">Vertudo
+                </button>
+            </div>
+        </section>
+
+        <section class="mt-5 pt-5 d-flex flex-column align-items-center aboult">
+            <h2 class="fw-bold fs-5">Como funciona a E-factor</h2>
+
+            <card-details [cards]="about"></card-details>
+        </section>
+
+        <section class="mt-5 pt-4 d-flex flex-column align-items-center testimonials mb-5">
+            <h2 class="fw-bold fs-5">Depoimentos</h2>
+
+            <div class="d-flex testimonials">
+                <button type="button" class="border-0 me-5 pe-5">
+                    <svg width="21" height="39" viewBox="0 0 21 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 36.4765L4.2205 22.697C2.59317 21.0697 2.59317 18.4068 4.2205 16.7795L18 3"
+                            stroke="#FAA61A" stroke-opacity="0.5" stroke-width="5" stroke-miterlimit="10"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+
+                <card-details [cards]="testimonials" class="mx-5"></card-details>
+
+
+                <button type="button" class="border-0 ms-5 ps-5">
+                    <svg width="21" height="39" viewBox="0 0 21 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 36.3845L16.7795 22.6429C18.4068 21.0201 18.4068 18.3645 16.7795 16.7416L3 3"
+                            stroke="#FAA61A" stroke-width="5" stroke-miterlimit="10" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+        </section>
+    </div>
+
 </main>
 
 <app-footer></app-footer>
