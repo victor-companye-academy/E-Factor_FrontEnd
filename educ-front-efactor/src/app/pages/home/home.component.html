@@ -25,7 +25,10 @@
                     class="mt-4 border-0 fw-medium py-2 px-5 rounded-3 overflow-hidden text-nowrap">Ver
                     tudo</button>
             </div>
-            <card-professional [short]="true" [cards]="cardProfessional" class="d-flex"></card-professional>
+
+            <span *ngFor="let card of cardProfessional">
+                <card-professional [short]="true" [card]="card" class="d-flex"></card-professional>
+            </span>
         </section>
 
         <section class="d-flex justify-content-center">

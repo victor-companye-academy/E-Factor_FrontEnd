@@ -1,13 +1,10 @@
-<article *ngFor="let card of cards; let i = index"
-    class="card d-flex border-0 rounded-4 card m-4 container flex-column p-4 pb-2 overflow-hidden"
+<article *ngIf="card" class="card d-flex border-0 rounded-4 card container flex-column px-3 pt-3  overflow-hidden"
     [ngClass]="{'flex-row': !isShort}" [ngStyle]="{'width': isShort ? '21rem' : 'auto'}">
 
-    <section class="content d-flex overflow-hidden w-100">
+    <section class="content d-flex overflow-hidden">
+        <img src="{{ card.src || 'assets/icons/user.svg' }}" alt="Logo usuario" class="rounded-circle object-fit-scale bg-white" width="40x" height="40px">
 
-        <img src="{{ card.src || 'assets/icons/user.svg' }}" alt="Logo" class="rounded-5 logo object-fit-scale bg-white"
-            width="40px" height="40px">
-
-        <div class="d-flex align-items-end justify-content-between w-100">
+        <div class="d-flex align-items-end justify-content-between">
             <div class="d-flex align-items-start flex-wrap" [ngClass]="{'flex-column': isShort}">
                 <div class="title-professional ms-2 overflow-hidden">
                     <h3 class="me-0 fw-light mb-0 text-start">{{ card.userName }}</h3>
@@ -27,7 +24,7 @@
     <section class="d-flex content-2 align-items-start flex-column mt-3 ms-1"
         [ngClass]="{'me-2': !isShort, 'flex-nowrap': isShort, 'justify-content-between': isShort}">
 
-        <div class="d-flex overflow-hidden flex-nowrap w-100">
+        <div class="d-flex overflow-hidden flex-nowrap">
             <div class="d-flex me-2" *ngIf="isShort">
                 <img src="assets/icons/map.svg" alt="Icone de mapa" class="me-2" width="24px" height="24px">
                 <span class="rounded-5 bg-white px-2 fw-medium"

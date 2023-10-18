@@ -8,5 +8,5 @@ import { CardProfessional } from 'src/app/core/interfaces/card-professional';
 })
 export class CardProfessionalComponent {
   @Input({ alias: 'short' }) public isShort?: boolean;
-  @Input({ alias: 'cards' }) public cards?: Array<CardProfessional>;
+  @Input({ alias: 'card' }) public card?:CardProfessional;
 }
