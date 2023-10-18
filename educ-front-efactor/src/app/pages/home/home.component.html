@@ -1,9 +1,9 @@
-<main class="d-flex">
-    <div class="test">
-        <!-- <app-sidebar></app-sidebar> -->
+<main class="d-flex justify-content-between" >
+    <div class="sidebar">
+        <app-sidebar></app-sidebar>
     </div>
 
-    <div>
+    <div class="div-main">
         <button type="button" class="border-0 mt-4 mb-4 tobble w-100 d-flex justify-content-end px-4">
             <img src="assets/icons/tobble.svg" alt="Icone seta">
         </button>
@@ -69,30 +69,22 @@
 
         </section>
 
-        <section class="mt-5 d-flex flex-column align-items-center testimonials mb-5">
+        <section class="mt-5 d-flex flex-column align-items-center testimonials mb-5 justify-content-between">
             <h2 class="fw-bold fs-5">
                 Depoimentos
             </h2>
 
-            <div class="d-flex testimonials mt-4">
+            <div class="d-flex testimonials flex-nowrap mt-4 w-100 justify-content-between">
                 <button type="button" class="border-0 me-5 pe-5">
-                    <svg width="21" height="39" viewBox="0 0 21 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18 36.4765L4.2205 22.697C2.59317 21.0697 2.59317 18.4068 4.2205 16.7795L18 3"
-                            stroke="#FAA61A" stroke-opacity="0.5" stroke-width="5" stroke-miterlimit="10"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
+                    <img src="assets/icons/arrow-left.svg" alt="Icone seta esquerda">
                 </button>
 
-                <span *ngFor="let card of testimonials">
-                    <card-details [card]="card" class="mx-5"></card-details>
+                <span *ngFor="let card of testimonials" class="my-2">
+                    <card-details [card]="card"></card-details>
                 </span>
 
                 <button type="button" class="border-0 ms-5 ps-5">
-                    <svg width="21" height="39" viewBox="0 0 21 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3 36.3845L16.7795 22.6429C18.4068 21.0201 18.4068 18.3645 16.7795 16.7416L3 3"
-                            stroke="#FAA61A" stroke-width="5" stroke-miterlimit="10" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
+                    <img src="assets/icons/arrow-right.svg" alt="Icone seta direita">
                 </button>
             </div>
         </section>

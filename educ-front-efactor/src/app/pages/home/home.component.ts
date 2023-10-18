@@ -44,7 +44,11 @@ export class HomeComponent {
     {
       title: "Entrar em contato",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elemeccccccccccccsssssd ssntum curabitur vit..."
-    }
+    },
+    // {
+    //   title: "Entrar em contato",
+    //   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elemeccccccccccccsssssd ssntum curabitur vit..."
+    // }
   ]
 
   protected cardVacancy: Array<CardVacancy> = [

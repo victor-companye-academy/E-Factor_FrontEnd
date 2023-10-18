@@ -9,7 +9,7 @@ import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
-    HomeComponent,
+    // HomeComponent,
     LoginComponent,
     ChooseUserComponent,
   ],
@@ -19,7 +19,6 @@ import { HomeComponent } from './home/home.component';
     SharedModule
   ],
   exports: [
-    HomeComponent,
     LoginComponent,
   ]
 })
