@@ -1,10 +1,10 @@
-<span *ngFor="let card of cards" class="card m-4 container rounded-4 border-0"
-    [ngStyle]="{'height': card.src != null ? '12rem' : '8.75rem', 'width': '19.75rem'}">
-
+<span *ngIf="card" class="card container rounded-4 border-0"
+    [ngStyle]="{'height': card.src != null ? '12rem' : '8.75rem'}">
+    
     <div class="d-flex align-items-center mt-3 ps-3">
         <span class="me-3" *ngIf="card.src">
             <figure>
-                <img [src]="card.src" alt="img">
+                <img [src]="card.src" alt="Imagem" class="object-fit-scale pt-2">
             </figure>
         </span>
         <h2 class="mx-0 fw-medium">

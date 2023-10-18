@@ -11,6 +11,7 @@ import { CardVacancy } from 'src/app/core/interfaces/card-vacancy';
 export class HomeComponent {
   protected about: Array<CardDetails> = [
     {
+      // src: 'https://logosmarcas.net/wp-content/uploads/2020/09/Google-Logo.png',
       title: "Publicar Vaga",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elementum curabitur vissssssssssssssssssssssssssssssssssssssssssssssst Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elementum curabitur vissssssssssssssssssssssssssssssssssssssssssssssstLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elementum curabitur vissssssssssssssssssssssssssssssssssssssssssssssst..."
     },

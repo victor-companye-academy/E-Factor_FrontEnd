@@ -18,16 +18,12 @@
         h3 {
             color: var(--primary);
         }
-        div .tobble{
-            padding-right: 6rem;
-        }
 
         .background-students {
             height: 20rem;
             background-image: url("../../../assets/imgs/background-students.svg");
             background-repeat: no-repeat;
             background-size: cover;
-            max-width: 90%;
             h1 {
                 max-width: 320px;
                 color: var(--primary);
@@ -40,7 +36,8 @@
 
         .section-professional,
         .section-vacancy {
-            max-width: 24rem;
+            max-width: 23rem;
+            max-height: 200px;
 
             button {
                 background: var(--secondary);
@@ -61,15 +58,5 @@
         .aboult {
             color: var(--primary);
         }
-    }
-
-    @media (max-width: 1400px) {
-        .section-professional, 
-        .section-vacancy {
-            display: none;
-        }
-    }
-
-    @media (min-width: 1400px) {
     }
 }

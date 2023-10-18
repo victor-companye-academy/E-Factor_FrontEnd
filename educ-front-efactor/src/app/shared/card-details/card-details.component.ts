@@ -8,6 +8,6 @@ import { CardDetails } from 'src/app/core/interfaces/card-details';
 })
 export class CardDetailsComponent {
 
-  @Input({alias:'cards'}) public cards?: Array<CardDetails> = []
+  @Input({alias:'card'}) public card?: CardDetails;
 
 }
