@@ -1,21 +1,7 @@
 :host {
     color: var(--text);
 
-    button {
-        background: none;
-    }
-
-    // .sidebar {
-    //     background: var(--primary);
-    //     max-width: 350px;
-    // }
-
-    .div-main {
-        margin: 0 2%;
-        max-width: 1500px;
-    }
-
-    main {
+    .main {
         h2,
         h1,
         h3 {
@@ -33,10 +19,6 @@
             }
         }
 
-        section {
-            margin: 1.75rem;
-        }
-
         .section-professional,
         .section-vacancy {
             max-width: 23rem;
@@ -50,16 +32,6 @@
                     background: var(--primary);
                 }
             }
-        }
-
-        .testimonials {
-            button {
-                background: none;
-            }
-        }
-
-        .aboult {
-            color: var(--primary);
         }
     }
 }

@@ -1,13 +1,8 @@
 :host{
-
-    left: 0;
-    top: 0;
-    position: absolute;
-
     #sidebar{
         background-color: var(--background);
-        width: 15.625rem;
-        height: 52rem;
+        width: 16.625rem;
+        height: 100%;
     
         #logo{
             width: 9.688rem;
