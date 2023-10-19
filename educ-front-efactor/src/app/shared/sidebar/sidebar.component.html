@@ -1,15 +1,19 @@
-<div id="sidebar" class="d-flex justify-content-between flex-column pt-5 pb-5 ps-4 pe-4">
-    <img src="assets/logo-efactor.svg" alt="logo e-factor" id="logo" class="mb-5">
-    <div id="nav-links" *ngFor="let link of arrayLinksSidebar; let i = index" class="p-2">
-        <span [ngClass]="{'active-link':isActive[i]}" (click)="activateLink(i)" class="d-flex justify-content-start align-items-center">
-            <div class="position-absolute"></div>
-            <img src="{{link.parameters[1]}}" alt="{{link.title}}" class="me-3">
-            <a class="text-decoration-none">
-                {{link.title}}
-            </a>
-        </span>
+<div id="sidebar" class="justify-content-between flex-column pt-5 pb-5 ps-4 pe-4">
+    <img src="assets/logo-efactor.svg" alt="logo e-factor" title="e-factor" id="logo" class="mb-5 position-fixed ms-4">
+    <div class="position-fixed menu flex-column justify-content-between">
+        <div id="nav-links" *ngFor="let link of arrayLinksSidebar; let i = index" class="p-2">
+            <span [ngClass]="{'active-link':isActive[i]}" (click)="activateLink(i)"
+                class="d-flex justify-content-start align-items-center">
+                <div class="position-absolute"></div>
+                <img src="{{link.parameters[1]}}" alt="{{link.title}}" class="me-3">
+                <a class="text-decoration-none">
+                    {{link.title}}
+                </a>
+            </span>
+        </div>
     </div>
-    <div id="login" class="d-flex justify-content-between align-items-center mt-5 p-3" [routerLink]="['/login']">
+
+    <div id="login" class="justify-content-between align-items-center p-3" [routerLink]="['/login']">
         <div>
             <img src="assets/icons/sidebar/entrar.svg" alt="Entrar" class="nav-icons me-2">
             <a class="fw-bold text-decoration-none">Entrar</a>

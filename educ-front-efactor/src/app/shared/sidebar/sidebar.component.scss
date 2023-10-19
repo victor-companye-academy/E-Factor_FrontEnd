@@ -1,54 +1,139 @@
-:host{
-    #sidebar{
+:host {
+    #sidebar {
+        position: relative;
         background-color: var(--background);
         width: 16.625rem;
         height: 100%;
-    
-        #logo{
+
+        #logo {
             width: 9.688rem;
         }
-    
-        #nav-links{
-            span{
+
+        .menu {
+            display: fixed;
+            left: 0;
+            top: 10rem;
+            padding: 0 0 0 2.5rem;
+        }
+
+        #nav-links {
+            span {
                 cursor: pointer;
                 height: 3.125rem;
             }
-            
-            a{
+
+            a {
                 color: var(--text);
             }
-            
-            .active-link{
-                img{
+
+            .active-link {
+                img {
                     filter: invert(74%) sepia(85%) saturate(611%) hue-rotate(326deg) brightness(102%) contrast(96%);
                 }
-    
-                div{
+
+                div {
                     width: 0.625rem;
                     height: 3.125rem;
                     background-color: var(--primary);
                     border-radius: 0rem 0.313rem 0.313rem 0rem;
                     left: 0;
                 }
-    
-                a{
+
+                a {
                     color: var(--primary);
                 }
             }
         }
-    
-        #login{
+
+        #login {
+            position: fixed;
+            display: flex;
             width: 11.875rem;
             height: 2.5rem;
-    
+
+            margin-top: 150px;
+
             background-color: var(--secondary);
             border-radius: 0.75rem;
             cursor: pointer;
-    
-            div{
-                a{
+
+            &:hover {
+                background-color: var(--primary);
+            }
+
+            div {
+                a {
                     color: #fff;
                 }
+            }
+        }
+        
+        @media (min-height: 725px) {
+            #login {
+                bottom: 19rem;
+            }
+
+            .menu{
+                top: 8rem;
+                height: 260px;
+                overflow-y: scroll;
+            }
+        }
+
+        @media (max-height: 725px) {
+            #login {
+                bottom: 19rem;
+            }
+
+            .menu{
+                top: 8rem;
+                height: 200px;
+                overflow-y: scroll;
+            }
+        }
+
+        @media (max-height: 650px) {
+            #login {
+                bottom: 19rem;
+            }
+
+            .menu{
+                top: 8rem;
+                height: 130px;
+                overflow-y: scroll;
+            }
+        }
+
+        @media (max-height: 591px) {
+            #login {
+                bottom: 19rem;
+            }
+
+            .menu{
+                top: 20%;
+                height: 15%;
+                overflow-y: scroll;
+            }
+        }
+
+        @media (max-height: 510px) {
+
+            #login {
+                bottom: 19rem;
+            }
+
+            .menu{
+                display: none;
+            }
+        }
+        @media (max-height: 450px) {
+            #login {
+                display: none;
+            }
+        }
+        @media (max-height: 400px) {
+            #logo {
+                display: none;
             }
         }
     }

@@ -19,8 +19,17 @@
             }
         }
 
-        .section-professional,
-        .section-vacancy {
+        section {
+            .arrow:hover {
+                transform: scale(1.2);
+                transition: all 0.5s;
+            }
+        }
+
+        .card-professional,
+        .card-vacancy {
+            display: flex;
+            padding: 0 1rem;
             max-width: 23rem;
             max-height: 200px;
 
@@ -31,6 +40,24 @@
                 &:hover {
                     background: var(--primary);
                 }
+            }
+        }
+        @media (max-width: 1470px) {
+            .card-professional,
+            .card-vacancy {
+                padding: 0;
+                min-width: 163px;
+                max-width: 250px;
+                p{
+                display: none;
+                }
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .card-professional,
+            .card-vacancy {
+          
             }
         }
     }
