@@ -13,4 +13,12 @@ export class ChooseUserComponent {
     this.isActiveArray[0] = false; this.isActiveArray[1] = false;
     this.isActiveArray[index] = true; this.isActiveArray[2] = true;
   }
+
+  public getLinkDestination() {
+    if (this.isActiveArray[0]){
+      return '/criar-conta-profissional';
+    } else {
+      return '/criar-conta-empresa';
+    }
+  }
 }
