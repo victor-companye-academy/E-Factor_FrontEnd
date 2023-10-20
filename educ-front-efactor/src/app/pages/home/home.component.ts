@@ -45,10 +45,14 @@ export class HomeComponent {
       title: "Entrar em contato",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elemeccccccccccccsssssd ssntum curabitur vit..."
     },
-    // {
-    //   title: "Entrar em contato",
-    //   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elemeccccccccccccsssssd ssntum curabitur vit..."
-    // }
+    {
+      title: "Test Card3",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elemeccccccccccccsssssd ssntum curabitur vit..."
+    },
+    {
+      title: "Test Card4",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elemeccccccccccccsssssd ssntum curabitur vit..."
+    },
   ]
 
   protected cardVacancy: Array<CardVacancy> = [
@@ -92,4 +96,14 @@ export class HomeComponent {
       skills: ['Phyton', 'Javascript', 'Typescript', 'Spring', 'React', 'PHP', 'HTML']
     }
   ]
+
+  public currentIndex: number = 0;
+
+  nextCard() {
+    this.currentIndex = (this.currentIndex + 1) % this.testimonials.length;
+  }
+
+  prevCard() {
+    this.currentIndex = (this.currentIndex - 1 + this.testimonials.length) % this.testimonials.length;
+  }
 }

@@ -14,12 +14,15 @@
             background-repeat: no-repeat;
             background-size: cover;
             h1 {
-                max-width: 320px;
+                max-width: 20rem;
                 color: var(--primary);
             }
         }
 
         section {
+            .arrow{
+                min-width: 1.5625rem;
+            }
             .arrow:hover {
                 transform: scale(1.2);
                 transition: all 0.5s;
@@ -31,7 +34,7 @@
             display: flex;
             padding: 0 1rem;
             max-width: 23rem;
-            max-height: 200px;
+            max-height: 12.5rem;
 
             button {
                 background: var(--secondary);
@@ -42,12 +45,13 @@
                 }
             }
         }
+        
         @media (max-width: 1470px) {
             .card-professional,
             .card-vacancy {
                 padding: 0;
-                min-width: 163px;
-                max-width: 250px;
+                min-width: 10.1875rem;
+                max-width: 15.625rem;
                 p{
                 display: none;
                 }

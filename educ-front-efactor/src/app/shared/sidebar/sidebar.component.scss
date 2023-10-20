@@ -3,14 +3,12 @@
         position: relative;
         background-color: var(--background);
         width: 16.625rem;
-        height: 100%;
 
         #logo {
             width: 9.688rem;
         }
 
         .menu {
-            position: fixed;
             left: 0;
             top: 10rem;
             padding: 0 0 0 2.5rem;
@@ -46,12 +44,11 @@
         }
 
         #login {
-            position: fixed;
             display: flex;
             width: 11.875rem;
             height: 2.5rem;
 
-            margin-top: 150px;
+            margin-top: 9.375rem;
 
             background-color: var(--secondary);
             border-radius: 0.75rem;
@@ -68,7 +65,7 @@
             }
         }
 
-        @media (min-height: 801px) {
+        @media (min-height: 800px) {
             #login {
                 bottom: 19rem;
             }
@@ -78,7 +75,6 @@
                 overflow-y: scroll;
             }
         }
-
         
         @media (max-height: 800px) {
             #login {
@@ -111,7 +107,7 @@
 
             .menu{
                 top: 7.5rem;
-                height: 180px;
+                height: 11.25rem;
                 overflow-y: scroll;
             }
         }
@@ -123,7 +119,7 @@
 
             .menu{
                 top: 7.5rem;
-                height: 120px;
+                height: 7.5rem;
                 overflow-y: scroll;
             }
         }

@@ -87,22 +87,20 @@
                 <h2 class="fw-bold fs-5">
                     Depoimentos
                 </h2>
-
                 <div class="testimonials d-flex mt-4 w-100 justify-content-between overflow-hidden">
-                    <button type="button" class="border-0 bg-transparent arrow">
-                        <img src="assets/icons/arrow-left.svg" alt="Icone seta esquerda">
+                    <button type="button" class="border-0 bg-transparent arrow" (click)="prevCard()">
+                      <img src="assets/icons/arrow-left.svg" alt="Icone seta esquerda">
                     </button>
-
+                  
                     <div class="d-flex w-100 justify-content-center">
-                        <span *ngFor="let card of testimonials" class="mx-3">
-                            <card-details [card]="card"></card-details>
-                        </span>
+                      <card-details [card]="testimonials[currentIndex]" class="mx-3"></card-details>
+                      <card-details [card]="testimonials[(currentIndex + 1) % testimonials.length]" class="mx-3"></card-details>
                     </div>
-
-                    <button type="button" class="border-0 bg-transparent arrow">
-                        <img src="assets/icons/arrow-right.svg" alt="Icone seta direita">
+                  
+                    <button type="button" class="border-0 bg-transparent arrow" (click)="nextCard()">
+                      <img src="assets/icons/arrow-right.svg" alt="Icone seta direita">
                     </button>
-                </div>
+                  </div>
             </div>
 
         </section>
