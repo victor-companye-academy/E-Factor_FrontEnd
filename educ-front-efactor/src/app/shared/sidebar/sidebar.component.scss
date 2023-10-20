@@ -10,7 +10,7 @@
         }
 
         .menu {
-            display: fixed;
+            position: fixed;
             left: 0;
             top: 10rem;
             padding: 0 0 0 2.5rem;
@@ -67,15 +67,39 @@
                 }
             }
         }
-        
-        @media (min-height: 725px) {
+
+        @media (min-height: 801px) {
             #login {
                 bottom: 19rem;
             }
 
             .menu{
-                top: 8rem;
-                height: 260px;
+                top: 7.5rem;
+                overflow-y: scroll;
+            }
+        }
+
+        
+        @media (max-height: 800px) {
+            #login {
+                bottom: 19rem;
+            }
+
+            .menu{
+                top: 7.5rem;
+                height: 35%;
+                overflow-y: scroll;
+            }
+        }
+
+        @media (max-height: 750px) {
+            #login {
+                bottom: 19rem;
+            }
+
+            .menu{
+                top: 7.5rem;
+                height: 35%;
                 overflow-y: scroll;
             }
         }
@@ -86,8 +110,8 @@
             }
 
             .menu{
-                top: 8rem;
-                height: 200px;
+                top: 7.5rem;
+                height: 180px;
                 overflow-y: scroll;
             }
         }
@@ -98,23 +122,24 @@
             }
 
             .menu{
-                top: 8rem;
-                height: 130px;
+                top: 7.5rem;
+                height: 120px;
                 overflow-y: scroll;
             }
         }
 
-        @media (max-height: 591px) {
-            #login {
-                bottom: 19rem;
-            }
+            @media (max-height: 591px) {
+                #login {
+                    bottom: 19rem;
+                }
 
-            .menu{
-                top: 20%;
-                height: 15%;
-                overflow-y: scroll;
+                .menu{
+                    margin-top: 1rem;
+                    top: 17%;
+                    height: 12%;
+                    overflow-y: scroll;
+                }
             }
-        }
 
         @media (max-height: 510px) {
 

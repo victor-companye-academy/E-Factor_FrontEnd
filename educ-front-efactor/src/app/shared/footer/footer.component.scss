@@ -1,7 +1,7 @@
 :host {
   width: 100%;
   bottom: 0;
-  
+
   .footer {
     color: var(--text);
     background: var(--background);
@@ -52,6 +52,13 @@
 
       & .nav h3 {
         font-size: 0.75rem;
+      }
+    }
+
+    @media (max-width: 910px) {
+      max-height: 300px;
+      .nav{
+        padding-left: 11px;
       }
     }
   }
