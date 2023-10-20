@@ -1,0 +1,28 @@
+div{
+    color: var(--primary);
+
+    input, select{
+        border: 1.5px solid var(--primary);
+        color: var(--text);
+        border-radius: 0.75rem;
+    }
+
+    ::placeholder{
+        color: var(--text);
+    }
+}
+
+.btn-search{
+    background-color: var(--primary);
+    color: var(--text-white);
+    font-weight: 700;
+    border-radius: 0.75rem;
+}
+
+.container{
+    width: 30rem;
+}
+
+.error-text{
+    color: rgb(255, 85, 85);
+}
