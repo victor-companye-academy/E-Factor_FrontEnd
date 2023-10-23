@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CardDetails } from 'src/app/core/interfaces/card-details';
-import { CardDetailsService } from 'src/app/core/service/card-details.service';
+import { CardDetailsService } from 'src/app/core/service/cardDetails/card-details.service';
 
 @Component({
   selector: 'app-about',
