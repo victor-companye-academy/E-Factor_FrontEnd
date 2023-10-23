@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { SharedModule } from '../shared/shared.module';
 import { ChooseUserComponent } from './choose-user/choose-user.component';
 import { PersonalDataComponent } from './personal-data/personal-data.component';
+import { BiographyComponent } from './biography/biography.component';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { PersonalDataComponent } from './personal-data/personal-data.component';
     LoginComponent,
     ChooseUserComponent,
     PersonalDataComponent,
+    BiographyComponent,
   ],
   imports: [
     CommonModule,

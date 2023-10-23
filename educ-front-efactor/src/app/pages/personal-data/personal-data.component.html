@@ -3,14 +3,14 @@
 <div class="row container">
     <div class="col-8 d-flex flex-column align-items-center justify-content-center div-left">
         <h1 class="w-75 text-center fw-bold">Complete seu cadastro para começar sua jornada</h1>
-        <div *ngFor="let input of arrayPersonalDataInputs[pageType]; let i = index; last as isLast">
-            <span class="mt-4 d-flex mt-3" *ngIf="!isLast">
+        <div class="me-3" *ngFor="let input of arrayPersonalDataInputs[pageType]; let i = index; last as isLast">
+            <span class="mt-4 d-flex" *ngIf="!isLast">
                 <input title="{{input.title}}" type="{{input.parameters[2]}}" class="form-control ps-3 pe-5" placeholder="{{input.title}}" (blur)="addErrorLabel(i)" (input)="isInputValid($event, i)" [ngClass]="{'msgError': elementoComErro[i] === i}" required>
                 <img src="{{input.parameters[0]}}" alt="{{input.parameters[1]}}" (click)="showPasswordToggle(i)" class="input-icon">
             </span>
             <label *ngIf="input.label" class="mt-2 msgError">{{input.label}}</label>
         </div>
-        <button class="btn mt-5 fw-bold" [routerLink]="['/']" [disabled]="!isInputPasswordValid">CONTINUAR</button>
+        <button class="btn mt-5 fw-bold btn-continue" [routerLink]="getLinkDestination()" [disabled]="!isInputPasswordValid">CONTINUAR</button>
     </div>
     <div class="col-4 d-flex flex-column align-items-start justify-content-center div-right">
         <div class="ms-4 me-4">

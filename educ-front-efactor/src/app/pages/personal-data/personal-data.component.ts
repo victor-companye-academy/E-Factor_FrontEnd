@@ -29,13 +29,13 @@ export class PersonalDataComponent {
   protected arrayPersonalDataInputs: Array<Array<PersonalDataInputs>> = [
       [
           {
-            title: "Nome completo",
-            parameters: ['assets/icons/personal-data/name.svg', 'Nome completo', 'text'],
+            title: "E-mail",
+            parameters: ['assets/icons/personal-data/email.svg', 'E-mail', 'text'],
             label: ''
           },
           {
-            title: "Email",
-            parameters: ['assets/icons/personal-data/email.svg', 'Email', 'text'],
+            title: "Confirmação de e-mail",
+            parameters: ['assets/icons/personal-data/email.svg', 'Confirmação de e-mail', 'text'],
             label: ''
           },
           {
@@ -83,6 +83,14 @@ export class PersonalDataComponent {
     ],
   ];
 
+  public getLinkDestination() {
+    if (this.pageType == 0){
+      return '/biografia-profissional';
+    } else {
+      return '/biografia-empresa';
+    }
+  }
+
   showPasswordToggle(i: number) {
     if (i != 2 && i != 3) {
       return;
@@ -102,11 +110,12 @@ export class PersonalDataComponent {
     let value = event.target.value;
     this.input[i] = value;
     console.log(this.input[i])
-    if (this.input[0] != '' &&
+    if (this.input[0].includes('@') &&
         this.input[1].includes('@') &&
         this.input[2] != '' &&
         this.input[3] != '' &&
-        this.input[2] === this.input[3])
+        this.input[2] === this.input[3] &&
+        this.input[0] === this.input[1])
     {
       return this.isInputPasswordValid = true;
     } else {
@@ -115,26 +124,48 @@ export class PersonalDataComponent {
   }
 
   addErrorLabel(i: number) {
-    if (this.input[2] !== this.input[3] && this.input[2] !== '' && this.input[3] !== '') {
-      if (this.elementoComErro[2] !== 2) {
-        this.arrayPersonalDataInputs[this.pageType][3].label = 'As senhas não conferem';
-        this.elementoComErro[2] = 2;
-        this.elementoComErro[3] = 3;
+    this.validateEmailInput(i);
+    this.validatePasswordInput();
+  }
+
+  validateEmailInput(i: number) {
+    if (i === 0 || i === 1) {
+      if (this.input[i] !== '' && !this.input[i].includes('@')) {
+        this.setErrorMessage(i, 'O e-mail informado é inválido');
+      } else {
+        this.clearErrorMessage(i);
+        this.validadeEmailEquality();
       }
-    } else {
-      this.elementoComErro[2] = -1;
-      this.elementoComErro[3] = -1;
-      this.arrayPersonalDataInputs[this.pageType][3].label = '';
     }
+  }
   
-    if (this.input[1] !== '' && !this.input[1].includes('@')) {
-      if (this.elementoComErro[1] !== 1) {
-        this.arrayPersonalDataInputs[this.pageType][1].label = 'O Email informado é inválido';
-        this.elementoComErro[1] = 1;
-      }
+  validadeEmailEquality() {
+    if (this.input[0] !== this.input[1] && this.input[0] !== '' && this.input[1] !== '') {
+      this.setErrorMessage(0, '');
+      this.setErrorMessage(1, 'Os e-mails não conferem');
     } else {
-      this.elementoComErro[1] = -1;
-      this.arrayPersonalDataInputs[this.pageType][1].label = '';
+      this.clearErrorMessage(0);
+      this.clearErrorMessage(1);
     }
+  }
+  
+  validatePasswordInput() {
+    if (this.input[2] !== this.input[3] && this.input[2] !== '' && this.input[3] !== '') {
+      this.setErrorMessage(2, 'As senhas não conferem');
+      this.setErrorMessage(3, 'As senhas não conferem');
+    } else {
+      this.clearErrorMessage(2);
+      this.clearErrorMessage(3);
+    }
+  }
+  
+  setErrorMessage(i: number, message: string) {
+    this.arrayPersonalDataInputs[this.pageType][i].label = message;
+    this.elementoComErro[i] = i;
+  }
+  
+  clearErrorMessage(i: number) {
+    this.arrayPersonalDataInputs[this.pageType][i].label = '';
+    this.elementoComErro[i] = -1;
   }
 }

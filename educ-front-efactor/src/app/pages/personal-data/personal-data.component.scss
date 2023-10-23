@@ -21,7 +21,6 @@
 .div-right{
     background-color: var(--primary);
     color: var(--text-white);
-    width: 27rem;
     height: 35.125rem;
     border-radius: 0.9375rem;
 }
@@ -42,16 +41,16 @@ input{
     color: var(--quaternary);
 }
 
-button{
+.btn-continue{
     background-color: var(--primary);
     color: var(--text-white);
     border-radius: 0.75rem;
-    width: 40%;
+    width: 15rem;
 }
 
 .back-option{
-    left: 1rem;
-    bottom: 1.75rem;
+    left: 0.75rem;
+    bottom: 2rem;
     cursor: pointer;
     color: var(--quaternary);
     width: 7rem;
@@ -60,4 +59,112 @@ button{
 .msgError{
     color: rgb(255, 85, 85);  
     border-color: rgb(255, 85, 85);
+}
+
+@media (min-width: 1920px)  {
+    .div-right{
+        width: 27rem;
+        // margin-right: 3rem;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1919px) {
+
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .div-left{
+        input{
+            width: 20rem;
+        }
+    
+        h1{
+            font-size: x-large;
+        }
+    }
+    
+    .div-right{
+        h2{
+            font-size: larger;
+        }
+        p{
+            font-size: small;
+        }
+    }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 3rem;
+
+        .div-left{
+            margin-top: 95%;
+            width: 85vw;
+
+            h1{
+                font-size: x-large;
+            }
+
+            input{
+                width: 75vw; 
+            }
+        }
+
+        .div-right{
+            width: 75vw;
+            height: 50vh;
+            margin-bottom: 5rem;
+        }
+        
+        .back-option{
+            top: 1.75rem;
+            right: 1.75rem;
+            left: unset;
+            bottom: unset;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 3rem;
+
+        .div-left{
+            margin-top: 115vw;
+            width: 95vw;
+
+            h1{
+                font-size: x-large;
+            }
+
+            input{
+                width: 75vw; 
+            }
+        }
+
+        .div-right{
+            width: 90vw;
+            height: 50vh;
+            margin-bottom: 5rem;
+        }
+        
+        .back-option{
+            top: 1.75rem;
+            right: 1.75rem;
+            left: unset;
+            bottom: unset;
+        }
+    }
 }
