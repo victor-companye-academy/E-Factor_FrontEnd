@@ -38,7 +38,7 @@ input{
 }
 
 ::placeholder{
-    color: var(--quaternary);
+    color: var(--text);
 }
 
 .btn-continue{
@@ -52,7 +52,7 @@ input{
     left: 0.75rem;
     bottom: 2rem;
     cursor: pointer;
-    color: var(--quaternary);
+    color: var(--text);
     width: 7rem;
 }
 

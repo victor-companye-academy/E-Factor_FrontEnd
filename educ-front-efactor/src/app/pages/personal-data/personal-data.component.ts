@@ -56,13 +56,13 @@ export class PersonalDataComponent {
       ],
       [
         {
-          title: "Nome jurídico",
-          parameters: ['assets/icons/personal-data/name.svg', 'Nome completo', 'text'],
+          title: "E-mail",
+          parameters: ['assets/icons/personal-data/email.svg', 'E-mail', 'text'],
           label: ''
         },
         {
-          title: "Email profissional",
-          parameters: ['assets/icons/personal-data/email.svg', 'Email', 'text'],
+          title: "Confirmação de e-mail",
+          parameters: ['assets/icons/personal-data/email.svg', 'Confirmação de e-mail', 'text'],
           label: ''
         },
         {

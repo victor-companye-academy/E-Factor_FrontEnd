@@ -3,6 +3,7 @@
     width: 97vw;
     height: 87vh;
     background-color: var(--tertiary);
+    align-self: center;
 
     .logo{
         width: 9.66369rem;
@@ -19,14 +20,20 @@
         textarea,
         ::placeholder{
             border: none;
-            color: var(--quaternary);
+            color: var(--text);
         }    
+    }
+}
+
+.bottom{
+    p{
+        color: var(--text);
     }
 }
 
 .back-option{
     cursor: pointer;
-    color: var(--quaternary);
+    color: var(--text);
 }
 
 .btn-continue{
