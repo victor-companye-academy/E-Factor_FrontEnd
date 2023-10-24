@@ -1,0 +1,21 @@
+<body class="justify-content-center">
+    <div class="content p-4 d-flex flex-column justify-content-center align-items-center">
+        <img src="assets/logo-efactor.svg" alt="Logo e-factor" class="logo position-fixed mt-3 ms-3" [routerLink]="['/']">
+        <div class="textarea h-50">
+            <h2 class="fw-bold mb-3">{{h2Text}}</h2>
+            <textarea title="biography" type="text" placeholder="Digite aqui" id="biography" class="form-control rounded h-100" (input)="setBiography($event)"></textarea>
+        </div>
+    </div>
+    <div class="bottom d-flex justify-content-between mt-3 mx-5">
+        <div class="d-flex back-option gap-3" [routerLink]="['/criar-conta-profissional']">
+            <img src="assets/icons/personal-data/voltar.svg" alt="Voltar">
+            <p class="mt-3">VOLTAR</p>
+        </div>
+        <div class="mt-3">
+            <p>2/2</p>
+        </div>
+        <div class="mt-2">
+            <button class="btn fw-bold btn-continue w-100" [routerLink]="['/biography']" [disabled]="!isBiographyValid">CONTINUAR</button>
+        </div>
+    </div>
+</body>
