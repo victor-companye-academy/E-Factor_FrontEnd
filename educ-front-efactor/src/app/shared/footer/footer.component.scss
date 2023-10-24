@@ -4,6 +4,11 @@
     background: var(--background);
     padding: 1.68rem 1.35rem 1.35rem 2.6rem;
 
+    .div-main{
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
     .div-main > .section-figure {
       max-width: 13.375rem;
 
