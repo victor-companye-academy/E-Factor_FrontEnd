@@ -8,7 +8,7 @@ export class CardDetailsService {
 
   constructor() { }
 
-  public getTestimonialsList(): Array<CardDetails> {
+  public listTestimonials(): Array<CardDetails> {
     return [
       {
         title: "Buscar Profissional",
@@ -28,7 +28,7 @@ export class CardDetailsService {
       },]
   }
 
-  public getAboutList(): Array<CardDetails> {
+  public listAbout(): Array<CardDetails> {
     return [
       {
       // src: 'https://logosmarcas.net/wp-content/uploads/2020/09/Google-Logo.png',

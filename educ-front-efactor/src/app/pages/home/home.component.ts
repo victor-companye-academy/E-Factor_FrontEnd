@@ -15,13 +15,13 @@ export class HomeComponent {
 
   constructor(private cardDetailsService:CardDetailsService, private cardProfessionalService:CardProfessionalService, private cardVacancyService:CardVacancyService){}
 
-  protected about: Array<CardDetails> = this.cardDetailsService.getAboutList();
+  protected about: Array<CardDetails> = this.cardDetailsService.listAbout();
 
-  protected testimonials: Array<CardDetails> = this.cardDetailsService.getTestimonialsList();
+  protected testimonials: Array<CardDetails> = this.cardDetailsService.listTestimonials();
 
-  protected cardVacancy: Array<CardVacancy> = this.cardVacancyService.getVacanciesList();
+  protected cardVacancy: Array<CardVacancy> = this.cardVacancyService.listVacancies();
 
-  protected cardProfessional: Array<CardProfessional> = this.cardProfessionalService.getProfessionalsList();
+  protected cardProfessional: Array<CardProfessional> = this.cardProfessionalService.listProfessionals();
 
   public currentIndex: number = 0;
 

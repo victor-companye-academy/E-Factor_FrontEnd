@@ -8,7 +8,7 @@ export class CardProfessionalService {
 
   constructor() { }
 
-  public getProfessionalsList():Array<CardProfessional>{
+  public listProfessionals():Array<CardProfessional>{
     return [
       {
         userName: 'Marcos Henrique',

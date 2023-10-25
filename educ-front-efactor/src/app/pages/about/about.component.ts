@@ -11,9 +11,9 @@ export class AboutComponent {
 
   constructor(private cardDetailsService:CardDetailsService){}
 
-  protected about: Array<CardDetails> = this.cardDetailsService.getAboutList();
+  protected about: Array<CardDetails> = this.cardDetailsService.listAbout();
 
-  protected testimonials: Array<CardDetails> = this.cardDetailsService.getTestimonialsList();
+  protected testimonials: Array<CardDetails> = this.cardDetailsService.listTestimonials();
 
   public currentIndex: number = 0;
 

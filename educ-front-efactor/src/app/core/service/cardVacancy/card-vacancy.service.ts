@@ -8,7 +8,7 @@ export class CardVacancyService {
 
   constructor() { }
 
-  public getVacanciesList(): Array<CardVacancy> {
+  public listVacancies(): Array<CardVacancy> {
     return [
       {
         companyName: 'Google',
