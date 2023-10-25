@@ -11,6 +11,8 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 
+import { ButtonModule } from 'primeng/button';
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -24,6 +26,7 @@ import { AboutComponent } from './about/about.component';
     CommonModule,
     PagesRoutingModule,
     SharedModule,
+    ButtonModule
   ],
 })
 export class PagesModule { }
