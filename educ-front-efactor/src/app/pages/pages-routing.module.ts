@@ -6,11 +6,13 @@ import { ChooseUserComponent } from './choose-user/choose-user.component';
 import { PersonalDataComponent } from './personal-data/personal-data.component';
 import { BiographyComponent } from './biography/biography.component';
 import { AboutComponent } from './about/about.component';
+import { ProfessionalsComponent } from './professionals/professionals.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'about', component: AboutComponent },
+  { path: 'professionals', component: ProfessionalsComponent },
   { path: 'selecionar-usuario', component: ChooseUserComponent },
   { path: 'criar-conta-profissional', component: PersonalDataComponent },
   { path: 'criar-conta-empresa', component: PersonalDataComponent },

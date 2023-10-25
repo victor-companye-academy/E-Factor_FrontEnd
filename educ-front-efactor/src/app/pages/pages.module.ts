@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 
 import { ButtonModule } from 'primeng/button';
+import { ProfessionalsComponent } from './professionals/professionals.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ButtonModule } from 'primeng/button';
     AboutComponent,
     PersonalDataComponent,
     BiographyComponent,
+    ProfessionalsComponent,
   ],
   imports: [
     CommonModule,
