@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { SidebarLinks } from 'src/app/core/interfaces/sidebar-links';
 
 @Component({
@@ -8,11 +9,12 @@ import { SidebarLinks } from 'src/app/core/interfaces/sidebar-links';
 })
 export class SidebarComponent {
 
-  public isActive = [false, false, false, false, false];
-
-  activateLink(index: number){
-    this.isActive = [false, false, false, false, false]
-    this.isActive[index] = true;
+  constructor(private router: Router) {
+    router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        window.scrollTo(0, 0);
+      }
+    });
   }
 
   protected arrayLinksSidebar: Array<SidebarLinks> = [
