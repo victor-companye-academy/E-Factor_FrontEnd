@@ -18,23 +18,23 @@ export class SidebarComponent {
   protected arrayLinksSidebar: Array<SidebarLinks> = [
     {
       title: "Página inicial",
-      parameters: ['/pagina-inicial', 'assets/icons/sidebar/pagina-inicial.svg']
+      parameters: ['', 'assets/icons/sidebar/pagina-inicial.svg']
     },
     {
       title: "Profissionais",
-      parameters: ['/profissionais', 'assets/icons/sidebar/profissionais.svg']
+      parameters: ['/professionals', 'assets/icons/sidebar/profissionais.svg']
     },
     {
       title: "Vagas",
-      parameters: ['/vagas', 'assets/icons/sidebar/vagas.svg']
+      parameters: ['/vacancies', 'assets/icons/sidebar/vagas.svg']
     },
     {
       title: "Novidades",
-      parameters: ['/novidades', 'assets/icons/sidebar/novidades.svg']
+      parameters: ['/newsletter', 'assets/icons/sidebar/novidades.svg']
     },
     {
       title: "Sobre",
-      parameters: ['/sobre', 'assets/icons/sidebar/sobre.svg']
+      parameters: ['/about', 'assets/icons/sidebar/sobre.svg']
     }
   ]
 }
