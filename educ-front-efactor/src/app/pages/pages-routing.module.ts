@@ -9,10 +9,14 @@ import { UserInformationComponent } from './user-information/user-information.co
 import { SendEmailComponent } from './send-email/send-email.component';
 import { CodeConfirmationComponent } from './code-confirmation/code-confirmation.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { AboutComponent } from './about/about.component';
+import { ProfessionalsComponent } from './professionals/professionals.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'search-professionals', component: ProfessionalsComponent },
   { path: 'selecionar-usuario', component: ChooseUserComponent },
   { path: 'criar-conta-profissional', component: PersonalDataComponent },
   { path: 'criar-conta-empresa', component: PersonalDataComponent },

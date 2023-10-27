@@ -1,23 +1,23 @@
 <div id="sidebar" class="h-100 justify-content-between flex-column py-5 px-4">
     <img src="assets/logo-efactor.svg" alt="logo e-factor" title="e-factor" id="logo" class="mb-5 position-fixed ms-4">
-    <div class="position-fixed menu flex-column justify-content-between position-fixed">
+    <nav class="position-fixed menu flex-column justify-content-between position-fixed">
         <div id="nav-links" *ngFor="let link of arrayLinksSidebar; let i = index" class="p-2">
-            <span [ngClass]="{'active-link':isActive[i]}" (click)="activateLink(i)"
-                class="d-flex justify-content-start align-items-center">
+            <span routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" class="d-flex justify-content-start align-items-center">
                 <div class="position-absolute"></div>
                 <img src="{{link.parameters[1]}}" alt="{{link.title}}" class="me-3">
-                <a class="text-decoration-none">
+                <a class="text-decoration-none" [routerLink]="link.parameters[0]">
                     {{link.title}}
                 </a>
             </span>
         </div>
-    </div>
+    </nav>
 
-    <div id="login" class="justify-content-between align-items-center p-3 position-fixed" [routerLink]="['/login']">
-        <div>
-            <img src="assets/icons/sidebar/entrar.svg" alt="Entrar" class="nav-icons me-2">
+    <button type="button" id="login" class="justify-content-between align-items-center p-3 position-fixed border-0"
+        [routerLink]="['/login']">
+        <div class="p-0 mt-2 mb-1">
+            <img src="assets/icons/sidebar/entrar.svg" alt="Entrar" class="nav-icons me-2 mb-2 mt-1">
             <a class="fw-bold text-decoration-none">Entrar</a>
         </div>
         <img src="assets/icons/sidebar/arrow.svg" alt="Entrar" class="nav-icons">
-    </div>
+    </button>
 </div>
