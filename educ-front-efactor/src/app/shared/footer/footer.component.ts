@@ -11,11 +11,11 @@ export class FooterComponent {
   protected arrayMenu: Array<MenuFooter> = [
     {
       title: "Empresa",
-      routers: [['/create-vacancy', 'Criar vaga'], ['/seach-professional', 'Buscar profissional'], ['/login', 'Criar conta']]
+      routers: [['/create-vacancy', 'Criar vaga'], ['/search-professionals', 'Buscar profissional'], ['/login', 'Criar conta']]
     },
     {
       title: "Profissional",
-      routers: [['/seach-vacancy', 'Buscar vaga'], ['/login', 'Criar conta']]
+      routers: [['/search-vacancies', 'Buscar vaga'], ['/login', 'Criar conta']]
     },
     {
       title: "Outros",
