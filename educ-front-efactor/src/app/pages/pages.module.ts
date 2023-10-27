@@ -102,6 +102,10 @@ import { BlockUIModule } from 'primeng/blockui';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { UserInformationComponent } from './user-information/user-information.component';
+import { SendEmailComponent } from './send-email/send-email.component';
+import { CodeConfirmationComponent } from './code-confirmation/code-confirmation.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -112,6 +116,10 @@ import { HttpClientModule } from '@angular/common/http';
     PersonalDataComponent,
     BiographyComponent,
     ProfessionalsComponent,
+    UserInformationComponent,
+    SendEmailComponent,
+    CodeConfirmationComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     CommonModule,

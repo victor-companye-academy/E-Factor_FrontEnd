@@ -26,3 +26,27 @@ div{
 .error-text{
     color: rgb(255, 85, 85);
 }
+
+@media (max-width: 767px) {
+    .form-control, .btn-search{
+        height: 1.75rem;
+        border-radius: 0.50rem !important;
+        font-size: small;
+        padding: 0.3rem;
+    }
+}
+
+@media (min-width: 510px) and (max-width: 767px) {
+    .form-row{
+        justify-content: space-between;
+        input{
+            width: 215px;
+        }
+    }
+}
+
+@media (max-width: 510px) {
+    .container{
+        width: 20rem;
+    }
+}

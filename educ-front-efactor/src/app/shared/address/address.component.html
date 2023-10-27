@@ -3,8 +3,8 @@
         
       <div class="form-group">
         <label for="inputCep">CEP</label>
-        <div class="d-flex">
-          <input type="text" class="form-control" name="cep" id="inputCep" placeholder="00000-000" [(ngModel)]="addressComponents[0].value" (input)="applyCepMask($event)" maxlength="9" required>
+        <div class="d-flex align-items-end">
+          <input title="input" type="text" class="form-control mt-1" name="cep" id="inputCep" placeholder="00000-000" [(ngModel)]="addressComponents[0].value" (input)="applyCepMask($event)" (input)="checkInputs()" maxlength="9" required>
           <button title="search" type="button" class="btn btn-search ms-3" (click)="searchAddress(addressComponents[0].value)">BUSCAR</button>
         </div>
       </div>
@@ -12,32 +12,32 @@
       <div class="form-row d-flex gap-3 mt-3">
         <div class="w-100">
             <label for="inputCity">Cidade</label>
-            <input type="text" class="form-control" name="cidade" id="inputCity" placeholder="Cidade" [(ngModel)]="addressComponents[1].value" readonly required disabled>
+            <input type="text" class="form-control mt-1" name="cidade" id="inputCity" placeholder="Cidade" [(ngModel)]="addressComponents[1].value" readonly required disabled>
         </div>
         <div>
             <label for="inputState">Estado</label>
-            <input type="text" class="form-control" name="estado" id="inputState" placeholder="UF" [(ngModel)]="addressComponents[2].value" readonly required disabled>
+            <input type="text" class="form-control mt-1" name="estado" id="inputState" placeholder="UF" [(ngModel)]="addressComponents[2].value" readonly required disabled>
         </div>
       </div>
   
       <div class="mt-3">
         <label for="inputNeighborhood">Bairro</label>
-        <input type="text" class="form-control" name="bairro" id="inputNeighborhood" placeholder="Bairro" [(ngModel)]="addressComponents[3].value" readonly required disabled>
+        <input type="text" class="form-control mt-1" name="bairro" id="inputNeighborhood" placeholder="Bairro" [(ngModel)]="addressComponents[3].value" readonly required disabled>
       </div>
   
       <div class="mt-3">
         <label for="inputStreet">Rua</label>
-        <input type="text" class="form-control" name="rua" id="inputStreet" placeholder="Rua" [(ngModel)]="addressComponents[4].value" readonly required disabled>
+        <input type="text" class="form-control mt-1" name="rua" id="inputStreet" placeholder="Rua" [(ngModel)]="addressComponents[4].value" readonly required disabled>
       </div>
   
       <div class="form-row d-flex gap-3 mt-3">
         <div>
           <label for="inputNumber">Número</label>
-          <input type="text" class="form-control" name="numero" id="inputNumber" placeholder="N°" [(ngModel)]="addressComponents[5].value" required>
+          <input type="text" class="form-control mt-1" name="numero" id="inputNumber" placeholder="N°" [(ngModel)]="addressComponents[5].value" (input)="checkInputs()" required>
         </div>
         <div>
           <label for="inputComplement">Complemento</label>
-          <input type="text" class="form-control" id="inputComplement" placeholder="Complemento">
+          <input type="text" class="form-control mt-1" id="inputComplement" placeholder="Complemento">
         </div>
       </div>
 
