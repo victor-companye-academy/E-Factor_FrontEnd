@@ -1,10 +1,19 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { CardProfessional } from 'src/app/core/interfaces/card-professional';
+import { CardProfessionalService } from 'src/app/core/service/cardProfessional/card-professional.service';
 
 interface City {
   name: string;
   code: string;
+}
+
+interface PaginatorState {
+  first?: number;
+  rows?: number;
+  page?: number;
+  pageCount?: number;
 }
 
 @Component({
@@ -12,22 +21,25 @@ interface City {
   templateUrl: './professionals.component.html',
   styleUrls: ['./professionals.component.scss']
 })
-export class ProfessionalsComponent implements OnInit{
-  cities: City[] | undefined;
-    
-  formGroup: FormGroup | undefined | any;
+export class ProfessionalsComponent implements OnInit {
 
-  ngOnInit() {
-      this.cities = [
-          { name: 'New York', code: 'NY' },
-          { name: 'Rome', code: 'RM' },
-          { name: 'London', code: 'LDN' },
-          { name: 'Istanbul', code: 'IST' },
-          { name: 'Paris', code: 'PRS' }
-      ];
+  constructor(private cardProfessionalService: CardProfessionalService) { }
 
-      this.formGroup = new FormGroup({
-          selectedCity: new FormControl<City | null>(null)
-      });
+  protected cardProfessional: Array<CardProfessional> = this.cardProfessionalService.listProfessionals();
+
+  protected first: number = 0;
+  protected rows: number = 10;
+  protected totalRecords: number = 250;
+
+  onPageChange(event: PaginatorState) {
+    console.log(event)
+    if (event.first !== undefined) {
+      this.first = event.first;
+    }
+    if (event.rows !== undefined) {
+      this.rows = event.rows;
+    }
   }
+
+  ngOnInit() {}
 }

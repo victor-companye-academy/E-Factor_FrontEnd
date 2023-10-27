@@ -4,7 +4,24 @@
     </div>
 
     <div class="w-100 container fadeIn overflow-hidden">
-        
+        <button type="button" class="fadeIn border-0 mt-5 tobble w-100 d-flex justify-content-end px-4 bg-transparent">
+            <img src="assets/icons/tobble.svg" alt="Icone seta" title="Mudar modo">
+        </button>
+
+        <h1 class="fw-bold fs-5 mt-1 w-100 p-4">
+            Profissionais do seu jeito
+        </h1>
+
+        <Section>
+            <span *ngFor="let card of cardProfessional" class="mx-1">
+                <card-professional [short]="false" [card]="card" class="mt-4"></card-professional>
+            </span>
+
+            <div class="flex justify-content-center">
+                <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalRecords"  [showFirstLastIcon]="false" [dropdownAppendTo]="false" ></p-paginator>
+            </div>
+
+        </Section>
     </div>
 </main>
 
