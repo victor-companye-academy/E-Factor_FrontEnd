@@ -109,7 +109,6 @@ export class PersonalDataComponent {
   isInputValid(event: any, i: number) {
     let value = event.target.value;
     this.input[i] = value;
-    console.log(this.input[i])
     if (this.input[0].includes('@') &&
         this.input[1].includes('@') &&
         this.input[2] != '' &&
