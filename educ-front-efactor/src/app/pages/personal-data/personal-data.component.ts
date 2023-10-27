@@ -85,9 +85,9 @@ export class PersonalDataComponent {
 
   public getLinkDestination() {
     if (this.pageType == 0){
-      return '/biografia-profissional';
+      return '/informacoes-profissional';
     } else {
-      return '/biografia-empresa';
+      return '/login';
     }
   }
 

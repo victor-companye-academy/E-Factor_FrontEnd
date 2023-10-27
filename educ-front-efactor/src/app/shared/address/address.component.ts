@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+
 import { FindCepService } from '../../core/service/findCep/find-cep.service';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AddressArray } from 'src/app/core/interfaces/address-array';
 
 @Component({

@@ -115,11 +115,11 @@ import { HttpClientModule } from '@angular/common/http';
     AboutComponent,
     PersonalDataComponent,
     BiographyComponent,
+    ProfessionalsComponent,
     UserInformationComponent,
     SendEmailComponent,
     CodeConfirmationComponent,
     ChangePasswordComponent,
-    ProfessionalsComponent,
   ],
   imports: [
     CommonModule,
