@@ -24,11 +24,11 @@ export class SidebarComponent {
     },
     {
       title: "Profissionais",
-      parameters: ['/professionals', 'assets/icons/sidebar/profissionais.svg']
+      parameters: ['/search-professionals', 'assets/icons/sidebar/profissionais.svg']
     },
     {
       title: "Vagas",
-      parameters: ['/vacancies', 'assets/icons/sidebar/vagas.svg']
+      parameters: ['/search-vacancies', 'assets/icons/sidebar/vagas.svg']
     },
     {
       title: "Novidades",
