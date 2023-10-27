@@ -23,7 +23,7 @@
         <section class="mt-5  w-100 p-4">
             <div class="d-flex justify-content-between">
                 <div
-                    class="card-professional  flex-column align-items-start justify-content-center overflow-hidden me-3">
+                    class="card-professional  flex-column align-items-start justify-content-center overflow-hidden">
                     <h3 class="fw-bold fs-6">
                         Um mundo de profissionais ao seu alcance.
                     </h3>
@@ -36,19 +36,17 @@
                         Ver tudo
                     </button>
                 </div>
-
-                <span *ngFor="let card of cardProfessional" class="mx-1">
-                    <card-professional [short]="true" [card]="card"></card-professional>
-                </span>
+                <card-professional [short]="true" [card]="cardProfessional[1]"></card-professional>
+                <card-professional [short]="true" [card]="cardProfessional[0]"></card-professional>
             </div>
         </section>
 
         <section class="mb-5  w-100 p-4">
             <div class="d-flex justify-content-between">
-                <span *ngFor="let card of cardVacancy" class="mx-1">
-                    <card-vacancy [short]="true" [cards]="card"></card-vacancy>
-                </span>
 
+                <card-vacancy [short]="true" [cards]="cardVacancy[1]"></card-vacancy>
+                <card-vacancy [short]="true" [cards]="cardVacancy[0]"></card-vacancy>
+                
                 <div class="card-vacancy flex-column align-items-end justify-content-center overflow-hidden">
                     <h3 class="fw-bold fs-6 text-end">
                         Um mundo de vagas ao seu alcance.
