@@ -17,7 +17,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": ["quill"],
             "outputPath": "dist/educ-front-efactor",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -31,7 +30,7 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+              "node_modules/primeng/resources/themes/e-factor/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
@@ -43,8 +42,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "3mb"
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
                 },
                 {
                   "type": "anyComponentStyle",

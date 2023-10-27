@@ -37,8 +37,9 @@
                     </button>
                 </div>
 
-                    <card-professional [short]="true" [card]="cardProfessional[1]"></card-professional>
-                    <card-professional [short]="true" [card]="cardProfessional[0]"></card-professional>
+                <span *ngFor="let card of cardProfessional" class="mx-1">
+                    <card-professional [short]="true" [card]="card"></card-professional>
+                </span>
             </div>
         </section>
 

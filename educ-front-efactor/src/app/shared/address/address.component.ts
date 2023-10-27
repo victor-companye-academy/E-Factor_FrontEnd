@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FindCepService } from 'src/app/core/service/findCep/find-cep.service';
+import { FindCepService } from '../services/find-cep.service';
 import { AddressArray } from 'src/app/core/interfaces/address-array';
 
 @Component({
