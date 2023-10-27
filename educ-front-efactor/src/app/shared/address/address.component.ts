@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FindCepService } from '../services/find-cep.service';
 import { AddressArray } from 'src/app/core/interfaces/address-array';
 
@@ -8,6 +8,8 @@ import { AddressArray } from 'src/app/core/interfaces/address-array';
   styleUrls: ['./address.component.scss']
 })
 export class AddressComponent {
+
+  @Output() inputsFilled = new EventEmitter<boolean>();
 
   errorMsg: string = '';
   addressComponents: Array<AddressArray> = [
@@ -39,6 +41,18 @@ export class AddressComponent {
 
   constructor (private findCepService: FindCepService) {}
 
+  checkInputs() {
+    const paginaAtiva = this.addressComponents;
+
+    const todosPreenchidos = paginaAtiva.every((input) => input.value !== '');
+    
+    if (todosPreenchidos) {
+      this.inputsFilled.emit(true);
+    } else {
+      this.inputsFilled.emit(false);
+    }
+  }
+
   searchAddress(cep: string) {
     if(this.isCepValid(cep)){
       this.findCepService.getAddressByCep(cep).subscribe(data => {
@@ -51,6 +65,8 @@ export class AddressComponent {
         this.addressComponents[i].value = '';
       }
     }
+
+    this.checkInputs();
   }
 
   isCepValid(cep: string): boolean{
@@ -80,6 +96,8 @@ export class AddressComponent {
         }
       }
     }
+
+    this.checkInputs();
   }
 
   numberMask(event: any){
