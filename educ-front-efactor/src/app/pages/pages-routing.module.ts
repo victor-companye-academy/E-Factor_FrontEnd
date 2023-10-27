@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'professionals', component: ProfessionalsComponent },
+  { path: 'search-professionals', component: ProfessionalsComponent },
   { path: 'selecionar-usuario', component: ChooseUserComponent },
   { path: 'criar-conta-profissional', component: PersonalDataComponent },
   { path: 'criar-conta-empresa', component: PersonalDataComponent },

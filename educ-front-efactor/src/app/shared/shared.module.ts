@@ -19,7 +19,7 @@ import { CardVacancyComponent } from './card-vacancy/card-vacancy.component';
     SidebarComponent,
     CardDetailsComponent,
     CardVacancyComponent,
-    CardProfessionalComponent
+    CardProfessionalComponent,
   ],
   imports: [
     CommonModule,
@@ -34,7 +34,7 @@ import { CardVacancyComponent } from './card-vacancy/card-vacancy.component';
     SidebarComponent,
     CardDetailsComponent,
     CardVacancyComponent,
-    CardProfessionalComponent
+    CardProfessionalComponent,
   ]
 })
 export class SharedModule { }
