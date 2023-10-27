@@ -19,9 +19,7 @@ import { CardVacancyComponent } from './card-vacancy/card-vacancy.component';
     SidebarComponent,
     CardDetailsComponent,
     CardVacancyComponent,
-    CardProfessionalComponent,
-    CardVacancyComponent
-
+    CardProfessionalComponent
   ],
   imports: [
     CommonModule,

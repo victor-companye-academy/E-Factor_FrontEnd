@@ -1,0 +1,70 @@
+.content{
+    border-radius: 0.9375rem;
+    width: 97vw;
+    height: 87vh;
+    background-color: var(--tertiary);
+    align-self: center;
+
+    .logo{
+        width: 9.66369rem;
+        left: 1.5rem;
+        top: 2rem;
+        cursor: pointer;
+    }
+
+    .textarea{
+        h2{
+            color: var(--primary);
+        }
+        
+        textarea,
+        ::placeholder{
+            border: none;
+            color: var(--text);
+        }    
+    }
+}
+
+.bottom{
+    p{
+        color: var(--text);
+    }
+}
+
+.back-option{
+    cursor: pointer;
+    color: var(--text);
+}
+
+.btn-continue{
+    width: 15.9375rem;
+    height: 2.5rem;
+    background-color: var(--primary);
+    color: var(--text-white);
+    border-radius: 0.75rem;
+    width: 40%;
+}
+
+@media (min-width: 991px) {
+    .textarea{
+        width: 35%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .textarea{
+        width: 60%;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .textarea{
+        width: 70%;
+    }
+}
+
+@media (max-width: 480px) {
+    .textarea{
+        width: 85%;
+    }
+}

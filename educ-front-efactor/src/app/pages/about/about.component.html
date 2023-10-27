@@ -1,0 +1,76 @@
+<main class="d-flex w-100 main">
+    <div class="sidebar">
+        <app-sidebar></app-sidebar>
+    </div>
+
+    <div class="w-100 container fadeIn overflow-hidden">
+        <button type="button" class="fadeIn border-0 mt-5 tobble w-100 d-flex justify-content-end px-4 bg-transparent">
+            <img src="assets/icons/tobble.svg" alt="Icone seta" title="Mudar modo">
+        </button>
+
+        <h1 class="fw-bold fs-5 mt-1 w-100 p-4">
+            Sobre a E-Factor
+        </h1>
+
+        <section class=" d-flex w-100 p-4 justify-content-center mt-4">
+            <div class="div-aboult d-flex justify-content-center flex-column align-items-center overflow-hidden">
+                <h2 class="fw-bold fs-5">
+                    Como funciona a E-factor
+                </h2>
+
+                <div class="d-flex flex-wrap justify-content-between overflow-hidden mt-2">
+                    <span *ngFor="let card of about" class="mx-1">
+                        <card-details [card]="card" class="mt-4"></card-details>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <section class="d-flex flex-column align-items-center mt-5 overflow-hidden px-4">
+            <h2 class="fw-bold fs-5">
+                Objetivos
+            </h2>
+            <p class="text-center fw-light mt-4">
+                Lorem ipsum dolor sit amet consectetur. Facilisis pharetra placerat pretium vitae varius quis. Molestie
+                fames sit eu aliquam faucibus. Erat sapien in elit semper eu sit fames habitant viverra. Nunc tincidunt
+                ultrices aliquam fames tellus eros pellentesque a pulvinar. Facilisis ornare dolor pellentesque vivamus
+                enim. Rhoncus sed id quam tellus elit tellus non. Aliquam amet sagittis urna lectus cursus consectetur.
+                Malesuada lectus ut nulla facilisi. Placerat aliquet sagittis eu sed. Eget feugiat cursus augue felis
+                semper.
+                Id elit fames molestie lorem lacus vehicula sagittis consequat nibh. Tellus volutpat in viverra nisl
+                gravida vitae. Massa molestie elementum scelerisque vulputate massa lacus facilisi. Nulla nam laoreet
+                porta consectetur quisque.
+            </p>
+        </section>
+
+        <section class="d-flex flex-column align-items-center mt-4 overflow-hidden px-4">
+            <img src="assets/imgs/brazilian-regions.svg" class="mt-4"
+                alt="Mapa do Brasil com destaque onde há maior números de pessoas impactadas." title="Mapa">
+        </section>
+
+        <section class="mt-5 mb-5  me-0 w-100 p-4 ">
+            <div class="container d-flex justify-content-center flex-column align-items-center">
+                <h2 class="fw-bold fs-5">
+                    Depoimentos
+                </h2>
+                <div class="testimonials d-flex mt-4 w-100 justify-content-between overflow-hidden">
+                    <button type="button" class="border-0 bg-transparent arrow" (click)="prevCard()">
+                        <img src="assets/icons/arrow-left.svg" alt="Icone seta esquerda">
+                    </button>
+
+                    <div class="d-flex w-100 justify-content-center">
+                        <card-details [card]="testimonials[currentIndex]" class="mx-3"></card-details>
+                        <card-details [card]="testimonials[(currentIndex + 1) % testimonials.length]"
+                            class="mx-3"></card-details>
+                    </div>
+
+                    <button type="button" class="border-0 bg-transparent arrow" (click)="nextCard()">
+                        <img src="assets/icons/arrow-right.svg" alt="Icone seta direita">
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<app-footer class="footer"></app-footer>
