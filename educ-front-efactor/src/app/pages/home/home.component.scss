@@ -3,7 +3,7 @@
 
     .main {
         min-height: 100vh;
-        
+
         h2,
         h1,
         h3 {
@@ -22,7 +22,7 @@
         }
 
         section {
-            .arrow{
+            .arrow {
                 min-width: 1.5625rem;
             }
             .arrow:hover {
@@ -31,14 +31,10 @@
             }
         }
 
-        .card-professional,
-        .card-vacancy {
-            display: flex;
-            padding: 0 1rem;
-            max-width: 23rem;
-            max-height: 12.5rem;
-
+        .see-more {
             button {
+                width: 8rem;
+
                 background: var(--secondary);
 
                 color: var(--text-white);
@@ -47,16 +43,22 @@
                 }
             }
         }
-        
+
         @media (max-width: 1470px) {
             .card-professional,
             .card-vacancy {
                 padding: 0;
                 min-width: 10.1875rem;
                 max-width: 15.625rem;
-                p{
-                display: none;
+                p {
+                    display: none;
                 }
+            }
+        }
+
+        @media (max-width:992px) {
+            .section-professional{
+                flex-direction: column-reverse;
             }
         }
     }

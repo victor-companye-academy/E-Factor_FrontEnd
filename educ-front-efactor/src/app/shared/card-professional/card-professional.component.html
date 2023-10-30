@@ -1,5 +1,5 @@
 <article *ngIf="card" class="card d-flex border-0 rounded-4 card container flex-column px-3 pt-3  overflow-hidden"
-    [ngClass]="{'flex-row': !isShort}" [ngStyle]="{'width': isShort ? '23rem' : 'auto'}">
+    [ngClass]="{'flex-row': !isShort}">
 
     <section class="content d-flex overflow-hidden">
         <img src="{{ card.src || 'assets/icons/user.svg' }}" alt="Logo usuario"
@@ -29,11 +29,10 @@
     <section class="d-flex content-2 align-items-start flex-column mt-3 ms-1"
         [ngClass]="{'me-2': !isShort, 'flex-nowrap': isShort, 'justify-content-between': isShort}">
 
-        <div class="d-flex overflow-hidden flex-nowrap">
+        <div class="d-flex overflow-hidden ">
             <div class="d-flex me-2" *ngIf="isShort">
                 <img src="assets/icons/map.svg" alt="Icone de mapa" class="me-2" width="24px" height="24px">
-                <span class="rounded-5 bg-white px-2 fw-medium"
-                    >
+                <span class="rounded-5 bg-white px-2 fw-medium" [title]="card.locality">
                     {{ card.locality }}
                 </span>
             </div>
@@ -43,13 +42,12 @@
 
                 <ul class="d-flex p-0" *ngIf="!isShort">
                     <li *ngFor="let skill of card.skills; let i = index">
-                        <span 
-                            class="me-2 ms-2 rounded-5 bg-white px-3 fw-medium" *ngIf="i<5">{{ card.skills[i] }}</span>
+                        <span class="me-2 ms-2 rounded-5 bg-white px-3 fw-medium" *ngIf="i<5">{{ card.skills[i]
+                            }}</span>
                     </li>
                 </ul>
 
-                <span 
-                    class="me-2 rounded-5 bg-white px-3 fw-medium" *ngIf="isShort">{{ card.skills[0] }} </span>
+                <span class="me-2 rounded-5 bg-white px-3 fw-medium" *ngIf="isShort">{{ card.skills[0] }} </span>
 
                 <span class="rounded-5 bg-white px-2 fw-medium"
                     *ngIf="(card.skills.length > 1 && card.skills.length - 6 && !isShort)">

@@ -8,7 +8,7 @@
             <img src="assets/icons/tobble.svg" alt="Icone seta" title="Mudar modo">
         </button>
 
-        <section class="mb-5 w-100 p-4">
+        <section class="mb-0 w-100 p-4">
             <div
                 class="fadeInDown d-flex flex-column justify-content-center align-items-start background-students rounded-4 px-5">
                 <img src="assets/icons/logo-site.svg" width="270px" alt="Logo e-factor" title="e-factor">
@@ -20,10 +20,9 @@
 
         <!--  -->
 
-        <section class="mt-5  w-100 p-4">
-            <div class="d-flex justify-content-between">
-                <div
-                    class="card-professional  flex-column align-items-start justify-content-center overflow-hidden">
+        <section class="mt-0  w-100 p-4">
+            <div class="section-professional d-flex justify-content-center row">
+                <div class="see-more mt-3 col-lg-12 col-xl-4">
                     <h3 class="fw-bold fs-6">
                         Um mundo de profissionais ao seu alcance.
                     </h3>
@@ -31,33 +30,37 @@
                         Encontre profissionais capacitados com a categoria de sua preferência.
                     </p>
 
-                    <button type="button"
-                        class="mt-3 border-0 fw-medium py-2 px-5 rounded-3 overflow-hidden text-nowrap" routerLink="/search-professionals">
+                    <button type="button" class="mt-4 border-0 fw-medium py-2 rounded-3 me-0"
+                        routerLink="/search-professionals">
                         Ver tudo
                     </button>
                 </div>
-                <card-professional [short]="true" [card]="cardProfessional[1]"></card-professional>
-                <card-professional [short]="true" [card]="cardProfessional[0]"></card-professional>
+
+                <card-professional [short]="true" [card]="cardProfessional[1]"
+                    class="mt-4 col-lg-6 col-xl-4"></card-professional>
+                <card-professional [short]="true" [card]="cardProfessional[0]"
+                    class="mt-4 col-lg-6 col-xl-4"></card-professional>
+
             </div>
         </section>
 
-        <section class="mb-5  w-100 p-4">
-            <div class="d-flex justify-content-between">
+        <section class="mb-5 w-100 p-4">
+            <div class="row justify-content-center">
 
-                <card-vacancy [short]="true" [cards]="cardVacancy[1]"></card-vacancy>
-                <card-vacancy [short]="true" [cards]="cardVacancy[0]"></card-vacancy>
-                
-                <div class="card-vacancy flex-column align-items-end justify-content-center overflow-hidden">
+                <card-vacancy [short]="true" [cards]="cardVacancy[1]" class="mt-4 col-lg-6 col-xl-4"></card-vacancy>
+                <card-vacancy [short]="true" [cards]="cardVacancy[0]" class="mt-4 col-lg-6 col-xl-4"></card-vacancy>
+
+                <div class="see-more d-flex flex-column align-items-end mt-4 col-lg-12 col-xl-4">
                     <h3 class="fw-bold fs-6 text-end">
                         Um mundo de vagas ao seu alcance.
                     </h3>
-                    <p class="fw-light mt-2 text-end p">
+                    <p class="fw-light mt-2 text-end">
                         Encontre vagas da forma onde você se enquada com a categoria de sua
                         preferência..
                     </p>
 
-                    <button type="button"
-                        class="mt-2 border-0 fw-medium py-2 px-5 rounded-3 overflow-hidden text-nowrap" routerLink="/search-vacancies">
+                    <button type="button" class="mt-4 border-0 fw-medium py-2 rounded-3 me-0"
+                        routerLink="/search-vacancies">
                         Ver tudo
                     </button>
                 </div>
@@ -66,27 +69,27 @@
 
         <!--  -->
 
-        <section class="mt-5  d-flex w-100 p-4 justify-content-center">
+        <section class="mt-5 w-100 p-4 ">
             <div class="div-aboult d-flex justify-content-center flex-column align-items-center overflow-hidden">
                 <h2 class="fw-bold fs-5">
                     Como funciona a E-factor
                 </h2>
 
-                <div class="d-flex flex-wrap justify-content-between overflow-hidden ">
-                    <span *ngFor="let card of about" class="mx-1">
+                <div class="row justify-content-between flex-wrap">
+                    <span *ngFor="let card of about" class="col-lg-6 col-xl-4">
                         <card-details [card]="card" class="mt-4"></card-details>
                     </span>
                 </div>
             </div>
         </section>
 
-        <section class="mt-5 mb-5  me-0 w-100 p-4 ">
+        <section class="mt-5 mb-5  w-100 p-4 ">
             <div class="container d-flex justify-content-center flex-column align-items-center">
                 <h2 class="fw-bold fs-5">
                     Depoimentos
                 </h2>
-                <div class="testimonials d-flex mt-4 w-100 justify-content-between overflow-hidden">
-                    <button type="button" class="border-0 bg-transparent arrow" (click)="prevCard()">
+                <div class="d-flex mt-4 w-100 justify-content-between">
+                    <button type="button" class="border-0 bg-transparent arrow me-5" (click)="prevCard()">
                         <img src="assets/icons/arrow-left.svg" alt="Icone seta esquerda">
                     </button>
 
@@ -96,7 +99,7 @@
                             class="mx-3"></card-details>
                     </div>
 
-                    <button type="button" class="border-0 bg-transparent arrow" (click)="nextCard()">
+                    <button type="button" class="border-0 bg-transparent arrow ms-5" (click)="nextCard()">
                         <img src="assets/icons/arrow-right.svg" alt="Icone seta direita">
                     </button>
                 </div>
