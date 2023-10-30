@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CardProfessionalComponent } from './card-professional/card-professional.component';
 import { CardVacancyComponent } from './card-vacancy/card-vacancy.component';
+import { CardNewsletterComponent } from './card-newsletter/card-newsletter.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import { CardVacancyComponent } from './card-vacancy/card-vacancy.component';
     SidebarComponent,
     CardDetailsComponent,
     CardVacancyComponent,
-    CardProfessionalComponent
+    CardProfessionalComponent,
+    CardNewsletterComponent,
+    CardNewsletterComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +37,8 @@ import { CardVacancyComponent } from './card-vacancy/card-vacancy.component';
     SidebarComponent,
     CardDetailsComponent,
     CardVacancyComponent,
-    CardProfessionalComponent
+    CardProfessionalComponent,
+    CardNewsletterComponent
   ]
 })
 export class SharedModule { }

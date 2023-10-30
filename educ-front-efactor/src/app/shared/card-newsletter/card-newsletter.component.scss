@@ -1,0 +1,50 @@
+:host {
+    display: flex;
+    justify-content: center;
+
+    .card {
+        color: var(--text-white);
+        min-height: 13rem;
+
+        background-color: rgb(177, 177, 177);
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        img {
+            width: 60px;
+            height: 60px;
+        }
+
+        button {
+            --s: 65%; /* the size of the image */
+            --b: 3px; /* the border thickness*/
+            --g: 2px; /* the gap */
+            --c: orange; /* the color */
+
+            width: var(--s);
+            min-height: 2.5rem;
+            outline: calc(var(--s) / 2) solid #0009;
+            outline-offset: calc(var(--s) / -2);
+            cursor: pointer;
+            transition: 0.1s;
+
+            background-color: var(--primary);
+            color: var(--text-white);
+
+            &:hover {
+                outline: var(--b) solid var(--c);
+                outline-offset: var(--g);
+            }
+        }
+    }
+
+    h2 {
+        font-size: 1.125rem;
+        overflow: hidden;
+    }
+
+    p {
+        font-size: 0.75rem;
+        overflow: hidden;
+    }
+}

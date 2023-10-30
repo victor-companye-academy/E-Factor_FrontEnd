@@ -11,6 +11,7 @@ import { UserInformationComponent } from './user-information/user-information.co
 import { SendEmailComponent } from './send-email/send-email.component';
 import { CodeConfirmationComponent } from './code-confirmation/code-confirmation.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { NewsletterComponent } from './newsletter/newsletter.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'send-email', component: SendEmailComponent },
   { path: 'confirm-code/:email', component: CodeConfirmationComponent },
   { path: 'change-password', component: ChangePasswordComponent },
+  {path: 'newsletter', component: NewsletterComponent},
   { path: '**', redirectTo: '' },
 ];
 
