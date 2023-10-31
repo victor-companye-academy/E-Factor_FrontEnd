@@ -22,8 +22,8 @@
 
         <section class="mt-0  w-100 p-4">
             <div class="section-professional d-flex justify-content-center row">
-                <div class="see-more mt-3 col-lg-12 col-xl-4">
-                    <h3 class="fw-bold fs-6">
+                <div class="see-more pt-2 col-lg-12 col-xl-4">
+                    <h3 class="fw-bold fs-6 mt-4">
                         Um mundo de profissionais ao seu alcance.
                     </h3>
                     <p class="fw-light mt-3">
@@ -51,7 +51,7 @@
                 <card-vacancy [short]="true" [cards]="cardVacancy[0]" class="mt-4 col-lg-6 col-xl-4"></card-vacancy>
 
                 <div class="see-more d-flex flex-column align-items-end mt-4 col-lg-12 col-xl-4">
-                    <h3 class="fw-bold fs-6 text-end">
+                    <h3 class="fw-bold fs-6 text-end pt-2">
                         Um mundo de vagas ao seu alcance.
                     </h3>
                     <p class="fw-light mt-2 text-end">
@@ -69,13 +69,13 @@
 
         <!--  -->
 
-        <section class="mt-5 w-100 p-4 ">
-            <div class="div-aboult d-flex justify-content-center flex-column align-items-center overflow-hidden">
-                <h2 class="fw-bold fs-5">
+        <section class="mt-5 mb-5 w-100 p-4">
+            <div class="div-aboult">
+                <h2 class="fw-bold fs-5 text-center">
                     Como funciona a E-factor
                 </h2>
 
-                <div class="row justify-content-between flex-wrap">
+                <div class="row mt-4">
                     <span *ngFor="let card of about" class="col-lg-6 col-xl-4">
                         <card-details [card]="card" class="mt-4"></card-details>
                     </span>
@@ -83,23 +83,24 @@
             </div>
         </section>
 
-        <section class="mt-5 mb-5  w-100 p-4 ">
-            <div class="container d-flex justify-content-center flex-column align-items-center">
+        <section class="mt-5 mb-5  w-100">
+            <div class="text-center">
                 <h2 class="fw-bold fs-5">
                     Depoimentos
                 </h2>
-                <div class="d-flex mt-4 w-100 justify-content-between">
-                    <button type="button" class="border-0 bg-transparent arrow me-5" (click)="prevCard()">
+                <div class="row p-4 text-start">
+                    <button type="button" class="border-0 bg-transparent arrow me-5 mt-3 col-1" (click)="prevCard()">
                         <img src="assets/icons/arrow-left.svg" alt="Icone seta esquerda">
                     </button>
 
-                    <div class="d-flex w-100 justify-content-center">
-                        <card-details [card]="testimonials[currentIndex]" class="mx-3"></card-details>
+                    <div class="d-flex row col">
+                        <card-details [card]="testimonials[currentIndex]"
+                            class="mt-3 col-lg-12 col-xl-6"></card-details>
                         <card-details [card]="testimonials[(currentIndex + 1) % testimonials.length]"
-                            class="mx-3"></card-details>
+                            class="mt-3 col-lg-12 col-xl-6"></card-details>
                     </div>
 
-                    <button type="button" class="border-0 bg-transparent arrow ms-5" (click)="nextCard()">
+                    <button type="button" class="border-0 bg-transparent arrow ms-5 mt-3 col-1" (click)="nextCard()">
                         <img src="assets/icons/arrow-right.svg" alt="Icone seta direita">
                     </button>
                 </div>

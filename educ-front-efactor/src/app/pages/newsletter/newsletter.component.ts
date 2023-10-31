@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CardDetails } from 'src/app/core/interfaces/card-details';
-import { CardDetailsService } from 'src/app/core/service/cardDetails/card-details.service';
 import { NewsletterService } from 'src/app/core/service/newsletter/newsletter.service';
 
 @Component({
@@ -8,32 +7,68 @@ import { NewsletterService } from 'src/app/core/service/newsletter/newsletter.se
   templateUrl: './newsletter.component.html',
   styleUrls: ['./newsletter.component.scss']
 })
-export class NewsletterComponent {
+export class NewsletterComponent implements OnInit {
   constructor(private newsletterService: NewsletterService) { }
-
 
   protected novelties: Array<CardDetails> = this.newsletterService.listNovelties();
   protected courses: Array<CardDetails> = this.newsletterService.listCourses();
 
-
   public currentNoveltyIndex: number = 0;
   public currentCourseIndex: number = 0;
 
+  isAnimatingNextCourse: boolean = false;
+  isAnimatingPrevCourse: boolean = false;
+
+  isAnimatingNextNovelty: boolean = false;
+  isAnimatingPrevNovelty: boolean = false;
+
+  private animationDuration: number = 1000; //Ajuste este valor para corresponder à duração da transição em milissegundos
+  private nextDuration: number = 10000; //Ajuste este valor para corresponder à duração da transição em milissegundos
 
   nextNovelty() {
-    this.currentNoveltyIndex = (this.currentNoveltyIndex + 1) % this.novelties.length;
+    if (!this.isAnimatingNextNovelty) {
+      this.isAnimatingNextNovelty = true;
+      this.currentNoveltyIndex = (this.currentNoveltyIndex + 1) % this.novelties.length;
+      setTimeout(() => {
+        this.isAnimatingNextNovelty = false;
+      }, this.animationDuration);
+    }
   }
 
   prevNovelty() {
-    this.currentNoveltyIndex = (this.currentNoveltyIndex - 1 + this.novelties.length) % this.novelties.length;
+    if (!this.isAnimatingPrevNovelty) {
+      this.isAnimatingPrevNovelty = true;
+      this.currentNoveltyIndex = (this.currentNoveltyIndex - 1 + this.novelties.length) % this.novelties.length;
+      setTimeout(() => {
+        this.isAnimatingPrevNovelty = false;
+      }, this.animationDuration);
+    }
   }
 
   nextCourse() {
-    this.currentCourseIndex = (this.currentCourseIndex + 1) % this.courses.length;
+    if (!this.isAnimatingNextCourse) {
+      this.isAnimatingNextCourse = true;
+      this.currentCourseIndex = (this.currentCourseIndex + 1) % this.courses.length;
+      setTimeout(() => {
+        this.isAnimatingNextCourse = false;
+      }, this.animationDuration);
+    }
   }
 
   prevCourse() {
-    this.currentCourseIndex = (this.currentCourseIndex - 1 + this.courses.length) % this.courses.length;
+    if (!this.isAnimatingPrevCourse) {
+      this.isAnimatingPrevCourse = true;
+      this.currentCourseIndex = (this.currentCourseIndex - 1 + this.courses.length) % this.courses.length;
+      setTimeout(() => {
+        this.isAnimatingPrevCourse = false;
+      }, this.animationDuration);
+    }
   }
 
+  ngOnInit(): void {
+    setInterval(() => {
+      this.nextCourse()
+      this.nextNovelty()
+    }, this.nextDuration)
+  }
 }

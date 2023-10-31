@@ -34,4 +34,14 @@
         }
     }
 
+    @media (max-width:992px) {
+        .section-professional{
+            flex-direction: column-reverse;
+        }
+
+        .arrow{
+            display: none;
+        }
+    }
+
 }

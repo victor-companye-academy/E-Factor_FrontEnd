@@ -1,7 +1,7 @@
-:host{
+:host {
     color: var(--text);
 
-    .main{
+    .main {
         min-height: 100vh;
         h2,
         h1,
@@ -12,11 +12,11 @@
         }
     }
 
-    section{
-        .amount{
+    section {
+        .amount {
             max-width: 12rem;
         }
-                .arrow{
+        .arrow {
             min-width: 1.5625rem;
         }
         .arrow:hover {
@@ -34,4 +34,19 @@
         }
     }
 
+    .slide-in-x {
+        transform: translateX(0);
+        opacity: 1;
+        transition:
+            transform 0.5s ease,
+            opacity 0.5s ease;
+    }
+
+    .slide-out-x {
+        transform: translateX(100%);
+        opacity: 0;
+        transition:
+            transform 0.5s ease,
+            opacity 0.5s ease;
+    }
 }

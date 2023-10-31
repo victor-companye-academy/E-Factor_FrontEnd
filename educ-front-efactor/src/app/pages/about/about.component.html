@@ -12,14 +12,14 @@
             Sobre a E-Factor
         </h1>
 
-        <section class=" d-flex w-100 p-4 justify-content-center mt-4">
-            <div class="div-aboult d-flex justify-content-center flex-column align-items-center overflow-hidden">
-                <h2 class="fw-bold fs-5">
+        <section class="mt-5 w-100 p-4">
+            <div class="div-aboult">
+                <h2 class="fw-bold fs-5 text-center">
                     Como funciona a E-factor
                 </h2>
 
-                <div class="d-flex flex-wrap justify-content-between overflow-hidden mt-2">
-                    <span *ngFor="let card of about" class="mx-1">
+                <div class="row mt-4">
+                    <span *ngFor="let card of about" class="col-lg-6 col-xl-4">
                         <card-details [card]="card" class="mt-4"></card-details>
                     </span>
                 </div>
@@ -43,28 +43,29 @@
             </p>
         </section>
 
-        <section class="d-flex flex-column align-items-center mt-4 overflow-hidden px-4">
-            <img src="assets/imgs/brazilian-regions.svg" class="mt-4"
+        <section class="overflow-hidden mt-5 mb-5 w-100 d-flex justify-content-center">
+            <img src="assets/imgs/brazilian-regions.svg" class="mt-4 mb-4 col-12 col-xl-10"
                 alt="Mapa do Brasil com destaque onde há maior números de pessoas impactadas." title="Mapa">
         </section>
 
-        <section class="mt-5 mb-5  me-0 w-100 p-4 ">
-            <div class="container d-flex justify-content-center flex-column align-items-center">
+        <section class="mt-5 mb-5 pt-5 w-100">
+            <div class="text-center">
                 <h2 class="fw-bold fs-5">
                     Depoimentos
                 </h2>
-                <div class="testimonials d-flex mt-4 w-100 justify-content-between overflow-hidden">
-                    <button type="button" class="border-0 bg-transparent arrow" (click)="prevCard()">
+                <div class="row p-4 text-start">
+                    <button type="button" class="border-0 bg-transparent arrow me-5 mt-3 col-1" (click)="prevCard()">
                         <img src="assets/icons/arrow-left.svg" alt="Icone seta esquerda">
                     </button>
 
-                    <div class="d-flex w-100 justify-content-center">
-                        <card-details [card]="testimonials[currentIndex]" class="mx-3"></card-details>
+                    <div class="d-flex row col">
+                        <card-details [card]="testimonials[currentIndex]"
+                            class="mt-3 col-lg-12 col-xl-6"></card-details>
                         <card-details [card]="testimonials[(currentIndex + 1) % testimonials.length]"
-                            class="mx-3"></card-details>
+                            class="mt-3 col-lg-12 col-xl-6"></card-details>
                     </div>
 
-                    <button type="button" class="border-0 bg-transparent arrow" (click)="nextCard()">
+                    <button type="button" class="border-0 bg-transparent arrow ms-5 mt-3 col-1" (click)="nextCard()">
                         <img src="assets/icons/arrow-right.svg" alt="Icone seta direita">
                     </button>
                 </div>
