@@ -13,62 +13,25 @@ export class NewsletterComponent implements OnInit {
   protected novelties: Array<CardDetails> = this.newsletterService.listNovelties();
   protected courses: Array<CardDetails> = this.newsletterService.listCourses();
 
-  public currentNoveltyIndex: number = 0;
-  public currentCourseIndex: number = 0;
+  public responsiveOptions: any[] | undefined;
 
-  isAnimatingNextCourse: boolean = false;
-  isAnimatingPrevCourse: boolean = false;
-
-  isAnimatingNextNovelty: boolean = false;
-  isAnimatingPrevNovelty: boolean = false;
-
-  private animationDuration: number = 500; 
-  private nextDuration: number = 4000; 
-
-  nextNovelty() {
-    if (!this.isAnimatingNextNovelty) {
-      this.isAnimatingNextNovelty = true;
-      this.currentNoveltyIndex = (this.currentNoveltyIndex + 1) % this.novelties.length;
-      setTimeout(() => {
-        this.isAnimatingNextNovelty = false;
-      }, this.animationDuration);
-    }
-  }
-
-  prevNovelty() {
-    if (!this.isAnimatingPrevNovelty) {
-      this.isAnimatingPrevNovelty = true;
-      this.currentNoveltyIndex = (this.currentNoveltyIndex - 1 + this.novelties.length) % this.novelties.length;
-      setTimeout(() => {
-        this.isAnimatingPrevNovelty = false;
-      }, this.animationDuration);
-    }
-  }
-
-  nextCourse() {
-    if (!this.isAnimatingNextCourse) {
-      this.isAnimatingNextCourse = true;
-      this.currentCourseIndex = (this.currentCourseIndex + 1) % this.courses.length;
-      setTimeout(() => {
-        this.isAnimatingNextCourse = false;
-      }, this.animationDuration);
-    }
-  }
-
-  prevCourse() {
-    if (!this.isAnimatingPrevCourse) {
-      this.isAnimatingPrevCourse = true;
-      this.currentCourseIndex = (this.currentCourseIndex - 1 + this.courses.length) % this.courses.length;
-      setTimeout(() => {
-        this.isAnimatingPrevCourse = false;
-      }, this.animationDuration);
-    }
-  }
-
-  ngOnInit(): void {
-    setInterval(() => {
-      this.nextCourse()
-      this.nextNovelty()
-    }, this.nextDuration)
+  ngOnInit() {
+    this.responsiveOptions = [
+      {
+        breakpoint: '1199px',
+        numVisible: 2,
+        numScroll: 3
+      },
+      {
+        breakpoint: '992px',
+        numVisible: 1,
+        numScroll: 1
+      },
+      {
+        breakpoint: '660px',
+        numVisible: 1,
+        numScroll: 1
+      }
+    ];
   }
 }

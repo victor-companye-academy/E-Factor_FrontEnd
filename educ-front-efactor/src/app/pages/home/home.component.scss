@@ -21,16 +21,6 @@
             }
         }
 
-        section {
-            .arrow {
-                min-width: 1.5625rem;
-            }
-            .arrow:hover {
-                transform: scale(1.2);
-                transition: all 0.5s;
-            }
-        }
-
         .see-more {
             button {
                 width: 8rem;
@@ -40,18 +30,6 @@
                 color: var(--text-white);
                 &:hover {
                     background: var(--primary);
-                }
-            }
-        }
-
-        @media (max-width: 1470px) {
-            .card-professional,
-            .card-vacancy {
-                padding: 0;
-                min-width: 10.1875rem;
-                max-width: 15.625rem;
-                p {
-                    display: none;
                 }
             }
         }

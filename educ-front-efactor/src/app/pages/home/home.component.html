@@ -20,7 +20,7 @@
 
         <!--  -->
 
-        <section class="mt-0  w-100 p-4">
+        <section class="mt-0 w-100 px-4 py-1">
             <div class="section-professional d-flex justify-content-center row">
                 <div class="see-more pt-2 col-lg-12 col-xl-4">
                     <h3 class="fw-bold fs-6 mt-4">
@@ -44,7 +44,7 @@
             </div>
         </section>
 
-        <section class="mb-5 w-100 p-4">
+        <section class="w-100 px-4 py-1">
             <div class="row justify-content-center">
 
                 <card-vacancy [short]="true" [cards]="cardVacancy[1]" class="mt-4 col-lg-6 col-xl-4"></card-vacancy>
@@ -67,9 +67,7 @@
             </div>
         </section>
 
-        <!--  -->
-
-        <section class="mt-5 mb-5 w-100 p-4">
+        <section class="mt-5 w-100 p-4">
             <div class="div-aboult">
                 <h2 class="fw-bold fs-5 text-center">
                     Como funciona a E-factor
@@ -83,28 +81,24 @@
             </div>
         </section>
 
-        <section class="mt-5 mb-5  w-100">
+        <section class="mt-5 mb-5 py-4 w-100">
             <div class="text-center">
                 <h2 class="fw-bold fs-5">
                     Depoimentos
                 </h2>
-                <div class="row p-4 text-start">
-                    <button type="button" class="mt-3 border-0 bg-transparent arrow col-1 p-0"
-                        (click)="prevCard()">
-                        <img src="assets/icons/arrow-left.svg" alt="Icone seta esquerda">
-                    </button>
 
-                    <div class="d-flex row col-10 p-0">
-                        <card-details [card]="testimonials[currentIndex]"
-                            class="mt-3 col-lg-12 col-xl-6"></card-details>
-                        <card-details [card]="testimonials[(currentIndex + 1) % testimonials.length]"
-                            class="mt-3 col-lg-12 col-xl-6"></card-details>
+                <div class="text-start mt-5">
+                    <div class="row m-0">
+                        <p-carousel [value]="testimonials" [numVisible]="3" [numScroll]="3"
+                            [responsiveOptions]="responsiveOptions" [circular]="true" [autoplayInterval]="4000"
+                            class="col-12">
+
+                            <ng-template let-card pTemplate="item">
+                                <card-details [card]="card" class="mx-2"></card-details>
+                            </ng-template>
+
+                        </p-carousel>
                     </div>
-
-                    <button type="button" class="mt-3 border-0 bg-transparent arrow col-1 p-0"
-                        (click)="nextCard()">
-                        <img src="assets/icons/arrow-right.svg" alt="Icone seta direita">
-                    </button>
                 </div>
             </div>
         </section>

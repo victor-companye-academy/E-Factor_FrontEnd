@@ -11,13 +11,11 @@ export class AboutComponent implements OnInit {
 
   constructor(private cardDetailsService: CardDetailsService) { }
 
-  responsiveOptions: any[] | undefined;
-
   protected about: Array<CardDetails> = this.cardDetailsService.listAbout();
 
   protected testimonials: Array<CardDetails> = this.cardDetailsService.listTestimonials();
 
-  public currentIndex: number = 0;
+  public responsiveOptions: any[] | undefined;
 
   ngOnInit() {
     this.responsiveOptions = [

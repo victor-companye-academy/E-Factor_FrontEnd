@@ -12,19 +12,6 @@
         }
     }
 
-    section {
-        .amount {
-            max-width: 12rem;
-        }
-        .arrow {
-            min-width: 1.5625rem;
-        }
-        .arrow:hover {
-            transform: scale(1.2);
-            transition: all 0.5s;
-        }
-    }
-
     button {
         background: var(--secondary);
 
