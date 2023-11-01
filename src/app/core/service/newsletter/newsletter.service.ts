@@ -11,27 +11,27 @@ export class NewsletterService {
   public listNovelties(): Array<CardDetails> {
     return [
       {
-        src: '../../../../assets/imgs/noticias-bg-1.svg',
+        src: 'assets/imgs/noticias-bg-1.svg',
         title: "Test Card1",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elemeccccccccccccsssssd ssntum curabitur vit..."
       },
       {
-        src: '../../../../assets/imgs/noticias-bg-2.svg',
+        src: 'assets/imgs/noticias-bg-2.svg',
         title: "Test Card2",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elemeccccccccccccsssssd ssntum curabitur vit..."
       },
       {
-        src: '../../../../assets/imgs/curso-bg-1.svg',
+        src: 'assets/imgs/curso-bg-1.svg',
         title: "Test Card3",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elemeccccccccccccsssssd ssntum curabitur vit..."
       },
       {
-        src: '../../../../assets/imgs/curso-bg-2.svg',
+        src: 'assets/imgs/curso-bg-2.svg',
         title: "Test Card4",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elemeccccccccccccsssssd ssntum curabitur vit..."
       },
       {
-        src: '../../../../assets/imgs/curso-bg-1.svg',
+        src: 'assets/imgs/curso-bg-1.svg',
         title: "Test Card",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elemeccccccccccccsssssd ssntum curabitur vit..."
       }
@@ -41,22 +41,22 @@ export class NewsletterService {
   public listCourses(): Array<CardDetails> {
     return [
       {
-        src: '../../../../assets/imgs/curso-bg-1.svg',
+        src: 'assets/imgs/curso-bg-1.svg',
         title: "Test Card1",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elemeccccccccccccsssssd ssntum curabitur vit..."
       },
       {
-        src: '../../../../assets/imgs/curso-bg-2.svg',
+        src: 'assets/imgs/curso-bg-2.svg',
         title: "Test Card2",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elemeccccccccccccsssssd ssntum curabitur vit..."
       },
       {
-        src: '../../../../assets/imgs/curso-bg-1.svg',
+        src: 'assets/imgs/curso-bg-1.svg',
         title: "Test Card3",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elemeccccccccccccsssssd ssntum curabitur vit..."
       },
       {
-        src: '../../../../assets/imgs/curso-bg-2.svg',
+        src: 'assets/imgs/curso-bg-2.svg',
         title: "Test Card4",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elemeccccccccccccsssssd ssntum curabitur vit..."
       }
