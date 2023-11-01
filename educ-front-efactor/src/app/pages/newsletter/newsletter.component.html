@@ -18,21 +18,21 @@
                     Notícias
                 </h2>
 
-                <div class="row mt-5 text-start fadeInLeft">
-                    <button type="button" class="mt-3 border-0 bg-transparent arrow col-1" (click)="prevNovelty()">
+                <div class="row mt-5 text-start fadeIn">
+                    <button type="button" class="mt-3 border-0 bg-transparent arrow col-1 p-0" (click)="prevNovelty()">
                         <img src="assets/icons/arrow-left.svg" alt="Icone seta esquerda">
                     </button>
 
-                    <div class="col row">
+                    <div class="col-10 row p-0">
                         <card-newsletter [card]="novelties[currentNoveltyIndex]" class="mt-3 col-12 col-xl-6"
-                            [ngClass]="{'slideInLeft': isAnimatingPrevNovelty, 'slideInRight': isAnimatingNextNovelty}"></card-newsletter>
+                            [ngClass]="{'fadeIn': isAnimatingPrevNovelty}"></card-newsletter>
 
                         <card-newsletter [card]="novelties[(currentNoveltyIndex + 1) % novelties.length]"
                             class="mt-3 col-12 col-xl-6"
-                            [ngClass]="{'slideInRight': isAnimatingNextNovelty,'slideInLeft': isAnimatingPrevNovelty}"></card-newsletter>
+                            [ngClass]="{'fadeIn': isAnimatingNextNovelty}"></card-newsletter>
                     </div>
 
-                    <button type="button" class="mt-3 border-0 bg-transparent arrow col-1" (click)="nextNovelty()">
+                    <button type="button" class="mt-3 border-0 bg-transparent arrow col-1 p-0" (click)="nextNovelty()">
                         <img src="assets/icons/arrow-right.svg" alt="Icone seta direita">
                     </button>
                 </div>
@@ -45,23 +45,21 @@
                     Cursos
                 </h2>
 
-                <div class="row my-5 text-start fadeInLeft">
-                    <button type="button" class="mt-3 border-0 bg-transparent arrow col-1" (click)="prevCourse()">
+                <div class="row my-5 text-start fade-In">
+                    <button type="button" class="mt-3 border-0 bg-transparent arrow col-1 p-0" (click)="prevCourse()">
                         <img src="assets/icons/arrow-left.svg" alt="Icone seta esquerda">
                     </button>
 
-                    <div class="col row">
+                    <div class="col-10 row p-0">
                         <card-newsletter [card]="courses[currentCourseIndex]" class="mt-3 col-12 col-xl-6"
-                            [ngClass]="{'slideInLeft': isAnimatingPrevCourse, 'slideInRight': isAnimatingNextCourse}"></card-newsletter>
+                            [ngClass]="{'fadeIn': isAnimatingPrevCourse}"></card-newsletter>
 
                         <card-newsletter [card]="courses[(currentCourseIndex + 1) % courses.length]"
                             class="mt-3 col-12 col-xl-6"
-                            [ngClass]="{'slideInRight': isAnimatingNextCourse,'slideInLeft': isAnimatingPrevCourse}"></card-newsletter>
+                            [ngClass]="{'fadeIn': isAnimatingNextCourse}"></card-newsletter>
                     </div>
 
-
-
-                    <button type="button" class="mt-3 border-0 bg-transparent arrow col-1" (click)="nextCourse()">
+                    <button type="button" class="mt-3 border-0 bg-transparent arrow col-1 p-0" (click)="nextCourse()">
                         <img src="assets/icons/arrow-right.svg" alt="Icone seta direita">
                     </button>
                 </div>

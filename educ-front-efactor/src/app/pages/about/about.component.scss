@@ -1,7 +1,7 @@
-:host{
+:host {
     color: var(--text);
-
-    .main{
+    
+    .main {
         min-height: 100vh;
         h2,
         h1,
@@ -11,12 +11,12 @@
             color: var(--primary);
         }
     }
-
-    section{
-        .amount{
+    
+    section {
+        .amount {
             max-width: 12rem;
         }
-                .arrow{
+        .arrow {
             min-width: 1.5625rem;
         }
         .arrow:hover {
@@ -34,14 +34,9 @@
         }
     }
 
-    @media (max-width:992px) {
-        .section-professional{
+    @media (max-width: 992px) {
+        .section-professional {
             flex-direction: column-reverse;
         }
-
-        .arrow{
-            display: none;
-        }
     }
-
 }

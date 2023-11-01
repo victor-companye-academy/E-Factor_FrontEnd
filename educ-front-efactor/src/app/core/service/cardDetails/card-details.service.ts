@@ -11,11 +11,11 @@ export class CardDetailsService {
   public listTestimonials(): Array<CardDetails> {
     return [
       {
-        title: "Buscar Profissional",
+        title: "Feliz",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elementum curabitur vit..."
       },
       {
-        title: "Entrar em contato",
+        title: "Muito bom",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elemeccccccccccccsssssd ssntum curabitur vit..."
       },
       {

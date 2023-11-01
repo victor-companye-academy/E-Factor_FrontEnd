@@ -89,18 +89,20 @@
                     Depoimentos
                 </h2>
                 <div class="row p-4 text-start">
-                    <button type="button" class="border-0 bg-transparent arrow me-5 mt-3 col-1" (click)="prevCard()">
+                    <button type="button" class="mt-3 border-0 bg-transparent arrow col-1 p-0"
+                        (click)="prevCard()">
                         <img src="assets/icons/arrow-left.svg" alt="Icone seta esquerda">
                     </button>
 
-                    <div class="d-flex row col">
+                    <div class="d-flex row col-10 p-0">
                         <card-details [card]="testimonials[currentIndex]"
                             class="mt-3 col-lg-12 col-xl-6"></card-details>
                         <card-details [card]="testimonials[(currentIndex + 1) % testimonials.length]"
                             class="mt-3 col-lg-12 col-xl-6"></card-details>
                     </div>
 
-                    <button type="button" class="border-0 bg-transparent arrow ms-5 mt-3 col-1" (click)="nextCard()">
+                    <button type="button" class="mt-3 border-0 bg-transparent arrow col-1 p-0"
+                        (click)="nextCard()">
                         <img src="assets/icons/arrow-right.svg" alt="Icone seta direita">
                     </button>
                 </div>

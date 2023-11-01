@@ -22,8 +22,8 @@ export class NewsletterComponent implements OnInit {
   isAnimatingNextNovelty: boolean = false;
   isAnimatingPrevNovelty: boolean = false;
 
-  private animationDuration: number = 1000; //Ajuste este valor para corresponder à duração da transição em milissegundos
-  private nextDuration: number = 10000; //Ajuste este valor para corresponder à duração da transição em milissegundos
+  private animationDuration: number = 500; 
+  private nextDuration: number = 4000; 
 
   nextNovelty() {
     if (!this.isAnimatingNextNovelty) {
