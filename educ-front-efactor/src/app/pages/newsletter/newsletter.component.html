@@ -13,14 +13,14 @@
         </h1>
 
         <div>
-            <section class="container text-center mt-0">
-                <h2 class="fw-bold fs-5 py-4">
+            <section class="container text-center mt-0 pt-4">
+                <h2 class="fw-bold fs-5">
                     Notícias
                 </h2>
 
                 <div class="text-start mt-5">
                     <div class="row m-0">
-                        <p-carousel [value]="novelties" [numVisible]="2" [numScroll]="3" [showIndicators]="false"
+                        <p-carousel [value]="novelties" [numVisible]="2" [numScroll]="3" [showIndicators]="true"
                             [responsiveOptions]="responsiveOptions" [circular]="true" [autoplayInterval]="4000"
                             class="col-12">
 
@@ -35,14 +35,14 @@
         </div>
 
         <div>
-            <section class="container text-center mt-5 mb-5 py-4">
-                <h2 class="fw-bold fs-5 py-4">
+            <section class="container text-center my-5 pt-4 pb-5">
+                <h2 class="fw-bold fs-5">
                     Cursos
                 </h2>
 
                 <div class="text-start mt-5">
-                    <div class="row m-0 pb-4">
-                        <p-carousel [value]="courses" [numVisible]="2" [numScroll]="3" [showIndicators]="false"
+                    <div class="row m-0">
+                        <p-carousel [value]="courses" [numVisible]="2" [numScroll]="3" [showIndicators]="true"
                             [responsiveOptions]="responsiveOptions" [circular]="true" [autoplayInterval]="4000"
                             class="col-12">
 
