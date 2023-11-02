@@ -30,15 +30,10 @@ export class HomeComponent implements OnInit {
       {
         breakpoint: '1199px',
         numVisible: 2,
-        numScroll: 3
-      },
-      {
-        breakpoint: '992px',
-        numVisible: 1,
         numScroll: 1
       },
       {
-        breakpoint: '660px',
+        breakpoint: '992px',
         numVisible: 1,
         numScroll: 1
       }

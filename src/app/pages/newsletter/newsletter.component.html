@@ -3,59 +3,61 @@
         <app-sidebar></app-sidebar>
     </div>
 
-    <div class="w-100 container fadeIn overflow-hidden">
-        <button type="button" class="fadeIn border-0 mt-5 tobble w-100 d-flex justify-content-end px-4 bg-transparent">
-            <img src="assets/icons/tobble.svg" alt="Icone seta" title="Mudar modo">
-        </button>
+    <div class="w-100 fadeIn overflow-hidden">
+        <div class="w-100 container">
+            <button type="button"
+                class="fadeIn border-0 mt-5 tobble w-100 d-flex justify-content-end px-4 bg-transparent">
+                <img src="assets/icons/tobble.svg" alt="Icone seta" title="Mudar modo">
+            </button>
 
-        <h1 class="fw-bold fs-5 mt-1 w-100 p-4 overflow-hidden">
-            Fique por dentro de tudo o que estamos fazendo
-        </h1>
+            <h1 class="fw-bold fs-5 mt-1 w-100 p-4 overflow-hidden">
+                Fique por dentro de tudo o que estamos fazendo
+            </h1>
 
-        <div>
-            <section class="container text-center mt-0 pt-4">
-                <h2 class="fw-bold fs-5">
-                    Notícias
-                </h2>
+            <div>
+                <section class="container text-center mt-0 pt-4">
+                    <h2 class="fw-bold fs-5">
+                        Notícias
+                    </h2>
 
-                <div class="text-start mt-5">
-                    <div class="row m-0">
-                        <p-carousel [value]="novelties" [numVisible]="2" [numScroll]="3" [showIndicators]="true"
-                            [responsiveOptions]="responsiveOptions" [circular]="true" [autoplayInterval]="4000"
-                            class="col-12">
+                    <div class="text-start mt-5">
+                        <div class="row m-0">
+                            <p-carousel [value]="novelties" [numVisible]="2" [numScroll]="1" [showIndicators]="true"
+                                [responsiveOptions]="responsiveOptions" [circular]="true" [autoplayInterval]="4000"
+                                class="col-12">
 
-                            <ng-template let-card pTemplate="novelties">
-                                <card-newsletter [card]="card" class="mx-2"></card-newsletter>
-                            </ng-template>
+                                <ng-template let-card pTemplate="novelties">
+                                    <card-newsletter [card]="card" class="mx-2"></card-newsletter>
+                                </ng-template>
 
-                        </p-carousel>
+                            </p-carousel>
+                        </div>
                     </div>
-                </div>
-            </section>
-        </div>
+                </section>
+            </div>
 
-        <div>
-            <section class="container text-center my-5 pt-4 pb-5">
-                <h2 class="fw-bold fs-5">
-                    Cursos
-                </h2>
+            <div>
+                <section class="container text-center my-5 pt-4 pb-5">
+                    <h2 class="fw-bold fs-5">
+                        Cursos
+                    </h2>
 
-                <div class="text-start mt-5">
-                    <div class="row m-0">
-                        <p-carousel [value]="courses" [numVisible]="2" [numScroll]="3" [showIndicators]="true"
-                            [responsiveOptions]="responsiveOptions" [circular]="true" [autoplayInterval]="4000"
-                            class="col-12">
+                    <div class="text-start mt-5">
+                        <div class="row m-0">
+                            <p-carousel [value]="courses" [numVisible]="2" [numScroll]="1" [showIndicators]="true"
+                                [responsiveOptions]="responsiveOptions" [circular]="true" [autoplayInterval]="4000"
+                                class="col-12">
 
-                            <ng-template let-card pTemplate="courses">
-                                <card-newsletter [card]="card" class="mx-2"></card-newsletter>
-                            </ng-template>
+                                <ng-template let-card pTemplate="courses">
+                                    <card-newsletter [card]="card" class="mx-2"></card-newsletter>
+                                </ng-template>
 
-                        </p-carousel>
+                            </p-carousel>
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
         </div>
+        <app-footer class="footer"></app-footer>
     </div>
 </main>
-
-<app-footer class="footer"></app-footer>

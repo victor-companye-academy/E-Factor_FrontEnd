@@ -19,16 +19,6 @@ export class NewsletterComponent implements OnInit {
     this.responsiveOptions = [
       {
         breakpoint: '1199px',
-        numVisible: 2,
-        numScroll: 3
-      },
-      {
-        breakpoint: '992px',
-        numVisible: 1,
-        numScroll: 1
-      },
-      {
-        breakpoint: '660px',
         numVisible: 1,
         numScroll: 1
       }
