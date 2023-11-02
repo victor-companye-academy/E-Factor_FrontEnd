@@ -106,6 +106,7 @@ import { BlockUIModule } from 'primeng/blockui';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { BusinessUserComponent } from './business-user/business-user.component';
 
 @NgModule({
   declarations: [
@@ -120,6 +121,7 @@ import { HttpClientModule } from '@angular/common/http';
     SendEmailComponent,
     CodeConfirmationComponent,
     ChangePasswordComponent,
+    BusinessUserComponent,
   ],
   imports: [
     CommonModule,

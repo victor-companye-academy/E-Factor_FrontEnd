@@ -35,4 +35,20 @@ export class BiographyComponent {
       this.isBiographyValid = false;
     }
   }
+
+  getLinkDestinationContinue() {
+    if (this.pageType == 0){
+      return '/login';
+    } else {
+      return '/criar-conta-empresa';
+    }
+  }
+
+  getLinkDestinationBack(){
+    if (this.pageType == 0){
+      return '/informacoes-profissional';
+    } else {
+      return '/informacoes-empresa';
+    }
+  }
 }

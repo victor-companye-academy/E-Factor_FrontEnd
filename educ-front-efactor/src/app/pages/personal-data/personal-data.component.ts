@@ -50,7 +50,7 @@ export class PersonalDataComponent {
           },
           {
             title: "Profissional",
-            parameters: ['assets/icons/personal-data/right-icon-profissional.svg', 'Um mundo de vagas ao seu alcance.', 'Encontre vagas da forma onde você se enquada com a categoria de sua preferência.'],
+            parameters: ['assets/icons/personal-data/right-icon-profissional.svg', 'Um mundo de vagas ao seu alcance.', 'Encontre vagas de forma onde você se enquadra com a categoria de sua preferência.'],
             label: ''
           }
       ],
@@ -83,11 +83,19 @@ export class PersonalDataComponent {
     ],
   ];
 
-  public getLinkDestination() {
+  public getLinkDestinationContinue() {
     if (this.pageType == 0){
       return '/informacoes-profissional';
     } else {
-      return '/login';
+      return '/create-business-user';
+    }
+  }
+
+  public getLinkDestinationBack() {
+    if (this.pageType == 0){
+      return '/selecionar-usuario';
+    } else {
+      return '/biografia-empresa';
     }
   }
 
@@ -109,8 +117,8 @@ export class PersonalDataComponent {
   isInputValid(event: any, i: number) {
     let value = event.target.value;
     this.input[i] = value;
-    if (this.input[0].includes('@') &&
-        this.input[1].includes('@') &&
+    if (this.input[0].match(/^[\w-\.]+@([\w-]+\.)+[\w-]/g) &&
+        this.input[1].match(/^[\w-\.]+@([\w-]+\.)+[\w-]/g) &&
         this.input[2] != '' &&
         this.input[3] != '' &&
         this.input[2] === this.input[3] &&
@@ -129,7 +137,7 @@ export class PersonalDataComponent {
 
   validateEmailInput(i: number) {
     if (i === 0 || i === 1) {
-      if (this.input[i] !== '' && !this.input[i].includes('@')) {
+      if (this.input[i] !== '' && !this.input[i].match(/^[\w-\.]+@([\w-]+\.)+[\w-]/g)) {
         this.setErrorMessage(i, 'O e-mail informado é inválido');
       } else {
         this.clearErrorMessage(i);
@@ -140,9 +148,9 @@ export class PersonalDataComponent {
   
   validadeEmailEquality() {
     if (this.input[0] !== this.input[1] && this.input[0] !== '' && this.input[1] !== '') {
-      this.setErrorMessage(0, '');
+      // this.setErrorMessage(0, '');
       this.setErrorMessage(1, 'Os e-mails não conferem');
-    } else {
+    } else if (this.input[0] !== '' && this.input[1] !== ''){
       this.clearErrorMessage(0);
       this.clearErrorMessage(1);
     }

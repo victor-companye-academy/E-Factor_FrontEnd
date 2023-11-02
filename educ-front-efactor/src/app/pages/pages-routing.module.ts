@@ -11,6 +11,7 @@ import { CodeConfirmationComponent } from './code-confirmation/code-confirmation
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { AboutComponent } from './about/about.component';
 import { ProfessionalsComponent } from './professionals/professionals.component';
+import { BusinessUserComponent } from './business-user/business-user.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'send-email', component: SendEmailComponent },
   { path: 'confirm-code/:email', component: CodeConfirmationComponent },
   { path: 'change-password', component: ChangePasswordComponent },
+  { path: 'create-business-user', component: BusinessUserComponent },
   { path: '**', redirectTo: '' },
 ];
 
