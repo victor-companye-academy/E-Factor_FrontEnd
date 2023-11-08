@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CardProfessionalComponent } from './card-professional/card-professional.component';
 import { CardVacancyComponent } from './card-vacancy/card-vacancy.component';
 import { CardNewsletterComponent } from './card-newsletter/card-newsletter.component';
+import { FilterComponent } from './filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CardNewsletterComponent } from './card-newsletter/card-newsletter.compo
     CardVacancyComponent,
     CardProfessionalComponent,
     CardNewsletterComponent,
-    CardNewsletterComponent
+    CardNewsletterComponent,
+    FilterComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,8 @@ import { CardNewsletterComponent } from './card-newsletter/card-newsletter.compo
     CardDetailsComponent,
     CardVacancyComponent,
     CardProfessionalComponent,
-    CardNewsletterComponent
+    CardNewsletterComponent,
+    FilterComponent
   ]
 })
 export class SharedModule { }
