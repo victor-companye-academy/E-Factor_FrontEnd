@@ -1,0 +1,54 @@
+*{
+    color: var(--text);
+}
+
+.text-primary-color{
+    color: var(--primary);
+}
+
+.logo{
+    width: 9.66369rem;
+    left: 1.5rem;
+    top: 2rem;
+    cursor: pointer;
+}
+
+.option-icon{
+    width: 1.87463rem;
+    height: 1.87463rem;
+}
+
+.user-option{
+    background-color: var(--tertiary);
+    width: 16.25rem;
+    height: 6.875rem;
+    border-radius: 0.9375rem;
+    cursor: pointer;
+}
+
+.btn-continue{
+    width: 15.9375rem;
+    height: 2.5rem;
+    border-radius: 0.75rem;
+    background-color: var(--text);
+    color: var(--text-white);
+}
+
+.active{
+    background-color: var(--secondary);
+
+    &.btn-continue{
+        background-color: var(--primary);
+    }
+}
+
+.bottom-text{
+    width: 23.5625rem;
+    font-size: 0.75rem;
+}
+
+.back-option{
+    left: 1.5rem;
+    bottom: 2rem;
+    cursor: pointer;
+}

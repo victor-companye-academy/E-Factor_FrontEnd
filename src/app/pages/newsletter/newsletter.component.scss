@@ -1,0 +1,23 @@
+:host {
+    color: var(--text);
+
+    .main {
+        min-height: 100vh;
+        h2,
+        h1,
+        h3,
+        span,
+        .text-color-primary {
+            color: var(--primary);
+        }
+    }
+
+    button {
+        background: var(--secondary);
+
+        color: var(--text-white);
+        &:hover {
+            background: var(--primary);
+        }
+    }
+}

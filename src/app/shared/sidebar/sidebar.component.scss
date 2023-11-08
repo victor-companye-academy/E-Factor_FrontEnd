@@ -1,0 +1,98 @@
+:host {
+    #sidebar {
+        position: relative;
+        background-color: var(--background);
+        width: 15.625rem;
+
+        #logo {
+            width: 9.688rem;
+        }
+
+        #nav-links {
+            span {
+                cursor: pointer;
+                height: 3.125rem;
+            }
+
+            a {
+                color: var(--text);
+            }
+
+            .active-link {
+                img {
+                    filter: invert(74%) sepia(85%) saturate(611%) hue-rotate(326deg) brightness(102%) contrast(96%);
+                }
+
+                div {
+                    width: 0.625rem;
+                    height: 3.125rem;
+                    background-color: var(--primary);
+                    border-radius: 0rem 0.313rem 0.313rem 0rem;
+                    left: 0;
+                }
+
+                a {
+                    color: var(--primary);
+                }
+            }
+        }
+
+        .menu {
+            left: 0;
+            top: 10%;
+            padding: 0 1.5rem 0 2.5rem;
+        }
+
+        #login {
+            display: flex;
+            width: 12rem;
+            height: 2.5rem;
+
+            bottom: 15%;
+
+            background-color: var(--secondary);
+            border-radius: 0.75rem;
+            cursor: pointer;
+
+            &:hover {
+                background-color: var(--primary);
+            }
+
+            div {
+                a {
+                    color: #fff;
+                }
+            }
+        }
+
+        @media screen and (min-height: 570px) {
+            .menu {
+                overflow-y: auto;
+                height: 100%;
+            }
+        }
+
+        @media screen and (max-height: 570px) {
+            .menu {
+                top: 15%;
+                overflow-y: auto;
+                height: 50%;
+            }
+        }
+        @media screen and (max-height: 500px) {
+            .menu {
+                top: 15%;
+                overflow-y: auto;
+                height: 40%;
+            }
+        }
+
+        @media screen and (max-height: 300px) {
+            .menu {
+                top: 22%;
+                overflow-y: auto;
+                height: 22%;
+            }
+        }
+    }
+}

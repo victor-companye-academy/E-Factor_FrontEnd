@@ -1,0 +1,110 @@
+<main class="d-flex w-100 main">
+    <div class="sidebar">
+        <app-sidebar></app-sidebar>
+    </div>
+
+    <div class="w-100 fadeIn overflow-hidden">
+        <div class="w-100 container">
+            <button type="button"
+                class="fadeIn border-0 mt-5 tobble w-100 d-flex justify-content-end px-4 bg-transparent">
+                <img src="assets/icons/tobble.svg" alt="Icone seta" title="Mudar modo">
+            </button>
+
+            <section class="mb-0 w-100 p-4">
+                <div
+                    class="fadeInDown d-flex flex-column justify-content-center align-items-start background-students rounded-4 px-5 overflow-hidden">
+                    <img src="assets/icons/logo-site.svg" width="270px" alt="Logo e-factor" title="e-factor">
+                    <h1 class="fw-bold fs-6 mt-1">O seu profissional ou sua vaga na palma da sua mão de um jeito
+                        diferente.
+                    </h1>
+                </div>
+            </section>
+
+            <!--  -->
+
+            <section class="mt-0 w-100 px-4 py-1">
+                <div class="section-professional d-flex justify-content-center row">
+                    <div class="see-more pt-2 col-lg-12 col-xl-4">
+                        <h3 class="fw-bold fs-6 mt-4">
+                            Um mundo de profissionais ao seu alcance.
+                        </h3>
+                        <p class="fw-light mt-3">
+                            Encontre profissionais capacitados com a categoria de sua preferência.
+                        </p>
+
+                        <button type="button" class="mt-4 border-0 fw-medium py-2 rounded-3 me-0"
+                            routerLink="/search-professionals">
+                            Ver tudo
+                        </button>
+                    </div>
+
+                    <card-professional [short]="true" [card]="cardProfessional[1]"
+                        class="mt-4 col-lg-6 col-xl-4"></card-professional>
+                    <card-professional [short]="true" [card]="cardProfessional[0]"
+                        class="mt-4 col-lg-6 col-xl-4"></card-professional>
+
+                </div>
+            </section>
+
+            <section class="w-100 px-4 py-1">
+                <div class="div-vacancy row justify-content-center">
+
+                    <card-vacancy [short]="true" [cards]="cardVacancy[1]" class="mt-4 col-lg-6 col-xl-4"></card-vacancy>
+                    <card-vacancy [short]="true" [cards]="cardVacancy[0]" class="mt-4 col-lg-6 col-xl-4"></card-vacancy>
+
+                    <div class="see-more d-flex flex-column align-items-end mt-4 col-lg-12 col-xl-4">
+                        <h3 class="fw-bold fs-6 text-end pt-2">
+                            Um mundo de vagas ao seu alcance.
+                        </h3>
+                        <p class="fw-light mt-2 text-end">
+                            Encontre vagas da forma onde você se enquada com a categoria de sua
+                            preferência..
+                        </p>
+
+                        <button type="button" class="mt-4 border-0 fw-medium py-2 rounded-3 me-0"
+                            routerLink="/search-vacancies">
+                            Ver tudo
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mt-5 w-100 p-4">
+                <div class="div-aboult">
+                    <h2 class="fw-bold fs-5 text-center">
+                        Como funciona a E-factor
+                    </h2>
+
+                    <div class="row mt-4">
+                        <span *ngFor="let card of about" class="col-lg-6 col-xl-4">
+                            <card-details [card]="card" class="mt-4"></card-details>
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mt-5 mb-5 py-4 w-100">
+                <div class="text-center">
+                    <h2 class="fw-bold fs-5">
+                        Depoimentos
+                    </h2>
+
+                    <div class="text-start mt-5">
+                        <div class="row m-0">
+                            <p-carousel [value]="testimonials" [numVisible]="3" [numScroll]="1"
+                                [responsiveOptions]="responsiveOptions" [circular]="true" [autoplayInterval]="4000"
+                                class="col-12">
+
+                                <ng-template let-card pTemplate="item">
+                                    <card-details [card]="card" class="mx-2"></card-details>
+                                </ng-template>
+
+                            </p-carousel>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <app-footer class=""></app-footer>
+    </div>
+</main>

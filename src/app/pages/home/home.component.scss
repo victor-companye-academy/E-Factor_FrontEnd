@@ -1,0 +1,43 @@
+:host {
+    color: var(--text);
+
+    .main {
+        min-height: 100vh;
+
+        h2,
+        h1,
+        h3 {
+            color: var(--primary);
+        }
+
+        .background-students {
+            height: 20rem;
+            background-image: url("../../../assets/imgs/background-students.svg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            h1 {
+                max-width: 20rem;
+                color: var(--primary);
+            }
+        }
+
+        .see-more {
+            button {
+                width: 8rem;
+
+                background: var(--secondary);
+
+                color: var(--text-white);
+                &:hover {
+                    background: var(--primary);
+                }
+            }
+        }
+
+        @media (max-width: 992px) {
+            .div-vacancy {
+                flex-direction: column-reverse;
+            }
+        }
+    }
+}
