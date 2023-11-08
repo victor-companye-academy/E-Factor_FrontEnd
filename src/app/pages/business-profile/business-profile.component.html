@@ -1,39 +1,41 @@
 <main class="d-flex w-100 main">
     <app-sidebar class="sidebar"></app-sidebar>
-    <div class="w-100 p-5 container fadeIn overflow-hidden">
-        <h5 class="fw-bold">Dados Jurídicos</h5>
-        <section>
-            <div class="d-flex align-items-center p-4 dados-juridicos">
-                <img class="ms-3" src="assets/imgs/default-profile.svg" alt="Foto do perfil">
-                <div class="ms-5">
-                    <h5 class="name fw-bold">Banco Bradesco S.A</h5>
-                    <p class="info-text fw-light">São Paulo, São Paulo</p>
-                    <div class="d-flex gap-3 mt-3">
-                        <div>
-                            <p class="info-text mb-1 fw-light">E-mail</p>
-                            <p>bradesco@email.com</p>
-                        </div>
-                        <div>
-                            <p class="info-text mb-1 fw-light">Telefone</p>
-                            <p>(11) 99123-4567</p>
+    <div class="w-100 fadeIn overflow-hidden">
+        <div class="container py-5 px-3">
+            <h5 class="fw-bold">Dados Jurídicos</h5>
+            <section>
+                <div class="d-flex align-items-center p-4 dados-juridicos">
+                    <img class="profile-photo ms-3" [src]="businessInfo[0].photo || 'assets/imgs/default-profile.svg'" alt="Foto do perfil">
+                    <div class="ms-5">
+                        <h5 class="name fw-bold">{{businessInfo[0].name}}</h5>
+                        <p class="info-text fw-light">{{businessInfo[0].city}}, {{businessInfo[0].state}}</p>
+                        <div class="d-flex gap-3 mt-3">
+                            <div>
+                                <p class="info-text mb-1 fw-light">E-mail</p>
+                                <p>{{businessInfo[0].email}}</p>
+                            </div>
+                            <div>
+                                <p class="info-text mb-1 fw-light">Telefone</p>
+                                <p>{{businessInfo[0].telephone}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </section>
+            <h5 class="fw-bold mt-4">Sobre a empresa</h5>
+            <section>
+                <div class="p-3">
+                    <p>{{businessInfo[0].about}}</p>
+                </div>
+            </section>
+            <h5 class="fw-bold mt-4">Vagas recentes</h5>
+            <div class="d-flex flex-column align-items-center gap-3">
+                <span *ngFor="let card of cardVacancy" class="mx-1">
+                    <card-vacancy [short]="false" [card]="card" class="mt-4"></card-vacancy>
+                </span>
+                <button class=" w-25 btn btn-view-all fw-bold mt-3" [routerLink]="['{{businessInfo[0].id}}-all-vacancies']">Ver tudo</button>
             </div>
-        </section>
-        <h5 class="fw-bold mt-4">Sobre a empresa</h5>
-        <section>
-            <div class="p-3">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente deleniti quo ipsum tempore illo. Perspiciatis eveniet, quasi architecto quidem suscipit odit! Assumenda asperiores facilis quam a consectetur blanditiis recusandae, laboriosam commodi ipsam optio deserunt quasi similique iure. Eveniet, doloribus? Tempora repudiandae in, veniam ab quasi voluptates alias quibusdam quia, fuga beatae quo, autem corrupti suscipit eius quis cum natus dolorum velit dicta accusamus explicabo! Quas rem dolorem perspiciatis consequuntur obcaecati quae esse? Sit hic voluptas minus in numquam alias odit corrupti, illo vel maxime doloremque unde optio ipsum placeat nihil velit natus non repellendus id, aliquam expedita. Dolorem, repellat a.</p>
-            </div>
-        </section>
-        <h5 class="fw-bold mt-4">Vagas recentes</h5>
-        <div class="d-flex justify-content-center">
-            <card-vacancy></card-vacancy>
-            <card-vacancy></card-vacancy>
-            <card-vacancy></card-vacancy>
-            <button class="btn btn-view-all fw-bold mt-3">Ver tudo</button>
         </div>
+        <app-footer class="footer"></app-footer>
     </div>
 </main>
-<app-footer class="footer"></app-footer>
