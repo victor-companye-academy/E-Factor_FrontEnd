@@ -9,10 +9,6 @@ import { BiographyComponent } from './biography/biography.component';
 
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import { UserInformationComponent } from './user-information/user-information.component';
-import { SendEmailComponent } from './send-email/send-email.component';
-import { CodeConfirmationComponent } from './code-confirmation/code-confirmation.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
 import { AboutComponent } from './about/about.component';
 import { ProfessionalsComponent } from './professionals/professionals.component';
 
@@ -108,6 +104,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BusinessUserComponent } from './business-user/business-user.component';
 import { BusinessProfileComponent } from './business-profile/business-profile.component';
+import { UserInformationComponent } from './user-information/user-information.component';
+import { SendEmailComponent } from './send-email/send-email.component';
+import { CodeConfirmationComponent } from './code-confirmation/code-confirmation.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { NewsletterComponent } from './newsletter/newsletter.component';
 
 @NgModule({
   declarations: [
@@ -124,6 +125,7 @@ import { BusinessProfileComponent } from './business-profile/business-profile.co
     ChangePasswordComponent,
     BusinessUserComponent,
     BusinessProfileComponent,
+    NewsletterComponent,
   ],
   imports: [
     CommonModule,

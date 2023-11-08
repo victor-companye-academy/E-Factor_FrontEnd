@@ -2,37 +2,21 @@
   .footer {
     color: var(--text);
     background: var(--background);
-    padding: 1.68rem 1.35rem 1.35rem 2.6rem;
+    padding: 2.6rem;
+    font-size: 0.75rem;
 
-    .div-main{
-      overflow-x: hidden;
-      overflow-y: auto;
-    }
-
-    .div-main > .section-figure {
-      max-width: 13.375rem;
-
-      figure {
-        & img {
-          max-width: 6.63rem;
-          margin-bottom: 1.63rem;
-        }
-        & p {
-          font-size: 0.95rem;
-        }
+    .logo-description {
+      P {
+        max-width: 250px;
       }
     }
 
-    & li {
-      li:last-child {
-        margin-right: 8.25rem;
+    .section-menu {
+      p {
+        font-size: 0.95rem;
       }
 
-      &:not(:last-child) {
-        margin-right: 2.6rem;
-      }
-
-      & a {
+      a {
         cursor: pointer;
         color: var(--text);
 
@@ -42,25 +26,21 @@
         }
       }
 
-      & ul {
-        & li:not(:last-child) {
-          margin-bottom: 0.83rem;
-        }
+      .nav-menu ul li {
+        font-size: 1rem;
       }
     }
 
-    & .div-main + section {
+    .nav-footer h3,
+    ul {
       font-size: 0.75rem;
+      li:hover {
+        cursor: pointer;
 
-      & .nav h3 {
-        font-size: 0.75rem;
-      }
-    }
-
-    @media (max-width: 910px) {
-      max-height: 18.75rem;
-      .nav{
-        padding-left: 0.6875rem;
+        &:hover {
+          color: var(--primary);
+          transition: 0.4s;
+        }
       }
     }
   }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CardDetails } from 'src/app/core/interfaces/card-details';
 import { CardProfessional } from 'src/app/core/interfaces/card-professional';
 import { CardVacancy } from 'src/app/core/interfaces/card-vacancy';
@@ -11,9 +11,9 @@ import { CardVacancyService } from 'src/app/core/service/cardVacancy/card-vacanc
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
-  constructor(private cardDetailsService:CardDetailsService, private cardProfessionalService:CardProfessionalService, private cardVacancyService:CardVacancyService){}
+  constructor(private cardDetailsService: CardDetailsService, private cardProfessionalService: CardProfessionalService, private cardVacancyService: CardVacancyService) { }
 
   protected about: Array<CardDetails> = this.cardDetailsService.listAbout();
 
@@ -23,13 +23,20 @@ export class HomeComponent {
 
   protected cardProfessional: Array<CardProfessional> = this.cardProfessionalService.listProfessionals();
 
-  public currentIndex: number = 0;
+  public responsiveOptions: any[] | undefined;
 
-  nextCard() {
-    this.currentIndex = (this.currentIndex + 1) % this.testimonials.length;
-  }
-
-  prevCard() {
-    this.currentIndex = (this.currentIndex - 1 + this.testimonials.length) % this.testimonials.length;
+  ngOnInit() {
+    this.responsiveOptions = [
+      {
+        breakpoint: '1199px',
+        numVisible: 2,
+        numScroll: 1
+      },
+      {
+        breakpoint: '992px',
+        numVisible: 1,
+        numScroll: 1
+      }
+    ];
   }
 }

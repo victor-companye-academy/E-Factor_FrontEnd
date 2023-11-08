@@ -2,12 +2,10 @@
     display: flex;
     justify-content: center;
 
-    width: 23rem;
-
     .card {
         background: var(--background);
         color: var(--text);
-        min-width: 21rem;
+        // min-width: 21rem;
 
         img {
             width: 60px;

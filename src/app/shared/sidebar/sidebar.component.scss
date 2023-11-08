@@ -2,16 +2,10 @@
     #sidebar {
         position: relative;
         background-color: var(--background);
-        width: 16.625rem;
+        width: 15.625rem;
 
         #logo {
             width: 9.688rem;
-        }
-
-        .menu {
-            left: 0;
-            top: 10rem;
-            padding: 0 1.5rem 0 2.5rem;
         }
 
         #nav-links {
@@ -43,12 +37,18 @@
             }
         }
 
+        .menu {
+            left: 0;
+            top: 10%;
+            padding: 0 1.5rem 0 2.5rem;
+        }
+
         #login {
             display: flex;
-            width: 11.875rem;
+            width: 12rem;
             height: 2.5rem;
 
-            margin-top: 9.375rem;
+            bottom: 15%;
 
             background-color: var(--secondary);
             border-radius: 0.75rem;
@@ -65,96 +65,33 @@
             }
         }
 
-        @media (min-height: 800px) {
-            #login {
-                bottom: 19rem;
-            }
-
-            .menu{
-                top: 7.5rem;
-                overflow-y: scroll;
-            }
-        }
-        
-        @media (max-height: 800px) {
-            #login {
-                bottom: 19rem;
-            }
-
-            .menu{
-                top: 7.5rem;
-                height: 35%;
-                overflow-y: scroll;
+        @media screen and (min-height: 570px) {
+            .menu {
+                overflow-y: auto;
+                height: 100%;
             }
         }
 
-        @media (max-height: 750px) {
-            #login {
-                bottom: 19rem;
+        @media screen and (max-height: 570px) {
+            .menu {
+                top: 15%;
+                overflow-y: auto;
+                height: 50%;
             }
-
-            .menu{
-                top: 7.5rem;
-                height: 35%;
-                overflow-y: scroll;
+        }
+        @media screen and (max-height: 500px) {
+            .menu {
+                top: 15%;
+                overflow-y: auto;
+                height: 40%;
             }
         }
 
-        @media (max-height: 725px) {
-            #login {
-                bottom: 19rem;
-            }
-
-            .menu{
-                top: 7.5rem;
-                height: 11.25rem;
-                overflow-y: scroll;
-            }
-        }
-
-        @media (max-height: 650px) {
-            #login {
-                bottom: 19rem;
-            }
-
-            .menu{
-                top: 7.5rem;
-                height: 7.5rem;
-                overflow-y: scroll;
-            }
-        }
-
-            @media (max-height: 591px) {
-                #login {
-                    bottom: 19rem;
-                }
-
-                .menu{
-                    margin-top: 1rem;
-                    top: 17%;
-                    height: 12%;
-                    overflow-y: scroll;
-                }
-            }
-
-        @media (max-height: 510px) {
-
-            #login {
-                bottom: 19rem;
-            }
-
-            .menu{
-                display: none;
-            }
-        }
-        @media (max-height: 450px) {
-            #login {
-                display: none;
-            }
-        }
-        @media (max-height: 400px) {
-            #logo {
-                display: none;
+        @media screen and (max-height: 300px) {
+            .menu {
+                top: 22%;
+                overflow-y: auto;
+                height: 22%;
             }
         }
     }

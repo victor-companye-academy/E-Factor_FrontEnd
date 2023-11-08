@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CardDetails } from 'src/app/core/interfaces/card-details';
 import { CardDetailsService } from 'src/app/core/service/cardDetails/card-details.service';
 
@@ -7,21 +7,34 @@ import { CardDetailsService } from 'src/app/core/service/cardDetails/card-detail
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss']
 })
-export class AboutComponent {
+export class AboutComponent implements OnInit {
 
-  constructor(private cardDetailsService:CardDetailsService){}
+  constructor(private cardDetailsService: CardDetailsService) { }
 
   protected about: Array<CardDetails> = this.cardDetailsService.listAbout();
 
   protected testimonials: Array<CardDetails> = this.cardDetailsService.listTestimonials();
 
-  public currentIndex: number = 0;
+  public responsiveOptions: any[] | undefined;
 
-  nextCard() {
-    this.currentIndex = (this.currentIndex + 1) % this.testimonials.length;
+  ngOnInit() {
+    this.responsiveOptions = [
+      {
+        breakpoint: '1199px',
+        numVisible: 2,
+        numScroll: 3
+      },
+      {
+        breakpoint: '992px',
+        numVisible: 1,
+        numScroll: 1
+      },
+      {
+        breakpoint: '660px',
+        numVisible: 1,
+        numScroll: 1
+      }
+    ];
   }
 
-  prevCard() {
-    this.currentIndex = (this.currentIndex - 1 + this.testimonials.length) % this.testimonials.length;
-  }
 }
