@@ -107,6 +107,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BusinessUserComponent } from './business-user/business-user.component';
+import { BusinessProfileComponent } from './business-profile/business-profile.component';
 
 @NgModule({
   declarations: [
@@ -122,6 +123,7 @@ import { BusinessUserComponent } from './business-user/business-user.component';
     CodeConfirmationComponent,
     ChangePasswordComponent,
     BusinessUserComponent,
+    BusinessProfileComponent,
   ],
   imports: [
     CommonModule,

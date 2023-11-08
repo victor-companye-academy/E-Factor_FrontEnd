@@ -12,6 +12,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { AboutComponent } from './about/about.component';
 import { ProfessionalsComponent } from './professionals/professionals.component';
 import { BusinessUserComponent } from './business-user/business-user.component';
+import { BusinessProfileComponent } from './business-profile/business-profile.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'confirm-code/:email', component: CodeConfirmationComponent },
   { path: 'change-password', component: ChangePasswordComponent },
   { path: 'create-business-user', component: BusinessUserComponent },
+  { path: 'business-profile', component: BusinessProfileComponent },
   { path: '**', redirectTo: '' },
 ];
 
