@@ -1,13 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { CardProfessional } from 'src/app/core/interfaces/card-professional';
 import { CardProfessionalService } from 'src/app/core/service/cardProfessional/card-professional.service';
-
-interface City {
-  name: string;
-  code: string;
-}
 
 interface PaginatorState {
   first?: number;
