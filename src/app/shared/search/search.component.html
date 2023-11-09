@@ -1,14 +1,15 @@
 <section class="container search rounded-4 pt-3 pb-4">
     <div>
-        <form class="row align-items-end justify-content-center px-3">
-            <label for="" class="cursor-pointer fw-normal d-flex flex-column col-5">
+        <form [formGroup]="searchGroup" (ngSubmit)="onSubmit()" class="row align-items-end justify-content-center px-3">
+            <label for="otherSkill" class="cursor-pointer fw-normal d-flex flex-column col-5">
                 Habilidades
-                <input type="text" placeholder="Ex: .Net" class="px-3 border-0 mt-2">
+                <input type="text" id="otherSkill" formControlName="otherSkill" placeholder="Ex: .Net"
+                    class="px-3 border-0 mt-2">
             </label>
 
-            <label for="" class="cursor-pointer fw-normal d-flex flex-column col-5">
+            <label for="otherPosition" class="cursor-pointer fw-normal d-flex flex-column col-5">
                 Cargo
-                <input type="text" placeholder="Ex: Senior" class="px-3 border-0 mt-2">
+                <input type="text" id="otherPosition" formControlName="otherPosition" placeholder="Ex: Senior" class="px-3 border-0 mt-2">
             </label>
 
             <div class="col-2">

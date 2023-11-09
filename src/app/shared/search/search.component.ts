@@ -10,8 +10,6 @@ export class SearchComponent {
 
   searchGroup = new FormGroup({
     otherSkill: new FormControl(''),
-
-    //outros cargos
     otherPosition: new FormControl(''),
 
   })
