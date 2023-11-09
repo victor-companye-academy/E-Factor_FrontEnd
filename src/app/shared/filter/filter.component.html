@@ -1,5 +1,90 @@
-<div>
-    <h2>
+<section class="filter p-4 rounded-4 container overflow-hidden">
+    <h2 class="fs-3">
         Filtro
     </h2>
-</div>
+
+    <div>
+        <h3 class="fs-5 fw-normal mt-5">
+            Habilidades
+        </h3>
+
+        <form [formGroup]="filterGroup" (ngSubmit)="onSubmit()" class="mt-4">
+            <label for="Javascript" class="cursor-pointer d-flex aligh-items-center mb-3 fw-normal">
+                <input type="checkbox" id="Javascript" formControlName="javascript">
+                <span class="custom-checkbox me-2"></span>
+                Javascript
+            </label>
+
+            <label for="typescript" class="cursor-pointer d-flex aligh-items-center mb-3 fw-normal">
+                <input type="checkbox" id="typescript" formControlName="typescript">
+                <span class="custom-checkbox me-2"></span>
+                Typescript
+            </label>
+
+            <label for="angular" class="cursor-pointer d-flex aligh-items-center mb-3 fw-normal">
+                <input type="checkbox" id="angular" formControlName="angular">
+                <span class="custom-checkbox me-2"></span>
+                Angular
+            </label>
+
+            <label for="html" class="cursor-pointer d-flex aligh-items-center mb-3 fw-normal">
+                <input type="checkbox" id="html" formControlName="html">
+                <span class="custom-checkbox me-2"></span>
+                HTML
+            </label>
+
+            <!--  -->
+
+            <label for="other-skill" class="cursor-pointer mb-3 fw-normal d-flex flex-column">
+                Outro qual?
+                <input id="other-skill" type="text" formControlName="otherSkill" class="px-3 border-0 mt-2"
+                    placeholder="Ex: .Net">
+            </label>
+        </form>
+    </div>
+
+    <div>
+        <h3 class="fs-5 fw-normal mt-3">
+            Cargo
+        </h3>
+
+        <form [formGroup]="filterGroup" (ngSubmit)="onSubmit()" class="mt-4">
+            <label for="estagio" class="cursor-pointer d-flex aligh-items-center mb-3 fw-normal">
+                <input type="checkbox" id="estagio" formControlName="estagio">
+                <span class="custom-checkbox me-2"></span>
+                Estagiário
+            </label>
+
+            <label for="junior" class="cursor-pointer d-flex aligh-items-center mb-3 fw-normal">
+                <input type="checkbox" id="junior" formControlName="junior">
+                <span class="custom-checkbox me-2"></span>
+                Junior
+            </label>
+
+            <label for="pleno" class="cursor-pointer d-flex aligh-items-center mb-3 fw-normal">
+                <input type="checkbox" id="pleno" formControlName="pleno">
+                <span class="custom-checkbox me-2"></span>
+                Pleno
+            </label>
+
+            <label for="senior" class="cursor-pointer d-flex aligh-items-center mb-3 fw-normal">
+                <input type="checkbox" id="senior" formControlName="senior">
+                <span class="custom-checkbox me-2"></span>
+                Sênior
+            </label>
+
+            <!--  -->
+
+            <label for="other-skill" class="cursor-pointer mb-3 fw-normal d-flex flex-column">
+                Outro qual?
+                <input id="other-skill" type="text" formControlName="otherSkill" class="px-3 border-0 mt-2"
+                    placeholder="Ex: Senior">
+            </label>
+
+            <br>
+            <hr>
+
+            <button type="submit" [disabled]="!filterGroup.valid">Submit</button>
+        </form>
+    </div>
+</section>

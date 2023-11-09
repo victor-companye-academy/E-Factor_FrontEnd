@@ -11,17 +11,17 @@
                     <img src="assets/icons/tobble.svg" alt="Icone seta" title="Mudar modo">
                 </button>
 
-                <h1 class="fw-bold fs-5 mt-1 w-100 py-4">
+                <h1 class="fw-bold fs-4 mt-1 w-100 py-4">
                     Profissionais do seu jeito
                 </h1>
             </section>
 
             <div class="row">
-                <!-- <section class="col-3">
+                <section class="col-3 mt-4">
                     <filter></filter>
-                </section> -->
+                </section>
 
-                <Section class="professional-list col-9">
+                <Section class="col-9">
                     <span *ngFor="let card of cardProfessional" class="mx-1">
                         <card-professional [short]="false" [card]="card" class="mt-4"></card-professional>
                     </span>
