@@ -5,12 +5,14 @@ import { LoginComponent } from './login/login.component';
 import { ChooseUserComponent } from './choose-user/choose-user.component';
 import { PersonalDataComponent } from './personal-data/personal-data.component';
 import { BiographyComponent } from './biography/biography.component';
-import { AboutComponent } from './about/about.component';
-import { ProfessionalsComponent } from './professionals/professionals.component';
 import { UserInformationComponent } from './user-information/user-information.component';
 import { SendEmailComponent } from './send-email/send-email.component';
 import { CodeConfirmationComponent } from './code-confirmation/code-confirmation.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { AboutComponent } from './about/about.component';
+import { ProfessionalsComponent } from './professionals/professionals.component';
+import { BusinessUserComponent } from './business-user/business-user.component';
+import { BusinessProfileComponent } from './business-profile/business-profile.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
 
 const routes: Routes = [
@@ -28,6 +30,8 @@ const routes: Routes = [
   { path: 'send-email', component: SendEmailComponent },
   { path: 'confirm-code/:email', component: CodeConfirmationComponent },
   { path: 'change-password', component: ChangePasswordComponent },
+  { path: 'create-business-user', component: BusinessUserComponent },
+  { path: 'business-profile', component: BusinessProfileComponent },
   {path: 'newsletter', component: NewsletterComponent},
   { path: '**', redirectTo: '' },
 ];

@@ -1,6 +1,4 @@
 body {
-    display: flex;
-    justify-content: center;
     min-height: 45rem;
 }
 
@@ -8,9 +6,9 @@ body {
     border-radius: 0.9375rem;
     width: 97vw;
     height: 87vh;
+    min-height: 37rem;
     background-color: var(--tertiary);
     align-self: center;
-    min-height: 39.188rem;
 
     .logo{
         width: 9.66369rem;
@@ -19,11 +17,11 @@ body {
         cursor: pointer;
     }
 
-    h1, label, .info{
+    h2, label, .info{
         color: var(--primary);
     }
-    
-    input, select{
+
+    input{
         border: 1.5px solid var(--primary);
         color: var(--text);
         border-radius: 0.75rem;
@@ -32,25 +30,19 @@ body {
     ::placeholder{
         color: var(--text);
     }
-    
-    .personal-inputs{
-        width: 30rem;
-    }
 
     .errMsg{
         color: rgb(255, 85, 85);
+    }
+
+    .personal-inputs{
+        width: 30rem;
     }
 }
 
 ::-webkit-calendar-picker-indicator {
     filter: brightness(0) saturate(100%) invert(36%) sepia(20%) saturate(485%) hue-rotate(195deg) brightness(96%) contrast(90%) opacity(50%);
 } 
-
-.double-input-row-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}      
 
 .bottom{
     p{
@@ -64,50 +56,14 @@ body {
 }
 
 .btn-continue{
-    width: 15.9375rem;
-    height: 2.5rem;
     background-color: var(--primary);
     color: var(--text-white);
     border-radius: 0.75rem;
-    width: 40%;
-}
-
-@media (max-width: 991px) {
-    body{
-        min-height: 74.75rem;
-    }
-    .content{
-        flex-direction: column;
-        padding-bottom: 5rem !important;
-        min-height: 68.5rem;
-        .logo{
-            top: 0.5rem;
-        }
-        h1{
-            font-size: x-large;
-        }
-    }
-    .title{
-        margin-top: 4rem;
-    }
-}
-
-@media (max-width: 767px) {
-    input, select{
-        height: 1.75rem;
-        border-radius: 0.50rem !important;
-        font-size: small;
-        padding: 0.3rem;
-    }
-    .double-input-row-container{
-        display: flex;
-        justify-content: space-between;
-    }
 }
 
 @media (max-width: 558px) {
     .personal-inputs{
-        width: 20rem !important;
+        width: 90% !important;
     }
     label{
         font-size: small;
