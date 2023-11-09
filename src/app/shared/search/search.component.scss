@@ -1,5 +1,5 @@
 :host {
-    .filter {
+    .search {
         background-color: var(--background);
 
         color: var(--text-color);
@@ -11,24 +11,8 @@
             cursor: pointer;
         }
 
-        .custom-checkbox {
-            display: inline-block;
-            min-width: 25px;
-            min-height: 25px;
-            border-radius: 5px;
-            background-color: var(--input);
-        }
-
         input:focus{
             outline: none;
-        }
-
-        input[type="checkbox"] {
-            display: none;
-
-            &:checked + span {
-                background-color: var(--primary);
-            }
         }
 
         input[type="text"]{
