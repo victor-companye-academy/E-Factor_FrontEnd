@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -7,6 +7,8 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./filter.component.scss'],
 })
 export class FilterComponent {
+
+  @Output() public sendData = new EventEmitter;
 
   filterGroup = new FormGroup({
     javascript: new FormControl(false),
@@ -25,7 +27,7 @@ export class FilterComponent {
   })
 
   onSubmit() {
-    
+    this.sendData.emit(this.filterGroup.value);
     console.warn(this.filterGroup.value);
   }
 }

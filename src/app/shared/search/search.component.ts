@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -8,6 +8,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class SearchComponent {
 
+  @Output() public sendData = new EventEmitter;
+
   searchGroup = new FormGroup({
     otherSkill: new FormControl(''),
     otherPosition: new FormControl(''),
@@ -15,8 +17,7 @@ export class SearchComponent {
   })
 
   onSubmit() {
-
-    console.warn(this.searchGroup.value);
+    this.sendData.emit(this.searchGroup.value)
   }
 
 }

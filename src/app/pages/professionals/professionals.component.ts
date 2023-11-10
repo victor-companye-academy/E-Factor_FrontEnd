@@ -17,15 +17,36 @@ interface PaginatorState {
 })
 export class ProfessionalsComponent implements OnInit {
 
+
+  protected setSearch(event: any) {
+    console.log(event)
+    console.log(this.filterList(event));
+
+    // throw new Error('Method not implemented.');
+  }
+
   constructor(private cardProfessionalService: CardProfessionalService) { }
 
   protected cardProfessional: Array<CardProfessional> = this.cardProfessionalService.listProfessionals();
+
+  protected cardProfessionalSearch: Array<CardProfessional> = this.cardProfessionalService.listProfessionals();
+
+
+  // Setar dados conforme lista
 
   protected first: number = 0;
   protected rows: number = 10;
   protected totalRecords: number = 250;
 
-  onPageChange(event: PaginatorState) {
+  // ------
+
+  filterList(event: any): Array<CardProfessional> {
+    return this.cardProfessional.filter(card => card.skills.map(skill => skill.toLocaleUpperCase()).includes(event.otherSkill.toLocaleUpperCase()))
+  }
+
+
+
+  protected onPageChange(event: PaginatorState) {
     console.log(event)
     if (event.first !== undefined) {
       this.first = event.first;
@@ -35,5 +56,5 @@ export class ProfessionalsComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }
