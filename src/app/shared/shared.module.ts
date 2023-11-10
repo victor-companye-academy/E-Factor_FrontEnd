@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { CardProfessionalComponent } from './card-professional/card-professional.component';
 import { CardVacancyComponent } from './card-vacancy/card-vacancy.component';
 import { CardNewsletterComponent } from './card-newsletter/card-newsletter.component';
+import { EditProfileAboutModalComponent } from './edit-profile-about-modal/edit-profile-about-modal.component';
+import { EditProfileExperienceModalComponent } from './edit-profile-experience-modal/edit-profile-experience-modal.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { CardNewsletterComponent } from './card-newsletter/card-newsletter.compo
     CardVacancyComponent,
     CardProfessionalComponent,
     CardNewsletterComponent,
-    CardNewsletterComponent
+    CardNewsletterComponent,
+    EditProfileAboutModalComponent,
+    EditProfileExperienceModalComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +42,8 @@ import { CardNewsletterComponent } from './card-newsletter/card-newsletter.compo
     CardDetailsComponent,
     CardVacancyComponent,
     CardProfessionalComponent,
-    CardNewsletterComponent
+    CardNewsletterComponent,
+    EditProfileAboutModalComponent
   ]
 })
 export class SharedModule { }

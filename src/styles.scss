@@ -42,7 +42,7 @@
     }
 
     //estilização focus inputs
-    input:focus, select:focus {
+    input:focus, select:focus, textarea:focus {
         border: 1.5px solid var(--primary) !important;
         box-shadow: 0 0 3px var(--primary) !important;
     }
@@ -60,3 +60,25 @@ body {
     height: 100vh;
     background-color: var(--body);
 }
+
+// centralização modal e blur
+
+.centralizeOnScreen {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+.blur-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.8);
+    filter: blur(5px);
+    pointer-events: none;
+    overflow: hidden;
+  }

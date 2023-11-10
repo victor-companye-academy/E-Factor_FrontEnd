@@ -1,0 +1,10 @@
+<div class="modal-container centralizeOnScreen fadeIn">
+    <form (ngSubmit)="onSubmit()">
+        <label for="about">Sobre:</label>
+        <textarea id="about" [(ngModel)]="editedProfile[0].about" name="about" class="form-control mt-2"></textarea>
+        <div class="d-flex justify-content-end gap-2 mt-3">
+            <button type="button" class="btn cancel" (click)="cancelEdit()">Cancelar</button>
+            <button type="submit" class="btn save">Salvar</button>
+        </div>
+    </form>
+</div>
