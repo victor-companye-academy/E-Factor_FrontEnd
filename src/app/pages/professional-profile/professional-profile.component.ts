@@ -57,7 +57,7 @@ export class ProfessionalProfileComponent {
         break;
       case 3:
         this.modalIndex = 3;
-        this.isEditEducationModalOpen = false;
+        this.isEditEducationModalOpen = true;
         break;
       case 4:
         this.modalIndex = 4;
@@ -71,8 +71,12 @@ export class ProfessionalProfileComponent {
   }
 
   closeEditModal() {
+    this.isEditInfoModalOpen = false;
     this.isEditAboutModalOpen = false;
     this.isEditExperienceModalOpen = false;
+    this.isEditEducationModalOpen = false;
+    this.isEditSkillsModalOpen = false;
+    this.isEditLanguagesModalOpen = false;
   }
 
   saveProfileChanges(updatedProfile: any) {
@@ -86,6 +90,7 @@ export class ProfessionalProfileComponent {
         this.professionalInfo[0].experience = updatedProfile;
         break;
       case 3:
+        this.professionalInfo[0].education = updatedProfile;
         break;
       case 4:
         break;

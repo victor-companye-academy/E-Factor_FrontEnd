@@ -10,6 +10,12 @@
     (closeModal)="closeEditModal()"
     (saveChanges)="saveProfileChanges($event)"
 ></app-edit-profile-experience-modal>
+<app-edit-profile-education-modal
+    *ngIf="isEditEducationModalOpen"
+    [profile]="professionalInfo"
+    (closeModal)="closeEditModal()"
+    (saveChanges)="saveProfileChanges($event)"
+></app-edit-profile-education-modal>
 <main class="d-flex w-100 main">
     <app-sidebar class="sidebar"></app-sidebar>
     <div class="w-100 fadeIn overflow-hidden">
@@ -75,7 +81,7 @@
             <!-- formação -->
             <div class="d-flex justify-content-between align-items-center mb-2 mt-4">
                 <h5 class="fw-bold">Formação</h5>
-                <button class="edit py-1 px-2" *ngIf="isLogged">Editar<img src="../../../assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
+                <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(3)">Editar<img src="../../../assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
             </div>
             <section class="py-4">
                 <div *ngFor="let education of professionalInfo[0].education; let i = index" class="px-4 py-2 d-flex gap-3 align-items-start">

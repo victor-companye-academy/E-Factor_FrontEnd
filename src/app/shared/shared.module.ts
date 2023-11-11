@@ -46,7 +46,8 @@ import { EditProfileEducationModalComponent } from './edit-profile-education-mod
     CardProfessionalComponent,
     CardNewsletterComponent,
     EditProfileAboutModalComponent,
-    EditProfileExperienceModalComponent
+    EditProfileExperienceModalComponent,
+    EditProfileEducationModalComponent
   ]
 })
 export class SharedModule { }
