@@ -1,0 +1,38 @@
+.modal-container{
+    background-color: white;
+    padding: 1.25rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+    border-radius: 0.75rem;
+    width: 50%;
+    max-height: 90vh;
+    overflow: scroll;
+
+    input, textarea, select::placeholder{
+        color: var(--text);
+    }
+    input, textarea, select{
+        color: var(--text);
+    }
+    .form-check-input:checked {
+        border: none;
+        background-color: var(--primary);
+    }
+    label{
+        color: var(--primary);
+    }
+
+    @media (max-width: 991px){
+        width: 90%;
+    }
+}
+button{
+    border-radius: 0.75rem;
+}
+.cancel{
+    border: 1.5px solid var(--primary);
+    color: var(--primary);
+}
+.save{
+    background-color: var(--primary);
+    color: var(--text-white);
+}

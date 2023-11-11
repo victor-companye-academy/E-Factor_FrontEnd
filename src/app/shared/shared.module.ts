@@ -13,6 +13,7 @@ import { CardVacancyComponent } from './card-vacancy/card-vacancy.component';
 import { CardNewsletterComponent } from './card-newsletter/card-newsletter.component';
 import { EditProfileAboutModalComponent } from './edit-profile-about-modal/edit-profile-about-modal.component';
 import { EditProfileExperienceModalComponent } from './edit-profile-experience-modal/edit-profile-experience-modal.component';
+import { EditProfileEducationModalComponent } from './edit-profile-education-modal/edit-profile-education-modal.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { EditProfileExperienceModalComponent } from './edit-profile-experience-m
     CardNewsletterComponent,
     CardNewsletterComponent,
     EditProfileAboutModalComponent,
-    EditProfileExperienceModalComponent
+    EditProfileExperienceModalComponent,
+    EditProfileEducationModalComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +45,8 @@ import { EditProfileExperienceModalComponent } from './edit-profile-experience-m
     CardVacancyComponent,
     CardProfessionalComponent,
     CardNewsletterComponent,
-    EditProfileAboutModalComponent
+    EditProfileAboutModalComponent,
+    EditProfileExperienceModalComponent
   ]
 })
 export class SharedModule { }

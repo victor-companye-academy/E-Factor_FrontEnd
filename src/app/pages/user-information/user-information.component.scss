@@ -42,10 +42,6 @@ body {
     }
 }
 
-::-webkit-calendar-picker-indicator {
-    filter: brightness(0) saturate(100%) invert(36%) sepia(20%) saturate(485%) hue-rotate(195deg) brightness(96%) contrast(90%) opacity(50%);
-} 
-
 .double-input-row-container {
     display: flex;
     flex-direction: row;

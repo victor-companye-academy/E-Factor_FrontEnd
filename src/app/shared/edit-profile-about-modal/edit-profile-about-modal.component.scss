@@ -3,7 +3,16 @@
     padding: 1.25rem;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
     border-radius: 0.75rem;
-    width: 35%;
+    width: 50%;
+    max-height: 90vh;
+    overflow: scroll;
+
+    label{
+        color: var(--primary);
+    }
+    input, textarea, select::placeholder{
+        color: var(--text);
+    }
 
     @media (max-width: 991px){
         width: 90%;
