@@ -10,6 +10,11 @@ interface PaginatorState {
   pageCount?: number;
 }
 
+interface Search {
+  otherSkill: string;
+  otherPosition: string;
+}
+
 @Component({
   selector: 'app-professionals',
   templateUrl: './professionals.component.html',
@@ -17,90 +22,103 @@ interface PaginatorState {
 })
 export class ProfessionalsComponent {
 
-  constructor(private cardProfessionalService: CardProfessionalService) { }
+  protected readonly rows: number = 4;
 
-  private nuncamuda = this.cardProfessionalService.listProfessionals()
   protected cardProfessional: Array<CardProfessional> = this.cardProfessionalService.listProfessionals();
-  protected cardProfessionalSearch?: Array<CardProfessional>;
+  protected cardProfessionalSearch: Array<CardProfessional> = this.cardProfessional;
 
   protected first: number = 0;
-  protected readonly rows: number = 1;
-  protected totalRecords: number = this.cardProfessionalSearch?.length || 0
-  private searchObj: any;
+  protected totalRecords: number = this.cardProfessionalSearch.length || 0
+  private searchObj: Search | undefined;
 
+  constructor(private cardProfessionalService: CardProfessionalService) { }
 
-  protected setSearch(event: any) {
+  protected setSearch(event: Search) {
     this.first = 0
 
     if (this.validSearch(event)) {
-      this.searchObj = event
-      console.log("--------------------------------")
-      console.log(this.searchObj)
-      console.log('entrou 1')
-
-
-      console.log(this.cardProfessionalSearch = this.cardProfessional.filter(card => card.skills.map(skill => skill.toLocaleUpperCase()).includes(event.otherSkill.toLocaleUpperCase())))
-
-      //returna 2 ^^
-
+      this.searchObj = event;
+      this.cardProfessionalSearch = this.applySearch(this.cardProfessional, event);
       this.totalRecords = this.cardProfessionalSearch.length;
 
-      console.log( this.cardProfessionalSearch = this.cardProfessionalSearch.slice(this.first, (this.rows + this.first)))
-
-      //retorna 1 ^^
-      console.log("--------------------------------")
-
+      this.cardProfessionalSearch = this.pagination(this.cardProfessionalSearch)
 
     } else {
-      this.searchObj = {}
-      console.log(this.cardProfessionalSearch)
-      this.cardProfessionalSearch = this.filterList()
+      this.searchObj = undefined
+      this.cardProfessionalSearch = this.setList()
     }
   }
 
-  private filterList(event?: any): Array<CardProfessional> {
-    let newArray: Array<CardProfessional>;
-
+  private setList(event?: Search): Array<CardProfessional> {
     if (!event) {
-      console.log("index " + this.first + " " + (this.rows + this.first))
-
       if (this.validSearch(this.searchObj)) {
-        console.log(this.searchObj)
-        
-        return this.cardProfessionalSearch = this.cardProfessional.filter(card => card.skills.map(skill => skill.toLocaleUpperCase()).includes(this.searchObj.otherSkill.toLocaleUpperCase())).slice(this.first, (this.rows + this.first));
+
+        this.cardProfessionalSearch = this.applySearch(this.cardProfessional, this.searchObj!);
+        this.cardProfessionalSearch = this.pagination(this.cardProfessionalSearch)
+
+        return this.cardProfessionalSearch
       }
       else {
-
-        
-        this.cardProfessionalSearch = this.cardProfessional.slice(this.first, (this.rows + this.first));
-        console.log(this.cardProfessionalSearch)
+        this.cardProfessionalSearch = this.pagination(this.cardProfessional);
 
         this.totalRecords = this.cardProfessional.length;
 
-        return this.cardProfessionalSearch.slice(this.first, (this.rows + this.first));
+        return this.cardProfessionalSearch;
       }
-
     }
-
-    newArray = this.cardProfessional.filter(card => card.skills.map(skill => skill.toLocaleUpperCase()).includes(event.otherSkill.toLocaleUpperCase()));
-
-    this.cardProfessionalSearch = newArray.slice(this.first, this.rows);
+    this.cardProfessionalSearch = this.pagination(this.applySearch(this.cardProfessional, event));
 
     return this.cardProfessionalSearch;
-
   }
 
-  private validSearch(event: any): boolean {
-    if (event && (event.otherSkill || event.otherPosition)) {
-      return true;
+  private validSearch(search: Search | undefined): boolean {
+    return search && (search.otherSkill.trim() !=='' || search.otherPosition.trim() !=='') ? true : false
+  }
+
+  private applySearch(list: Array<CardProfessional>, search: Search): Array<CardProfessional> {
+    if (!this.validSearch(search)) {
+      return  this.cardProfessionalSearch;
     }
-    return false;
+    if (search.otherPosition && search.otherSkill) {
+      return this.searchGroup(list, search)
+    }
+    if (search.otherPosition) {
+      return this.searchByPosition(list, search)
+    }
+    if (search.otherSkill) {
+      return this.searchBySkill(list, search)
+    }
+    return this.cardProfessionalSearch;
+  }
+
+  private searchGroup(list: Array<CardProfessional>, obj: Search) {
+    const newListByPosition: Array<CardProfessional> = this.searchByPosition(list, obj);
+    const newList: Array<CardProfessional> = this.searchBySkill(newListByPosition, obj);
+    return newList;
+  }
+
+  private searchBySkill(list: Array<CardProfessional>, obj: Search): Array<CardProfessional> {
+    const newList = list
+      .filter(card => card.skills
+        .map(skill => skill.toLocaleUpperCase())
+        .includes(obj.otherSkill.toLocaleUpperCase()));
+    return newList;
+  }
+
+  private searchByPosition(list: Array<CardProfessional>, obj: Search): Array<CardProfessional> {
+    const newList: Array<CardProfessional> = list.filter(card => card.title.toLocaleUpperCase() == obj.otherPosition.toLocaleUpperCase())
+    return newList;
+  }
+
+  private pagination(list: Array<CardProfessional>): Array<CardProfessional> {
+    const newList = list.slice(this.first, (this.rows + this.first))
+    return newList;
   }
 
   protected onPageChange(event: PaginatorState) {
     if (event.first !== undefined) {
       this.first = event.first;
     }
-    this.filterList()
+    this.setList()
   }
 }

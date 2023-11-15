@@ -21,7 +21,7 @@
 
             <div class="row mt-4">
 
-                <div class="col-3 mt-4">
+                <div class="col-3 mt-4 mb-5">
                     <filter></filter>
                 </div>
 
@@ -32,8 +32,7 @@
 
                     <ng-template [ngIf]="cardProfessionalSearch" class="flex justify-content-center">
                         <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"
-                            [totalRecords]="totalRecords" [showFirstLastIcon]="false"
-                            [dropdownAppendTo]="false">
+                            [totalRecords]="totalRecords" [showFirstLastIcon]="false" [dropdownAppendTo]="false">
                         </p-paginator>
                     </ng-template>
                 </Section>
