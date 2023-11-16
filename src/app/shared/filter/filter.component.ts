@@ -17,17 +17,15 @@ export class FilterComponent {
     html: new FormControl(false),
     otherSkill: new FormControl(''),
 
-    //outros cargos
+    //cargos
     estagio: new FormControl(false),
     junior: new FormControl(false),
     pleno: new FormControl(false),
     senior: new FormControl(false),
     otherPosition: new FormControl(''),
-    
   })
 
   onSubmit() {
     this.sendData.emit(this.filterGroup.value);
-    console.warn(this.filterGroup.value);
   }
 }

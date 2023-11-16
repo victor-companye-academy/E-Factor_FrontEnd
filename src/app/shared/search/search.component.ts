@@ -19,6 +19,7 @@ export class SearchComponent implements OnInit {
   onSubmit() {
     this.sendData.emit(this.searchGroup.value)
   }
+  
   ngOnInit() { 
     this.onSubmit()
   }

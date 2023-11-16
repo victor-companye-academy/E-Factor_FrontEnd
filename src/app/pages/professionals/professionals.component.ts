@@ -13,6 +13,15 @@ interface PaginatorState {
 interface Search {
   otherSkill: string;
   otherPosition: string;
+
+  angular: boolean;
+  html: boolean;
+  javascript: boolean;
+  junior: boolean;
+  pleno: boolean;
+  estagio: boolean;
+  senior: boolean;
+  typescript: boolean
 }
 
 @Component({
@@ -71,24 +80,58 @@ export class ProfessionalsComponent {
     return this.cardProfessionalSearch;
   }
 
-  private validSearch(search: Search | undefined): boolean {
-    return search && (search.otherSkill.trim() !=='' || search.otherPosition.trim() !=='') ? true : false
-  }
-
   private applySearch(list: Array<CardProfessional>, search: Search): Array<CardProfessional> {
-    if (!this.validSearch(search)) {
-      return  this.cardProfessionalSearch;
-    }
-    if (search.otherPosition && search.otherSkill) {
-      return this.searchGroup(list, search)
-    }
-    if (search.otherPosition) {
-      return this.searchByPosition(list, search)
-    }
-    if (search.otherSkill) {
-      return this.searchBySkill(list, search)
+    if (search) {
+
+      // 
+      for (const key in search) {
+        if (search.hasOwnProperty(key)) {
+          const searchKey = key as keyof Search;
+          if (search[searchKey]) {
+            console.log(`nome: ${searchKey}, valor: ${search[searchKey]}`)
+          }
+        }
+      }
+
+      // 
+
+      if (!this.validSearch(search)) {
+        return this.cardProfessionalSearch;
+      }
+      if (search.otherPosition && search.otherSkill) {
+        return this.searchGroup(list, search)
+      }
+      if (search.otherPosition) {
+        return this.searchByPosition(list, search)
+      }
+      if (search.otherSkill) {
+        return this.searchBySkill(list, search)
+      }
     }
     return this.cardProfessionalSearch;
+  }
+
+  private validSearch(search?: Search): boolean {
+    if (!search) {
+      return false
+    }
+
+    let isTrue: boolean = false;
+
+    for (const key in search) {
+      if (search.hasOwnProperty(key)) {
+        const searchKey = key as keyof Search;
+
+        if (search[searchKey]) {
+          isTrue = true
+        }
+
+        if (typeof search[searchKey] === 'string' && isTrue && (isTrue || search.otherPosition.trim() !== '' || search.otherSkill.trim() !== '')) {
+          isTrue = true;
+        }
+      }
+    }
+    return isTrue;
   }
 
   private searchGroup(list: Array<CardProfessional>, obj: Search) {
