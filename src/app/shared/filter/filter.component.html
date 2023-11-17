@@ -28,16 +28,16 @@
             </label>
 
             <label for="html" class="cursor-pointer d-flex aligh-items-center mb-3 fw-normal">
-                <input type="checkbox" id="html" formControlName="html">
+                <input type="checkbox" id="html"  formControlName="html">
                 <span class="custom-checkbox me-2"></span>
                 HTML
             </label>
 
             <!--  -->
 
-            <label for="otherSkill" class="cursor-pointer mb-3 fw-normal d-flex flex-column">
+            <label for="otherSkillFilter" class="cursor-pointer mb-3 fw-normal d-flex flex-column">
                 Outro qual?
-                <input id="otherSkill" type="text" formControlName="otherSkill" class="px-3 border-0 mt-2"
+                <input id="otherSkillFilter" type="text" maxlength="20" formControlName="otherSkill" class="px-3 border-0 mt-2"
                     placeholder="Ex: .Net">
             </label>
         </form>
@@ -75,9 +75,9 @@
 
             <!--  -->
 
-            <label for="otherPosition" class="cursor-pointer mb-3 fw-normal d-flex flex-column">
+            <label for="otherPositionFilter" class="cursor-pointer mb-3 fw-normal d-flex flex-column">
                 Outro qual?
-                <input id="otherPosition" type="text" formControlName="otherPosition" class="px-3 border-0 mt-2"
+                <input id="otherPositionFilter" type="text" maxlength="20" formControlName="otherPosition" class="px-3 border-0 mt-2"
                     placeholder="Ex: Sênior">
             </label>
 

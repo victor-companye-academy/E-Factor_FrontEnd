@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 import { CardProfessional } from 'src/app/core/interfaces/card-professional';
 import { CardProfessionalService } from 'src/app/core/service/cardProfessional/card-professional.service';
+import { formatText } from 'src/app/core/utils/formatText';
 
 interface PaginatorState {
   first?: number;
@@ -17,11 +18,11 @@ interface Search {
   angular: boolean;
   html: boolean;
   javascript: boolean;
+  typescript: boolean
   junior: boolean;
   pleno: boolean;
   estagio: boolean;
   senior: boolean;
-  typescript: boolean
 }
 
 @Component({
@@ -80,19 +81,61 @@ export class ProfessionalsComponent {
     return this.cardProfessionalSearch;
   }
 
+
   private applySearch(list: Array<CardProfessional>, search: Search): Array<CardProfessional> {
     if (search) {
-
+      let newArray: Array<CardProfessional> = this.cardProfessional;
       // 
       for (const key in search) {
         if (search.hasOwnProperty(key)) {
           const searchKey = key as keyof Search;
-          if (search[searchKey]) {
-            console.log(`nome: ${searchKey}, valor: ${search[searchKey]}`)
+
+          if (typeof search[searchKey] === 'boolean' && search[searchKey]) {
+
+            switch (searchKey) {
+              case 'angular':
+                newArray = this.searchBySkill(newArray, searchKey)
+                break;
+
+              case 'html':
+                newArray = this.searchBySkill(newArray, searchKey)
+                break;
+
+              case 'javascript':
+                newArray = this.searchBySkill(newArray, searchKey)
+                break;
+
+              case 'typescript':
+                newArray = this.searchBySkill(newArray, searchKey)
+                break;
+
+              case 'estagio':
+                this.searchByPosition(newArray, searchKey)
+                break;
+
+              case 'junior':
+                this.searchByPosition(newArray, searchKey)
+                break;
+
+              case 'pleno':
+                this.searchByPosition(newArray, searchKey)
+                break;
+
+              case 'senior':
+                this.searchByPosition(newArray, searchKey)
+                break;
+            }
+            console.log(this.cardProfessionalSearch)
+            console.log(newArray)
+
+            // console.log(`checkbox: on =  nome: ${searchKey}, valor: ${search[searchKey]}`)
+          }
+          else if (search[searchKey]) {
+            // console.log(`checkbox: off =  nome: ${searchKey}, valor: ${search[searchKey]}`)
           }
         }
       }
-
+      return newArray
       // 
 
       if (!this.validSearch(search)) {
@@ -102,10 +145,10 @@ export class ProfessionalsComponent {
         return this.searchGroup(list, search)
       }
       if (search.otherPosition) {
-        return this.searchByPosition(list, search)
+        return this.searchByPosition(list, search.otherPosition)
       }
       if (search.otherSkill) {
-        return this.searchBySkill(list, search)
+        return this.searchBySkill(list, search.otherSkill)
       }
     }
     return this.cardProfessionalSearch;
@@ -134,22 +177,22 @@ export class ProfessionalsComponent {
     return isTrue;
   }
 
-  private searchGroup(list: Array<CardProfessional>, obj: Search) {
-    const newListByPosition: Array<CardProfessional> = this.searchByPosition(list, obj);
-    const newList: Array<CardProfessional> = this.searchBySkill(newListByPosition, obj);
+  private searchGroup(list: Array<CardProfessional>, search: Search) {
+    const newListByPosition: Array<CardProfessional> = this.searchByPosition(list, search.otherPosition);
+    const newList: Array<CardProfessional> = this.searchBySkill(newListByPosition, search.otherSkill);
     return newList;
   }
 
-  private searchBySkill(list: Array<CardProfessional>, obj: Search): Array<CardProfessional> {
+  private searchBySkill(list: Array<CardProfessional>, search: string): Array<CardProfessional> {
     const newList = list
       .filter(card => card.skills
         .map(skill => skill.toLocaleUpperCase())
-        .includes(obj.otherSkill.toLocaleUpperCase()));
+        .includes(formatText(search.toLocaleUpperCase())));
     return newList;
   }
 
-  private searchByPosition(list: Array<CardProfessional>, obj: Search): Array<CardProfessional> {
-    const newList: Array<CardProfessional> = list.filter(card => card.title.toLocaleUpperCase() == obj.otherPosition.toLocaleUpperCase())
+  private searchByPosition(list: Array<CardProfessional>, search: string): Array<CardProfessional> {
+    const newList: Array<CardProfessional> = list.filter(card => formatText(card.title.toLocaleUpperCase()) == formatText(search.toLocaleUpperCase()))
     return newList;
   }
 

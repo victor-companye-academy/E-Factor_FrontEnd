@@ -36,14 +36,14 @@ export class CardProfessionalService {
         title: 'Junior',
         locality: 'São Paulo, SP',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...',
-        skills: ['Phyton', 'Javascript', 'Spring', 'React', 'PHP','test']
+        skills: ['Phyton', 'Javascript', 'Spring', 'React', 'PHP','test', 'Angular']
       },
       {
         userName: 'João Silva 5',
         title: 'Pleno',
         locality: 'São Paulo, SP',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...',
-        skills: ['Phyton', 'Javascript', 'Spring', 'React', 'PHP', 'test', 'Angular']
+        skills: ['Phyton', 'Javascript', 'Spring', 'React', 'PHP', 'test', 'Angular', 'html']
       },
       {
         userName: 'Marcos Henrique 6',
