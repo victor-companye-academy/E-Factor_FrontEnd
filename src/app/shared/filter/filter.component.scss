@@ -23,13 +23,14 @@
             outline: none;
         }
 
-        input[type="checkbox"] {
+        input[type="radio"], input[type="checkbox"] {
             display: none;
 
             &:checked + span {
                 background-color: var(--primary);
             }
         }
+        
 
         input[type="text"]{
             height: 2.5rem;

@@ -50,25 +50,25 @@
 
         <form [formGroup]="filterGroup" (ngSubmit)="onSubmit()" class="mt-4">
             <label for="estagio" class="cursor-pointer d-flex aligh-items-center mb-3 fw-normal">
-                <input type="checkbox" id="estagio" formControlName="estagio">
+                <input type="checkbox" id="estagio" formControlName="estagio" (change)="onCheckboxChange('estagio')">
                 <span class="custom-checkbox me-2"></span>
                 Estagiário
             </label>
 
             <label for="junior" class="cursor-pointer d-flex aligh-items-center mb-3 fw-normal">
-                <input type="checkbox" id="junior" formControlName="junior">
+                <input type="checkbox" id="junior" formControlName="junior" (change)="onCheckboxChange('junior')">
                 <span class="custom-checkbox me-2"></span>
                 Junior
             </label>
 
             <label for="pleno" class="cursor-pointer d-flex aligh-items-center mb-3 fw-normal">
-                <input type="checkbox" id="pleno" formControlName="pleno">
+                <input type="checkbox" id="pleno" formControlName="pleno" (change)="onCheckboxChange('pleno')">
                 <span class="custom-checkbox me-2"></span>
                 Pleno
             </label>
 
             <label for="senior" class="cursor-pointer d-flex aligh-items-center mb-3 fw-normal">
-                <input type="checkbox" id="senior" formControlName="senior">
+                <input type="checkbox" id="senior" formControlName="senior" (change)="onCheckboxChange('senior')">
                 <span class="custom-checkbox me-2"></span>
                 Sênior
             </label>

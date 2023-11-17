@@ -81,17 +81,15 @@ export class ProfessionalsComponent {
     return this.cardProfessionalSearch;
   }
 
-
   private applySearch(list: Array<CardProfessional>, search: Search): Array<CardProfessional> {
+    let newArray: Array<CardProfessional> = this.cardProfessional;
+
     if (search) {
-      let newArray: Array<CardProfessional> = this.cardProfessional;
-      // 
       for (const key in search) {
         if (search.hasOwnProperty(key)) {
           const searchKey = key as keyof Search;
 
           if (typeof search[searchKey] === 'boolean' && search[searchKey]) {
-
             switch (searchKey) {
               case 'angular':
                 newArray = this.searchBySkill(newArray, searchKey)
@@ -110,48 +108,36 @@ export class ProfessionalsComponent {
                 break;
 
               case 'estagio':
-                this.searchByPosition(newArray, searchKey)
+                newArray = this.searchByPosition(newArray, searchKey)
                 break;
 
               case 'junior':
-                this.searchByPosition(newArray, searchKey)
+                newArray = this.searchByPosition(newArray, searchKey)
                 break;
 
               case 'pleno':
-                this.searchByPosition(newArray, searchKey)
+                newArray = this.searchByPosition(newArray, searchKey)
                 break;
 
               case 'senior':
-                this.searchByPosition(newArray, searchKey)
+                newArray = this.searchByPosition(newArray, searchKey)
                 break;
             }
-            console.log(this.cardProfessionalSearch)
-            console.log(newArray)
-
-            // console.log(`checkbox: on =  nome: ${searchKey}, valor: ${search[searchKey]}`)
           }
-          else if (search[searchKey]) {
-            // console.log(`checkbox: off =  nome: ${searchKey}, valor: ${search[searchKey]}`)
+          else if (typeof search[searchKey] === 'string' && search[searchKey]) {
+            switch (searchKey) {
+              case 'otherPosition':
+                newArray = this.searchByPosition(newArray, search[searchKey])
+                break;
+              case 'otherSkill':
+                newArray = this.searchBySkill(newArray, search[searchKey])
+                break;
+            }
           }
         }
       }
-      return newArray
-      // 
-
-      if (!this.validSearch(search)) {
-        return this.cardProfessionalSearch;
-      }
-      if (search.otherPosition && search.otherSkill) {
-        return this.searchGroup(list, search)
-      }
-      if (search.otherPosition) {
-        return this.searchByPosition(list, search.otherPosition)
-      }
-      if (search.otherSkill) {
-        return this.searchBySkill(list, search.otherSkill)
-      }
     }
-    return this.cardProfessionalSearch;
+    return newArray;
   }
 
   private validSearch(search?: Search): boolean {
@@ -186,14 +172,14 @@ export class ProfessionalsComponent {
   private searchBySkill(list: Array<CardProfessional>, search: string): Array<CardProfessional> {
     const newList = list
       .filter(card => card.skills
-        .map(skill => skill.toLocaleUpperCase())
-        .includes(formatText(search.toLocaleUpperCase())));
+        .map(skill => skill.toLowerCase())
+        .includes(formatText(search.toLowerCase())));
     return newList;
   }
 
   private searchByPosition(list: Array<CardProfessional>, search: string): Array<CardProfessional> {
-    const newList: Array<CardProfessional> = list.filter(card => formatText(card.title.toLocaleUpperCase()) == formatText(search.toLocaleUpperCase()))
-    return newList;
+    const newList: Array<CardProfessional> = list.filter(card => formatText(card.title.toLowerCase()) === formatText(search.toLowerCase()))
+    return newList
   }
 
   private pagination(list: Array<CardProfessional>): Array<CardProfessional> {
