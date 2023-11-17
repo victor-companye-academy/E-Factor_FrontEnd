@@ -1,29 +1,10 @@
 
 import { Component } from '@angular/core';
+import { PaginatorState } from 'primeng/paginator';
 import { CardProfessional } from 'src/app/core/interfaces/card-professional';
+import { Search } from 'src/app/core/interfaces/search';
 import { CardProfessionalService } from 'src/app/core/service/cardProfessional/card-professional.service';
 import { formatText } from 'src/app/core/utils/formatText';
-
-interface PaginatorState {
-  first?: number;
-  rows?: number;
-  page?: number;
-  pageCount?: number;
-}
-
-interface Search {
-  otherSkill: string;
-  otherPosition: string;
-
-  angular: boolean;
-  html: boolean;
-  javascript: boolean;
-  typescript: boolean
-  junior: boolean;
-  pleno: boolean;
-  estagio: boolean;
-  senior: boolean;
-}
 
 @Component({
   selector: 'app-professionals',
@@ -33,8 +14,9 @@ interface Search {
 export class ProfessionalsComponent {
 
   protected readonly rows: number = 4;
+  protected toShow: boolean = true;
 
-  protected cardProfessional: Array<CardProfessional> = this.cardProfessionalService.listProfessionals();
+  protected cardProfessional: Array<CardProfessional> = this.cardProfessionalService.listProfessionals()
   protected cardProfessionalSearch: Array<CardProfessional> = this.cardProfessional;
 
   protected first: number = 0;
@@ -57,9 +39,11 @@ export class ProfessionalsComponent {
       this.searchObj = undefined
       this.cardProfessionalSearch = this.setList()
     }
+    this.toShow = this.isEmptylist(this.cardProfessionalSearch)
   }
 
   private setList(event?: Search): Array<CardProfessional> {
+
     if (!event) {
       if (this.validSearch(this.searchObj)) {
 
@@ -81,9 +65,12 @@ export class ProfessionalsComponent {
     return this.cardProfessionalSearch;
   }
 
+  private isEmptylist(list: Array<CardProfessional>): boolean {
+    return list.length ? true : false
+  }
+
   private applySearch(list: Array<CardProfessional>, search: Search): Array<CardProfessional> {
     let newArray: Array<CardProfessional> = this.cardProfessional;
-
     if (search) {
       for (const key in search) {
         if (search.hasOwnProperty(key)) {
@@ -137,6 +124,7 @@ export class ProfessionalsComponent {
         }
       }
     }
+    this.toShow = this.isEmptylist(newArray)
     return newArray;
   }
 
@@ -161,12 +149,6 @@ export class ProfessionalsComponent {
       }
     }
     return isTrue;
-  }
-
-  private searchGroup(list: Array<CardProfessional>, search: Search) {
-    const newListByPosition: Array<CardProfessional> = this.searchByPosition(list, search.otherPosition);
-    const newList: Array<CardProfessional> = this.searchBySkill(newListByPosition, search.otherSkill);
-    return newList;
   }
 
   private searchBySkill(list: Array<CardProfessional>, search: string): Array<CardProfessional> {
