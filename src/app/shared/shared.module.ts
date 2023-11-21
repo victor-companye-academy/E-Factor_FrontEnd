@@ -13,6 +13,7 @@ import { CardVacancyComponent } from './card-vacancy/card-vacancy.component';
 import { CardNewsletterComponent } from './card-newsletter/card-newsletter.component';
 import { FilterComponent } from './filter/filter.component';
 import { SearchComponent } from './search/search.component';
+import { AboutVacancyComponent } from './about-vacancy/about-vacancy.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,9 @@ import { SearchComponent } from './search/search.component';
     CardNewsletterComponent,
     CardNewsletterComponent,
     FilterComponent,
-    SearchComponent
+    SearchComponent,
+    AboutVacancyComponent,
+    AboutVacancyComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +48,8 @@ import { SearchComponent } from './search/search.component';
     CardProfessionalComponent,
     CardNewsletterComponent,
     FilterComponent,
-    SearchComponent
+    SearchComponent,
+    AboutVacancyComponent
   ]
 })
 export class SharedModule { }
