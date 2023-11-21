@@ -51,12 +51,12 @@
                 <span class="me-2 rounded-5 bg-white px-3 fw-medium" *ngIf="isShort">{{ card.skills[0] }} </span>
 
                 <span class="rounded-5 bg-white px-2 fw-medium"
-                    *ngIf="(card.skills.length > 1 && card.skills.length - 6 && !isShort)">
-                    +{{ card.skills.length -6}}
+                    *ngIf="(card.skills.length > 1 && ((card.skills.length - 5) > 0) && !isShort)">
+                    +{{ (card.skills.length -5)}}
                 </span>
 
-                <span class="rounded-5 bg-white px-2 fw-medium" *ngIf="(card.skills.length > 1 && isShort)">
-                    +{{ card.skills.length -3}}
+                <span class="rounded-5 bg-white px-2 fw-medium" *ngIf="((card.skills.length > 1 && ((card.skills.length - 1) > 0) && isShort))">
+                    +{{ card.skills.length -1}}
                 </span>
             </div>
         </div>
