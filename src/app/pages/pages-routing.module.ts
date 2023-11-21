@@ -14,12 +14,14 @@ import { ProfessionalsComponent } from './professionals/professionals.component'
 import { BusinessUserComponent } from './business-user/business-user.component';
 import { BusinessProfileComponent } from './business-profile/business-profile.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
+import { VacanciesComponent } from './vacancies/vacancies.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'about', component: AboutComponent },
   { path: 'search-professionals', component: ProfessionalsComponent },
+  { path: 'search-vacancies', component: VacanciesComponent },
   { path: 'selecionar-usuario', component: ChooseUserComponent },
   { path: 'criar-conta-profissional', component: PersonalDataComponent },
   { path: 'criar-conta-empresa', component: PersonalDataComponent },

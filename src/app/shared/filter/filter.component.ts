@@ -42,6 +42,7 @@ export class FilterComponent {
   }
 
   onSubmit(): void {
+    window.scrollTo(0, 120);
     this.sendData.emit(this.filterGroup.value);
   }
 }
