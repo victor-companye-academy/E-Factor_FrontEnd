@@ -1,4 +1,7 @@
 export interface CardVacancy {
+    id:number,
+    position: string,
+    
     src?: string;
     companyName: string
     title: string;

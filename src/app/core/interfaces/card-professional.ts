@@ -1,4 +1,5 @@
 export interface CardProfessional {
+    id:number;
     userName: string;
     title: string;
     description:string;
