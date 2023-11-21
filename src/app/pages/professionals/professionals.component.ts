@@ -13,7 +13,7 @@ import { formatText } from 'src/app/core/utils/formatText';
 })
 export class ProfessionalsComponent {
 
-  protected readonly rows: number = 4;
+  protected readonly rows: number = 10;
   protected toShow: boolean = true;
 
   protected cardProfessional: Array<CardProfessional> = this.cardProfessionalService.listProfessionals()
@@ -170,6 +170,7 @@ export class ProfessionalsComponent {
   }
 
   protected onPageChange(event: PaginatorState) {
+    window.scrollTo(0, 120);
     if (event.first !== undefined) {
       this.first = event.first;
     }

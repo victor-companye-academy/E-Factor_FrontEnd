@@ -24,6 +24,15 @@
             color: var(--text-gray);
         }
 
+        .section-main{
+            min-height: 62.5rem;
+        }
+
+        .div-filter{
+            position: sticky;
+            top:8vh;
+        }
+
         img.notFound {
             width: 8rem;
         }
