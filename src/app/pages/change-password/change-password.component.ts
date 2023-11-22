@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-change-password',
@@ -12,8 +13,10 @@ export class ChangePasswordComponent {
   protected input: Array<string> = ['', ''];
   protected showPassword: Array<boolean> = [false, false];
 
-  changePassword(){
+  constructor(private router: Router) { }
 
+  changePassword(){
+    this.router.navigate(['/login']);
   }
 
 

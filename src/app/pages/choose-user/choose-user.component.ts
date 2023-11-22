@@ -18,7 +18,7 @@ export class ChooseUserComponent {
     if (this.isActiveArray[0]){
       return '/criar-conta-profissional';
     } else {
-      return '/criar-conta-empresa';
+      return '/informacoes-empresa';
     }
   }
 }

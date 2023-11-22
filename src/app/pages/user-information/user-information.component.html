@@ -3,11 +3,12 @@
         <img src="assets/logo-efactor.svg" alt="Logo e-factor" class="logo position-fixed mt-3 ms-3" [routerLink]="['/']">
         <div class="personal-inputs">
             <h1 class="title ms-2 fw-bold">{{title}}</h1>
+            <p class="info ms-2">* Campos obrigatórios</p>
             <div class="mx-3 mt-3" *ngFor="let input of arrayUserInformationInputs[pageType]; let i = index">
                 <div *ngIf="input.parameters[2] === 'double-input-row'" [ngClass]="{'double-input-row-container gap-3': input.parameters[2] === 'double-input-row'}">
                     <div>
                         <label>{{arrayUserInformationInputs[pageType][i].title}}</label>
-                        <input title="{{arrayUserInformationInputs[pageType][(i)].title}}" type="text" class="form-control ps-3 pe-3 mt-1" placeholder="{{arrayUserInformationInputs[pageType][(i)].parameters[0]}}" (input)="inputMasks($event, i)" value="{{input.value}}" maxlength="14" required>
+                        <input title="{{arrayUserInformationInputs[pageType][(i)].title}}" type="text" class="form-control ps-3 pe-3 mt-1" placeholder="{{arrayUserInformationInputs[pageType][(i)].parameters[0]}}" (input)="inputMasks($event, i)" value="{{input.value}}" (blur)="validateValue()" maxlength="14" required>
                     </div>
                     <div>
                         <label>{{arrayUserInformationInputs[pageType][(i + 1)].title}}</label>
@@ -16,7 +17,7 @@
                 </div>
                 <div *ngIf="input.parameters[2] == ''">
                     <label>{{input.title}}</label>
-                    <input title="{{input.title}}" type="{{input.parameters[1]}}" class="form-control ps-3 pe-3 mt-1" placeholder="{{input.parameters[0]}}" (input)="inputMasks($event, i)" value="{{input.value}}" maxlength="18" required>
+                    <input title="{{input.title}}" type="{{input.parameters[1]}}" class="form-control ps-3 pe-3 mt-1" placeholder="{{input.parameters[0]}}" (input)="inputMasks($event, i)" value="{{input.value}}" (blur)="validateValue()" [attr.maxlength]="input.title === 'CNJP *' ? '18' : null" required>
                 </div>
                 <div *ngIf="input.parameters[2] == 'select'">
                     <label>{{input.title}}</label>
@@ -26,14 +27,16 @@
                     </select>
                 </div>
             </div>
+            <p *ngIf="errMsg" class="ms-3 mt-3 errMsg">{{errMsg}}</p>
         </div>
         <div>
             <h1 class="title ms-2 fw-bold">Endereço</h1>
+            <p class="info ms-2">* Campos obrigatórios</p>
             <app-address class="address mt-3" (inputsFilled)="verifyInputs($event, -1)"></app-address>
         </div>
     </div>
     <div class="bottom d-flex justify-content-between mt-3 mx-5">
-        <div class="d-flex back-option gap-3" [routerLink]="['/criar-conta-profissional']">
+        <div class="d-flex back-option gap-3" [routerLink]="getLinkDestinationBack()">
             <img src="assets/icons/personal-data/voltar.svg" alt="Voltar">
             <p class="mt-3">VOLTAR</p>
         </div>
@@ -41,7 +44,7 @@
             <p>1/2</p>
         </div>
         <div class="mt-2">
-            <button class="btn fw-bold btn-continue w-100" [routerLink]="['/biography']" [disabled]="!isContinueBtnActive">CONTINUAR</button>
+            <button class="btn fw-bold btn-continue w-100" [routerLink]="getLinkDestinationContinue()" [disabled]="!isContinueBtnActive">CONTINUAR</button>
         </div>
     </div>
 </body>

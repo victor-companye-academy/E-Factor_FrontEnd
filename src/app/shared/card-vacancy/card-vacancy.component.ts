@@ -9,5 +9,5 @@ import { CardVacancy } from 'src/app/core/interfaces/card-vacancy';
 export class CardVacancyComponent {
 
   @Input({ alias: 'short' }) public isShort?: boolean;
-  @Input({ alias: 'cards' }) public card?:CardVacancy;
+  @Input({ alias: 'card' }) public card?:CardVacancy;
 }

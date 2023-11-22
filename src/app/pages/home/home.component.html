@@ -4,7 +4,7 @@
     </div>
 
     <div class="w-100 fadeIn overflow-hidden">
-        <div class="w-100 container">
+        <div class="w-100 container div-main">
             <button type="button"
                 class="fadeIn border-0 mt-5 tobble w-100 d-flex justify-content-end px-4 bg-transparent">
                 <img src="assets/icons/tobble.svg" alt="Icone seta" title="Mudar modo">
@@ -20,7 +20,7 @@
                 </div>
             </section>
 
-            <!--  -->
+            <!--   -->
 
             <section class="mt-0 w-100 px-4 py-1">
                 <div class="section-professional d-flex justify-content-center row">
@@ -49,8 +49,8 @@
             <section class="w-100 px-4 py-1">
                 <div class="div-vacancy row justify-content-center">
 
-                    <card-vacancy [short]="true" [cards]="cardVacancy[1]" class="mt-4 col-lg-6 col-xl-4"></card-vacancy>
-                    <card-vacancy [short]="true" [cards]="cardVacancy[0]" class="mt-4 col-lg-6 col-xl-4"></card-vacancy>
+                    <card-vacancy [short]="true" [card]="cardVacancy[1]" class="mt-4 col-lg-6 col-xl-4"></card-vacancy>
+                    <card-vacancy [short]="true" [card]="cardVacancy[0]" class="mt-4 col-lg-6 col-xl-4"></card-vacancy>
 
                     <div class="see-more d-flex flex-column align-items-end mt-4 col-lg-12 col-xl-4">
                         <h3 class="fw-bold fs-6 text-end pt-2">
@@ -105,6 +105,6 @@
                 </div>
             </section>
         </div>
-        <app-footer class=""></app-footer>
+        <app-footer></app-footer>
     </div>
 </main>

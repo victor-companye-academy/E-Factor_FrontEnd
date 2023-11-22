@@ -4,7 +4,7 @@
     <section class="content position-relative">
         <img src="{{card.src || 'assets/icons/bag.svg'}}" alt="Logo empresa"
             class="rounded-circle logo position-absolute object-fit-scale bg-white" width="40px" height="40px"
-            [ngStyle]="{'left': isShort?'0': '-55px'}">
+            [ngStyle]="{'left': isShort?'0': '-65px'}">
 
         <div class="d-flex align-items-start flex-wrap " [ngClass]="{'flex-column': isShort}">
             <div class="title-company me-4" [ngClass]="{'ms-5':isShort}">
@@ -20,7 +20,7 @@
         </div>
 
         <div class="description overflow-hidden" *ngIf="!isShort">
-            <p class="m-0 pe-5 mt-4 text-start border-0 overflow-hidden fw-light">
+            <p class="m-0 pe-5 mt-4 text-start border-0 overflow-hidden fw-light text-wrap">
                 {{card.description}}</p>
         </div>
     </section>
@@ -43,13 +43,11 @@
                 <span class="rounded-5 bg-white px-3 fw-medium" [title]="card.locality">{{card.locality}}</span>
             </div>
 
-
         </div>
 
         <div>
             <div class="d-flex align-items-center justify-content-start mt-2" *ngIf="!isShort">
-                <img src="assets/icons/map.svg" alt="Icone de mapa" class="me-2" width="24px" height="24px"
-                    class="me-1">
+                <img src="assets/icons/map.svg" alt="Icone de mapa" class="me-1" width="24px" height="24px">
                 <span class="rounded-5 bg-white px-3 fw-medium" [title]="card.locality">
                     {{card.locality}}
                 </span>

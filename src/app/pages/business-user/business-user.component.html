@@ -1,0 +1,23 @@
+<body class="justify-content-center">
+    <div class="content p-4 d-flex flex-column justify-content-center align-items-center">
+        <img src="assets/logo-efactor.svg" alt="Logo e-factor" class="logo position-fixed mt-3 ms-3" [routerLink]="['/']">
+        <div class="h-50 personal-inputs">
+            <h2 class="fw-bold mb-3">Dados pessoais</h2>
+            <p class="info">* Campos obrigatórios</p>
+            <div *ngFor="let input of arrayInputsBussinesUser; let i = index" class="mt-3">
+                <label>{{input.title}}</label>
+                <input type="{{input.parameters[0]}}" placeholder="{{input.parameters[1]}}" class="form-control ps-3 pe-3 mt-1" value="{{input.value}}" (input)="verifyInputs($event, i)" (blur)="validateCpf(i)" [attr.maxlength]="i === 0 ? '14' : null">
+            </div>
+            <p class="errMsg mt-3">{{errMsg}}</p>
+        </div>
+    </div>
+    <div class="bottom d-flex justify-content-between mt-3 mx-5">
+        <div class="d-flex back-option gap-3" [routerLink]="['/criar-conta-empresa']">
+            <img src="assets/icons/personal-data/voltar.svg" alt="Voltar">
+            <p class="mt-3">VOLTAR</p>
+        </div>
+        <div class="mt-2">
+            <button class="btn fw-bold btn-continue w-100" [routerLink]="['/login']" [disabled]="!isContinueBtnActive">CONTINUAR</button>
+        </div>
+    </div>
+</body>

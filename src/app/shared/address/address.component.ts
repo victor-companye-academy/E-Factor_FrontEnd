@@ -13,6 +13,7 @@ export class AddressComponent {
   @Output() inputsFilled = new EventEmitter<boolean>();
 
   errorMsg: string = '';
+  isCepGeneric: boolean = false;
   addressComponents: Array<AddressArray> = [
     {
       title: "cep",
@@ -90,11 +91,18 @@ export class AddressComponent {
     this.addressComponents[4].value = addressData.logradouro;
 
     for (let i = 0; i < this.addressComponents.length - 1; i++){
-      if(this.addressComponents[i].value == null){
-        this.errorMsg = "CEP inválido, por favor tente novamente";
-        for(let i = 0; i < this.addressComponents.length - 1; i++){
-          this.addressComponents[i].value = '';
+      if(this.addressComponents[i].value == null || this.addressComponents[i].value == ''){
+        if (i != 3 && i != 4){
+          this.errorMsg = "CEP inválido, por favor tente novamente";
+          this.isCepGeneric = false;
+          for(let i = 0; i < this.addressComponents.length - 1; i++){
+            this.addressComponents[i].value = '';
+          }
+        } else {
+          this.isCepGeneric = true;
         }
+      } else {
+          this.isCepGeneric = false;
       }
     }
 

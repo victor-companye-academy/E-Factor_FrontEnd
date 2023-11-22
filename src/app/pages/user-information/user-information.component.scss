@@ -19,7 +19,7 @@ body {
         cursor: pointer;
     }
 
-    h1, label{
+    h1, label, .info{
         color: var(--primary);
     }
     
@@ -35,6 +35,10 @@ body {
     
     .personal-inputs{
         width: 30rem;
+    }
+
+    .errMsg{
+        color: rgb(255, 85, 85);
     }
 }
 
@@ -70,12 +74,12 @@ body {
 
 @media (max-width: 991px) {
     body{
-        min-height: 68.75rem;
+        min-height: 74.75rem;
     }
     .content{
         flex-direction: column;
         padding-bottom: 5rem !important;
-        min-height: 62.5rem;
+        min-height: 68.5rem;
         .logo{
             top: 0.5rem;
         }
@@ -101,7 +105,7 @@ body {
     }
 }
 
-@media (max-width: 510px) {
+@media (max-width: 558px) {
     .personal-inputs{
         width: 20rem !important;
     }
