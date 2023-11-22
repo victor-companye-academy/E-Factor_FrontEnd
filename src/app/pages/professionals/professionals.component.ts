@@ -13,8 +13,12 @@ import { formatText } from 'src/app/core/utils/formatText';
 })
 export class ProfessionalsComponent {
 
+  constructor(private cardProfessionalService: CardProfessionalService) { }
+
+
   protected readonly rows: number = 10;
   protected toShow: boolean = true;
+  protected visible: boolean = false;
 
   protected cardProfessional: Array<CardProfessional> = this.cardProfessionalService.listProfessionals()
   protected cardProfessionalSearch: Array<CardProfessional> = this.cardProfessional;
@@ -22,8 +26,6 @@ export class ProfessionalsComponent {
   protected first: number = 0;
   protected totalRecords: number = this.cardProfessionalSearch.length || 0
   private searchObj: Search | undefined;
-
-  constructor(private cardProfessionalService: CardProfessionalService) { }
 
   protected setSearch(event: Search) {
     this.first = 0
@@ -169,8 +171,13 @@ export class ProfessionalsComponent {
     return newList;
   }
 
+  showDialog() {
+    this.visible = true;
+  }
+
   protected onPageChange(event: PaginatorState) {
     window.scrollTo(0, 120);
+
     if (event.first !== undefined) {
       this.first = event.first;
     }

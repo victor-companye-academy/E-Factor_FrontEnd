@@ -1,0 +1,39 @@
+:host {
+    h2,
+    h3,
+    h4 {
+        margin: 0;
+    }
+    .primary-color {
+        color: var(--primary);
+    }
+    .section-main {
+        .about {
+            span.status {
+                font-size: 0.85rem;
+                background: var(--secondary);
+                color: var(--text-white);
+            }
+        }
+
+        .profile {
+            section {
+                background: var(--white);
+                img {
+                    border: none;
+                }
+            }
+
+            button {
+                height: 3rem;
+                background: var(--secondary);
+                color: var(--text-white);
+
+                &:hover {
+                    background-color: var(--primary);
+                    transition: 0.5s;
+                }
+            }
+        }
+    }
+}

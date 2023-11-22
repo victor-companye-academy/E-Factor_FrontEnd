@@ -1,66 +1,69 @@
-<section class="row">
-    <div class="col">
-        <section>
-            <img src="" alt="">
-            <h2>
+<section class="row section-main">
+    <div class="col-4 profile">
+        <section class="profile mb-5 rounded-4 p-5 d-flex flex-column align-items-center">
+            <img src="" alt=" " title="Logo da empresa" width="180rem" height="180rem" class="border-0 rounded-circle"
+                style="background-color: #f2f4f7;">
+
+            <h2 class="fw-light fs-5 mt-4">
                 Banco Bradesco S.A.
             </h2>
 
-            <h3>
+            <h3 class="fw-bold fs-5 mt-4 primary-color text-center">
                 Analista de Desenvolvimento
                 Junior
             </h3>
         </section>
 
-        <section>
-            <h2>
-                Detalhes adicionais
-            </h2>
-
-            <h4>
-                Telefone
-            </h4>
-            <span>
-                (11) 97854-4359
-            </span>
-        </section>
-
-        <section>
-            <h4>
-                E-mail
-            </h4>
-            <span>
-                efactor@email.com
-            </span>
-        </section>
-
-        <section>
-            <h4>
-                Endereço
-            </h4>
-            <span>
-                Av. Paulista, 901 - Cerqueira César, São Paulo - SP, 01411-100
-            </span>
-        </section>
-
-        <button type="button">Demonstrar interesse</button>
-    </div>
-
-    <div class="col">
-        <div>
+        <section class="details mb-5 rounded-4 p-5">
             <div>
-                <h2>
-                    Sobre a Vaga
+                <h2 class="fw-light fs-5">
+                    Detalhes adicionais
                 </h2>
-                <span>
-                    últimas Vagas
+
+                <h4 class="fw-light fs-6 mt-4 mb-2">
+                    Telefone
+                </h4>
+
+                <span class="fw-medium fs-5">
+                    (11) 97854-4359
                 </span>
             </div>
-            <button type="button">&times</button>
+
+            <div>
+                <h4 class="fw-light fs-6 mt-4 mb-2">
+                    E-mail
+                </h4>
+                <span class="fw-medium fs-5">
+                    efactor@email.com
+                </span>
+            </div>
+
+            <div>
+                <h4 class="fw-light fs-6 mt-4 mb-2">
+                    Endereço
+                </h4>
+                <span class="fw-medium fs-5">
+                    Av. Paulista, 901 - Cerqueira César, São Paulo - SP, 01411-100
+                </span>
+            </div>
+        </section>
+        <button type="button" (click)="show()" class="w-100 border-0 rounded-4 fs-4 fw-bold button">Demonstrar
+            interesse</button>
+
+    </div>
+
+    <div class="col about">
+        <div class="d-flex align-items-center mb-4">
+            <h2 class="fw-bold fs-4 primary-color text-center">
+                Sobre a Vaga
+            </h2>
+            <span class="text-center status rounded-4 ms-4 px-3">
+                últimas Vagas
+            </span>
         </div>
 
         <section>
-            <p>
+            <p class="fw-light">
                 Lorem ipsum dolor sit amet consectetur. Tellus vitae viverra nascetur nulla vel nunc risus aliquam.
                 Sodales sed tellus pretium egestas ac sed purus sed tempor. Mi eleifend metus a amet nunc volutpat
                 egestas vulputate. Cras hac sit purus lacus aenean sed. Sed elit sed amet vel tortor tincidunt tellus
@@ -96,7 +99,7 @@
         </section>
         <div>
             <section>
-                <h2>
+                <h2 class="fw-bold fs-4 primary-color text-start">
                     Dados da vaga
                 </h2>
                 <div>
@@ -140,7 +143,7 @@
             </section>
 
             <section>
-                <h2>
+                <h2 class="fw-bold fs-4 primary-color text-start">
                     Habilidades
                     <ul>
                         <li></li>

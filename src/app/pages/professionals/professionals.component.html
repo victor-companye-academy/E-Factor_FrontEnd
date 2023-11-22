@@ -28,8 +28,19 @@
                     <span *ngFor="let card of cardProfessionalSearch" class="mx-1 fadeIn">
                         <card-professional [short]="false" [card]="card" class="mt-4"></card-professional>
                     </span>
+                    <!--  -->
+                    <div class="card flex justify-content-center">
+                        <p-button (click)="showDialog()" icon="pi pi-external-link" label="Show"></p-button>
+                        <p-toast></p-toast>
 
-                    <div class="position-absolute bottom-0 d-flex w-100 justify-content-center">
+                        <p-dialog [(visible)]="visible"  [modal]="true" [style]="{ width: '90vw'}" [draggable]="false"
+                            [resizable]="true"  [maximizable]="true" styleClass="modal">
+
+                            <about-vacancy></about-vacancy>
+                        </p-dialog>
+                    </div>
+                    <!--  -->
+                    <div class=" position-absolute bottom-0 d-flex w-100 justify-content-center">
                         <ng-template [ngIf]="toShow">
                             <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"
                                 [totalRecords]="totalRecords" [showFirstLastIcon]="false" [dropdownAppendTo]="false">
