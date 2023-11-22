@@ -16,7 +16,7 @@ export class CardProfessionalService {
         title: 'Sênior',
         locality: 'São Paulo, SP',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...',
-        skills: ['Phyton', 'Javascript', 'Spring', 'React', 'PHP','Javascript', 'Spring', 'React', 'PHP']
+        skills: ['Phyton', 'Javascript', 'Spring', 'React', 'PHP','Javascript', 'Spring', 'React']
       },
       {
         id: 2,
