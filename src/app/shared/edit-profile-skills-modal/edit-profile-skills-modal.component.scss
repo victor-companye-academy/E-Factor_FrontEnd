@@ -17,9 +17,6 @@
             color: var(--text);
         }
     }
-    textarea {
-        height: 200px;
-    }
 
     @media (max-width: 991px){
         width: 90%;
@@ -35,4 +32,21 @@ button{
 .save{
     background-color: var(--primary);
     color: var(--text-white);
+}
+.skills{
+    background-color: var(--background);
+    font-size: small;
+    border: none;
+    border-radius: 0.75rem;
+}
+.skillsList{
+    cursor: pointer;
+    font-size: small;
+}
+.x-icon{
+    cursor: pointer;
+    filter: brightness(0) saturate(100%) invert(52%) sepia(52%) saturate(95%) hue-rotate(192deg) brightness(95%) contrast(93%);
+}
+.errMsg{
+    color: rgb(255, 85, 85);
 }

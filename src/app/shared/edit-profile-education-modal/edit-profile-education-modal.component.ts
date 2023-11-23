@@ -11,6 +11,7 @@ export class EditProfileEducationModalComponent {
   @Output() saveChanges = new EventEmitter<any>();
 
   protected editedProfile: any;
+  protected isValid: boolean = true;
 
   ngOnInit() {
     this.editedProfile = JSON.parse(JSON.stringify(this.profile));
@@ -30,6 +31,9 @@ export class EditProfileEducationModalComponent {
         this.editedProfile[0].education[i].current = true;
       }
     }
+
+    this.organizeEducation();
+
     this.saveChanges.emit(this.editedProfile[0].education);
     const mainElement = document.querySelector('.main');
     if (mainElement) {
@@ -43,6 +47,10 @@ export class EditProfileEducationModalComponent {
     if (mainElement) {
       mainElement.classList.remove('blur-background');
     }
+  }
+
+  getMonthOptions(): string[] {
+    return ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
   }
 
   getAnoOptions(): number[] {
@@ -60,6 +68,7 @@ export class EditProfileEducationModalComponent {
   addEducation() {
      this.editedProfile[0].education.unshift({ institution: '', start: '', end: '', current: false, role: '', description: '' });
      this.editedProfile = JSON.parse(JSON.stringify(this.editedProfile));
+     this.isValid = false;
   }
 
   deleteEducation(i: number) {
@@ -88,5 +97,77 @@ export class EditProfileEducationModalComponent {
     } else {
       this.editedProfile[0].education[i].current = true;
     }
+  }
+
+  verifyEducation() {
+    for (let i = 0; i < this.editedProfile[0].education.length; i++) {
+      if (this.editedProfile[0].education[i].institution == '' ||
+          this.editedProfile[0].education[i].start.length < 8 ||
+          this.editedProfile[0].education[i].start.split(' ')[1] == 'undefined' ||
+          this.editedProfile[0].education[i].title == '' ||
+          this.editedProfile[0].education[i].description == '') {
+        return this.isValid = false;
+      }
+    }
+    return this.isValid = true;
+  }
+
+  organizeEducation() {
+    this.editedProfile[0].education.sort((a: any, b: any) => {
+      if (a.current && !b.current) {
+        return -1;
+      } else if (!a.current && b.current) {
+        return 1;
+      } else if (parseInt(a.end.split(' ')[1]) > parseInt(b.end.split(' ')[1])) {
+        return -1;
+      } else if (parseInt(a.end.split(' ')[1]) < parseInt(b.end.split(' ')[1])) {
+        return 1;
+      } else {
+        let monthAStart = 0;
+        let monthAEnd = 0;
+        this.getMonthOptions().forEach((month: string, index: number) => {
+          if (a.start.split(' ')[0] == month) {
+            monthAStart = index;
+          }
+          if (a.end.split(' ')[0] == month) {
+            monthAEnd = index;
+          }
+        })
+        let monthBStart = 0; 
+        let monthBEnd = 0; 
+        this.getMonthOptions().forEach((month: string, index: number) => {
+          if (b.start.split(' ')[0] == month) {
+            monthBStart = index;
+          }
+          if (b.end.split(' ')[0] == month) {
+            monthBEnd = index;
+          }
+        })
+
+        if (a.current && b.current){
+          if (monthAStart > monthBStart) {
+            return -1;
+          } else if (monthAStart < monthBStart) {
+            return 1;
+          } else {
+            if (parseInt(a.start.split(' ')[1]) > parseInt(b.start.split(' ')[1])) {
+              return -1;
+            } else if (parseInt(a.start.split(' ')[1]) < parseInt(b.start.split(' ')[1])) {
+              return 1;
+            } else {
+              return 0;
+            }
+          }
+        } else {
+          if (monthAEnd > monthBEnd) {
+            return -1;
+          } else if (monthAEnd < monthBEnd) {
+            return 1;
+          } else {
+            return 0;
+          }
+        }
+      }
+    });
   }
 }

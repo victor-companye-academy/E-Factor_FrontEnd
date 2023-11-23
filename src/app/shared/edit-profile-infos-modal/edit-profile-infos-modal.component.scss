@@ -7,6 +7,13 @@
     max-height: 90vh;
     overflow: scroll;
 
+    .profile-photo{
+        width: 9.6875rem;
+        height: 9.6875rem;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    }
     label{
         color: var(--primary);
     }
@@ -17,22 +24,36 @@
             color: var(--text);
         }
     }
+    .form-check-input:checked {
+        border: none;
+        background-color: var(--primary);
+    }
     textarea {
         height: 200px;
+    }
+    input[type='file'] {
+        display: none;
     }
 
     @media (max-width: 991px){
         width: 90%;
+        .info-div{
+            flex-direction: column;
+        }
     }
 }
 button{
     border-radius: 0.75rem;
 }
 .cancel{
+    border-radius: 0.75rem;
     border: 1.5px solid var(--primary);
     color: var(--primary);
 }
 .save{
     background-color: var(--primary);
     color: var(--text-white);
+}
+.errMsg{
+    color: rgb(255, 85, 85);
 }

@@ -14,6 +14,9 @@ import { CardNewsletterComponent } from './card-newsletter/card-newsletter.compo
 import { EditProfileAboutModalComponent } from './edit-profile-about-modal/edit-profile-about-modal.component';
 import { EditProfileExperienceModalComponent } from './edit-profile-experience-modal/edit-profile-experience-modal.component';
 import { EditProfileEducationModalComponent } from './edit-profile-education-modal/edit-profile-education-modal.component';
+import { EditProfileSkillsModalComponent } from './edit-profile-skills-modal/edit-profile-skills-modal.component';
+import { EditProfileLanguageModalComponent } from './edit-profile-language-modal/edit-profile-language-modal.component';
+import { EditProfileInfosModalComponent } from './edit-profile-infos-modal/edit-profile-infos-modal.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { EditProfileEducationModalComponent } from './edit-profile-education-mod
     CardNewsletterComponent,
     EditProfileAboutModalComponent,
     EditProfileExperienceModalComponent,
-    EditProfileEducationModalComponent
+    EditProfileEducationModalComponent,
+    EditProfileSkillsModalComponent,
+    EditProfileLanguageModalComponent,
+    EditProfileInfosModalComponent,
   ],
   imports: [
     CommonModule,
@@ -47,7 +53,10 @@ import { EditProfileEducationModalComponent } from './edit-profile-education-mod
     CardNewsletterComponent,
     EditProfileAboutModalComponent,
     EditProfileExperienceModalComponent,
-    EditProfileEducationModalComponent
+    EditProfileEducationModalComponent,
+    EditProfileSkillsModalComponent,
+    EditProfileLanguageModalComponent,
+    EditProfileInfosModalComponent,
   ]
 })
 export class SharedModule { }

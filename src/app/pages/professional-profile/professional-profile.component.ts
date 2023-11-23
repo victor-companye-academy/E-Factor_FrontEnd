@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { CardVacancy } from 'src/app/core/interfaces/card-vacancy';
 import { ProfessionalInfo } from 'src/app/core/interfaces/professional-info';
+import { CardVacancyService } from 'src/app/core/service/cardVacancy/card-vacancy.service';
 
 @Component({
   selector: 'app-professional-profile',
@@ -9,6 +11,11 @@ import { ProfessionalInfo } from 'src/app/core/interfaces/professional-info';
 export class ProfessionalProfileComponent {
 
   protected isLogged: boolean = true;
+  protected showCellphone = true;
+
+  constructor (private cardVacancyService: CardVacancyService) {}
+
+  protected cardVacancy: Array<CardVacancy> = this.cardVacancyService.listVacancies();
 
   protected professionalInfo: Array<ProfessionalInfo> = [
     {
@@ -17,7 +24,7 @@ export class ProfessionalProfileComponent {
       name: 'Wilson Snowden O. Junior',
       age: '23',
       city: 'São Paulo',
-      state: 'Sao Paulo',
+      state: 'São Paulo',
       email: 'wilson@email.com',
       cellphone: '(11) 99123-4567',
       seniority: 'Sênior',
@@ -27,8 +34,10 @@ export class ProfessionalProfileComponent {
         { institution: 'Samsung Brasil', start: 'Fev 2022', end: 'Fev 2023', current: false, role: 'Desenvolvedor Front-End Pleno', description: 'Lorem ipsum dolor sit amet consectetur. Eget consequat quis quis diam nisl aliquet. Est in consequat consequat vel sagittis suspendisse id. Porttitor lacus dignissim fames porta interdum neque. Vitae consequat gravida neque eu adipiscing massa nulla adipiscing quis. Quis quis mattis amet suspendisse dictum turpis egestas amet. Morbi scelerisque sit lectus arcu vulputate.' },
         { institution: 'IFSP | Instituto Federal de Educação, Ciência e Tecnologia de São Paulo', start: 'Jul 2021', end: 'Dez 2021', current: false, role: 'Monitor de Programação em C++', description: 'Lorem ipsum dolor sit amet consectetur. Eget consequat quis quis diam nisl aliquet. Est in consequat consequat vel sagittis suspendisse id. Porttitor lacus dignissim fames porta interdum neque.' },
       ],
-      education: [{ institution: 'IFSP | Instituto Federal de Educação, Ciência e Tecnologia de São Paulo', start: 'Jan 2017', end: 'Dez 2021', current: false, title: 'Curso Técnico Integrado Informática', description: 'Lorem ipsum dolor sit amet consectetur. Eget consequat quis quis diam nisl aliquet. Est in consequat consequat vel sagittis suspendisse id. Porttitor lacus dignissim fames porta interdum neque. Vitae consequat gravida neque eu adipiscing massa nulla adipiscing quis. Quis quis mattis amet suspendisse dictum turpis egestas amet. Morbi scelerisque sit lectus arcu vulputate. Et lacinia ut at vitae platea suspendisse sed volutpat. Nibh aliquet morbi egestas iaculis fames interdum hendrerit.' }],
-      skills: ['CSS', 'JAVA', 'HTML', 'JAVASCRIPT', 'ANGULAR', 'TYPESCRIPT', 'SQL', 'CSS', 'JAVA', 'HTML', 'JAVASCRIPT', 'ANGULAR', 'TYPESCRIPT', 'SQL', 'CSS', 'JAVA', 'HTML', 'JAVASCRIPT', 'ANGULAR', 'TYPESCRIPT', 'SQL'],
+      education: [
+        { institution: 'IFSP | Instituto Federal de Educação, Ciência e Tecnologia de São Paulo', start: 'Jan 2017', end: 'Dez 2021', current: false, title: 'Curso Técnico Integrado Informática', description: 'Lorem ipsum dolor sit amet consectetur. Eget consequat quis quis diam nisl aliquet. Est in consequat consequat vel sagittis suspendisse id. Porttitor lacus dignissim fames porta interdum neque. Vitae consequat gravida neque eu adipiscing massa nulla adipiscing quis. Quis quis mattis amet suspendisse dictum turpis egestas amet. Morbi scelerisque sit lectus arcu vulputate. Et lacinia ut at vitae platea suspendisse sed volutpat. Nibh aliquet morbi egestas iaculis fames interdum hendrerit.' }
+      ],
+      skills: ['HTML', 'CSS', 'JavaScript', 'PHP', 'Java', 'Python', 'C#', 'Ruby', 'Swift', 'TypeScript', 'React', 'Angular', 'Vue.js', 'Node.js', 'Express.js', 'Django', 'Flask', 'Spring Boot'],
       languages: [{ language: 'Português - BR', level: 'Nativo'}, { language: 'Inglês', level: 'Básico'}],
     }
   ];
@@ -82,6 +91,7 @@ export class ProfessionalProfileComponent {
   saveProfileChanges(updatedProfile: any) {
     switch (this.modalIndex) {
       case 0:
+        this.professionalInfo[0] = updatedProfile;
         break;
       case 1:
         this.professionalInfo[0].about = updatedProfile;
@@ -93,8 +103,10 @@ export class ProfessionalProfileComponent {
         this.professionalInfo[0].education = updatedProfile;
         break;
       case 4:
+        this.professionalInfo[0].skills = updatedProfile;
         break;
       case 5:
+        this.professionalInfo[0].languages = updatedProfile;
         break;
     }
     this.modalIndex = -1;

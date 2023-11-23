@@ -7,11 +7,12 @@
     max-height: 90vh;
     overflow: scroll;
 
-    input, textarea, select::placeholder{
+    input, select, textarea{
+        border-radius: 0.75rem;
         color: var(--text);
-    }
-    input, textarea, select{
-        color: var(--text);
+        &::placeholder{
+            color: var(--text);
+        }
     }
     .form-check-input:checked {
         border: none;
@@ -19,6 +20,9 @@
     }
     label{
         color: var(--primary);
+    }
+    textarea {
+        height: 200px;
     }
 
     @media (max-width: 991px){
@@ -35,4 +39,7 @@ button{
 .save{
     background-color: var(--primary);
     color: var(--text-white);
+}
+.trash-icon{
+    filter: invert(85%) sepia(27%) saturate(7097%) hue-rotate(347deg) brightness(102%) contrast(96%);
 }

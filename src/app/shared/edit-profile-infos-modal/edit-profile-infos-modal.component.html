@@ -1,0 +1,49 @@
+<div class="modal-container centralizeOnScreen fadeIn">
+    <form (ngSubmit)="onSubmit()">
+        <label class="fw-bold fs-5">Informações:</label>
+        <div class="d-flex flex-column align-items-center justify-content-center">
+            <img class="profile-photo mx-4 mt-3" [src]="editedProfile[0].photo || 'assets/imgs/default-profile.svg'" alt="Foto do perfil">
+            <label for="photo" class="btn cancel mt-3">Selecione um arquivo<img src="../../../assets/icons/edit.svg" alt="Editar" class="ms-2"></label>
+            <input type="file" id="photo" title="photo" name="photo" accept="image/*" (change)="onPhotoChange($event)" class="p-1">
+        </div>
+        <div>
+            <label for="name" class="mt-3">Nome</label>
+            <input type="text" [(ngModel)]="editedProfile[0].name" name="name" class="form-control mt-2" placeholder="Nome" (input)="verifyInfos()">
+            <label for="age" class="mt-3">Idade</label>
+            <input type="text" [(ngModel)]="editedProfile[0].age" name="age" class="form-control mt-2" placeholder="Idade" (input)="numberMask($event); verifyInfos()" maxlength="2">
+            <label for="state" class="mt-3">Estado</label>
+            <select name="state" id="state" title="state" [(ngModel)]="editedProfile[0].state" class="form-select mt-2" (change)="verifyInfos(); updateCitySelect()">
+                <option *ngFor="let state of getStateOptions()" [value]="state" [selected]="state">{{ state }}</option>
+            </select>
+            <label for="city" class="mt-3">Cidade</label>
+            <select name="city" id="city" title="city" [(ngModel)]="editedProfile[0].city" class="form-select mt-2" (change)="verifyInfos()">
+                <option *ngFor="let city of getCityOptions(editedProfile[0].state)" [value]="city" [selected]="city">{{ city }}</option>
+            </select>
+            <div class="info-div d-flex gap-3 mt-3">
+                <div>
+                    <label for="email">E-Mail</label>
+                    <input type="text" [(ngModel)]="editedProfile[0].email" name="email" class="form-control mt-2" placeholder="E-Mail" (input)="verifyInfos(); isEmailValid()">
+                </div>
+                <div>
+                    <label for="cellphone">Telefone</label>
+                    <input type="text" [(ngModel)]="editedProfile[0].cellphone" name="cellphone" class="form-control mt-2" placeholder="Celular" (input)="applyPhoneMask($event); verifyInfos()" maxlength="15">
+                </div>
+                <div>
+                    <label for="seniority">Senioridade</label>
+                    <select name="seniority" id="seniority" title="seniority" [(ngModel)]="editedProfile[0].seniority" class="form-select mt-2" (change)="verifyInfos()">
+                        <option *ngFor="let seniority of getSeniorityOptions()" [value]="seniority" [selected]="seniority">{{ seniority }}</option>
+                    </select>
+                </div>
+            </div>
+            <p class="errMsg my-2">{{errMsg}}</p>
+            <div class="d-flex align-items-center mt-3">
+                <input type="checkbox" title="showCellphone" id="btncheck" [(ngModel)]="showCellphone" name="showCellphone" class="form-check-input">
+                <label class="ms-2 mt-1" for="btncheck">Deseja mostrar o número de telefone no perfil?</label>
+            </div>
+        </div>
+        <div class="d-flex justify-content-end gap-2 mt-3">
+            <button type="button" class="btn cancel" (click)="cancelEdit()">Cancelar</button>
+            <button type="submit" class="btn save" [disabled]="!isValid">Salvar</button>
+        </div>
+    </form>
+</div>
