@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-profile-infos-modal',
@@ -17,8 +18,11 @@ export class EditProfileInfosModalComponent {
   protected isValid: boolean = true;
   protected selectedPhoto: File | null = null;
   protected errMsg: string = '';
+  protected pageType: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private route: ActivatedRoute) {
+    this.pageType = this.route.snapshot.url[0].path;
+  }
 
   onPhotoChange(event: any) {
     this.selectedPhoto = event.target.files[0];
@@ -118,18 +122,31 @@ export class EditProfileInfosModalComponent {
   }
 
   verifyInfos() {
-    if (this.editedProfile[0].name.trim() == '' ||
-        this.editedProfile[0].age.trim() == '' ||
-        parseInt(this.editedProfile[0].age) <= 0 ||
-        this.editedProfile[0].city == '' ||
-        this.editedProfile[0].state == '' ||
-        this.editedProfile[0].email.trim() == '' ||  
-        this.editedProfile[0].cellphone.trim() == '' ||
-        this.editedProfile[0].seniority == '' ||
-        !this.isEmailValid()) {
-      return this.isValid = false;
+    if (this.pageType == 'profissional-profile') {
+      if (this.editedProfile[0].name.trim() == '' ||
+          this.editedProfile[0].age.trim() == '' ||
+          parseInt(this.editedProfile[0].age) <= 0 ||
+          this.editedProfile[0].city == '' ||
+          this.editedProfile[0].state == '' ||
+          this.editedProfile[0].email.trim() == '' ||  
+          this.editedProfile[0].cellphone.trim() == '' ||
+          this.editedProfile[0].seniority == '' ||
+          !this.isEmailValid()) {
+        return this.isValid = false;
+      } else {
+        return this.isValid = true;
+      }
     } else {
-      return this.isValid = true;
+      if (this.editedProfile[0].name.trim() == '' ||
+          this.editedProfile[0].city == '' ||
+          this.editedProfile[0].state == '' ||
+          this.editedProfile[0].email.trim() == '' ||  
+          this.editedProfile[0].cellphone.trim() == '' ||
+          !this.isEmailValid()) {
+        return this.isValid = false;
+      } else {
+        return this.isValid = true;
+      }
     }
   }
 

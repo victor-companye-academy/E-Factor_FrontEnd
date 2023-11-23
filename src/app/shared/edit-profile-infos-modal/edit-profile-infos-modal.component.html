@@ -9,8 +9,10 @@
         <div>
             <label for="name" class="mt-3">Nome</label>
             <input type="text" [(ngModel)]="editedProfile[0].name" name="name" class="form-control mt-2" placeholder="Nome" (input)="verifyInfos()">
-            <label for="age" class="mt-3">Idade</label>
-            <input type="text" [(ngModel)]="editedProfile[0].age" name="age" class="form-control mt-2" placeholder="Idade" (input)="numberMask($event); verifyInfos()" maxlength="2">
+            <div *ngIf="pageType == 'profissional-profile'">
+                <label for="age" class="mt-3">Idade</label>
+                <input type="text" [(ngModel)]="editedProfile[0].age" name="age" class="form-control mt-2" placeholder="Idade" (input)="numberMask($event); verifyInfos()" maxlength="2">
+            </div>
             <label for="state" class="mt-3">Estado</label>
             <select name="state" id="state" title="state" [(ngModel)]="editedProfile[0].state" class="form-select mt-2" (change)="verifyInfos(); updateCitySelect()">
                 <option *ngFor="let state of getStateOptions()" [value]="state" [selected]="state">{{ state }}</option>
@@ -28,7 +30,7 @@
                     <label for="cellphone">Telefone</label>
                     <input type="text" [(ngModel)]="editedProfile[0].cellphone" name="cellphone" class="form-control mt-2" placeholder="Celular" (input)="applyPhoneMask($event); verifyInfos()" maxlength="15">
                 </div>
-                <div>
+                <div *ngIf="pageType == 'profissional-profile'">
                     <label for="seniority">Senioridade</label>
                     <select name="seniority" id="seniority" title="seniority" [(ngModel)]="editedProfile[0].seniority" class="form-select mt-2" (change)="verifyInfos()">
                         <option *ngFor="let seniority of getSeniorityOptions()" [value]="seniority" [selected]="seniority">{{ seniority }}</option>
