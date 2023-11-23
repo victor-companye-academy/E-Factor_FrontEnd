@@ -14,6 +14,12 @@
                 background: var(--secondary);
                 color: var(--text-white);
             }
+            section {
+                .card {
+                    background: var(--white);
+                    color: var(--text);
+                }
+            }
         }
 
         .profile {
@@ -25,7 +31,6 @@
             }
 
             button {
-                height: 3rem;
                 background: var(--secondary);
                 color: var(--text-white);
 
