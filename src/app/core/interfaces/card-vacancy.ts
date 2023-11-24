@@ -15,4 +15,8 @@ export interface CardVacancy {
     skills: Array<string>;
     mode: string;
     contract: string;
+
+    phone?: string;
+    email:string;
+    address: string;
 }

@@ -171,8 +171,14 @@ export class ProfessionalsComponent {
     return newList;
   }
 
-  showDialog() {
+  protected showDialog() {
     this.visible = true;
+  }
+
+  protected modal(id: number):void{
+    const element = document.querySelector('[about-vacancy]');
+
+    
   }
 
   protected onPageChange(event: PaginatorState) {

@@ -10,6 +10,7 @@
         .text-color-primary {
             color: var(--primary);
         }
+
         .div-main {
             min-height: 100vh;
             h2 {
@@ -34,6 +35,10 @@
             img.notFound {
                 width: 8rem;
             }
+
+            .cursor-pointer{
+                cursor: pointer;
+            }
         }
     }
 
@@ -46,3 +51,24 @@
         }
     }
 }
+:host ::ng-deep {
+    .modal {
+        .p-dialog-content,
+        .p-dialog-title,
+        .p-dialog-header {
+            background: var(--background);
+        }
+        .p-dialog-header {
+            padding: 0.8rem 2rem 0.2rem 0;
+            .p-ripple {
+                &:hover {
+                    background: var(--primary);
+                    svg {
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+}
+

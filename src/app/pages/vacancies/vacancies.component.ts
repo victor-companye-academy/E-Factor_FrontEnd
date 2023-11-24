@@ -11,8 +11,13 @@ import { formatText } from 'src/app/core/utils/formatText';
   styleUrls: ['./vacancies.component.scss']
 })
 export class VacanciesComponent {
+
+  constructor(private cardVacancyService: CardVacancyService) { }
+
   protected readonly rows: number = 10;
   protected toShow: boolean = true;
+  protected visible: boolean = false;
+  protected card?: CardVacancy;
 
   protected cardVacancy: Array<CardVacancy> = this.cardVacancyService.listVacancies()
   protected cardVacancySearch: Array<CardVacancy> = this.cardVacancy;
@@ -20,8 +25,6 @@ export class VacanciesComponent {
   protected first: number = 0;
   protected totalRecords: number = this.cardVacancySearch.length || 0
   private searchObj: Search | undefined;
-
-  constructor(private cardVacancyService: CardVacancyService) { }
 
   protected setSearch(event: Search) {
     this.first = 0
@@ -173,5 +176,10 @@ export class VacanciesComponent {
       this.first = event.first;
     }
     this.setList()
+  }
+
+  protected showDialog(card: CardVacancy) {
+    this.card = card
+    this.visible = true;
   }
 }
