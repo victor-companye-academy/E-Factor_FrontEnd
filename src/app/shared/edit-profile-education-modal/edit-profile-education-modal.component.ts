@@ -49,22 +49,6 @@ export class EditProfileEducationModalComponent {
     }
   }
 
-  getMonthOptions(): string[] {
-    return ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
-  }
-
-  getAnoOptions(): number[] {
-    const startYear = 2000;
-    const currentYear = new Date().getFullYear();
-    const years = [];
-  
-    for (let year = startYear; year <= currentYear; year++) {
-      years.push(year);
-    }
-  
-    return years;
-  }
-
   addEducation() {
      this.editedProfile[0].education.unshift({ institution: '', start: '', end: '', current: false, role: '', description: '' });
      this.editedProfile = JSON.parse(JSON.stringify(this.editedProfile));
@@ -75,40 +59,37 @@ export class EditProfileEducationModalComponent {
     this.editedProfile[0].education.splice(i, 1);
   }
 
-  selectInputStartMonth(event: any, i: number) {
-    this.editedProfile[0].education[i].start = event.target.value + ' ' + this.editedProfile[0].education[i].start.split(' ')[1];
-  }
-
-  selectInputStartYear(event: any, i: number) {
-    this.editedProfile[0].education[i].start = this.editedProfile[0].education[i].start.split(' ')[0] + ' ' + event.target.value;
-  }
-
-  selectInputEndMonth(event: any, i: number) {
-    this.editedProfile[0].education[i].end = event.target.value + ' ' + this.editedProfile[0].education[i].end.split(' ')[1];
-  }
-
-  selectInputEndYear(event: any, i: number) {
-    this.editedProfile[0].education[i].end = this.editedProfile[0].education[i].end.split(' ')[0] + ' ' + event.target.value;
-  }
-
   selectCurrent(i: number){
     if (this.editedProfile[0].education[i].current) {
       this.editedProfile[0].education[i].current = false;
     } else {
       this.editedProfile[0].education[i].current = true;
+      this.editedProfile[0].education[i].end = '';
     }
   }
 
   verifyEducation() {
     for (let i = 0; i < this.editedProfile[0].education.length; i++) {
-      if (this.editedProfile[0].education[i].institution == '' ||
-          this.editedProfile[0].education[i].start.length < 8 ||
-          this.editedProfile[0].education[i].start.split(' ')[1] == 'undefined' ||
-          this.editedProfile[0].education[i].title == '' ||
-          this.editedProfile[0].education[i].description == '') {
+      const education = this.editedProfile[0].education[i];
+      const { institution, start, title, description, end, current } = education;
+
+      if (!institution || !start || !title || !description) {
+        return this.isValid = false;
+      }
+
+      if (!current && (!end)) {
+        return this.isValid = false;
+      }
+      
+      if (new Date(start) > new Date(end)) {
+        return this.isValid = false;
+      }
+
+      if (new Date(start) > new Date() || new Date(end) > new Date()) {
         return this.isValid = false;
       }
     }
+
     return this.isValid = true;
   }
 
@@ -118,50 +99,15 @@ export class EditProfileEducationModalComponent {
         return -1;
       } else if (!a.current && b.current) {
         return 1;
-      } else if (parseInt(a.end.split(' ')[1]) > parseInt(b.end.split(' ')[1])) {
-        return -1;
-      } else if (parseInt(a.end.split(' ')[1]) < parseInt(b.end.split(' ')[1])) {
-        return 1;
       } else {
-        let monthAStart = 0;
-        let monthAEnd = 0;
-        this.getMonthOptions().forEach((month: string, index: number) => {
-          if (a.start.split(' ')[0] == month) {
-            monthAStart = index;
-          }
-          if (a.end.split(' ')[0] == month) {
-            monthAEnd = index;
-          }
-        })
-        let monthBStart = 0; 
-        let monthBEnd = 0; 
-        this.getMonthOptions().forEach((month: string, index: number) => {
-          if (b.start.split(' ')[0] == month) {
-            monthBStart = index;
-          }
-          if (b.end.split(' ')[0] == month) {
-            monthBEnd = index;
-          }
-        })
-
-        if (a.current && b.current){
-          if (monthAStart > monthBStart) {
-            return -1;
-          } else if (monthAStart < monthBStart) {
-            return 1;
-          } else {
-            if (parseInt(a.start.split(' ')[1]) > parseInt(b.start.split(' ')[1])) {
-              return -1;
-            } else if (parseInt(a.start.split(' ')[1]) < parseInt(b.start.split(' ')[1])) {
-              return 1;
-            } else {
-              return 0;
-            }
-          }
+        if (new Date(a.end) > new Date(b.end)) {
+          return -1;
+        } else if (new Date(a.end) < new Date(b.end)) {
+          return 1;
         } else {
-          if (monthAEnd > monthBEnd) {
+          if (new Date(a.start) > new Date(b.start)) {
             return -1;
-          } else if (monthAEnd < monthBEnd) {
+          } else if (new Date(a.start) < new Date(b.start)) {
             return 1;
           } else {
             return 0;

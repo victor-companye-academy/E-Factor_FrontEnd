@@ -108,7 +108,7 @@
                         </div>
                         <div>
                             <p class="fw-bold mb-1">{{experience.institution}}</p>
-                            <p class="fw-light">{{experience.start}} - {{experience.end == '' ? 'até o momento' : experience.end}}</p>
+                            <p class="fw-light">{{getDate(experience.start)}} - {{experience.end == '' ? 'até o momento' : getDate(experience.end)}}</p>
                             <p class="fw-bold">{{experience.role}}</p>
                             <p>{{experience.description}}</p>
                         </div>
@@ -131,7 +131,7 @@
                         </div>
                         <div>
                             <p class="fw-bold mb-1">{{education.institution}}</p>
-                            <p class="fw-light">{{education.start}} - {{education.end == '' ? 'até o momento' : education.end}}</p>
+                            <p class="fw-light">{{getDate(education.start)}} - {{education.end == '' ? 'até o momento' : getDate(education.end)}}</p>
                             <p class="fw-bold">{{education.title}}</p>
                             <p>{{education.description}}</p>
                         </div>

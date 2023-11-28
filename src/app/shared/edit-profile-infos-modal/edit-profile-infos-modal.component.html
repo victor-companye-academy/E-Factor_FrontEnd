@@ -30,7 +30,7 @@
                     <label for="cellphone">Telefone</label>
                     <input type="text" [(ngModel)]="editedProfile[0].cellphone" name="cellphone" class="form-control mt-2" placeholder="Celular" (input)="applyPhoneMask($event); verifyInfos()" maxlength="15">
                 </div>
-                <div *ngIf="pageType == 'profissional-profile'">
+                <div *ngIf="pageType == 'professional-profile'">
                     <label for="seniority">Senioridade</label>
                     <select name="seniority" id="seniority" title="seniority" [(ngModel)]="editedProfile[0].seniority" class="form-select mt-2" (change)="verifyInfos()">
                         <option *ngFor="let seniority of getSeniorityOptions()" [value]="seniority" [selected]="seniority">{{ seniority }}</option>
