@@ -1,4 +1,4 @@
-export interface CardProfessional {
+export interface Professional {
     id:number;
     userName: string;
     title: string;

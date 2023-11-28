@@ -1,7 +1,7 @@
 import { _isNumberValue } from '@angular/cdk/coercion';
 import { Component, Input } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { CardVacancy } from 'src/app/core/interfaces/card-vacancy';
+import { Vacancy } from 'src/app/core/interfaces/vacancy';
 
 @Component({
   selector: 'about-vacancy',
@@ -10,7 +10,7 @@ import { CardVacancy } from 'src/app/core/interfaces/card-vacancy';
 })
 export class AboutVacancyComponent {
 
-  @Input({ alias: 'card' }) public card?: CardVacancy;
+  @Input({ alias: 'card' }) public card?: Vacancy;
 
   constructor(private messageService: MessageService) { }
 

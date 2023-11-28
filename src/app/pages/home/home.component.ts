@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CardDetails } from 'src/app/core/interfaces/card-details';
-import { CardProfessional } from 'src/app/core/interfaces/card-professional';
-import { CardVacancy } from 'src/app/core/interfaces/card-vacancy';
+import { Professional } from 'src/app/core/interfaces/professional';
+import { Vacancy } from 'src/app/core/interfaces/vacancy';
 import { CardDetailsService } from 'src/app/core/service/cardDetails/card-details.service';
-import { CardProfessionalService } from 'src/app/core/service/professional/professional.service';
-import { CardVacancyService } from 'src/app/core/service/vacancy/vacancy.service';
+import { ProfessionalService } from 'src/app/core/service/professional/professional.service';
+import { VacancyService } from 'src/app/core/service/vacancy/vacancy.service';
 
 @Component({
   selector: 'app-home',
@@ -13,15 +13,15 @@ import { CardVacancyService } from 'src/app/core/service/vacancy/vacancy.service
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private cardDetailsService: CardDetailsService, private cardProfessionalService: CardProfessionalService, private cardVacancyService: CardVacancyService) { }
+  constructor(private cardDetailsService: CardDetailsService, private professionalService: ProfessionalService, private vacancyService: VacancyService) { }
 
   protected about: Array<CardDetails> = this.cardDetailsService.listAbout();
 
   protected testimonials: Array<CardDetails> = this.cardDetailsService.listTestimonials();
 
-  protected cardVacancy: Array<CardVacancy> = this.cardVacancyService.listVacancies();
+  protected cardVacancy: Array<Vacancy> = this.vacancyService.listVacancies();
 
-  protected cardProfessional: Array<CardProfessional> = this.cardProfessionalService.listProfessionals();
+  protected cardProfessional: Array<Professional> = this.professionalService.listProfessionals();
 
   public responsiveOptions: any[] | undefined;
 

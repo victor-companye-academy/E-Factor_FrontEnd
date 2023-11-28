@@ -1,4 +1,4 @@
-export interface CardVacancy {
+export interface Vacancy {
     id:number,
     position: string,
     

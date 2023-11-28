@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { CardVacancy } from '../../interfaces/card-vacancy';
+import { Vacancy } from '../../interfaces/vacancy';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CardVacancyService {
+export class VacancyService {
 
   constructor() { }
 
-  public listVacancies(): Array<CardVacancy> {
+  public listVacancies(): Array<Vacancy> {
     return [
       {
         id: 1,
@@ -44,7 +44,7 @@ export class CardVacancyService {
       }]
   }
 
-  public getById(id: number | undefined): CardVacancy {
+  public getById(id: number | undefined): Vacancy {
     try {
       const listVacancies = this.listVacancies()
       const card = listVacancies.filter(e => e.id === id)

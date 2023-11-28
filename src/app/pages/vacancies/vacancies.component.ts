@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { PaginatorState } from 'primeng/paginator';
-import { CardVacancy } from 'src/app/core/interfaces/card-vacancy';
+import { Vacancy } from 'src/app/core/interfaces/vacancy';
 import { Search } from 'src/app/core/interfaces/search';
-import { CardVacancyService } from 'src/app/core/service/vacancy/vacancy.service';
+import { VacancyService } from 'src/app/core/service/vacancy/vacancy.service';
 import { formatText } from 'src/app/core/utils/formatText';
 
 @Component({
@@ -12,18 +12,18 @@ import { formatText } from 'src/app/core/utils/formatText';
 })
 export class VacanciesComponent {
 
-  constructor(private cardVacancyService: CardVacancyService) { }
+  constructor(private vacancyService: VacancyService) { }
 
   protected readonly rows: number = 10;
   protected toShow: boolean = true;
   protected visible: boolean = false;
-  protected card?: CardVacancy;
+  protected card?: Vacancy;
 
-  protected cardVacancy: Array<CardVacancy> = this.cardVacancyService.listVacancies()
-  protected cardVacancySearch: Array<CardVacancy> = this.cardVacancy;
+  protected vacancy: Array<Vacancy> = this.vacancyService.listVacancies()
+  protected vacancySearch: Array<Vacancy> = this.vacancy;
 
   protected first: number = 0;
-  protected totalRecords: number = this.cardVacancySearch.length || 0
+  protected totalRecords: number = this.vacancySearch.length || 0
   private searchObj: Search | undefined;
 
   protected setSearch(event: Search) {
@@ -31,47 +31,47 @@ export class VacanciesComponent {
 
     if (this.validSearch(event)) {
       this.searchObj = event;
-      this.cardVacancySearch = this.applySearch(this.cardVacancy, event);
-      this.totalRecords = this.cardVacancySearch.length;
+      this.vacancySearch = this.applySearch(this.vacancy, event);
+      this.totalRecords = this.vacancySearch.length;
 
-      this.cardVacancySearch = this.pagination(this.cardVacancySearch)
+      this.vacancySearch = this.pagination(this.vacancySearch)
 
     } else {
       this.searchObj = undefined
-      this.cardVacancySearch = this.setList()
+      this.vacancySearch = this.setList()
     }
-    this.toShow = this.isEmptylist(this.cardVacancySearch)
+    this.toShow = this.isEmptylist(this.vacancySearch)
   }
 
-  private setList(event?: Search): Array<CardVacancy> {
+  private setList(event?: Search): Array<Vacancy> {
 
     if (!event) {
       if (this.validSearch(this.searchObj)) {
 
-        this.cardVacancySearch = this.applySearch(this.cardVacancy, this.searchObj!);
-        this.cardVacancySearch = this.pagination(this.cardVacancySearch)
+        this.vacancySearch = this.applySearch(this.vacancy, this.searchObj!);
+        this.vacancySearch = this.pagination(this.vacancySearch)
 
-        return this.cardVacancySearch
+        return this.vacancySearch
       }
       else {
-        this.cardVacancySearch = this.pagination(this.cardVacancy);
+        this.vacancySearch = this.pagination(this.vacancy);
 
-        this.totalRecords = this.cardVacancy.length;
+        this.totalRecords = this.vacancy.length;
 
-        return this.cardVacancySearch;
+        return this.vacancySearch;
       }
     }
-    this.cardVacancySearch = this.pagination(this.applySearch(this.cardVacancy, event));
+    this.vacancySearch = this.pagination(this.applySearch(this.vacancy, event));
 
-    return this.cardVacancySearch;
+    return this.vacancySearch;
   }
 
-  private isEmptylist(list: Array<CardVacancy>): boolean {
+  private isEmptylist(list: Array<Vacancy>): boolean {
     return list.length ? true : false
   }
 
-  private applySearch(list: Array<CardVacancy>, search: Search): Array<CardVacancy> {
-    let newArray: Array<CardVacancy> = this.cardVacancy;
+  private applySearch(list: Array<Vacancy>, search: Search): Array<Vacancy> {
+    let newArray: Array<Vacancy> = this.vacancy;
     if (search) {
       for (const key in search) {
         if (search.hasOwnProperty(key)) {
@@ -152,7 +152,7 @@ export class VacanciesComponent {
     return isTrue;
   }
 
-  private searchBySkill(list: Array<CardVacancy>, search: string): Array<CardVacancy> {
+  private searchBySkill(list: Array<Vacancy>, search: string): Array<Vacancy> {
     const newList = list
       .filter(card => card.skills
         .map(skill => skill.toLowerCase())
@@ -160,12 +160,12 @@ export class VacanciesComponent {
     return newList;
   }
 
-  private searchByPosition(list: Array<CardVacancy>, search: string): Array<CardVacancy> {
-    const newList: Array<CardVacancy> = list.filter(card => formatText(card.position.toLowerCase()) === formatText(search.toLowerCase()))
+  private searchByPosition(list: Array<Vacancy>, search: string): Array<Vacancy> {
+    const newList: Array<Vacancy> = list.filter(card => formatText(card.position.toLowerCase()) === formatText(search.toLowerCase()))
     return newList
   }
 
-  private pagination(list: Array<CardVacancy>): Array<CardVacancy> {
+  private pagination(list: Array<Vacancy>): Array<Vacancy> {
     const newList = list.slice(this.first, (this.rows + this.first))
     return newList;
   }
@@ -178,7 +178,7 @@ export class VacanciesComponent {
     this.setList()
   }
 
-  protected showDialog(card: CardVacancy) {
+  protected showDialog(card: Vacancy) {
     this.card = card
     this.visible = true;
   }

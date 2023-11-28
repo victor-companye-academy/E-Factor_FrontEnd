@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CardVacancy } from 'src/app/core/interfaces/card-vacancy';
+import { Vacancy } from 'src/app/core/interfaces/vacancy';
 
 @Component({
   selector: 'card-vacancy',
@@ -9,5 +9,5 @@ import { CardVacancy } from 'src/app/core/interfaces/card-vacancy';
 export class CardVacancyComponent {
 
   @Input({ alias: 'short' }) public isShort?: boolean;
-  @Input({ alias: 'card' }) public card?:CardVacancy;
+  @Input({ alias: 'card' }) public card?:Vacancy;
 }

@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { CardProfessional } from '../../interfaces/card-professional';
+import { Professional } from '../../interfaces/professional';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CardProfessionalService {
+export class ProfessionalService {
 
   constructor() { }
 
-  public listProfessionals():Array<CardProfessional>{
+  public listProfessionals():Array<Professional>{
     return [
       {
         id: 1,
