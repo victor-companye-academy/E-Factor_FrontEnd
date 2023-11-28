@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { PaginatorState } from 'primeng/paginator';
 import { CardProfessional } from 'src/app/core/interfaces/card-professional';
 import { Search } from 'src/app/core/interfaces/search';
-import { CardProfessionalService } from 'src/app/core/service/cardProfessional/card-professional.service';
+import { CardProfessionalService } from 'src/app/core/service/professional/professional.service';
 import { formatText } from 'src/app/core/utils/formatText';
 
 @Component({

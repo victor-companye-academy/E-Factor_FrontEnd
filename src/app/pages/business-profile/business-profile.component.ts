@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BusinessInfo } from 'src/app/core/interfaces/business-info';
 import { CardVacancy } from 'src/app/core/interfaces/card-vacancy';
-import { CardVacancyService } from 'src/app/core/service/cardVacancy/card-vacancy.service';
+import { CardVacancyService } from 'src/app/core/service/vacancy/vacancy.service';
 
 @Component({
   selector: 'app-business-profile',

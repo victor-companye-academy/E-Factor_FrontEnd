@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { PaginatorState } from 'primeng/paginator';
 import { CardVacancy } from 'src/app/core/interfaces/card-vacancy';
 import { Search } from 'src/app/core/interfaces/search';
-import { CardVacancyService } from 'src/app/core/service/cardVacancy/card-vacancy.service';
+import { CardVacancyService } from 'src/app/core/service/vacancy/vacancy.service';
 import { formatText } from 'src/app/core/utils/formatText';
 
 @Component({
