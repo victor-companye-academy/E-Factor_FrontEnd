@@ -1,0 +1,26 @@
+<div class="modal-container centralizeOnScreen fadeIn">
+    <form (ngSubmit)="onSubmit()">
+        <label for="skills" class="fw-bold fs-5">Habilidades:</label>
+        <div class="mb-3">
+            <input type="text" id="skills" [(ngModel)]="searchText" (input)="filterSkills()" name="skills" class="form-control my-2" placeholder="Digite sua habilidade aqui...">
+            <div *ngFor="let skill of filteredSkills; let i = index" class="mx-3 fadeIn">
+                <div *ngIf="i < 5">
+                    <p (click)="addSkill(skill)" class="skillsList my-1" [innerHTML]="getHighlightedText(skill)"></p>
+                    <hr class="my-1">
+                </div>
+            </div>
+        </div>
+        <p class="errMsg">{{errMsg}}</p>
+        <div class="d-flex flex-wrap">
+            <div *ngFor="let skill of editedProfile.skills; let i = index" class="mx-1">
+                <div class="d-flex justify-content-between align-items-center">
+                    <p class="skills my-1 py-1 px-3 fadeIn">{{editedProfile.skills[i]}}<img (click)="deleteSkill(i)" src="assets/icons/x2.svg" alt="Excluir" class="x-icon ms-2"></p>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-end gap-2 mt-3">
+            <button type="button" class="btn cancel" (click)="cancelEdit()">Cancelar</button>
+            <button type="submit" class="btn save">Salvar</button>
+        </div>
+    </form>
+</div>

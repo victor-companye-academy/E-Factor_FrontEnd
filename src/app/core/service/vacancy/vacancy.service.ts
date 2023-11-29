@@ -28,8 +28,39 @@ export class VacancyService {
         address: 'Av. Paulista, 901 - Cerqueira César, São Paulo - SP, 01411-100',
         email: 'efactor@gmail.com',
         phone: '(11) 97854-4359'
+      }, {
+        id: 1,
+        position: 'senior',
+        companyName: 'E-Factor',
+        title: 'Desenvolvedor Senior',
+        days: 'Há 6 dias',
+        contract: 'CLT',
+        locality: 'São Paulo - SP',
+        description: 'Lorem ipsum dolor sit amet consectetur. Suspendisse maecenas condimentum blandit vitae tortor dis nec mattis. Ipsum eu praesent orci lacus. Sed lorem id duis tempor felis tempor molestie. Commodo nisl sed massa varius magna interdum. Pulvinar nibh dignissim egestas ut. Nibh amet vitae sed duis sit diam. Feugiat sit viverra habitant platea adipiscing amet in nisi cursus. Feugiat mi rutrum velit vitae.',
+        mode: 'Home Office',
+        skills: ['Angular', 'Javascript', 'Typescript', 'Spring'],
+        status: 'Ultimas Vagas',
+        address: 'Av. Paulista, 901 - Cerqueira César, São Paulo - SP, 01411-100',
+        email: 'efactor@gmail.com',
+        phone: '(11) 97854-4359'
       },
-     ];
+      {
+        id: 1,
+        position: 'senior',
+        companyName: 'E-Factor',
+        title: 'Desenvolvedor Senior',
+        days: 'Há 6 dias',
+        contract: 'CLT',
+        locality: 'São Paulo - SP',
+        description: 'Lorem ipsum dolor sit amet consectetur. Suspendisse maecenas condimentum blandit vitae tortor dis nec mattis. Ipsum eu praesent orci lacus. Sed lorem id duis tempor felis tempor molestie. Commodo nisl sed massa varius magna interdum. Pulvinar nibh dignissim egestas ut. Nibh amet vitae sed duis sit diam. Feugiat sit viverra habitant platea adipiscing amet in nisi cursus. Feugiat mi rutrum velit vitae.',
+        mode: 'Home Office',
+        skills: ['Angular', 'Javascript', 'Typescript', 'Spring'],
+        status: 'Ultimas Vagas',
+        address: 'Av. Paulista, 901 - Cerqueira César, São Paulo - SP, 01411-100',
+        email: 'efactor@gmail.com',
+        phone: '(11) 97854-4359'
+      }
+    ];
 
     dataStorage = sessionStorage.getItem(key);
 

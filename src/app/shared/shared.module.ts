@@ -11,6 +11,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { CardProfessionalComponent } from './card-professional/card-professional.component';
 import { CardVacancyComponent } from './card-vacancy/card-vacancy.component';
 import { CardNewsletterComponent } from './card-newsletter/card-newsletter.component';
+import { EditProfileAboutModalComponent } from './edit-profile-about-modal/edit-profile-about-modal.component';
+import { EditProfileExperienceModalComponent } from './edit-profile-experience-modal/edit-profile-experience-modal.component';
+import { EditProfileEducationModalComponent } from './edit-profile-education-modal/edit-profile-education-modal.component';
+import { EditProfileSkillsModalComponent } from './edit-profile-skills-modal/edit-profile-skills-modal.component';
+import { EditProfileLanguageModalComponent } from './edit-profile-language-modal/edit-profile-language-modal.component';
+import { EditProfileInfosModalComponent } from './edit-profile-infos-modal/edit-profile-infos-modal.component';
 import { FilterComponent } from './filter/filter.component';
 import { SearchComponent } from './search/search.component';
 import { ToastModule } from 'primeng/toast';
@@ -27,6 +33,12 @@ import { AboutVacancyComponent } from './about-vacancy/about-vacancy.component';
     CardProfessionalComponent,
     CardNewsletterComponent,
     CardNewsletterComponent,
+    EditProfileAboutModalComponent,
+    EditProfileExperienceModalComponent,
+    EditProfileEducationModalComponent,
+    EditProfileSkillsModalComponent,
+    EditProfileLanguageModalComponent,
+    EditProfileInfosModalComponent,
     FilterComponent,
     SearchComponent,
     AboutVacancyComponent,
@@ -49,6 +61,12 @@ import { AboutVacancyComponent } from './about-vacancy/about-vacancy.component';
     CardVacancyComponent,
     CardProfessionalComponent,
     CardNewsletterComponent,
+    EditProfileAboutModalComponent,
+    EditProfileExperienceModalComponent,
+    EditProfileEducationModalComponent,
+    EditProfileSkillsModalComponent,
+    EditProfileLanguageModalComponent,
+    EditProfileInfosModalComponent,
     FilterComponent,
     SearchComponent,
     AboutVacancyComponent

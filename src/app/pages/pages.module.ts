@@ -109,6 +109,7 @@ import { SendEmailComponent } from './send-email/send-email.component';
 import { CodeConfirmationComponent } from './code-confirmation/code-confirmation.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
+import { ProfessionalProfileComponent } from './professional-profile/professional-profile.component';
 import { VacanciesComponent } from './vacancies/vacancies.component';
 
 @NgModule({
@@ -127,6 +128,7 @@ import { VacanciesComponent } from './vacancies/vacancies.component';
     BusinessUserComponent,
     BusinessProfileComponent,
     NewsletterComponent,
+    ProfessionalProfileComponent,
     VacanciesComponent,
   ],
   imports: [

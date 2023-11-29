@@ -11,20 +11,20 @@ export class CardDetailsService {
   public listTestimonials(): Array<CardDetails> {
     return [
       {
-        title: "Feliz",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elementum curabitur vit..."
+        title: "Walace",
+        description: "Foi ao cruzar caminhos com o Projeto Elias através da Educ360 que as portas se abriram de forma notável. Assim, mergulhei profundamente em áreas como jogos, programação, informática e empreendedorismo."
       },
       {
-        title: "Muito bom",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elemeccccccccccccsssssd ssntum curabitur vit..."
+        title: "Carlos",
+        description: "Minha vida passou por transformações significativas. Sem contar que hoje, graças a Deus, não tenho mais que enfrentar a incômoda sensação de dormir de barriga vazia, por não ter o que comer."
       },
       {
-        title: "Test Card3",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elemeccccccccccccsssssd ssntum curabitur vit..."
+        title: "Anny",
+        description: "Passei pela jornada Gamer em 2021 e Hoje atuo como desenvolvedora de softwares em uma empresa parceria do Educ360. Agradeço por esse projeto mudar as vidas de muitos jovens, assim como fez com a minha."
       },
       {
-        title: "Test Card4",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elemeccccccccccccsssssd ssntum curabitur vit..."
+        title: "Cainã",
+        description: "Chamar o Projeto Elias, no Parque Vila Maria, zona norte de São Paulo, de escolinha, é um eufemismo. Adolescente como Cainã Lellis da Silva, 16, descobriu, ao participar da parceria do projeto Educ360°."
       },]
   }
 
