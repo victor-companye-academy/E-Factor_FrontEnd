@@ -9,7 +9,10 @@ export class VacancyService {
   constructor() { }
 
   public listVacancies(): Array<Vacancy> {
-    return [
+    let dataStorage: string | null;
+
+    const key: string = 'vacancies'
+    const vacanciesArray: Array<Vacancy> = [
       {
         id: 1,
         position: 'senior',
@@ -21,27 +24,28 @@ export class VacancyService {
         description: 'Lorem ipsum dolor sit amet consectetur. Suspendisse maecenas condimentum blandit vitae tortor dis nec mattis. Ipsum eu praesent orci lacus. Sed lorem id duis tempor felis tempor molestie. Commodo nisl sed massa varius magna interdum. Pulvinar nibh dignissim egestas ut. Nibh amet vitae sed duis sit diam. Feugiat sit viverra habitant platea adipiscing amet in nisi cursus. Feugiat mi rutrum velit vitae.',
         mode: 'Home Office',
         skills: ['Angular', 'Javascript', 'Typescript', 'Spring'],
-        status: 'Ultimas Vagas', 
+        status: 'Ultimas Vagas',
         address: 'Av. Paulista, 901 - Cerqueira César, São Paulo - SP, 01411-100',
         email: 'efactor@gmail.com',
-        phone:'(11) 97854-4359'
+        phone: '(11) 97854-4359'
       },
-      {
-        id: 2,
-        position: 'junior',
-        companyName: 'Google',
-        title: 'Desenvolvedor Junior',
-        days: 'Há 6 dias',
-        contract: 'CLT',
-        locality: 'São Paulo - SP',
-        description: 'Lorem ipsum dolor sit amet consectetur. Suspendisse maecenas condimentum blandit vitae tortor dis nec mattis. Ipsum eu praesent orci lacus. Sed lorem id duis tempor felis tempor molestie. Commodo nisl sed massa varius magna interdum. Pulvinar nibh dignissim egestas ut. Nibh amet vitae sed duis sit diam. Feugiat sit viverra habitant platea adipiscing amet in nisi cursus. Feugiat mi rutrum velit vitae.',
-        mode: 'Home Office',
-        skills: ['Angular', 'Javascript', 'Typescript', 'Spring', 'html'],
-        status: 'Ultimas Vagas',
-        src: 'https://logosmarcas.net/wp-content/uploads/2020/09/Google-Logo.png',
-        address: 'Av. Paulista, 901 - Cerqueira César, São Paulo - SP, 01411-100',
-        email: 'efactor@gmail.com'
-      }]
+     ];
+
+    dataStorage = sessionStorage.getItem(key);
+
+    if (dataStorage) {
+      try {
+        console.log("Usando sessionStorage");
+        return JSON.parse(dataStorage);
+      } catch (error) {
+        console.error("Erro ao analisar os dados armazenados:", error);
+      }
+    }
+
+    sessionStorage.setItem(key, JSON.stringify(vacanciesArray))
+    console.log("Usando requisição para API");
+
+    return vacanciesArray
   }
 
   public getById(id: number | undefined): Vacancy {
