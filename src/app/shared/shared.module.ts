@@ -13,6 +13,7 @@ import { CardVacancyComponent } from './card-vacancy/card-vacancy.component';
 import { CardNewsletterComponent } from './card-newsletter/card-newsletter.component';
 import { FilterComponent } from './filter/filter.component';
 import { SearchComponent } from './search/search.component';
+import { ToastModule } from 'primeng/toast';
 import { AboutVacancyComponent } from './about-vacancy/about-vacancy.component';
 
 @NgModule({
@@ -36,7 +37,8 @@ import { AboutVacancyComponent } from './about-vacancy/about-vacancy.component';
     FormsModule,
     HttpClientModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastModule
   ],
   exports: [
     AddressComponent,

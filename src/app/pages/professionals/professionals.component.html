@@ -25,9 +25,21 @@
                 </div>
 
                 <Section class="col-9 position-relative pb-5 section-main">
-                    <span *ngFor="let card of cardProfessionalSearch" class="mx-1 fadeIn">
-                        <card-professional [short]="false" [card]="card" class="mt-4"></card-professional>
+                    <span *ngFor="let card of professionalSearch" class="mx-1 fadeIn">
+                        <card-professional (click)="modal(card.id)" [short]="false" [card]="card" class="mt-4"></card-professional>
                     </span>
+
+                    <!--  -->
+                    <div class="card  border-0 flex justify-content-center">
+                        <p-toast></p-toast>
+
+                        <p-dialog [(visible)]="visible" [modal]="true" [style]="{ width: '90vw'}" [draggable]="false"
+                            [resizable]="true" [maximizable]="true" styleClass="modal">
+
+                            <about-vacancy></about-vacancy>
+                        </p-dialog>
+                    </div>
+                    <!--  -->
 
                     <div class="position-absolute bottom-0 d-flex w-100 justify-content-center">
                         <ng-template [ngIf]="toShow">

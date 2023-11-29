@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BusinessInfo } from 'src/app/core/interfaces/business-info';
-import { CardVacancy } from 'src/app/core/interfaces/card-vacancy';
-import { CardVacancyService } from 'src/app/core/service/cardVacancy/card-vacancy.service';
+import { Vacancy } from 'src/app/core/interfaces/vacancy';
+import { VacancyService } from 'src/app/core/service/vacancy/vacancy.service';
 
 @Component({
   selector: 'app-business-profile',
@@ -10,9 +10,9 @@ import { CardVacancyService } from 'src/app/core/service/cardVacancy/card-vacanc
 })
 export class BusinessProfileComponent {
 
-  constructor (private cardVacancyService: CardVacancyService) { }
+  constructor (private vacancyService: VacancyService) { }
   
-  protected cardVacancy: Array<CardVacancy> = this.cardVacancyService.listVacancies();
+  protected cardVacancy: Array<Vacancy> = this.vacancyService.listVacancies();
 
   protected businessInfo: Array<BusinessInfo> = [
     {

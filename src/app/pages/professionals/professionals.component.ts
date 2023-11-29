@@ -1,9 +1,9 @@
 
 import { Component } from '@angular/core';
 import { PaginatorState } from 'primeng/paginator';
-import { CardProfessional } from 'src/app/core/interfaces/card-professional';
+import { Professional } from 'src/app/core/interfaces/professional';
 import { Search } from 'src/app/core/interfaces/search';
-import { CardProfessionalService } from 'src/app/core/service/cardProfessional/card-professional.service';
+import { ProfessionalService } from 'src/app/core/service/professional/professional.service';
 import { formatText } from 'src/app/core/utils/formatText';
 
 @Component({
@@ -13,64 +13,68 @@ import { formatText } from 'src/app/core/utils/formatText';
 })
 export class ProfessionalsComponent {
 
+  constructor(private professionalService: ProfessionalService) { }
+
+
   protected readonly rows: number = 10;
   protected toShow: boolean = true;
+  protected visible: boolean = false;
 
-  protected cardProfessional: Array<CardProfessional> = this.cardProfessionalService.listProfessionals()
-  protected cardProfessionalSearch: Array<CardProfessional> = this.cardProfessional;
+  protected professional: Array<Professional> = this.professionalService.listProfessionals()
+  protected professionalSearch: Array<Professional> = this.professional;
 
   protected first: number = 0;
-  protected totalRecords: number = this.cardProfessionalSearch.length || 0
+  protected totalRecords: number = this.professionalSearch.length || 0
   private searchObj: Search | undefined;
 
-  constructor(private cardProfessionalService: CardProfessionalService) { }
+  //
 
   protected setSearch(event: Search) {
     this.first = 0
 
     if (this.validSearch(event)) {
       this.searchObj = event;
-      this.cardProfessionalSearch = this.applySearch(this.cardProfessional, event);
-      this.totalRecords = this.cardProfessionalSearch.length;
+      this.professionalSearch = this.applySearch(this.professional, event);
+      this.totalRecords = this.professionalSearch.length;
 
-      this.cardProfessionalSearch = this.pagination(this.cardProfessionalSearch)
+      this.professionalSearch = this.pagination(this.professionalSearch)
 
     } else {
       this.searchObj = undefined
-      this.cardProfessionalSearch = this.setList()
+      this.professionalSearch = this.setList()
     }
-    this.toShow = this.isEmptylist(this.cardProfessionalSearch)
+    this.toShow = this.isEmptylist(this.professionalSearch)
   }
 
-  private setList(event?: Search): Array<CardProfessional> {
+  private setList(event?: Search): Array<Professional> {
 
     if (!event) {
       if (this.validSearch(this.searchObj)) {
 
-        this.cardProfessionalSearch = this.applySearch(this.cardProfessional, this.searchObj!);
-        this.cardProfessionalSearch = this.pagination(this.cardProfessionalSearch)
+        this.professionalSearch = this.applySearch(this.professional, this.searchObj!);
+        this.professionalSearch = this.pagination(this.professionalSearch)
 
-        return this.cardProfessionalSearch
+        return this.professionalSearch
       }
       else {
-        this.cardProfessionalSearch = this.pagination(this.cardProfessional);
+        this.professionalSearch = this.pagination(this.professional);
 
-        this.totalRecords = this.cardProfessional.length;
+        this.totalRecords = this.professional.length;
 
-        return this.cardProfessionalSearch;
+        return this.professionalSearch;
       }
     }
-    this.cardProfessionalSearch = this.pagination(this.applySearch(this.cardProfessional, event));
+    this.professionalSearch = this.pagination(this.applySearch(this.professional, event));
 
-    return this.cardProfessionalSearch;
+    return this.professionalSearch;
   }
 
-  private isEmptylist(list: Array<CardProfessional>): boolean {
+  private isEmptylist(list: Array<Professional>): boolean {
     return list.length ? true : false
   }
 
-  private applySearch(list: Array<CardProfessional>, search: Search): Array<CardProfessional> {
-    let newArray: Array<CardProfessional> = this.cardProfessional;
+  private applySearch(list: Array<Professional>, search: Search): Array<Professional> {
+    let newArray: Array<Professional> = this.professional;
     if (search) {
       for (const key in search) {
         if (search.hasOwnProperty(key)) {
@@ -151,7 +155,7 @@ export class ProfessionalsComponent {
     return isTrue;
   }
 
-  private searchBySkill(list: Array<CardProfessional>, search: string): Array<CardProfessional> {
+  private searchBySkill(list: Array<Professional>, search: string): Array<Professional> {
     const newList = list
       .filter(card => card.skills
         .map(skill => skill.toLowerCase())
@@ -159,18 +163,29 @@ export class ProfessionalsComponent {
     return newList;
   }
 
-  private searchByPosition(list: Array<CardProfessional>, search: string): Array<CardProfessional> {
-    const newList: Array<CardProfessional> = list.filter(card => formatText(card.title.toLowerCase()) === formatText(search.toLowerCase()))
+  private searchByPosition(list: Array<Professional>, search: string): Array<Professional> {
+    const newList: Array<Professional> = list.filter(card => formatText(card.title.toLowerCase()) === formatText(search.toLowerCase()))
     return newList
   }
 
-  private pagination(list: Array<CardProfessional>): Array<CardProfessional> {
+  private pagination(list: Array<Professional>): Array<Professional> {
     const newList = list.slice(this.first, (this.rows + this.first))
     return newList;
   }
 
+  protected showDialog() {
+    this.visible = true;
+  }
+
+  protected modal(id: number):void{
+    const element = document.querySelector('[about-vacancy]');
+
+    
+  }
+
   protected onPageChange(event: PaginatorState) {
     window.scrollTo(0, 120);
+
     if (event.first !== undefined) {
       this.first = event.first;
     }

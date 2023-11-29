@@ -1,151 +1,141 @@
-<section class="row">
-    <div class="col">
-        <section>
-            <img src="" alt="">
-            <h2>
-                Banco Bradesco S.A.
+<section *ngIf="card" class="row section-main p-4">
+    <div class="col-5 col-xl-3 profile me-4">
+        <section class="profile mb-5 rounded-4 p-5 d-flex flex-column align-items-center overflow-hidden">
+            <img [src]="card.src" alt=" " title="Logo da empresa" width="150px" height="150px"
+                class="border-0 rounded-circle object-fit-scale" style="background-color: #f2f4f7;">
+
+            <h2 class="fw-light fs-5 mt-4 text-center text-capitalize">
+                {{card.companyName}}
             </h2>
 
-            <h3>
-                Analista de Desenvolvimento
-                Junior
+            <h3 class="fw-bold fs-5 mt-4 primary-color text-center text-capitalize">
+                {{card.title}}
             </h3>
         </section>
 
-        <section>
-            <h2>
+        <section class="details mb-5 rounded-4 p-5">
+            <h2 class="fw-light fs-5">
                 Detalhes adicionais
             </h2>
 
-            <h4>
-                Telefone
-            </h4>
-            <span>
-                (11) 97854-4359
-            </span>
-        </section>
+            <div *ngIf="card.phone">
+                <div >
+                    <h4 class="fw-light fs-6 mt-4 mb-2">
+                        Telefone
+                    </h4>
 
-        <section>
-            <h4>
-                E-mail
-            </h4>
-            <span>
-                efactor@email.com
-            </span>
-        </section>
+                    <span class="fw-semibold fs-6">
+                        {{card.phone}}
+                    </span>
+                </div>
+            </div>
 
-        <section>
-            <h4>
-                Endereço
-            </h4>
-            <span>
-                Av. Paulista, 901 - Cerqueira César, São Paulo - SP, 01411-100
-            </span>
-        </section>
-
-        <button type="button">Demonstrar interesse</button>
-    </div>
-
-    <div class="col">
-        <div>
             <div>
-                <h2>
-                    Sobre a Vaga
-                </h2>
-                <span>
-                    últimas Vagas
+                <h4 class="fw-light fs-6 mt-4 mb-2">
+                    E-mail
+                </h4>
+                <span class="fw-semibold fs-6">
+                    {{card.email}}
                 </span>
             </div>
-            <button type="button">&times</button>
+
+            <div>
+                <h4 class="fw-light fs-6 mt-4 mb-2">
+                    Endereço
+                </h4>
+                <span class="fw-semibold fs-6">
+                    {{card.address}}
+                </span>
+            </div>
+        </section>
+        <button type="button" (click)="show()" class="w-100 border-0 rounded-4 py-2 fs-5 fw-semibold button">
+            Demonstrar interesse
+        </button>
+    </div>
+
+    <div class="col about">
+        <div class="d-flex align-items-center mb-4">
+            <h2 class="fw-semibold fs-4 primary-color text-center">
+                Sobre a Vaga
+            </h2>
+            <span *ngIf="card.status" class="text-center status rounded-4 ms-4 px-3 text-capitalize">
+                {{card.status}}
+            </span>
         </div>
 
         <section>
-            <p>
-                Lorem ipsum dolor sit amet consectetur. Tellus vitae viverra nascetur nulla vel nunc risus aliquam.
-                Sodales sed tellus pretium egestas ac sed purus sed tempor. Mi eleifend metus a amet nunc volutpat
-                egestas vulputate. Cras hac sit purus lacus aenean sed. Sed elit sed amet vel tortor tincidunt tellus
-                sed. Scelerisque etiam risus nulla sed mattis neque. Nunc gravida gravida feugiat ac pellentesque
-                adipiscing velit elementum vestibulum. Quis tristique mi at nulla nec. Vitae auctor feugiat diam varius
-                nunc.
-                Aliquam massa quis gravida mauris praesent in pellentesque tortor placerat. Lacus at dapibus euismod
-                mattis. Posuere dictumst arcu in pellentesque pulvinar. Nisi montes enim nunc feugiat quis arcu nunc
-                posuere faucibus. Egestas dui facilisis pharetra nulla nunc.
-                Tincidunt elementum egestas lacus rhoncus ac. Sed scelerisque elementum fermentum purus massa senectus
-                pellentesque sed. Posuere bibendum faucibus proin turpis tellus eleifend metus semper. Leo sed vulputate
-                dui sed purus. Cursus ultricies morbi vel vel nibh. Bibendum ridiculus volutpat viverra diam ac massa
-                egestas a. In sagittis eget risus dictum nisi senectus nec venenatis. Morbi lorem justo dignissim non
-                sed varius a maecenas euismod. Augue ac quis magna nulla. Tellus ipsum sed lacus praesent id. Dui a
-                ornare integer vivamus turpis. Mus purus venenatis vel quam convallis phasellus sagittis. Suscipit
-                facilisi morbi lacus lacinia tincidunt.
-                Enim cras mattis vitae felis consectetur elit. Consequat a pellentesque fusce tincidunt in molestie
-                tristique vitae. Dis elit cras volutpat amet. Sit nunc eget id fermentum in. Morbi integer neque non in.
-                Ultricies eget ut semper in gravida. Et iaculis augue mi purus massa dis orci est. Enim neque mi cras
-                volutpat imperdiet. Et platea aliquam volutpat orci sed diam turpis. Eu dictum suspendisse a phasellus.
-                Cursus ut sed gravida venenatis fusce nec purus integer. Tristique elit viverra arcu sed adipiscing
-                suscipit arcu elementum nibh. At feugiat arcu quis vulputate eu dapibus tempor nam sollicitudin. Vitae
-                sagittis nibh id eu ultrices arcu nunc lectus.
-                Nibh at diam urna tortor volutpat vivamus lacus a. Quis ultrices risus nulla dictum justo id mauris
-                semper faucibus. Ut et pharetra amet nibh justo. Cras ut risus sollicitudin in venenatis. Faucibus non
-                volutpat nunc massa. Nunc aliquam donec morbi tristique commodo nisi adipiscing at. Faucibus aliquam
-                cras lectus risus. Nunc tortor tempus vestibulum in metus semper. Adipiscing vitae lectus sagittis
-                cursus.
-                Sagittis ut sed cum auctor et egestas mi. Nec pellentesque feugiat nisl odio leo quisque quis urna
-                senectus. Nulla eu faucibus at blandit rhoncus ut in. At sed arcu facilisis viverra maecenas. Fames
-                volutpat nec sed amet netus volutpat eu amet aliquam. Tempus.
+            <p class="fw-light text-capitalize" [ngStyle]="{'height': card.phone?'30.8rem':'26rem'}">
+                {{card.description}}
             </p>
         </section>
-        <div>
-            <section>
-                <h2>
+
+        <div class="row">
+            <section class="container col-6">
+                <h2 class="fw-semibold fs-4 primary-color text-start mt-4">
                     Dados da vaga
                 </h2>
-                <div>
-                    <div>
-                        <h4>
-                            Senioridade
-                        </h4>
-                        <span>
-                            Junior
-                        </span>
+
+                <div class="mt-4  mb-3">
+                    <div class="row">
+                        <div class="col-12 col-xl-6 py-2">
+                            <div class="py-3 px-3 card border-0 rounded-4">
+                                <h4 class="fw-light fs-6">
+                                    Senioridade
+                                </h4>
+                                <span class="fw-bold fs-6 text-capitalize">
+                                    {{card.position}}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-xl-6 py-2">
+                            <div class="py-3 px-3 card border-0 rounded-4">
+                                <h4 class="fw-light fs-6">
+                                    Contrato
+                                </h4>
+                                <span class="fw-bold fs-6 text-capitalize">
+                                    {{card.contract}}
+                                </span>
+                            </div>
+                        </div>
                     </div>
 
-                    <div>
-                        <h4>
-                            Contrato
-                        </h4>
-                        <span>
-                            CLT
-                        </span>
+                    <div class="row">
+                        <div class="col-12 col-xl-6 py-2">
+                            <div class="py-3 px-3 card border-0 rounded-4">
+                                <h4 class="fw-light fs-6">
+                                    Modalidade
+                                </h4>
+                                <span class="fw-bold fs-6 text-capitalize">
+                                    {{card.mode}}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-xl-6 py-2">
+                            <div class="py-3 px-3 card border-0 rounded-4">
+                                <h4 class="fw-light fs-6">
+                                    Data da Criação
+                                </h4>
+                                <span class="fw-bold fs-6 text-capitalize">
+                                    {{card.days}}
+                                </span>
+                            </div>
+                        </div>
                     </div>
 
-                    <div>
-                        <h4>
-                            Modalidade
-                        </h4>
-                        <span>
-                            Remoto
-                        </span>
-                    </div>
-
-                    <div>
-                        <h4>
-                            Data da Criação
-                        </h4>
-                        <span>
-                            há 1 semana
-                        </span>
-                    </div>
                 </div>
-
             </section>
 
-            <section>
-                <h2>
+            <section class="container col">
+                <h2 class="fw-semibold fs-4 primary-color text-start mt-4 container">
                     Habilidades
-                    <ul>
-                        <li></li>
-                    </ul>
                 </h2>
+                <ul class="mt-4 p-0 d-flex flex-wrap">
+                    <li class="card border-0 px-3 m-2 rounded-4 text-capitalize" *ngFor="let item of card.skills">
+                        {{item}}
+                    </li>
+                </ul>
 
             </section>
         </div>
