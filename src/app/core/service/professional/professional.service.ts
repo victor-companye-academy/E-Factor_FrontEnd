@@ -8,15 +8,28 @@ export class ProfessionalService {
 
   constructor() { }
 
-  public listProfessionals():Array<Professional>{
-    return [
+  public listProfessionals(): Array<Professional> {
+
+    console.log("entrei no serviço");
+
+    let dataStorage: string | null;
+
+    dataStorage = sessionStorage.getItem('data');
+
+    if (dataStorage) {
+      console.log("Usando sessionStorage");
+
+      return JSON.parse(dataStorage);
+    }
+
+    const professioanlsArray: Array<Professional> = [
       {
         id: 1,
         userName: 'Marcos Henrique 1',
         title: 'Sênior',
         locality: 'São Paulo, SP',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...',
-        skills: ['Phyton', 'Javascript', 'Spring', 'React', 'PHP','Javascript', 'Spring', 'React']
+        skills: ['Phyton', 'Javascript', 'Spring', 'React', 'PHP', 'Javascript', 'Spring', 'React']
       },
       {
         id: 2,
@@ -40,7 +53,7 @@ export class ProfessionalService {
         title: 'Junior',
         locality: 'São Paulo, SP',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...',
-        skills: ['Phyton', 'Javascript', 'Spring', 'React', 'PHP','test', 'Angular']
+        skills: ['Phyton', 'Javascript', 'Spring', 'React', 'PHP', 'test', 'Angular']
       },
       {
         id: 5,
@@ -80,7 +93,7 @@ export class ProfessionalService {
         title: 'Junior',
         locality: 'São Paulo, SP',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...',
-        skills: ['Phyton', 'Javascript', 'Typescript', 'Spring', 'React', 'PHP','test']
+        skills: ['Phyton', 'Javascript', 'Typescript', 'Spring', 'React', 'PHP', 'test']
       },
       {
         id: 10,
@@ -120,7 +133,7 @@ export class ProfessionalService {
         title: 'Junior',
         locality: 'São Paulo, SP',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...',
-        skills: ['Phyton', 'Javascript', 'Typescript', 'Spring', 'React', 'PHP','test']
+        skills: ['Phyton', 'Javascript', 'Typescript', 'Spring', 'React', 'PHP', 'test']
       },
       {
         id: 15,
@@ -160,7 +173,7 @@ export class ProfessionalService {
         title: 'Junior',
         locality: 'São Paulo, SP',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...',
-        skills: ['Phyton', 'Javascript', 'Typescript', 'Spring', 'React', 'PHP','test']
+        skills: ['Phyton', 'Javascript', 'Typescript', 'Spring', 'React', 'PHP', 'test']
       },
       {
         id: 20,
@@ -200,7 +213,7 @@ export class ProfessionalService {
         title: 'Junior',
         locality: 'São Paulo, SP',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...',
-        skills: ['Phyton', 'Javascript', 'Spring', 'React', 'PHP', 'HTML','test2']
+        skills: ['Phyton', 'Javascript', 'Spring', 'React', 'PHP', 'HTML', 'test2']
       },
       {
         id: 25,
@@ -210,6 +223,11 @@ export class ProfessionalService {
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...',
         skills: ['Phyton', 'Javascript', 'Spring', 'React', 'PHP', 'HTML', 'test2']
       }
-    ]
+    ];
+
+    sessionStorage.setItem('data', JSON.stringify(professioanlsArray))
+    console.log("Usando requisição para API");
+
+    return professioanlsArray
   }
 }

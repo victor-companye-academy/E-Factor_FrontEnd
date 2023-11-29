@@ -27,6 +27,8 @@ export class ProfessionalsComponent {
   protected totalRecords: number = this.professionalSearch.length || 0
   private searchObj: Search | undefined;
 
+  //
+
   protected setSearch(event: Search) {
     this.first = 0
 
