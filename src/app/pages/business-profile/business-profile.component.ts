@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BusinessInfo } from 'src/app/core/interfaces/business-info';
-import { CardVacancy } from 'src/app/core/interfaces/card-vacancy';
 import { BusinessService } from 'src/app/core/service/business/business.service';
-import { CardVacancyService } from 'src/app/core/service/cardVacancy/card-vacancy.service';
+import { Vacancy } from 'src/app/core/interfaces/vacancy';
+import { VacancyService } from 'src/app/core/service/vacancy/vacancy.service';
 
 @Component({
   selector: 'app-business-profile',
@@ -18,11 +17,11 @@ export class BusinessProfileComponent {
   protected isEditAboutModalOpen = false;
   protected modalIndex: number = -1;
 
-  constructor (private route: ActivatedRoute, private cardVacancyService: CardVacancyService, private businessService: BusinessService) { }
+  constructor (private vacancyService: VacancyService, private route: ActivatedRoute, private businessService: BusinessService) { }
   
   protected id = this.route.snapshot.paramMap.get('id');
   protected businessInfo = this.businessService.listBusiness().find(professional => professional.id === this.id);
-  protected cardVacancy: Array<CardVacancy> = this.cardVacancyService.listVacancies();
+  protected cardVacancy: Array<Vacancy> = this.vacancyService.listVacancies();
 
   openEditModal(index: number) {
     switch (index) {

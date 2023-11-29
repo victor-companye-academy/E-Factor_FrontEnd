@@ -9,7 +9,8 @@
     --primary: #faa61a;
     --secondary: rgba(250, 166, 26, 0.5);
     --tertiary: #f2f4f7;
-    --text-white : #fff;
+    --text-white : white;
+    --white : #fff;
     
     --body: var(--quartetinnal);
 
@@ -17,6 +18,8 @@
     --border: var(--primary);
 
     --text: #5b5e77b2;
+    --text-gray: #949494b2;
+    --input: #5b5e771f;
 }
 
 * {

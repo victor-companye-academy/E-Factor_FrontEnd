@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CardProfessional } from '../../interfaces/card-professional';
+import { CardProfessional } from '../../interfaces/professional';
 import { ProfessionalService } from '../professional/professional.service';
 
 @Injectable({

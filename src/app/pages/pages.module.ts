@@ -110,6 +110,7 @@ import { CodeConfirmationComponent } from './code-confirmation/code-confirmation
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import { ProfessionalProfileComponent } from './professional-profile/professional-profile.component';
+import { VacanciesComponent } from './vacancies/vacancies.component';
 
 @NgModule({
   declarations: [
@@ -128,6 +129,7 @@ import { ProfessionalProfileComponent } from './professional-profile/professiona
     BusinessProfileComponent,
     NewsletterComponent,
     ProfessionalProfileComponent,
+    VacanciesComponent,
   ],
   imports: [
     CommonModule,

@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CardVacancy } from 'src/app/core/interfaces/card-vacancy';
-import { ProfessionalInfo } from 'src/app/core/interfaces/professional-info';
-import { CardVacancyService } from 'src/app/core/service/cardVacancy/card-vacancy.service';
+import { Vacancy } from 'src/app/core/interfaces/vacancy';
+import { VacancyService } from 'src/app/core/service/vacancy/vacancy.service';
 import { ProfessionalService } from 'src/app/core/service/professional/professional.service';
 
 @Component({
@@ -15,12 +14,12 @@ export class ProfessionalProfileComponent {
   protected isLogged: boolean = true;
   protected showCellphone = true;
 
-  constructor (private route: ActivatedRoute, private cardVacancyService: CardVacancyService, private professionalService: ProfessionalService) {}
+  constructor (private route: ActivatedRoute, private vacancyService: VacancyService, private professionalService: ProfessionalService) {}
   
   
   protected id = this.route.snapshot.paramMap.get('id');
   protected professionalInfo = this.professionalService.listProfessionals().find(professional => professional.id === this.id);
-  protected cardVacancy: Array<CardVacancy> = this.cardVacancyService.listVacancies();
+  protected cardVacancy: Array<Vacancy> = this.vacancyService.listVacancies();
   protected isEditInfoModalOpen = false;
   protected isEditAboutModalOpen = false;
   protected isEditExperienceModalOpen = false;
@@ -92,6 +91,7 @@ export class ProfessionalProfileComponent {
     }
     this.modalIndex = -1;
     
+    this.professionalService.updateProfessional(this.professionalInfo);
     console.log('Perfil Atualizado:', updatedProfile);
 
     this.closeEditModal();

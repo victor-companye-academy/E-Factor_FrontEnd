@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CardProfessional } from 'src/app/core/interfaces/card-professional';
+import { CardProfessional } from 'src/app/core/interfaces/professional';
 
 @Component({
   selector: 'card-professional',
