@@ -35,7 +35,7 @@ export class EditProfileInfosModalComponent {
       formData.append('photo', this.selectedPhoto, this.selectedPhoto.name);
 
       this.http.post<any>('http://localhost:3000/upload', formData).subscribe(response => {
-        this.editedProfile[0].photo = response.imagePath;
+        this.editedProfile.photo = response.imagePath;
       }, error => {
         console.log(error);
       });
@@ -52,7 +52,7 @@ export class EditProfileInfosModalComponent {
 
   onSubmit() {
     this.closeModal.emit(true);
-    this.saveChanges.emit(this.editedProfile[0]);
+    this.saveChanges.emit(this.editedProfile);
     this.showCellphoneField.emit(this.showCellphone);
     const mainElement = document.querySelector('.main');
     if (mainElement) {
@@ -103,7 +103,7 @@ export class EditProfileInfosModalComponent {
   }
 
   updateCitySelect(){
-    this.editedProfile[0].city = this.getCityOptions(this.editedProfile[0].state)[0];
+    this.editedProfile.city = this.getCityOptions(this.editedProfile.state)[0];
   }
 
   getStateOptions(): string[] {
@@ -123,25 +123,25 @@ export class EditProfileInfosModalComponent {
 
   verifyInfos() {
     if (this.pageType == 'profissional-profile') {
-      if (this.editedProfile[0].name.trim() == '' ||
-          this.editedProfile[0].age.trim() == '' ||
-          parseInt(this.editedProfile[0].age) <= 0 ||
-          this.editedProfile[0].city == '' ||
-          this.editedProfile[0].state == '' ||
-          this.editedProfile[0].email.trim() == '' ||  
-          this.editedProfile[0].cellphone.trim() == '' ||
-          this.editedProfile[0].seniority == '' ||
+      if (this.editedProfile.name.trim() == '' ||
+          this.editedProfile.age.trim() == '' ||
+          parseInt(this.editedProfile.age) <= 0 ||
+          this.editedProfile.city == '' ||
+          this.editedProfile.state == '' ||
+          this.editedProfile.email.trim() == '' ||  
+          this.editedProfile.cellphone.trim() == '' ||
+          this.editedProfile.seniority == '' ||
           !this.isEmailValid()) {
         return this.isValid = false;
       } else {
         return this.isValid = true;
       }
     } else {
-      if (this.editedProfile[0].name.trim() == '' ||
-          this.editedProfile[0].city == '' ||
-          this.editedProfile[0].state == '' ||
-          this.editedProfile[0].email.trim() == '' ||  
-          this.editedProfile[0].cellphone.trim() == '' ||
+      if (this.editedProfile.name.trim() == '' ||
+          this.editedProfile.city == '' ||
+          this.editedProfile.state == '' ||
+          this.editedProfile.email.trim() == '' ||  
+          this.editedProfile.cellphone.trim() == '' ||
           !this.isEmailValid()) {
         return this.isValid = false;
       } else {
@@ -161,7 +161,7 @@ export class EditProfileInfosModalComponent {
       numericInput = numericInput.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
     }
 
-    this.editedProfile[0].cellphone = numericInput;
+    this.editedProfile.cellphone = numericInput;
   }
 
   numberMask(event: any){
@@ -170,7 +170,7 @@ export class EditProfileInfosModalComponent {
   }
 
   isEmailValid(){
-    let email = this.editedProfile[0].email;
+    let email = this.editedProfile.email;
     if (email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]/g)){
       this.errMsg = '';
       return true;

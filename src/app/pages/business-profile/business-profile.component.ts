@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { BusinessInfo } from 'src/app/core/interfaces/business-info';
 import { CardVacancy } from 'src/app/core/interfaces/card-vacancy';
+import { BusinessService } from 'src/app/core/service/business/business.service';
 import { CardVacancyService } from 'src/app/core/service/cardVacancy/card-vacancy.service';
 
 @Component({
@@ -16,22 +18,11 @@ export class BusinessProfileComponent {
   protected isEditAboutModalOpen = false;
   protected modalIndex: number = -1;
 
-  constructor (private cardVacancyService: CardVacancyService) { }
+  constructor (private route: ActivatedRoute, private cardVacancyService: CardVacancyService, private businessService: BusinessService) { }
   
+  protected id = this.route.snapshot.paramMap.get('id');
+  protected businessInfo = this.businessService.listBusiness().find(professional => professional.id === this.id);
   protected cardVacancy: Array<CardVacancy> = this.cardVacancyService.listVacancies();
-
-  protected businessInfo: Array<BusinessInfo> = [
-    {
-      id: "1",
-      photo: 'assets/imgs/bradesco-photo.png',
-      name: 'Banco Bradesco S.A',
-      city: 'São Paulo',
-      state: 'São Paulo',
-      email: 'bradesco@email.com',
-      cellphone: '(11) 99123-4567',
-      about: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente deleniti quo ipsum tempore illo. Perspiciatis eveniet, quasi architecto quidem suscipit odit! Assumenda asperiores facilis quam a consectetur blanditiis recusandae, laboriosam commodi ipsam optio deserunt quasi similique iure. Eveniet, doloribus? Tempora repudiandae in, veniam ab quasi voluptates alias quibusdam quia, fuga beatae quo, autem corrupti suscipit eius quis cum natus dolorum velit dicta accusamus explicabo! Quas rem dolorem perspiciatis consequuntur obcaecati quae esse? Sit hic voluptas minus in numquam alias odit corrupti, illo vel maxime doloremque unde optio ipsum placeat nihil velit natus non repellendus id, aliquam expedita. Dolorem, repellat a.',
-    }
-  ];
 
   openEditModal(index: number) {
     switch (index) {
@@ -52,13 +43,15 @@ export class BusinessProfileComponent {
   }
 
   saveProfileChanges(updatedProfile: any) {
-    switch (this.modalIndex) {
-      case 0:
-        this.businessInfo[0] = updatedProfile;
-        break;
-      case 1:
-        this.businessInfo[0].about = updatedProfile;
-        break;
+    if (this.businessInfo){
+      switch (this.modalIndex) {
+        case 0:
+          this.businessInfo = updatedProfile;
+          break;
+        case 1:
+          this.businessInfo.about = updatedProfile;
+          break;
+      }
     }
     this.modalIndex = -1;
     

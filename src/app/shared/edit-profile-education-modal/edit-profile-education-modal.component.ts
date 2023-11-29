@@ -23,18 +23,18 @@ export class EditProfileEducationModalComponent {
 
   onSubmit() {
     this.closeModal.emit(true);
-    for (let i = 0; i < this.editedProfile[0].education.length; i++) {
-      if (this.editedProfile[0].education[i].current) {
-        this.editedProfile[0].education[i].end = '';
+    for (let i = 0; i < this.editedProfile.education.length; i++) {
+      if (this.editedProfile.education[i].current) {
+        this.editedProfile.education[i].end = '';
       }
-      if (this.editedProfile[0].education[i].end == '') {
-        this.editedProfile[0].education[i].current = true;
+      if (this.editedProfile.education[i].end == '') {
+        this.editedProfile.education[i].current = true;
       }
     }
 
     this.organizeEducation();
 
-    this.saveChanges.emit(this.editedProfile[0].education);
+    this.saveChanges.emit(this.editedProfile.education);
     const mainElement = document.querySelector('.main');
     if (mainElement) {
       mainElement.classList.remove('blur-background');
@@ -50,27 +50,27 @@ export class EditProfileEducationModalComponent {
   }
 
   addEducation() {
-     this.editedProfile[0].education.unshift({ institution: '', start: '', end: '', current: false, role: '', description: '' });
+     this.editedProfile.education.unshift({ institution: '', start: '', end: '', current: false, role: '', description: '' });
      this.editedProfile = JSON.parse(JSON.stringify(this.editedProfile));
      this.isValid = false;
   }
 
   deleteEducation(i: number) {
-    this.editedProfile[0].education.splice(i, 1);
+    this.editedProfile.education.splice(i, 1);
   }
 
   selectCurrent(i: number){
-    if (this.editedProfile[0].education[i].current) {
-      this.editedProfile[0].education[i].current = false;
+    if (this.editedProfile.education[i].current) {
+      this.editedProfile.education[i].current = false;
     } else {
-      this.editedProfile[0].education[i].current = true;
-      this.editedProfile[0].education[i].end = '';
+      this.editedProfile.education[i].current = true;
+      this.editedProfile.education[i].end = '';
     }
   }
 
   verifyEducation() {
-    for (let i = 0; i < this.editedProfile[0].education.length; i++) {
-      const education = this.editedProfile[0].education[i];
+    for (let i = 0; i < this.editedProfile.education.length; i++) {
+      const education = this.editedProfile.education[i];
       const { institution, start, title, description, end, current } = education;
 
       if (!institution || !start || !title || !description) {
@@ -94,7 +94,7 @@ export class EditProfileEducationModalComponent {
   }
 
   organizeEducation() {
-    this.editedProfile[0].education.sort((a: any, b: any) => {
+    this.editedProfile.education.sort((a: any, b: any) => {
       if (a.current && !b.current) {
         return -1;
       } else if (!a.current && b.current) {

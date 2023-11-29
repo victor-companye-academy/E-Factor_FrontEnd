@@ -55,7 +55,7 @@ export class EditProfileSkillsModalComponent {
 
   onSubmit() {
     this.closeModal.emit(true);
-    this.saveChanges.emit(this.editedProfile[0].skills);
+    this.saveChanges.emit(this.editedProfile.skills);
     const mainElement = document.querySelector('.main');
     if (mainElement) {
       mainElement.classList.remove('blur-background');
@@ -94,17 +94,17 @@ export class EditProfileSkillsModalComponent {
   }
 
   addSkill(skill: string) {
-    if (this.editedProfile[0].skills.includes(skill)) {
+    if (this.editedProfile.skills.includes(skill)) {
       this.errMsg = "A habilidade escolhida já existe em sua lista de habilidades.";
       return;
     }
-    this.editedProfile[0].skills.push(skill);
+    this.editedProfile.skills.push(skill);
     this.errMsg = '';
     this.searchText = '';
     this.filteredSkills = [];
   }
 
   deleteSkill(i: number) {
-    this.editedProfile[0].skills.splice(i, 1);
+    this.editedProfile.skills.splice(i, 1);
   }
 }

@@ -22,32 +22,32 @@
             </div>
             <section>
                 <div class="d-flex align-items-center p-4 dados-juridicos">
-                    <img class="profile-photo ms-3" [src]="businessInfo[0].photo || 'assets/imgs/default-profile.svg'" alt="Foto do perfil">
+                    <img class="profile-photo ms-3" [src]="businessInfo?.photo || 'assets/imgs/default-profile.svg'" alt="Foto do perfil">
                     <div class="ms-5">
-                        <h5 class="name fw-bold">{{businessInfo[0].name}}</h5>
-                        <p class="info-text fw-light">{{businessInfo[0].city}}, {{businessInfo[0].state}}</p>
+                        <h5 class="name fw-bold">{{businessInfo?.name}}</h5>
+                        <p class="info-text fw-light">{{businessInfo?.city}}, {{businessInfo?.state}}</p>
                         <div class="d-flex gap-3 mt-3">
                             <div>
                                 <p class="info-text mb-1 fw-light">E-mail</p>
-                                <p>{{businessInfo[0].email}}</p>
+                                <p>{{businessInfo?.email}}</p>
                             </div>
                             <div *ngIf="showCellphone">
                                 <p class="info-text mb-1 fw-light">Telefone</p>
-                                <p>{{businessInfo[0].cellphone}}</p>
+                                <p>{{businessInfo?.cellphone}}</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
             <div class="d-flex gap-3">
-                <div *ngIf="!isLogged ? businessInfo[0].about.trim().length > 0 : true" [ngClass]="isLogged ? 'about w-75' : 'w-100'">
+                <div *ngIf="!isLogged ? (businessInfo?.about?.trim()?.length ?? 0) > 0 : true" [ngClass]="isLogged ? 'about w-75' : 'w-100'">
                     <div class="d-flex justify-content-between align-items-center mt-4">
                         <h5 class="fw-bold">Sobre a empresa</h5>
                         <button class="edit py-1 px-2 mb-2" *ngIf="isLogged" (click)="openEditModal(1)">Editar<img src="../../../assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
                     </div>
                     <section>
                         <div class="p-4">
-                            <p class="my-1">{{ businessInfo[0].about.trim() == '' ? 'Nenhuma informação inserida' : businessInfo[0].about }}</p>
+                            <p class="my-1">{{ businessInfo?.about?.trim() == '' ? 'Nenhuma informação inserida' : businessInfo?.about }}</p>
                         </div>
                     </section>
                 </div>
@@ -71,7 +71,7 @@
                         <span *ngFor="let card of cardVacancy; let i = index" class="mx-1">
                             <card-vacancy [short]="false" [card]="card" class="mt-4" *ngIf="i < 3"></card-vacancy>
                         </span>
-                        <button class=" w-25 btn btn-view-all fw-bold mt-3" [routerLink]="['{{businessInfo[0].id}}-all-vacancies']">Ver tudo</button>
+                        <button class=" w-25 btn btn-view-all fw-bold mt-3" [routerLink]="['{{businessInfo?.id}}-all-vacancies']">Ver tudo</button>
                     </div>
                 </div>
                 <div *ngIf="isLogged && true" class="w-25">

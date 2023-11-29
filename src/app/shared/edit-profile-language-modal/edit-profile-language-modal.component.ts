@@ -42,7 +42,7 @@ export class EditProfileLanguageModalComponent {
 
   onSubmit() {
     this.closeModal.emit(true);
-    this.saveChanges.emit(this.editedProfile[0].languages);
+    this.saveChanges.emit(this.editedProfile.languages);
     const mainElement = document.querySelector('.main');
     if (mainElement) {
       mainElement.classList.remove('blur-background');
@@ -81,14 +81,14 @@ export class EditProfileLanguageModalComponent {
   }
 
   addLanguage(language: string, level: string) {
-    for (let i = 0; i < this.editedProfile[0].languages.length; i++) {
-      if (this.editedProfile[0].languages[i].language === language) {
+    for (let i = 0; i < this.editedProfile.languages.length; i++) {
+      if (this.editedProfile.languages[i].language === language) {
         this.errMsg = "O idioma escolhido já existe em sua lista de idiomas.";
         return;
       }
     }
     if(this.languagesList.includes(language)) {
-      this.editedProfile[0].languages.push({ language: language, level: level });
+      this.editedProfile.languages.push({ language: language, level: level });
       this.errMsg = '';
     } else {
       this.errMsg = 'Idioma não encontrado.';
@@ -104,7 +104,7 @@ export class EditProfileLanguageModalComponent {
   }
 
   deleteLanguage(i: number) {
-    this.editedProfile[0].languages.splice(i, 1);
+    this.editedProfile.languages.splice(i, 1);
   }
 
   changeIsValid(){

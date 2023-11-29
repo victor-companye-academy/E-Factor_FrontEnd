@@ -12,9 +12,9 @@
         </div>
         <p class="errMsg">{{errMsg}}</p>
         <div class="d-flex flex-wrap">
-            <div *ngFor="let skill of editedProfile[0].skills; let i = index" class="mx-1">
+            <div *ngFor="let skill of editedProfile.skills; let i = index" class="mx-1">
                 <div class="d-flex justify-content-between align-items-center">
-                    <p class="skills my-1 py-1 px-3 fadeIn">{{editedProfile[0].skills[i]}}<img (click)="deleteSkill(i)" src="assets/icons/x2.svg" alt="Excluir" class="x-icon ms-2"></p>
+                    <p class="skills my-1 py-1 px-3 fadeIn">{{editedProfile.skills[i]}}<img (click)="deleteSkill(i)" src="assets/icons/x2.svg" alt="Excluir" class="x-icon ms-2"></p>
                 </div>
             </div>
         </div>

@@ -23,7 +23,7 @@ export class EditProfileAboutModalComponent {
 
   onSubmit() {
     this.closeModal.emit(true);
-    this.saveChanges.emit(this.editedProfile[0].about);
+    this.saveChanges.emit(this.editedProfile.about);
     const mainElement = document.querySelector('.main');
     if (mainElement) {
       mainElement.classList.remove('blur-background');
@@ -39,7 +39,7 @@ export class EditProfileAboutModalComponent {
   }
 
   verifyAbout() {
-    if (this.editedProfile[0].about == '') {
+    if (this.editedProfile.about == '') {
       return this.isValid = false;
       false;
     } else {

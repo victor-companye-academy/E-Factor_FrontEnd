@@ -23,18 +23,18 @@ export class EditProfileExperienceModalComponent {
 
   onSubmit() {
     this.closeModal.emit(true);
-    for (let i = 0; i < this.editedProfile[0].experience.length; i++) {
-      if (this.editedProfile[0].experience[i].current) {
-        this.editedProfile[0].experience[i].end = '';
+    for (let i = 0; i < this.editedProfile.experience.length; i++) {
+      if (this.editedProfile.experience[i].current) {
+        this.editedProfile.experience[i].end = '';
       }
-      if (this.editedProfile[0].experience[i].end == '') {
-        this.editedProfile[0].experience[i].current = true;
+      if (this.editedProfile.experience[i].end == '') {
+        this.editedProfile.experience[i].current = true;
       }
     }
 
     this.organizeExperience();
 
-    this.saveChanges.emit(this.editedProfile[0].experience);
+    this.saveChanges.emit(this.editedProfile.experience);
     const mainElement = document.querySelector('.main');
     if (mainElement) {
       mainElement.classList.remove('blur-background');
@@ -50,27 +50,27 @@ export class EditProfileExperienceModalComponent {
   }
 
   addExperience() {
-     this.editedProfile[0].experience.unshift({ institution: '', start: '', end: '', current: false, role: '', description: '' });
+     this.editedProfile.experience.unshift({ institution: '', start: '', end: '', current: false, role: '', description: '' });
      this.editedProfile = JSON.parse(JSON.stringify(this.editedProfile));
      this.isValid = false;
   }
 
   deleteExperience(i: number) {
-    this.editedProfile[0].experience.splice(i, 1);
+    this.editedProfile.experience.splice(i, 1);
   }
 
   selectCurrent(i: number){
-    if (this.editedProfile[0].experience[i].current) {
-      this.editedProfile[0].experience[i].current = false;
+    if (this.editedProfile.experience[i].current) {
+      this.editedProfile.experience[i].current = false;
     } else {
-      this.editedProfile[0].experience[i].current = true;
-      this.editedProfile[0].experience[i].end = '';
+      this.editedProfile.experience[i].current = true;
+      this.editedProfile.experience[i].end = '';
     }
   }
 
   verifyExperience() {
-    for (let i = 0; i < this.editedProfile[0].experience.length; i++) {
-      const experience = this.editedProfile[0].experience[i];
+    for (let i = 0; i < this.editedProfile.experience.length; i++) {
+      const experience = this.editedProfile.experience[i];
       const { institution, start, role, description, end, current } = experience;
 
       if (!institution || !start || !role || !description) {
@@ -94,7 +94,7 @@ export class EditProfileExperienceModalComponent {
   }
 
   organizeExperience() {
-    this.editedProfile[0].experience.sort((a: any, b: any) => {
+    this.editedProfile.experience.sort((a: any, b: any) => {
       if (a.current && !b.current) {
         return -1;
       } else if (!a.current && b.current) {

@@ -5,9 +5,9 @@
             <button type="button" class="btn save" (click)="addEducation()">Adicionar</button>
         </div>
         <p class="fw-light">* Campos obrigatórios</p>
-        <div *ngFor="let education of editedProfile[0].education; let i = index" class="mt-5">
+        <div *ngFor="let education of editedProfile.education; let i = index" class="mt-5">
             <div class="d-flex justify-content-between align-items-center">
-                <h6 for="education" class="fw-bold">Formação {{editedProfile[0].education.length - i}}</h6>
+                <h6 for="education" class="fw-bold">Formação {{editedProfile.education.length - i}}</h6>
                 <button type="button" class="btn cancel" (click)="deleteEducation(i); verifyEducation()">Excluir<img src="../../assets/icons/trash.svg" alt="Excluir" class="ms-2 trash-icon"></button>
             </div>
             <ng-container [ngModelGroup]="i.toString()">

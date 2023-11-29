@@ -47,22 +47,22 @@
             </div>
             <section>
                 <div class="d-flex align-items-center p-4 dados-pessoais">
-                    <img class="profile-photo mx-4" [src]="professionalInfo[0].photo || 'assets/imgs/default-profile.svg'" alt="Foto do perfil">
+                    <img class="profile-photo mx-4" [src]="professionalInfo?.photo || 'assets/imgs/default-profile.svg'" alt="Foto do perfil">
                     <div>
-                        <h5 class="name fw-bold">{{professionalInfo[0].name}}, {{professionalInfo[0].age}}</h5>
-                        <p class="info-text fw-light">{{professionalInfo[0].city}}, {{professionalInfo[0].state}}</p>
+                        <h5 class="name fw-bold">{{professionalInfo?.name}}, {{professionalInfo?.age}}</h5>
+                        <p class="info-text fw-light">{{professionalInfo?.city}}, {{professionalInfo?.state}}</p>
                         <div class="info-div d-flex gap-3 mt-3">
                             <div>
                                 <p class="info-text mb-1 fw-light">E-mail</p>
-                                <p class="mb-1">{{professionalInfo[0].email}}</p>
+                                <p class="mb-1">{{professionalInfo?.email}}</p>
                             </div>
                             <div *ngIf="showCellphone">
                                 <p class="info-text mb-1 fw-light">Telefone</p>
-                                <p class="mb-1">{{professionalInfo[0].cellphone}}</p>
+                                <p class="mb-1">{{professionalInfo?.cellphone}}</p>
                             </div>
                             <div>
                                 <p class="info-text mb-1 fw-light">Senioridade</p>
-                                <p class="mb-1">{{professionalInfo[0].seniority}}</p>
+                                <p class="mb-1">{{professionalInfo?.seniority}}</p>
                             </div>
                         </div>
                     </div>
@@ -70,14 +70,14 @@
             </section>
             <!-- sobre -->
             <div class="d-flex gap-3 about-div">
-                <div *ngIf="!isLogged ? professionalInfo[0].about.trim().length > 0 : true" [ngClass]="isLogged ? 'about w-75' : 'w-100'">
+                <div *ngIf="!isLogged ? (professionalInfo?.about?.trim()?.length ?? 0) > 0 : true" [ngClass]="isLogged ? 'about w-75' : 'w-100'">
                     <div class="d-flex justify-content-between align-items-center mb-2 mt-4">
                         <h5 class="fw-bold">Sobre</h5>
                         <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(1)">Editar<img src="../../../assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
                     </div>
                     <section>
                         <div class="p-4">
-                            <p class="my-1">{{professionalInfo[0].about.trim() == '' ? 'Nenhuma informação inserida' : professionalInfo[0].about}}</p>
+                            <p class="my-1">{{professionalInfo?.about?.trim() == '' ? 'Nenhuma informação inserida' : professionalInfo?.about}}</p>
                         </div>
                     </section>
                 </div>
@@ -94,13 +94,13 @@
                 </div>
             </div>
             <!-- experiencias -->
-            <div *ngIf="!isLogged ? professionalInfo[0].experience.length > 0 : true">
+            <div *ngIf="!isLogged ? (professionalInfo?.experience?.length ?? 0) > 0 : true">
                 <div class="d-flex justify-content-between align-items-center mb-2 mt-4">
                     <h5 class="fw-bold">Experiências</h5>
                     <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(2)">Editar<img src="../../../assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
                 </div>
                 <section class="py-4">
-                    <div *ngFor="let experience of professionalInfo[0].experience; let i = index" class="px-4 py-2 d-flex gap-3 align-items-start">
+                    <div *ngFor="let experience of professionalInfo?.experience; let i = index" class="px-4 py-2 d-flex gap-3 align-items-start">
                         <div class="d-flex flex-column justify-content-center align-items-center">
                             <div class="side-icon d-flex ali justify-content-center">
                                 <img src="assets/icons/briefcase.svg" alt="Experiência">
@@ -113,17 +113,17 @@
                             <p>{{experience.description}}</p>
                         </div>
                     </div>
-                    <p class="my-1 px-4" *ngIf="professionalInfo[0].experience.length == 0">Nenhuma experiência inserida</p>
+                    <p class="my-1 px-4" *ngIf="professionalInfo?.experience?.length == 0">Nenhuma experiência inserida</p>
                 </section>
             </div>
             <!-- formação -->
-            <div *ngIf="!isLogged ? professionalInfo[0].education.length > 0 : true">
+            <div *ngIf="!isLogged ? (professionalInfo?.education?.length ?? 0) > 0 : true">
                 <div class="d-flex justify-content-between align-items-center mb-2 mt-4">
                     <h5 class="fw-bold">Formação</h5>
                     <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(3)">Editar<img src="../../../assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
                 </div>
                 <section class="py-4">
-                    <div *ngFor="let education of professionalInfo[0].education; let i = index" class="px-4 py-2 d-flex gap-3 align-items-start">
+                    <div *ngFor="let education of professionalInfo?.education; let i = index" class="px-4 py-2 d-flex gap-3 align-items-start">
                         <div class="d-flex flex-column justify-content-center align-items-center line-height">
                             <div class="side-icon d-flex ali justify-content-center">
                                 <img src="assets/icons/formation.svg" alt="Experiência">
@@ -136,30 +136,30 @@
                             <p>{{education.description}}</p>
                         </div>
                     </div>
-                    <p class="my-1 px-4" *ngIf="professionalInfo[0].education.length == 0">Nenhuma formação inserida</p>
+                    <p class="my-1 px-4" *ngIf="professionalInfo?.education?.length == 0">Nenhuma formação inserida</p>
                 </section>
             </div>
             <!-- habilidades -->
-            <div *ngIf="!isLogged ? professionalInfo[0].skills.length > 0 : true">
+            <div *ngIf="!isLogged ? (professionalInfo?.skills?.length ?? 0) > 0 : true">
                 <div class="d-flex justify-content-between align-items-center mb-2 mt-4">
                     <h5 class="fw-bold">Habilidades</h5>
                     <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(4)">Editar<img src="../../../assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
                 </div>
                 <section class="d-flex gap-2 p-4 flex-wrap">
-                    <div *ngFor="let skill of professionalInfo[0].skills; let i = index">
-                        <p class="skills my-1 py-1 px-3">{{professionalInfo[0].skills[i]}}</p>
+                    <div *ngFor="let skill of professionalInfo?.skills; let i = index">
+                        <p class="skills my-1 py-1 px-3">{{skill}}</p>
                     </div>
-                    <p class="my-1 px-4" *ngIf="professionalInfo[0].skills.length == 0">Nenhuma habilidade inserida</p>
+                    <p class="my-1 px-4" *ngIf="professionalInfo?.skills?.length == 0">Nenhuma habilidade inserida</p>
                 </section>
             </div>
             <!-- idiomas -->
-            <div *ngIf="!isLogged ? professionalInfo[0].languages.length > 0 : true">
+            <div *ngIf="!isLogged ? (professionalInfo?.languages?.length ?? 0) > 0 : true">
                 <div class="d-flex justify-content-between align-items-center mb-2 mt-4">
                     <h5 class="fw-bold">Idiomas</h5>
                     <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(5)">Editar<img src="../../../assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
                 </div>
                 <section class="p-4">
-                    <div *ngFor="let language of professionalInfo[0].languages; let i = index" class="my-2">
+                    <div *ngFor="let language of professionalInfo?.languages; let i = index" class="my-2">
                         <p class="my-1 fw-bold">{{language.language}}</p>
                         <p class="my-1 fw-light">{{language.level}}</p>
                     </div>

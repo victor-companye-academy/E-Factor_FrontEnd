@@ -32,8 +32,8 @@ const routes: Routes = [
   { path: 'confirm-code/:email', component: CodeConfirmationComponent },
   { path: 'change-password', component: ChangePasswordComponent },
   { path: 'create-business-user', component: BusinessUserComponent },
-  { path: 'business-profile', component: BusinessProfileComponent },
-  { path: 'professional-profile', component: ProfessionalProfileComponent },
+  { path: 'business-profile/:id', component: BusinessProfileComponent },
+  { path: 'professional-profile/:id', component: ProfessionalProfileComponent },
   {path: 'newsletter', component: NewsletterComponent},
   { path: '**', redirectTo: '' },
 ];
