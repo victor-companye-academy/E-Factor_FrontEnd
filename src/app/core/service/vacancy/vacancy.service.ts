@@ -12,8 +12,22 @@ export class VacancyService {
 
   public listVacancies(): Array<Vacancy> {
     const businesses = this.businessService.listBusiness();
+
+    let dataStorage: string | null;
+    const key: string = 'vacancies'
+
+    dataStorage = sessionStorage.getItem(key);
+
+    if (dataStorage) {
+      try {
+        console.log("Usando sessionStorage");
+        return JSON.parse(dataStorage);
+      } catch (error) {
+        console.error("Erro ao analisar os dados armazenados:", error);
+      }
+    }
   
-    return [
+    const vacanciesArray: Array<Vacancy> = [
       {
         id: '1',
         businessId: '1',
@@ -43,6 +57,12 @@ export class VacancyService {
         showedInterest: ['1', '2', '3'],
       },
     ];
+
+    sessionStorage.setItem(key, JSON.stringify(vacanciesArray));
+    console.log("Usando requisição para API");
+
+    return vacanciesArray;
+
   }
 
   listInterestedVacancies(id: string): Array<Vacancy> {

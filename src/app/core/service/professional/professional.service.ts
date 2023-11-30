@@ -10,8 +10,9 @@ export class ProfessionalService {
 
   public listProfessionals(): Array<ProfessionalInfo> {
     let dataStorage: string | null;
+    const key: string = 'professionals'
 
-    dataStorage = sessionStorage.getItem('professionals');
+    dataStorage = sessionStorage.getItem(key);
 
     if (dataStorage) {
       try {
@@ -574,7 +575,7 @@ export class ProfessionalService {
       languages: [{ language: 'Português - BR', level: 'Nativo'}, { language: 'Inglês', level: 'Básico'}],
     }];
 
-    sessionStorage.setItem('professionals', JSON.stringify(professionalsArray));
+    sessionStorage.setItem(key, JSON.stringify(professionalsArray));
     console.log("Usando requisição para API");
 
     return professionalsArray;
@@ -586,7 +587,7 @@ export class ProfessionalService {
   
     if (index !== -1) {
       professionalsArray[index] = updatedProfessional;
-      sessionStorage.setItem('professionals', JSON.stringify(professionalsArray));
+      sessionStorage.setItem('key', JSON.stringify(professionalsArray));
     }
   }
 }
