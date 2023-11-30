@@ -1,0 +1,50 @@
+:host {
+    color: var(--text);
+
+    .main {
+        min-height: 100vh;
+        .div-main {
+            min-height: 100vh;
+        }
+        h2,
+        h1,
+        h3,
+        span,
+        .text-color-primary {
+            color: var(--primary);
+        }
+
+        .logo {
+            width: 13rem;
+        }
+
+        .card p {
+            padding: 0 7.5rem;
+            color: var(--text);
+
+            & > span,
+            .coin {
+                color: #00b5a0;
+            }
+        }
+
+        .card p > span.email {
+            color: var(--text);
+            text-decoration: underline;
+        }
+
+        .button-ok {
+            width: 12rem;
+            color: var(--text-white);
+            background-color: var(--secondary);
+
+            &:hover {
+                background-color: var(--primary);
+            }
+        }
+
+        .card {
+            background-color: var(--background);
+        }
+    }
+}
