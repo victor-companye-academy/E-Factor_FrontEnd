@@ -14,7 +14,7 @@ export class ProfessionalService {
 
     let dataStorage: string | null;
 
-    dataStorage = sessionStorage.getItem('data');
+    dataStorage = sessionStorage.getItem('professionals');
 
     if (dataStorage) {
       console.log("Usando sessionStorage");
@@ -574,7 +574,7 @@ export class ProfessionalService {
       languages: [{ language: 'Português - BR', level: 'Nativo'}, { language: 'Inglês', level: 'Básico'}],
     }];
 
-    sessionStorage.setItem('data', JSON.stringify(professionalsArray));
+    sessionStorage.setItem('professionals', JSON.stringify(professionalsArray));
     console.log("Usando requisição para API");
 
     return professionalsArray;
@@ -586,7 +586,7 @@ export class ProfessionalService {
   
     if (index !== -1) {
       professionalsArray[index] = updatedProfessional;
-      sessionStorage.setItem('data', JSON.stringify(professionalsArray));
+      sessionStorage.setItem('professionals', JSON.stringify(professionalsArray));
     }
   }
 }

@@ -1,22 +1,18 @@
-export interface Vacancy {
-    id:number,
-    position: string,
-    
-    src?: string;
-    companyName: string
-    title: string;
+import { BusinessInfo } from "./business-info";
 
+export interface Vacancy {
+    id: string,
+
+    businessId: string,
+    businessInfo: BusinessInfo,
+
+    position: string,
+    title: string;
     days: string;
     status?:string;
-
-    description: string;
-
-    locality: string;
-    skills: Array<string>;
-    mode: string;
     contract: string;
-
-    phone?: string;
-    email:string;
-    address: string;
+    mode: string;
+    description: string;
+    skills: Array<string>;
+    showedInterest: Array<string>;
 }

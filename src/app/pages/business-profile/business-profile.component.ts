@@ -19,9 +19,9 @@ export class BusinessProfileComponent {
 
   constructor (private vacancyService: VacancyService, private route: ActivatedRoute, private businessService: BusinessService) { }
   
-  protected id = this.route.snapshot.paramMap.get('id');
+  protected id = this.route.snapshot.paramMap.get('id')?.toString() || '';
   protected businessInfo = this.businessService.listBusiness().find(professional => professional.id === this.id);
-  protected cardVacancy: Array<Vacancy> = this.vacancyService.listVacancies();
+  protected cardVacancy: Array<Vacancy> = this.vacancyService.listVacanciesByBusiness(this.id);
 
   openEditModal(index: number) {
     switch (index) {
@@ -53,7 +53,8 @@ export class BusinessProfileComponent {
       }
     }
     this.modalIndex = -1;
-    
+
+    this.businessService.updateBusiness(this.businessInfo);
     console.log('Perfil Atualizado:', updatedProfile);
 
     this.closeEditModal();

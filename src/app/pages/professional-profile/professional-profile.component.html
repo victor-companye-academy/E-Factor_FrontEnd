@@ -43,7 +43,7 @@
             <!-- dados pessoais -->
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <h5 class="fw-bold">Dados Pessoais</h5>
-                <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(0)">Editar<img src="../../../assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
+                <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(0)">Editar<img src="assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
             </div>
             <section>
                 <div class="d-flex align-items-center p-4 dados-pessoais">
@@ -70,10 +70,10 @@
             </section>
             <!-- sobre -->
             <div class="d-flex gap-3 about-div">
-                <div *ngIf="!isLogged ? (professionalInfo?.about?.trim()?.length ?? 0) > 0 : true" [ngClass]="isLogged ? 'about w-75' : 'w-100'">
+                <div *ngIf="!isLogged ? (professionalInfo?.about?.trim()?.length ?? 0) > 0 : true" [ngClass]="isLogged && cardVacancy.length > 0 ? 'about w-75' : 'w-100'">
                     <div class="d-flex justify-content-between align-items-center mb-2 mt-4">
                         <h5 class="fw-bold">Sobre</h5>
-                        <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(1)">Editar<img src="../../../assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
+                        <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(1)">Editar<img src="assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
                     </div>
                     <section>
                         <div class="p-4">
@@ -81,7 +81,7 @@
                         </div>
                     </section>
                 </div>
-                <div *ngIf="isLogged && true">
+                <div *ngIf="isLogged && cardVacancy.length > 0">
                     <div class="d-flex mb-2 mt-4">
                         <h5 class="fw-bold my-1">Minhas vagas</h5>
                     </div>
@@ -97,7 +97,7 @@
             <div *ngIf="!isLogged ? professionalInfo.experience.length > 0 : true">
                 <div class="d-flex justify-content-between align-items-center mb-2 mt-4">
                     <h5 class="fw-bold">Experiências</h5>
-                    <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(2)">Editar<img src="../../../assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
+                    <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(2)">Editar<img src="assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
                 </div>
                 <section class="py-4">
                     <div *ngFor="let experience of professionalInfo?.experience; let i = index" class="px-4 py-2 d-flex gap-3 align-items-start">
@@ -120,7 +120,7 @@
             <div *ngIf="!isLogged ? professionalInfo.education.length > 0 : true">
                 <div class="d-flex justify-content-between align-items-center mb-2 mt-4">
                     <h5 class="fw-bold">Formação</h5>
-                    <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(3)">Editar<img src="../../../assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
+                    <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(3)">Editar<img src="assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
                 </div>
                 <section class="py-4">
                     <div *ngFor="let education of professionalInfo.education; let i = index" class="px-4 py-2 d-flex gap-3 align-items-start">
@@ -143,7 +143,7 @@
             <div *ngIf="!isLogged ? professionalInfo.skills.length > 0 : true">
                 <div class="d-flex justify-content-between align-items-center mb-2 mt-4">
                     <h5 class="fw-bold">Habilidades</h5>
-                    <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(4)">Editar<img src="../../../assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
+                    <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(4)">Editar<img src="assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
                 </div>
                 <section class="d-flex gap-2 p-4 flex-wrap">
                     <div *ngFor="let skill of professionalInfo.skills; let i = index">
@@ -156,7 +156,7 @@
             <div *ngIf="!isLogged ? professionalInfo.languages.length > 0 : true">
                 <div class="d-flex justify-content-between align-items-center mb-2 mt-4">
                     <h5 class="fw-bold">Idiomas</h5>
-                    <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(5)">Editar<img src="../../../assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
+                    <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(5)">Editar<img src="assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
                 </div>
                 <section class="p-4">
                     <div *ngFor="let language of professionalInfo.languages; let i = index" class="my-2">

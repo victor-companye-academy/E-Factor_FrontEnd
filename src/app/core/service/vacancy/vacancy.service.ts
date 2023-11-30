@@ -1,57 +1,56 @@
 import { Injectable } from '@angular/core';
 import { Vacancy } from '../../interfaces/vacancy';
+import { BusinessService } from '../business/business.service';
+import { BusinessInfo } from '../../interfaces/business-info';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VacancyService {
 
-  constructor() { }
+  constructor(private businessService: BusinessService) { }
 
   public listVacancies(): Array<Vacancy> {
+    const businesses = this.businessService.listBusiness();
+  
     return [
       {
-        id: 1,
-        position: 'senior',
-        companyName: 'E-Factor',
+        id: '1',
+        businessId: '1',
+        businessInfo: businesses.find(e => e.id === '1') as BusinessInfo,
+        position: 'sênior',
         title: 'Desenvolvedor Senior',
         days: 'Há 6 dias',
-        contract: 'CLT',
-        locality: 'São Paulo - SP',
-        description: 'Lorem ipsum dolor sit amet consectetur. Suspendisse maecenas condimentum blandit vitae tortor dis nec mattis. Ipsum eu praesent orci lacus. Sed lorem id duis tempor felis tempor molestie. Commodo nisl sed massa varius magna interdum. Pulvinar nibh dignissim egestas ut. Nibh amet vitae sed duis sit diam. Feugiat sit viverra habitant platea adipiscing amet in nisi cursus. Feugiat mi rutrum velit vitae.',
-        mode: 'Home Office',
-        skills: ['Angular', 'Javascript', 'Typescript', 'Spring'],
         status: 'Ultimas Vagas', 
-        address: 'Av. Paulista, 901 - Cerqueira César, São Paulo - SP, 01411-100',
-        email: 'efactor@gmail.com',
-        phone:'(11) 97854-4359'
+        contract: 'CLT',
+        mode: 'Home Office',
+        description: 'Lorem ipsum dolor sit amet consectetur. Suspendisse maecenas condimentum blandit vitae tortor dis nec mattis. Ipsum eu praesent orci lacus. Sed lorem id duis tempor felis tempor molestie. Commodo nisl sed massa varius magna interdum. Pulvinar nibh dignissim egestas ut. Nibh amet vitae sed duis sit diam. Feugiat sit viverra habitant platea adipiscing amet in nisi cursus. Feugiat mi rutrum velit vitae.',
+        skills: ['Angular', 'Javascript', 'Typescript', 'Spring'],
+        showedInterest: ['1'],
       },
       {
-        id: 2,
-        position: 'junior',
-        companyName: 'Google',
-        title: 'Desenvolvedor Junior',
+        id: '2',
+        businessId: '2',
+        businessInfo: businesses.find(e => e.id === '2') as BusinessInfo,
+        position: 'sênior',
+        title: 'Desenvolvedor Senior',
         days: 'Há 6 dias',
-        contract: 'CLT',
-        locality: 'São Paulo - SP',
-        description: 'Lorem ipsum dolor sit amet consectetur. Suspendisse maecenas condimentum blandit vitae tortor dis nec mattis. Ipsum eu praesent orci lacus. Sed lorem id duis tempor felis tempor molestie. Commodo nisl sed massa varius magna interdum. Pulvinar nibh dignissim egestas ut. Nibh amet vitae sed duis sit diam. Feugiat sit viverra habitant platea adipiscing amet in nisi cursus. Feugiat mi rutrum velit vitae.',
-        mode: 'Home Office',
-        skills: ['Angular', 'Javascript', 'Typescript', 'Spring', 'html'],
         status: 'Ultimas Vagas',
-        src: 'https://logosmarcas.net/wp-content/uploads/2020/09/Google-Logo.png',
-        address: 'Av. Paulista, 901 - Cerqueira César, São Paulo - SP, 01411-100',
-        email: 'efactor@gmail.com'
-      }]
+        contract: 'CLT',
+        mode: 'Home Office',
+        description: 'Lorem ipsum dolor sit amet consectetur. Suspendisse maecenas condimentum blandit vitae tortor dis nec mattis. Ipsum eu praesent orci lacus. Sed lorem id duis tempor felis tempor molestie. Commodo nisl sed massa varius magna interdum. Pulvinar nibh dignissim egestas ut. Nibh amet vitae sed duis sit diam. Feugiat sit viverra habitant platea adipiscing amet in nisi cursus. Feugiat mi rutrum velit vitae.',
+        skills: ['Angular', 'Javascript', 'Typescript', 'Spring'],
+        showedInterest: ['1', '2', '3'],
+      },
+    ];
   }
 
-  public getById(id: number | undefined): Vacancy {
-    try {
-      const listVacancies = this.listVacancies()
-      const card = listVacancies.filter(e => e.id === id)
-      return card[0]
+  listInterestedVacancies(id: string): Array<Vacancy> {
+    return this.listVacancies().filter(e => e.showedInterest.includes(id));
+  }
 
-    } catch (error) {
-      throw console.log(error)
-    }
+  listVacanciesByBusiness(id: string): Array<Vacancy> {
+    console.log(this.listVacancies().filter(e => e.businessId === id))
+    return this.listVacancies().filter(e => e.businessId === id);
   }
 }
