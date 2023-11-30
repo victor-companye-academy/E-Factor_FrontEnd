@@ -1,0 +1,17 @@
+:host {
+    color: var(--text);
+
+    .main {
+        min-height: 100vh;
+        .div-main {
+            min-height: 100vh;
+        }
+        h2,
+        h1,
+        h3,
+        span,
+        .text-color-primary {
+            color: var(--primary);
+        }
+    }
+}

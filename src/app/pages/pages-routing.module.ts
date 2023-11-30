@@ -16,6 +16,7 @@ import { BusinessProfileComponent } from './business-profile/business-profile.co
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import { ProfessionalProfileComponent } from './professional-profile/professional-profile.component';
 import { VacanciesComponent } from './vacancies/vacancies.component';
+import { CreateVacancyComponent } from './create-vacancy/create-vacancy.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'confirm-code/:email', component: CodeConfirmationComponent },
   { path: 'change-password', component: ChangePasswordComponent },
   { path: 'create-business-user', component: BusinessUserComponent },
+  { path: 'create-vacancy', component: CreateVacancyComponent },
   { path: 'business-profile/:id', component: BusinessProfileComponent },
   { path: 'professional-profile/:id', component: ProfessionalProfileComponent },
   {path: 'newsletter', component: NewsletterComponent},

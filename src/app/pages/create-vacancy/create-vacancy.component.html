@@ -1,0 +1,32 @@
+<main class="d-flex w-100 main">
+    <div class="sidebar">
+        <app-sidebar></app-sidebar>
+    </div>
+
+    <div class="w-100 fadeIn overflow-hidden">
+        <div class="w-100 container div-main fadeIn">
+            <section>
+                <div class="d-flex align-items-end">
+                    <button type="button"
+                        class="fadeIn border-0 mt-5 tobble w-100 d-flex justify-content-end bg-transparent">
+                        <img src="assets/icons/tobble.svg" alt="Icone seta" title="Mudar modo">
+                    </button>
+
+                    <button type="button" class="d-flex align-items-center border-0 bg-transparent mx-4">
+                        <img src="assets/icons/ecoin.svg" alt="Ícone da ecoin">
+                        <span class="fw-medium ms-2">
+                            {{coin}}
+                        </span>
+                    </button>
+                </div>
+
+
+                <h1 class="fw-bold fs-5 mt-1 w-100 p-4">
+                    Profissionais do seu jeito
+                </h1>
+            </section>
+        </div>
+
+        <app-footer></app-footer>
+    </div>
+</main>

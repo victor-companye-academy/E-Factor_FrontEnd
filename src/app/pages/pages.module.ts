@@ -111,6 +111,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import { ProfessionalProfileComponent } from './professional-profile/professional-profile.component';
 import { VacanciesComponent } from './vacancies/vacancies.component';
+import { CreateVacancyComponent } from './create-vacancy/create-vacancy.component';
 
 @NgModule({
   declarations: [
@@ -130,6 +131,7 @@ import { VacanciesComponent } from './vacancies/vacancies.component';
     NewsletterComponent,
     ProfessionalProfileComponent,
     VacanciesComponent,
+    CreateVacancyComponent,
   ],
   imports: [
     CommonModule,
