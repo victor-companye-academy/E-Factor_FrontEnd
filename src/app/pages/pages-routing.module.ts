@@ -37,16 +37,12 @@ const routes: Routes = [
   { path: 'confirm-code/:email', component: CodeConfirmationComponent },
   { path: 'change-password', component: ChangePasswordComponent },
   { path: 'create-business-user', component: BusinessUserComponent },
+  { path: 'create-vacancy', component: CreateVacancyComponent },
   {
     path: 'request-coin-factor',
-    children: [{
-      path: '',
-      component: RequestCoinFactorComponent
-    },
-    {
-      path: 'send',
-      component: SendRequestComponent
-    }]
+    children: [
+      { path: '', component: RequestCoinFactorComponent },
+      { path: 'send', component: SendRequestComponent }]
   },
   { path: 'business-profile/:id', component: BusinessProfileComponent },
   { path: 'professional-profile/:id', component: ProfessionalProfileComponent },
