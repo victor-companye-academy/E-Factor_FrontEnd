@@ -112,6 +112,7 @@ import { NewsletterComponent } from './newsletter/newsletter.component';
 import { ProfessionalProfileComponent } from './professional-profile/professional-profile.component';
 import { VacanciesComponent } from './vacancies/vacancies.component';
 import { CreateVacancyComponent } from './create-vacancy/create-vacancy.component';
+import { RequestCoinFactorComponent } from './request-coin-factor/request-coin-factor.component';
 
 @NgModule({
   declarations: [
@@ -132,6 +133,7 @@ import { CreateVacancyComponent } from './create-vacancy/create-vacancy.componen
     ProfessionalProfileComponent,
     VacanciesComponent,
     CreateVacancyComponent,
+    RequestCoinFactorComponent,
   ],
   imports: [
     CommonModule,
