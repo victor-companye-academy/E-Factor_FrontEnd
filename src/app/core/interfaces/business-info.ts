@@ -7,4 +7,5 @@ export interface BusinessInfo {
     email: string;
     cellphone: string;
     about: string;
+    coins: number;
   }

@@ -1,11 +1,11 @@
 <section *ngIf="card" class="row section-main p-4">
     <div class="col-5 col-xl-3 profile me-4">
         <section class="profile mb-5 rounded-4 p-5 d-flex flex-column align-items-center overflow-hidden">
-            <img [src]="card.src" alt=" " title="Logo da empresa" width="150px" height="150px"
-                class="border-0 rounded-circle object-fit-scale" style="background-color: #f2f4f7;">
+            <img [src]="card.businessInfo.photo || 'assets/imgs/default-profile.svg'" alt="foto de perfil" title="Logo da empresa" width="150px" height="150px"
+                class="border-0 rounded-circle object-fit-cover" style="background-color: #f2f4f7;">
 
             <h2 class="fw-light fs-5 mt-4 text-center text-capitalize">
-                {{card.companyName}}
+                {{card.businessInfo.name}}
             </h2>
 
             <h3 class="fw-bold fs-5 mt-4 primary-color text-center text-capitalize">
@@ -18,14 +18,14 @@
                 Detalhes adicionais
             </h2>
 
-            <div *ngIf="card.phone">
+            <div *ngIf="card.businessInfo.cellphone">
                 <div >
                     <h4 class="fw-light fs-6 mt-4 mb-2">
                         Telefone
                     </h4>
 
                     <span class="fw-semibold fs-6">
-                        {{card.phone}}
+                        {{card.businessInfo.cellphone}}
                     </span>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                     E-mail
                 </h4>
                 <span class="fw-semibold fs-6">
-                    {{card.email}}
+                    {{card.businessInfo.email}}
                 </span>
             </div>
 
@@ -44,7 +44,7 @@
                     Endereço
                 </h4>
                 <span class="fw-semibold fs-6">
-                    {{card.address}}
+                    {{card.businessInfo.city}} - {{card.businessInfo.state}}
                 </span>
             </div>
         </section>
@@ -64,7 +64,7 @@
         </div>
 
         <section>
-            <p class="fw-light text-capitalize" [ngStyle]="{'height': card.phone?'30.8rem':'26rem'}">
+            <p class="fw-light text-capitalize" [ngStyle]="{'height': card.businessInfo.cellphone?'30.8rem':'26rem'}">
                 {{card.description}}
             </p>
         </section>

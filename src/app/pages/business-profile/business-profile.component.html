@@ -18,7 +18,7 @@
         <div class="container py-5 px-3" *ngIf="businessInfo">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <h5 class="fw-bold">Dados Jurídicos</h5>
-                <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(0)">Editar<img src="../../../assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
+                <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(0)">Editar<img src="assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
             </div>
             <section>
                 <div class="d-flex align-items-center p-4 dados-juridicos">
@@ -43,7 +43,7 @@
                 <div *ngIf="!isLogged ? businessInfo.about.trim().length > 0 : true" [ngClass]="isLogged ? 'about w-75' : 'w-100'">
                     <div class="d-flex justify-content-between align-items-center mt-4">
                         <h5 class="fw-bold">Sobre a empresa</h5>
-                        <button class="edit py-1 px-2 mb-2" *ngIf="isLogged" (click)="openEditModal(1)">Editar<img src="../../../assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
+                        <button class="edit py-1 px-2 mb-2" *ngIf="isLogged" (click)="openEditModal(1)">Editar<img src="assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
                     </div>
                     <section>
                         <div class="p-4">
@@ -57,7 +57,7 @@
                     </div>
                     <section class="d-flex flex-column align-items-center gap-3 p-4">
                         <h6 class="fw-light">Você possui</h6>
-                        <img src="../../../assets/imgs/coin-factor.svg" alt="Coin Factor" class="coin-factor">
+                        <img src="assets/imgs/coin-factor.svg" alt="Coin Factor" class="coin-factor">
                         <p class="text-green d-flex align-items-center gap-2 mb-0"><span class="fw-bold fs-1">105</span> coin factor</p>
                         <p class="coin-text">Olá! Aqui está o seu saldo atual na nossa plataforma. Se precisar de mais, basta solicitar através do botão, e nossa equipe irá avaliar sua solicitação com carinho. Estamos à disposição para ajudar!</p>
                         <button class="btn btn-view-all" [routerLink]="['/request-coin-factor',1]">Solicitar mais</button>
@@ -65,13 +65,17 @@
                 </div>
             </div>
             <div class="d-flex gap-3">
-                <div *ngIf="!isLogged ? true : true" [ngClass]="isLogged ? 'about w-75' : 'w-100'">
+                <div *ngIf="!isLogged && !(cardVacancy.length > 0) ? false : true" [ngClass]="isLogged ? 'about w-75' : 'w-100'">
                     <h5 class="fw-bold mt-4">Vagas recentes</h5>
-                    <div class="d-flex flex-column align-items-center gap-3">
+                    <div class="d-flex flex-column align-items-center gap-3" *ngIf="(cardVacancy.length > 0)">
                         <span *ngFor="let card of cardVacancy; let i = index" class="mx-1">
                             <card-vacancy [short]="false" [card]="card" class="mt-4" *ngIf="i < 3"></card-vacancy>
                         </span>
                         <button class=" w-25 btn btn-view-all fw-bold mt-3" [routerLink]="['{{businessInfo.id}}-all-vacancies']">Ver tudo</button>
+                    </div>
+                    <div class="d-flex flex-column align-items-center gap-3 py-4" *ngIf="!(cardVacancy.length > 0)">
+                        <p>Parece que você ainda não possui nenhuma vaga cadastrada, sinta-se a vontade para publicar uma agora mesmo.</p>
+                        <button class=" w-25 btn btn-view-all fw-bold mt-3" [routerLink]="['{{businessInfo.id}}-all-vacancies']">Publicar vaga</button>
                     </div>
                 </div>
                 <div *ngIf="isLogged && true" class="w-25">
@@ -80,7 +84,7 @@
                     </div>
                     <div class="d-flex flex-column gap-3">
                         <section class="d-flex flex-column align-items-center gap-3 p-4">
-                            <img src="../../../assets/icons/sidebar/profissionais.svg" alt="Coin Factor" class="user-img">
+                            <img src="assets/icons/sidebar/profissionais.svg" alt="Coin Factor" class="user-img">
                             <p class="user-text">Você tem a opção de cadastrar moderadores que estarão lá para auxiliá-lo na publicação de vagas, análise de candidatos e muito mais. Porém, é importante lembrar que cada moderador custará <span class="text-green">10 Coin Factor.</span> Os moderadores utilizarão os Coin Factor disponíveis em sua conta, e estamos aqui para responder a quaisquer dúvidas. Sinta-se à vontade para entrar em contato conosco pelo e-mail efactor@ajuda.com, estamos aqui para ajudar!</p>
                             <button class="btn btn-view-all">Criar moderador</button>
                         </section>
