@@ -12,8 +12,20 @@ export class VacancyService {
 
   public listVacancies(): Array<Vacancy> {
     const businesses = this.businessService.listBusiness();
+
+    console.log("entrei no serviço");
+
+    let dataStorage: string | null;
+
+    dataStorage = sessionStorage.getItem('vacancys');
+
+    if (dataStorage) {
+      console.log("Usando sessionStorage");
+
+      return JSON.parse(dataStorage);
+    }
   
-    return [
+    const vacancysArray: Array<Vacancy> = [
       {
         id: '1',
         businessId: '1',
@@ -43,6 +55,34 @@ export class VacancyService {
         showedInterest: ['1', '2', '3'],
       },
     ];
+
+    sessionStorage.setItem('vacancys', JSON.stringify(vacancysArray));
+    console.log("Usando requisição para API");
+
+    return vacancysArray;
+  }
+
+  public updateVacancys(updatedVacancy: any) {
+    const vacancysArray: Array<Vacancy> = this.listVacancies();
+    const index = vacancysArray.findIndex(vacancy => vacancy.id === vacancy.id);
+  
+    if (index !== -1) {
+      vacancysArray[index] = updatedVacancy;
+      sessionStorage.setItem('vacancys', JSON.stringify(vacancysArray));
+    }
+  }
+
+  public addNewVacancy(newVacancy: any) {
+    const vacancysArray: Array<Vacancy> = this.listVacancies();
+    vacancysArray.push(newVacancy);
+    sessionStorage.setItem('vacancys', JSON.stringify(vacancysArray));
+  }
+
+  public deleteVacancy(id: string) {
+    const vacancysArray: Array<Vacancy> = this.listVacancies();
+    const index = vacancysArray.findIndex(vacancy => vacancy.id === id);
+    vacancysArray.splice(index, 1);
+    sessionStorage.setItem('vacancys', JSON.stringify(vacancysArray));
   }
 
   listInterestedVacancies(id: string): Array<Vacancy> {
