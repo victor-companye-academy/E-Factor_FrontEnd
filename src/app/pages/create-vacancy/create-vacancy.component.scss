@@ -14,32 +14,70 @@
             color: var(--primary);
         }
 
-        p>span, .coin{
-            color: #00B5A0;
+        .text-gray {
+            color: var(--text);
         }
 
-        .coin-quantity{
-            color: #FFC93E;
+        form {
+            height: auto;
+            & > div {
+                background-color: var(--background);
+                height: 100%;
+            }
+
+            .invalid {
+                color: rgb(255, 106, 106);
+                font-size: 0.8rem;
+            }
+
+            input,
+            textarea {
+                &.invalid {
+                    border: 1.5px solid red;
+                }
+                border: none;
+                outline: none;
+                padding: 0.5rem 0 0.5rem 1rem;
+            }
+
+            .title {
+                height: 40px;
+            }
+
+            textarea {
+                min-height: 10rem;
+                height: 30rem;
+            }
+            
+            .description-max{
+                font-size: 0.8rem;
+            }
+        }
+
+        p > span,
+        .coin {
+            color: #00b5a0;
+        }
+
+        .coin-quantity {
+            color: #ffc93e;
             font-size: 2.5rem;
         }
 
-        p>span.email{
+        p > span.email {
             color: var(--text);
             text-decoration: underline;
         }
 
-        .button-request{
+        .button {
+            cursor: pointer;
             width: 14rem;
             color: var(--text-white);
             background-color: var(--secondary);
 
-            &:hover{
+            &:hover {
                 background-color: var(--primary);
             }
-        }
-
-        .card{
-            background-color: var(--background);
         }
     }
 }
