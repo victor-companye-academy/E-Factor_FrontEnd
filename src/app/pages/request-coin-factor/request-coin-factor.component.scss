@@ -14,31 +14,35 @@
             color: var(--primary);
         }
 
-        p>span, .coin, .coin-quantity{
-            color: #00B5A0;
+        p > span,
+        .coin,
+        .coin-quantity {
+            color: #00b5a0;
         }
 
-        .coin-quantity{
-            font-size: 3rem;
-        }
+        .card-request-coin {
+            max-width: 28rem ;
 
-        p>span.email{
-            color: var(--text);
-            text-decoration: underline;
-        }
+            .coin-quantity {
+                font-size: 3rem;
+            }
+            .button-request {
+                width: 14rem;
+                color: var(--text-white);
+                background-color: var(--secondary);
 
-        .button-request{
-            width: 14rem;
-            color: var(--text-white);
-            background-color: var(--secondary);
-
-            &:hover{
-                background-color: var(--primary);
+                &:hover {
+                    background-color: var(--primary);
+                }
+            }
+            .card {
+                background-color: var(--background);
             }
         }
 
-        .card{
-            background-color: var(--background);
+        p > span.email {
+            color: var(--text);
+            text-decoration: underline;
         }
     }
 }

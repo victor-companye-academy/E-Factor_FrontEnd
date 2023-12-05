@@ -98,7 +98,7 @@
                                 <input type="text" formControlName="title" class="fs-6 rounded-3 mt-2 title fw-light"
                                     [ngClass]="{'invalid': titleEmpty || isInvalidTitleLength}"
                                     placeholder="Ex: Vaga para Desenvolvedor Junior em Angular" maxlength="45"
-                                    (keyup)="onKeyup($event)">
+                                    (keyup)="onKeyupTitle($event)">
 
                                 <div *ngIf="titleEmpty" class="mt-1 ms-1">
                                     <span class="invalid fw-light">Campo obrigatório</span>
@@ -116,10 +116,12 @@
 
                                 <textarea id="description" formControlName="description"
                                     class="rounded-3 mt-2 description fs-6 fw-light"
+                                    [maxlength]="descriptionMaxLength"
                                     placeholder="Ex: Vaga para Desenvolvedor Junior em Angular"
-                                    [ngClass]="{'invalid': descriptionEmpty}" (keyup)="onTextArea($event)"></textarea>
+                                    [ngClass]="{'invalid': descriptionEmpty}"
+                                    (keyup)="onkeyupDescription($event)"></textarea>
 
-                                <div class="description-max fw-light w-100 text-end">
+                                <div class="description-max fw-light w-100 text-end mt-2">
                                     Limite disponivel: {{textAreaLength}}
                                 </div>
 
