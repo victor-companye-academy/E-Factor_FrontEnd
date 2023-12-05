@@ -12,6 +12,7 @@ import { VacancyService } from 'src/app/core/service/vacancy/vacancy.service';
 export class BusinessProfileComponent {
 
   protected isLogged: boolean = true;
+  protected isCollapsed = false;
   protected showCellphone = true;
   protected isEditInfoModalOpen = false;
   protected isEditAboutModalOpen = false;

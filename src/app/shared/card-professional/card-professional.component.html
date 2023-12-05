@@ -1,5 +1,5 @@
-<article *ngIf="card" class="card d-flex border-0 rounded-4 card container flex-column px-3 pt-3  overflow-hidden"
-    [ngClass]="{'flex-row': !isShort}">
+<article *ngIf="card" class="card d-flex border-0 rounded-4 card container flex-column px-3 pt-3 overflow-hidden"
+    [ngClass]="{'flex-row': !isShort}" [routerLink]="['/professional-profile', card.id]">
 
     <section class="content d-flex overflow-hidden">
         <img src="{{ card.photo || 'assets/imgs/default-profile.svg' }}" alt="Logo usuario"

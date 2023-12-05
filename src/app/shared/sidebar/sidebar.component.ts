@@ -39,4 +39,6 @@ export class SidebarComponent {
       parameters: ['/about', 'assets/icons/sidebar/sobre.svg']
     }
   ]
+
+  isCollapsed = false;
 }
