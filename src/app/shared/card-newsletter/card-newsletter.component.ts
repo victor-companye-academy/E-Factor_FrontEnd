@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CardDetails } from 'src/app/core/interfaces/card-details';
+import { CardDetailsLink } from 'src/app/core/interfaces/card-details-link';
 
 @Component({
   selector: 'card-newsletter',
@@ -7,5 +7,9 @@ import { CardDetails } from 'src/app/core/interfaces/card-details';
   styleUrls: ['./card-newsletter.component.scss']
 })
 export class CardNewsletterComponent {
-  @Input({alias:'card'}) public card?: CardDetails;
+  @Input({alias:'card'}) public card?: CardDetailsLink;
+
+  redirectToLink(link: string) {
+    window.open(link, '_blank');
+  }
 }

@@ -5,6 +5,7 @@ export interface BusinessInfo {
     city: string,
     state: string,
     email: string;
-    telephone: string;
+    cellphone: string;
     about: string;
+    coins: number;
   }

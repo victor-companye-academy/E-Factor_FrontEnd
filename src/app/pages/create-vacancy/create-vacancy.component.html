@@ -1,0 +1,149 @@
+<main class="d-flex w-100 main">
+    <div class="sidebar">
+        <app-sidebar></app-sidebar>
+    </div>
+
+    <div class="w-100 fadeIn overflow-hidden">
+        <div class="w-100 container div-main fadeIn">
+
+            <div class="row px-4">
+                <div class="d-flex align-items-end">
+                    <button type="button"
+                        class="fadeIn border-0 mt-5 tobble w-100 d-flex justify-content-end bg-transparent">
+                        <img src="assets/icons/tobble.svg" alt="Icone seta" title="Mudar modo">
+                    </button>
+
+                    <button type="button" class="d-flex align-items-center border-0 bg-transparent mx-4">
+                        <img src="assets/icons/coin-factor.svg" width="20px" alt="Ícone da coin factor"
+                            title="Coin Factor">
+                        <span class="fw-medium ms-2">
+                            {{coin}}
+                        </span>
+                    </button>
+
+                    <button type="button" class="d-flex align-items-center border-0 bg-transparent">
+                        <img src="assets/icons/bell.svg" alt="Ícone de notificação">
+                    </button>
+                </div>
+
+                <div class="col">
+                    <section class="pb-1">
+                        <h1 class="fw-bold fs-5 mt-1 w-100 py-4 pb-0">
+                            Criação de vaga
+                        </h1>
+
+                        <p>
+                            Publicando sua vaga na e-factor você estará impactando vidas.
+                        </p>
+
+                        <h2 class="d-flex align-items-center mt-4 fs-3">
+                            <span class="coin me-2 fw-bold">Coin Factor</span> <span class="text-gray">restantes:</span>
+                            <span class="coin-quantity d-flex">
+                                <img src="assets/icons/coin-factor.svg" alt="Ícone da coin factor" title="Coin Facor"
+                                    class="mx-3" width="30px">
+                                {{coin}}
+                            </span>
+                        </h2>
+
+                        <div class="ms-2 mt-5">
+                            <p>
+                                Olá,
+                            </p>
+
+                            <p>
+                                Ao criar uma nova vaga em nossa plataforma, é importante estar ciente de que a criação
+                                dessa vaga resultará em um gasto de <span class="coin fw-semibold">1 Coin Factor</span>.
+                                Isso significa que o seu saldo de
+                                <span class="coin fw-semibold">Coin Factor</span> diminuirá proporcionalmente à
+                                quantidade de vagas que você criar.
+                            </p>
+
+                            <p>
+                                É fundamental notar que, se o seu saldo de <span class="coin fw-semibold">Coin
+                                    Factor</span> não for suficiente para cobrir o
+                                custo de criação da vaga, você não poderá prosseguir com o processo de criação.
+                                Certifique-se de que você possui a quantidade adequada de <span
+                                    class="coin fw-semibold">Coin Factor</span> disponível em sua
+                                conta antes de iniciar o processo.
+                            </p>
+
+                            <p>
+                                Caso você se encontre em uma situação em que não possui saldo suficiente, não se
+                                preocupe. Você pode solicitar mais <span class="coin fw-semibold">Coin Factor</span>
+                                facilmente. Basta acessar o seu perfil na
+                                seção dedicada a <span class="coin fw-semibold">Coin Factor</span> e solicitar mais.
+                                Nossos administradores estarão prontos
+                                para atender a sua solicitação.
+                            </p>
+
+                            <p>
+                                Estamos sempre disponíveis para esclarecer qualquer dúvida ou ajudá-lo no que for
+                                necessário. Sinta-se à vontade para entrar em contato conosco atráves do e-mail
+                                <span class="email">efactor@ajuda.com</span> sempre que precisar.
+                            </p>
+
+                            <p>
+                                Obrigado por utilizar nossa plataforma e boa sorte na criação de sua vaga!
+                            </p>
+                        </div>
+                    </section>
+                </div>
+
+                <section class="pb-2 rounded-3  border-0 w-100 col card-title-description">
+                    <form [formGroup]="form" (submit)="onSubmit()"
+                        class="w-100 h-100 d-flex flex-column align-items-end">
+                        <div class="h-100 rounded-3 p-4 w-100">
+                            <label for="" class="text-color-primary mt-3 d-flex flex-column">
+                                Titulo da vaga
+
+                                <input type="text" formControlName="title" class="fs-6 rounded-3 mt-2 title fw-light"
+                                    [ngClass]="{'invalid': titleEmpty || isInvalidTitleLength}"
+                                    placeholder="Ex: Vaga para Desenvolvedor Junior em Angular" maxlength="45"
+                                    (keyup)="onKeyupTitle($event)">
+
+                                <div class="d-flex">
+                                    <div *ngIf="titleEmpty" class="mt-1 ms-1">
+                                        <span class="invalid fw-light">Campo obrigatório</span>
+                                    </div>
+
+                                    <div *ngIf="isInvalidTitleLength" class="mt-1 ms-1">
+                                        <span class="invalid fw-light">Mínimo: {{titleMinLength}}, faltam
+                                            {{titleMinLength - titleLength}}</span>
+                                    </div>
+                                </div>
+
+
+                            </label>
+
+
+                            <label for="description" class="text-color-primary mt-3 d-flex flex-column">
+                                Descrição da vaga
+
+                                <textarea id="description" formControlName="description"
+                                    class="rounded-3 mt-2 description fs-6 fw-light" [maxlength]="descriptionMaxLength"
+                                    placeholder="Ex: Vaga para Desenvolvedor Junior em Angular"
+                                    [ngClass]="{'invalid': descriptionEmpty}" (keyup)="onkeyupDescription($event)">
+                                </textarea>
+
+                                <div class="d-flex">
+                                    <div *ngIf=" descriptionEmpty" class="mt-1 ms-1 w-100">
+                                        <span class="invalid fw-light">Campo obrigatório</span>
+                                    </div>
+
+                                    <div class="description-max fw-light w-100 text-end mt-2">
+                                        Limite disponivel: {{textAreaLength}}
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="button border-0 py-2 rounded-3 mt-3 mb-2">
+                            CONTINUAR
+                        </button>
+                    </form>
+                </section>
+            </div>
+        </div>
+        <app-footer></app-footer>
+    </div>
+</main>

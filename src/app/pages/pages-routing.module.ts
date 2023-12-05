@@ -14,7 +14,12 @@ import { ProfessionalsComponent } from './professionals/professionals.component'
 import { BusinessUserComponent } from './business-user/business-user.component';
 import { BusinessProfileComponent } from './business-profile/business-profile.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
+import { ProfessionalProfileComponent } from './professional-profile/professional-profile.component';
 import { VacanciesComponent } from './vacancies/vacancies.component';
+import { CreateVacancyComponent } from './create-vacancy/create-vacancy.component';
+import { RequestCoinFactorComponent } from './request-coin-factor/request-coin-factor.component';
+import { SendRequestComponent } from './send-request-coin/send-request.component';
+import { CreateVacancyDetailsComponent } from './create-vacancy-details/create-vacancy-details.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -33,8 +38,22 @@ const routes: Routes = [
   { path: 'confirm-code/:email', component: CodeConfirmationComponent },
   { path: 'change-password', component: ChangePasswordComponent },
   { path: 'create-business-user', component: BusinessUserComponent },
-  { path: 'business-profile', component: BusinessProfileComponent },
-  {path: 'newsletter', component: NewsletterComponent},
+  {
+    path: 'create-vacancy',
+    children: [
+      {path:'', component: CreateVacancyComponent},
+      {path:'details', component: CreateVacancyDetailsComponent}
+    ]
+  },
+  {
+    path: 'request-coin-factor',
+    children: [
+      { path: '', component: RequestCoinFactorComponent },
+      { path: 'send', component: SendRequestComponent }]
+  },
+  { path: 'business-profile/:id', component: BusinessProfileComponent },
+  { path: 'professional-profile/:id', component: ProfessionalProfileComponent },
+  { path: 'newsletter', component: NewsletterComponent },
   { path: '**', redirectTo: '' },
 ];
 

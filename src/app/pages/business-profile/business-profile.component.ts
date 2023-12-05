@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { BusinessInfo } from 'src/app/core/interfaces/business-info';
+import { ActivatedRoute } from '@angular/router';
+import { BusinessService } from 'src/app/core/service/business/business.service';
 import { Vacancy } from 'src/app/core/interfaces/vacancy';
 import { VacancyService } from 'src/app/core/service/vacancy/vacancy.service';
 
@@ -10,20 +11,52 @@ import { VacancyService } from 'src/app/core/service/vacancy/vacancy.service';
 })
 export class BusinessProfileComponent {
 
-  constructor (private vacancyService: VacancyService) { }
-  
-  protected cardVacancy: Array<Vacancy> = this.vacancyService.listVacancies();
+  protected isLogged: boolean = true;
+  protected showCellphone = true;
+  protected isEditInfoModalOpen = false;
+  protected isEditAboutModalOpen = false;
+  protected modalIndex: number = -1;
 
-  protected businessInfo: Array<BusinessInfo> = [
-    {
-      id: "1",
-      photo: 'assets/imgs/bradesco-photo.png',
-      name: 'Banco Bradesco S.A',
-      city: 'São Paulo',
-      state: 'Sao Paulo',
-      email: 'bradesco@email.com',
-      telephone: '(11) 99123-4567',
-      about: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente deleniti quo ipsum tempore illo. Perspiciatis eveniet, quasi architecto quidem suscipit odit! Assumenda asperiores facilis quam a consectetur blanditiis recusandae, laboriosam commodi ipsam optio deserunt quasi similique iure. Eveniet, doloribus? Tempora repudiandae in, veniam ab quasi voluptates alias quibusdam quia, fuga beatae quo, autem corrupti suscipit eius quis cum natus dolorum velit dicta accusamus explicabo! Quas rem dolorem perspiciatis consequuntur obcaecati quae esse? Sit hic voluptas minus in numquam alias odit corrupti, illo vel maxime doloremque unde optio ipsum placeat nihil velit natus non repellendus id, aliquam expedita. Dolorem, repellat a.',
+  constructor (private vacancyService: VacancyService, private route: ActivatedRoute, private businessService: BusinessService) { }
+  
+  protected id = this.route.snapshot.paramMap.get('id')?.toString() || '';
+  protected businessInfo = this.businessService.listBusiness().find(professional => professional.id === this.id);
+  protected cardVacancy: Array<Vacancy> = this.vacancyService.listVacanciesByBusiness(this.id);
+
+  openEditModal(index: number) {
+    switch (index) {
+      case 0:
+        this.modalIndex = 0;
+        this.isEditInfoModalOpen = true;
+        break;
+      case 1:
+        this.modalIndex = 1;
+        this.isEditAboutModalOpen = true;
+        break;
     }
-  ];
+  }
+
+  closeEditModal() {
+    this.isEditInfoModalOpen = false;
+    this.isEditAboutModalOpen = false;
+  }
+
+  saveProfileChanges(updatedProfile: any) {
+    if (this.businessInfo){
+      switch (this.modalIndex) {
+        case 0:
+          this.businessInfo = updatedProfile;
+          break;
+        case 1:
+          this.businessInfo.about = updatedProfile;
+          break;
+      }
+    }
+    this.modalIndex = -1;
+
+    this.businessService.updateBusiness(this.businessInfo);
+    console.log('Perfil Atualizado:', updatedProfile);
+
+    this.closeEditModal();
+  }
 }

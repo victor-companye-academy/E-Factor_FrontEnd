@@ -1,7 +1,7 @@
 
 import { Component } from '@angular/core';
 import { PaginatorState } from 'primeng/paginator';
-import { Professional } from 'src/app/core/interfaces/professional';
+import { ProfessionalInfo } from 'src/app/core/interfaces/professional-info';
 import { Search } from 'src/app/core/interfaces/search';
 import { ProfessionalService } from 'src/app/core/service/professional/professional.service';
 import { formatText } from 'src/app/core/utils/formatText';
@@ -20,8 +20,8 @@ export class ProfessionalsComponent {
   protected toShow: boolean = true;
   protected visible: boolean = false;
 
-  protected professional: Array<Professional> = this.professionalService.listProfessionals()
-  protected professionalSearch: Array<Professional> = this.professional;
+  protected professional: Array<ProfessionalInfo> = this.professionalService.listProfessionals()
+  protected professionalSearch: Array<ProfessionalInfo> = this.professional;
 
   protected first: number = 0;
   protected totalRecords: number = this.professionalSearch.length || 0
@@ -46,7 +46,7 @@ export class ProfessionalsComponent {
     this.toShow = this.isEmptylist(this.professionalSearch)
   }
 
-  private setList(event?: Search): Array<Professional> {
+  private setList(event?: Search): Array<ProfessionalInfo> {
 
     if (!event) {
       if (this.validSearch(this.searchObj)) {
@@ -69,12 +69,12 @@ export class ProfessionalsComponent {
     return this.professionalSearch;
   }
 
-  private isEmptylist(list: Array<Professional>): boolean {
+  private isEmptylist(list: Array<ProfessionalInfo>): boolean {
     return list.length ? true : false
   }
 
-  private applySearch(list: Array<Professional>, search: Search): Array<Professional> {
-    let newArray: Array<Professional> = this.professional;
+  private applySearch(list: Array<ProfessionalInfo>, search: Search): Array<ProfessionalInfo> {
+    let newArray: Array<ProfessionalInfo> = this.professional;
     if (search) {
       for (const key in search) {
         if (search.hasOwnProperty(key)) {
@@ -155,7 +155,7 @@ export class ProfessionalsComponent {
     return isTrue;
   }
 
-  private searchBySkill(list: Array<Professional>, search: string): Array<Professional> {
+  private searchBySkill(list: Array<ProfessionalInfo>, search: string): Array<ProfessionalInfo> {
     const newList = list
       .filter(card => card.skills
         .map(skill => skill.toLowerCase())
@@ -163,12 +163,12 @@ export class ProfessionalsComponent {
     return newList;
   }
 
-  private searchByPosition(list: Array<Professional>, search: string): Array<Professional> {
-    const newList: Array<Professional> = list.filter(card => formatText(card.title.toLowerCase()) === formatText(search.toLowerCase()))
+  private searchByPosition(list: Array<ProfessionalInfo>, search: string): Array<ProfessionalInfo> {
+    const newList: Array<ProfessionalInfo> = list.filter(card => formatText(card.seniority.toLowerCase()) === formatText(search.toLowerCase()))
     return newList
   }
 
-  private pagination(list: Array<Professional>): Array<Professional> {
+  private pagination(list: Array<ProfessionalInfo>): Array<ProfessionalInfo> {
     const newList = list.slice(this.first, (this.rows + this.first))
     return newList;
   }
@@ -177,10 +177,8 @@ export class ProfessionalsComponent {
     this.visible = true;
   }
 
-  protected modal(id: number):void{
+  protected modal(id: string):void{
     const element = document.querySelector('[about-vacancy]');
-
-    
   }
 
   protected onPageChange(event: PaginatorState) {
