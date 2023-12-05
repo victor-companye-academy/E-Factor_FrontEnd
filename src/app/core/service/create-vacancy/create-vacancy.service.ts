@@ -33,6 +33,7 @@ export class CreateVacancyService {
 
   public setDescription(description: string): void {
     this.vacancyObj.description = description;
+    console.log(this.vacancyObj)
   }
 
   //método temporário (será inserido pelo backend?)

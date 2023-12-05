@@ -4,13 +4,10 @@
     </div>
 
     <div class="w-100 fadeIn overflow-hidden">
-        <div class="w-100 container div-main">
-            <button type="button"
-                class="fadeIn border-0 mt-5 tobble w-100 d-flex justify-content-end px-4 bg-transparent">
-                <img src="assets/icons/tobble.svg" alt="Icone seta" title="Mudar modo">
-            </button>
+        <div class="w-100 container div-main px-4">
+            <app-header></app-header>
 
-            <section class="mb-0 w-100 p-4">
+            <section class="mb-0 w-100 py-4">
                 <div
                     class="fadeInDown d-flex flex-column justify-content-center align-items-start background-students rounded-4 px-5 overflow-hidden">
                     <img src="assets/icons/logo-site.svg" width="270px" alt="Logo e-factor" title="e-factor">
@@ -22,7 +19,7 @@
 
             <!--   -->
 
-            <section class="mt-0 w-100 px-4 py-1">
+            <section class="mt-0 w-100  py-1">
                 <div *ngIf="cardProfessional[1]" class="section-professional d-flex justify-content-center row">
                     <div class="see-more pt-2 col-lg-12 col-xl-4">
                         <h3 class="fw-bold fs-6 mt-4">
@@ -47,7 +44,7 @@
                 </div>
             </section>
 
-            <section class="w-100 px-4 py-1">
+            <section class="w-100 py-1">
                 <div *ngIf="cardVacancy[1]" class="div-vacancy row justify-content-center">
 
                     <card-vacancy [short]="true" [card]="cardVacancy[1]" class="mt-4 col-lg-6 col-xl-4"></card-vacancy>
@@ -70,7 +67,7 @@
                 </div>
             </section>
 
-            <section class="mt-5 w-100 p-4">
+            <section class="mt-5 w-100 py-4">
                 <div class="div-aboult">
                     <h2 class="fw-bold fs-5 text-center">
                         Como funciona a E-factor

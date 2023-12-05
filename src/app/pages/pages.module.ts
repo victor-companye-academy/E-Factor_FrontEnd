@@ -114,6 +114,7 @@ import { VacanciesComponent } from './vacancies/vacancies.component';
 import { CreateVacancyComponent } from './create-vacancy/create-vacancy.component';
 import { RequestCoinFactorComponent } from './request-coin-factor/request-coin-factor.component';
 import { SendRequestComponent } from './send-request-coin/send-request.component';
+import { CreateVacancyDetailsComponent } from './create-vacancy-details/create-vacancy-details.component';
 
 @NgModule({
   declarations: [
@@ -136,6 +137,7 @@ import { SendRequestComponent } from './send-request-coin/send-request.component
     CreateVacancyComponent,
     RequestCoinFactorComponent,
     SendRequestComponent,
+    CreateVacancyDetailsComponent,
   ],
   imports: [
     CommonModule,

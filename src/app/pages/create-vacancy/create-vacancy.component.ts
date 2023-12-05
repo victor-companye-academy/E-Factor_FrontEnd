@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CreateVacancyService } from 'src/app/core/service/create-vacancy/create-vacancy.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { CreateVacancyService } from 'src/app/core/service/create-vacancy/create
 })
 export class CreateVacancyComponent {
 
-  constructor(private createVacancyService: CreateVacancyService) { }
+  constructor(private createVacancyService: CreateVacancyService, private router:Router) { }
 
   protected titleMaxLength!: number;
   protected titleMinLength!: number;
@@ -100,6 +101,8 @@ export class CreateVacancyComponent {
 
       this.createVacancyService.setTitle(title || '');
       this.createVacancyService.setDescription(description || '');
+
+      this.router.navigateByUrl("/create-vacancy/details");
     }
   }
 
