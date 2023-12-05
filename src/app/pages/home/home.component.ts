@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CardDetails } from 'src/app/core/interfaces/card-details';
-import { CardProfessional } from 'src/app/core/interfaces/professional';
+import { ProfessionalInfo } from 'src/app/core/interfaces/professional-info';
 import { Vacancy } from 'src/app/core/interfaces/vacancy';
 import { CardDetailsService } from 'src/app/core/service/cardDetails/card-details.service';
 import { ProfessionalService } from 'src/app/core/service/professional/professional.service';
@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
 
   protected cardVacancy: Array<Vacancy> = this.vacancyService.listVacancies();
 
-  protected cardProfessional: Array<CardProfessional> = this.professionalService.listProfessionals();
+  protected cardProfessional: Array<ProfessionalInfo> = this.professionalService.listProfessionals();
 
   public responsiveOptions: any[] | undefined;
 

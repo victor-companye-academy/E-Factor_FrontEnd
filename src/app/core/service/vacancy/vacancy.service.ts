@@ -17,7 +17,7 @@ export class VacancyService {
 
     let dataStorage: string | null;
 
-    dataStorage = sessionStorage.getItem('vacancys');
+    dataStorage = sessionStorage.getItem('vacancies');
 
     if (dataStorage) {
       console.log("Usando sessionStorage");
@@ -25,7 +25,7 @@ export class VacancyService {
       return JSON.parse(dataStorage);
     }
   
-    const vacancysArray: Array<Vacancy> = [
+    const vacanciesArray: Array<Vacancy> = [
       {
         id: '1',
         businessId: '1',
@@ -56,33 +56,33 @@ export class VacancyService {
       },
     ];
 
-    sessionStorage.setItem('vacancys', JSON.stringify(vacancysArray));
+    sessionStorage.setItem('vacancies', JSON.stringify(vacanciesArray));
     console.log("Usando requisição para API");
 
-    return vacancysArray;
+    return vacanciesArray;
   }
 
   public updateVacancys(updatedVacancy: any) {
-    const vacancysArray: Array<Vacancy> = this.listVacancies();
-    const index = vacancysArray.findIndex(vacancy => vacancy.id === vacancy.id);
+    const vacanciesArray: Array<Vacancy> = this.listVacancies();
+    const index = vacanciesArray.findIndex(vacancy => vacancy.id === vacancy.id);
   
     if (index !== -1) {
-      vacancysArray[index] = updatedVacancy;
-      sessionStorage.setItem('vacancys', JSON.stringify(vacancysArray));
+      vacanciesArray[index] = updatedVacancy;
+      sessionStorage.setItem('vacancies', JSON.stringify(vacanciesArray));
     }
   }
 
   public addNewVacancy(newVacancy: any) {
-    const vacancysArray: Array<Vacancy> = this.listVacancies();
-    vacancysArray.push(newVacancy);
-    sessionStorage.setItem('vacancys', JSON.stringify(vacancysArray));
+    const vacanciesArray: Array<Vacancy> = this.listVacancies();
+    vacanciesArray.push(newVacancy);
+    sessionStorage.setItem('vacancies', JSON.stringify(vacanciesArray));
   }
 
   public deleteVacancy(id: string) {
-    const vacancysArray: Array<Vacancy> = this.listVacancies();
-    const index = vacancysArray.findIndex(vacancy => vacancy.id === id);
-    vacancysArray.splice(index, 1);
-    sessionStorage.setItem('vacancys', JSON.stringify(vacancysArray));
+    const vacanciesArray: Array<Vacancy> = this.listVacancies();
+    const index = vacanciesArray.findIndex(vacancy => vacancy.id === id);
+    vacanciesArray.splice(index, 1);
+    sessionStorage.setItem('vacancies', JSON.stringify(vacanciesArray));
   }
 
   listInterestedVacancies(id: string): Array<Vacancy> {

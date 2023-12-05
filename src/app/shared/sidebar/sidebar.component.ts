@@ -37,6 +37,10 @@ export class SidebarComponent {
     {
       title: "Sobre",
       parameters: ['/about', 'assets/icons/sidebar/sobre.svg']
+    },
+    {
+      title: "Criar vaga",
+      parameters: ['/create-vacancy', 'assets/icons/sidebar/plus.svg']
     }
   ]
 

@@ -1,0 +1,48 @@
+:host {
+    color: var(--text);
+
+    .main {
+        min-height: 100vh;
+        .div-main {
+            min-height: 100vh;
+        }
+        h2,
+        h1,
+        h3,
+        span,
+        .text-color-primary {
+            color: var(--primary);
+        }
+
+        p > span,
+        .coin,
+        .coin-quantity {
+            color: #00b5a0;
+        }
+
+        .card-request-coin {
+            max-width: 28rem ;
+
+            .coin-quantity {
+                font-size: 3rem;
+            }
+            .button-request {
+                width: 14rem;
+                color: var(--text-white);
+                background-color: var(--secondary);
+
+                &:hover {
+                    background-color: var(--primary);
+                }
+            }
+            .card {
+                background-color: var(--background);
+            }
+        }
+
+        p > span.email {
+            color: var(--text);
+            text-decoration: underline;
+        }
+    }
+}

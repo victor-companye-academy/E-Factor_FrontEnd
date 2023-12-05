@@ -111,6 +111,10 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import { ProfessionalProfileComponent } from './professional-profile/professional-profile.component';
 import { VacanciesComponent } from './vacancies/vacancies.component';
+import { CreateVacancyComponent } from './create-vacancy/create-vacancy.component';
+import { RequestCoinFactorComponent } from './request-coin-factor/request-coin-factor.component';
+import { SendRequestComponent } from './send-request-coin/send-request.component';
+import { CreateVacancyDetailsComponent } from './create-vacancy-details/create-vacancy-details.component';
 
 @NgModule({
   declarations: [
@@ -130,6 +134,10 @@ import { VacanciesComponent } from './vacancies/vacancies.component';
     NewsletterComponent,
     ProfessionalProfileComponent,
     VacanciesComponent,
+    CreateVacancyComponent,
+    RequestCoinFactorComponent,
+    SendRequestComponent,
+    CreateVacancyDetailsComponent,
   ],
   imports: [
     CommonModule,

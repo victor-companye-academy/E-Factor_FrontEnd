@@ -5,7 +5,8 @@
         background-color: var(--background);
         color: var(--text);
 
-        max-height: 300px;
+        max-height: 18.75rem;
+        min-height: 12.5rem;
 
         .bg-var-primary {
             background-color: var(--primary);

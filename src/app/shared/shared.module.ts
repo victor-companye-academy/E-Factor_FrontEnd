@@ -42,7 +42,8 @@ import { AboutVacancyComponent } from './about-vacancy/about-vacancy.component';
     FilterComponent,
     SearchComponent,
     AboutVacancyComponent,
-    AboutVacancyComponent
+    AboutVacancyComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
@@ -69,7 +70,8 @@ import { AboutVacancyComponent } from './about-vacancy/about-vacancy.component';
     EditProfileInfosModalComponent,
     FilterComponent,
     SearchComponent,
-    AboutVacancyComponent
+    AboutVacancyComponent,
+    HeaderComponent
   ]
 })
 export class SharedModule { }
