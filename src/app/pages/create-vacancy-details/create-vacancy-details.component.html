@@ -8,29 +8,101 @@
             <div class="row px-4">
                 <app-header></app-header>
 
-                <div class="col">
-                    <section class="pb-1">
-                        <h1 class="fw-bold fs-5 mt-1 w-100 py-4 pb-0">
-                            Criação de vaga
-                        </h1>
+                <section class="pb-1">
+                    <h1 class="fw-bold fs-5 mt-1 w-100 py-4 pb-0">
+                        Criação de vaga
+                    </h1>
 
-                        <p>
-                            Publicando sua vaga na e-factor você estará impactando vidas.
-                        </p>
+                    <p>
+                        Publicando sua vaga na e-factor você estará impactando vidas.
+                    </p>
 
-                        <div class="pb-2 rounded-3  border-0 w-100 col card-title-description">
-                            <form class="w-100 h-100 d-flex flex-column align-items-end overflow-hidden">
-                                <div class="h-100 rounded-3 p-4 w-100">
+                    <form class="w-100 d-flex flex-column align-items-end">
+                        <div class="div-card rounded-3 w-100 p-4 row m-0">
+                            <div class="col mt-2 mb-4">
+                                <div class="div-label">
+
+                                    <label for="skills">
+                                        <figure class="d-flex align-items-center m-0">
+                                            <img src="assets/icons/create-vacancy/list.svg" alt="Ícone de lista"
+                                                title="Skills">
+                                            <figcaption class="fw-normal ms-2">
+                                                Quais habilidades serão necessárias para este cargo?
+                                            </figcaption>
+                                        </figure>
+
+                                        <input type="text" id="skills" placeholder="Ex: Angular"
+                                            class="m-0 mt-2 rounded-3 px-3 py-1 border-0 w-100 fw-light">
+                                    </label>
+
+                                    <label for="position" class="mt-5">
+                                        Qual o nível de senioridade necessária?
+
+                                        <div class="div-select position-relative m-0 p-0">
+                                            <select #select id="position"
+                                                class="m-0 mt-2 rounded-3 px-3 py-1 border-0 w-100 fw-light">
+                                                <option selected disabled>Escolha uma opão</option>
+                                                <option value="">Junior</option>
+                                                <option value="">Pleno</option>
+                                                <option value="">Senior</option>
+                                            </select>
+
+                                            <img src="assets/icons/create-vacancy/arrow-select.svg" alt=""
+                                                title="Selecione uma opção">
+                                        </div>
+
+                                    </label>
+
+                                    <label for="developmentArea" class="mt-5">
+                                        Qual o nível de senioridade necessária?
+
+                                        <div class="div-select position-relative m-0 p-0">
+                                            <select #select id="developmentArea"
+                                                class="m-0 mt-2 rounded-3 px-3 py-1 border-0 w-100 fw-light">
+                                                <option selected disabled>Escolha uma opão</option>
+                                                <option value="">Front-End</option>
+                                                <option value="">Back-End</option>
+                                                <option value="">Tech Lider</option>
+                                                <option value="">QA</option>
+                                            </select>
+
+                                            <img src="assets/icons/create-vacancy/arrow-select.svg" alt=""
+                                                title="Selecione uma opção">
+                                        </div>
+
+                                    </label>
 
                                 </div>
+                            </div>
 
-                                <button type="submit" class="button border-0 py-2 rounded-3 mt-3 mb-2">
-                                    CONTINUAR
-                                </button>
-                            </form>
+                            <div class="col">
+                                <div class="div-label">
+
+                                    <label for="skills overflow-hidden">
+                                        <figure class="d-flex align-items-center m-0">
+                                            <img src="assets/icons/create-vacancy/list.svg" alt="Ícone de lista"
+                                                title="Skills">
+                                            <figcaption class="fw-normal ms-2">
+                                                Quais habilidades serão necessárias para este cargo?
+                                            </figcaption>
+                                        </figure>
+
+                                        <input type="text" id="skills" placeholder="Ex: Angular"
+                                            class="m-0 mt-2 rounded-3 px-3 py-1 border-0 w-100">
+                                    </label>
+
+                                </div>
+                            </div>
+
                         </div>
-                    </section>
-                </div>
+
+                        <button type="submit" class="button border-0 py-2 rounded-3 mt-3 mb-2">
+                            CONTINUAR
+                        </button>
+                    </form>
+
+                </section>
+
             </div>
         </div>
         <app-footer></app-footer>

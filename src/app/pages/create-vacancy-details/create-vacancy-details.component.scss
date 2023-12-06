@@ -7,68 +7,48 @@
             min-height: 100vh;
         }
         h2,
-        h1,
-        h3,
-        span,
-        .text-color-primary {
+        h1 {
             color: var(--primary);
         }
 
-        .text-gray {
-            color: var(--text);
-        }
-
-        .card-title-description {
-            form {
-                height: auto;
-                & > div {
-                    background-color: var(--background);
-                    height: 100%;
-                }
-
-                .invalid {
-                    color: rgb(255, 106, 106);
-                    font-size: 0.8rem;
-                }
-
-                input,
-                textarea {
-                    &.invalid {
-                        border: 1.5px solid red;
-                    }
-                    border: none;
-                    outline: none;
-                    padding: 0.5rem 0 0.5rem 1rem;
-                }
-
-                .title {
-                    height: 40px;
-                }
-
-                textarea {
-                    min-height: 10rem;
-                    height: 30rem;
-                }
-
-                .description-max {
-                    font-size: 0.8rem;
+        form {
+            .div-card {
+                background-color: var(--background);
+                .div-label {
+                    max-width: 28rem;
                 }
             }
-        }
 
-        p > span,
-        .coin {
-            color: #00b5a0;
-        }
+            label,
+            figcaption {
+                min-width: 100%;
+                color: var(--secondary-70);
+            }
 
-        .coin-quantity {
-            color: #ffc93e;
-            font-size: 2.5rem;
-        }
+            .div-select {
+                select {
+                    outline: none;
+                    height: 2.6rem;
+                    appearance: none;
+                }
+                img {
+                    position: absolute;
+                    top: 50%;
+                    left: 90%;
+                }
+            }
 
-        p > span.email {
-            color: var(--text);
-            text-decoration: underline;
+            input {
+                outline: none;
+
+                &[type="text"] {
+                    height: 2.5rem;
+                }
+
+                &::placeholder {
+                    font-weight: 300;
+                }
+            }
         }
 
         .button {

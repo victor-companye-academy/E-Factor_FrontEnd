@@ -6,7 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./create-vacancy-details.component.scss']
 })
 export class CreateVacancyDetailsComponent {
-
   ngOnInit(): void {
   }
 }

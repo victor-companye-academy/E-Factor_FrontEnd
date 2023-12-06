@@ -93,12 +93,14 @@
                     <form [formGroup]="form" (submit)="onSubmit()"
                         class="w-100 h-100 d-flex flex-column align-items-end">
                         <div class="h-100 rounded-3 p-4 w-100">
-                            <label for="" class="text-color-primary mt-3 d-flex flex-column">
+                            <label for="title" class="text-color-primary mt-3 d-flex flex-column">
                                 Titulo da vaga
 
-                                <input type="text" formControlName="title" class="fs-6 rounded-3 mt-2 title fw-light"
+                                <input type="text" formControlName="title" id="title"
+                                    class="fs-6 rounded-3 mt-2 title fw-light"
                                     [ngClass]="{'invalid': titleEmpty || isInvalidTitleLength}"
-                                    placeholder="Ex: Vaga para Desenvolvedor Junior em Angular" maxlength="45"
+                                    placeholder="Ex: Vaga para Desenvolvedor Junior em Angular"
+                                    [maxlength]="titleMaxLength" [minlength]="titleMinLength"
                                     (keyup)="onKeyupTitle($event)">
 
                                 <div class="d-flex">
@@ -112,9 +114,7 @@
                                     </div>
                                 </div>
 
-
                             </label>
-
 
                             <label for="description" class="text-color-primary mt-3 d-flex flex-column">
                                 Descrição da vaga
