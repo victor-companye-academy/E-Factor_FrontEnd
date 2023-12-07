@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { SidebarLinks } from 'src/app/core/interfaces/sidebar-links';
 
@@ -41,8 +41,17 @@ export class SidebarComponent {
     {
       title: "Criar vaga",
       parameters: ['/create-vacancy', 'assets/icons/sidebar/plus.svg']
+    },
+    {
+      title: "Extrato",
+      parameters: ['/extract', 'assets/icons/sidebar/extrato.svg']
     }
   ]
 
-  isCollapsed = false;
+  isCollapsed = window.innerWidth < 991;
+  
+  @HostListener('window:resize', ['$event'])
+  onWindowResize(event: Event) {
+    this.isCollapsed = window.innerWidth < 991;
+  }
 }

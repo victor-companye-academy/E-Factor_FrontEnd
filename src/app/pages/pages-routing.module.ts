@@ -20,6 +20,7 @@ import { CreateVacancyComponent } from './create-vacancy/create-vacancy.componen
 import { RequestCoinFactorComponent } from './request-coin-factor/request-coin-factor.component';
 import { SendRequestComponent } from './send-request-coin/send-request.component';
 import { CreateVacancyDetailsComponent } from './create-vacancy-details/create-vacancy-details.component';
+import { ExtractComponent } from './extract/extract.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -54,6 +55,7 @@ const routes: Routes = [
   { path: 'business-profile/:id', component: BusinessProfileComponent },
   { path: 'professional-profile/:id', component: ProfessionalProfileComponent },
   { path: 'newsletter', component: NewsletterComponent },
+  { path: 'extract', component: ExtractComponent },
   { path: '**', redirectTo: '' },
 ];
 

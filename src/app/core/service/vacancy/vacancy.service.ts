@@ -90,7 +90,6 @@ export class VacancyService {
   }
 
   listVacanciesByBusiness(id: string): Array<Vacancy> {
-    console.log(this.listVacancies().filter(e => e.businessId === id))
     return this.listVacancies().filter(e => e.businessId === id);
   }
 }
