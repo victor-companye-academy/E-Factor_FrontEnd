@@ -5,61 +5,127 @@
         min-height: 100vh;
         .div-main {
             min-height: 100vh;
+            .div-content {
+                min-height: 83vh;
+            }
         }
         h2,
         h1 {
             color: var(--primary);
         }
 
-        form {
-            .div-card {
-                background-color: var(--background);
-                .div-label {
-                    max-width: 28rem;
+        .section-content {
+            form {
+                .div-card {
+                    background-color: var(--background);
+                    .div-label {
+                        max-width: 28rem;
+                    }
                 }
-            }
 
-            label,
-            figcaption {
-                min-width: 100%;
-                color: var(--secondary-70);
-            }
+                .div-form-1 {
+                    padding-right: 4rem;
+                }
 
-            .div-select {
-                select {
+                .div-form-2 {
+                    padding-left: 4rem;
+                }
+
+                label,
+                figcaption,
+                fieldset {
+                    min-width: 100%;
+                    color: var(--text);
+                }
+
+                .div-select {
+                    select {
+                        outline: none;
+                        height: 2.6rem;
+                        appearance: none;
+                    }
+                    img {
+                        position: absolute;
+                        top: 50%;
+                        right: 1rem;
+                    }
+                }
+
+                .border-radius {
+                    input {
+                        &[type="radio"] {
+                            border-radius: 50%;
+                        }
+                    }
+                }
+
+                input {
                     outline: none;
-                    height: 2.6rem;
-                    appearance: none;
-                }
-                img {
-                    position: absolute;
-                    top: 50%;
-                    left: 90%;
-                }
-            }
+                    border: none;
 
-            input {
-                outline: none;
+                    &[type="text"] {
+                        height: 2.5rem;
+                    }
 
-                &[type="text"] {
-                    height: 2.5rem;
+                    &[type="radio"],
+                    &[type="checkbox"] {
+                        max-height: 2rem;
+                        appearance: none;
+                        content: " sdasd";
+                        background-color: white;
+                        height: 1rem;
+                        width: 1rem;
+
+                        &:checked {
+                            background-color: var(--primary);
+                        }
+                    }
+
+                    &::placeholder {
+                        font-weight: 300;
+                    }
                 }
 
-                &::placeholder {
-                    font-weight: 300;
+                .button {
+                    cursor: pointer;
+                    width: 14rem;
+                    color: var(--text-white);
+                    background-color: var(--secondary);
+
+                    &:hover {
+                        background-color: var(--primary);
+                    }
                 }
             }
         }
+    }
+}
 
-        .button {
-            cursor: pointer;
-            width: 14rem;
-            color: var(--text-white);
-            background-color: var(--secondary);
+:host ::ng-deep {
+    .p-autocomplete {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100%;
+        min-height: 2.6rem;
 
-            &:hover {
-                background-color: var(--primary);
+        .p-autocomplete-token {
+            background-color: var(--background);
+        }
+
+        .p-autocomplete-multiple-container,
+        ul {
+            li:last-child {
+                min-width: 100%;
             }
+        }
+
+        input,
+        ul,
+        li {
+            background-color: white;
+            border: 0 !important;
+            margin: 0 !important;
+            padding: 0.1rem 0.3rem 0.1rem 0.3rem !important;
         }
     }
 }

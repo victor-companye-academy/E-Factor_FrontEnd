@@ -3,12 +3,14 @@
         <app-sidebar></app-sidebar>
     </div>
 
-    <div class="w-100 fadeIn overflow-hidden">
-        <div class="w-100 container div-main fadeIn">
-            <div class="row px-4">
+    <div class="w-100 fadeIn h-100">
+        <div class="container px-4 div-main">
+            <div class="d-flex justify-content-end ">
                 <app-header></app-header>
+            </div>
 
-                <section class="pb-1">
+            <div class="row px-4 div-content">
+                <section>
                     <h1 class="fw-bold fs-5 mt-1 w-100 py-4 pb-0">
                         Criação de vaga
                     </h1>
@@ -16,93 +18,274 @@
                     <p>
                         Publicando sua vaga na e-factor você estará impactando vidas.
                     </p>
+                </section>
 
+                <section class="section-content ">
                     <form class="w-100 d-flex flex-column align-items-end">
                         <div class="div-card rounded-3 w-100 p-4 row m-0">
-                            <div class="col mt-2 mb-4">
-                                <div class="div-label">
+                            <div class="col-6 mt-2 mb-4 div-form-1">
 
-                                    <label for="skills">
-                                        <figure class="d-flex align-items-center m-0">
-                                            <img src="assets/icons/create-vacancy/list.svg" alt="Ícone de lista"
-                                                title="Skills">
-                                            <figcaption class="fw-normal ms-2">
-                                                Quais habilidades serão necessárias para este cargo?
-                                            </figcaption>
-                                        </figure>
+                                <label for="skills">
 
-                                        <input type="text" id="skills" placeholder="Ex: Angular"
+                                    <figure class="d-flex align-items-center m-0">
+                                        <img src="assets/icons/create-vacancy/list.svg" alt="Ícone de lista"
+                                            title="Skills">
+                                        <figcaption class="fw-light ms-2">
+                                            Quais habilidades serão necessárias para este cargo?
+                                        </figcaption>
+                                    </figure>
+
+                                    <div class="p-fluid mt-2">
+                                        <p-autoComplete (searchLocale)="true" id="skilss-multiple" [(ngModel)]="skills"
+                                            [suggestions]="FilteredItems" (completeMethod)="search($event)"
+                                            [multiple]="true" [forceSelection]="true" placeholder="Ex: Angular"
+                                            class="m-0 mt-2 rounded-3 px-3 py-3 border-0 w-100 fw-light p-autocomplete"
+                                            name="skills"></p-autoComplete>
+                                    </div>
+      
+                                </label>
+
+                                <label for="seniority" class="mt-5 fw-light fs-6">
+                                    Qual o nível de senioridade necessária?
+
+                                    <div class="div-select position-relative m-0 p-0">
+                                        <select id="seniority"
                                             class="m-0 mt-2 rounded-3 px-3 py-1 border-0 w-100 fw-light">
-                                    </label>
+                                            <option selected disabled hidden>...</option>
+                                            <option value="junior">Junior</option>
+                                            <option value="pleno">Pleno</option>
+                                            <option value="senior">Senior</option>
+                                        </select>
 
-                                    <label for="position" class="mt-5">
-                                        Qual o nível de senioridade necessária?
+                                        <img src="assets/icons/create-vacancy/arrow-select.svg" alt=""
+                                            title="Selecione uma opção">
+                                    </div>
 
-                                        <div class="div-select position-relative m-0 p-0">
-                                            <select #select id="position"
-                                                class="m-0 mt-2 rounded-3 px-3 py-1 border-0 w-100 fw-light">
-                                                <option selected disabled>Escolha uma opão</option>
-                                                <option value="">Junior</option>
-                                                <option value="">Pleno</option>
-                                                <option value="">Senior</option>
-                                            </select>
+                                </label>
 
-                                            <img src="assets/icons/create-vacancy/arrow-select.svg" alt=""
-                                                title="Selecione uma opção">
-                                        </div>
+                                <label for="developmentArea" class="mt-5 fw-light fs-6">
+                                    Qual é a área desta vaga?
 
-                                    </label>
+                                    <div class="div-select position-relative m-0 p-0">
+                                        <select id="developmentArea"
+                                            class="m-0 mt-2 rounded-3 px-3 py-1 border-0 w-100 fw-light">
+                                            <option selected disabled hidden>...</option>
+                                            <option value="front-end">Front-End</option>
+                                            <option value="back-End">Back-End</option>
+                                            <option value="tech lider">Tech Lider</option>
+                                            <option value="qa">QA</option>
+                                        </select>
 
-                                    <label for="developmentArea" class="mt-5">
-                                        Qual o nível de senioridade necessária?
+                                        <img src="assets/icons/create-vacancy/arrow-select.svg" alt=""
+                                            title="Selecione uma opção">
+                                    </div>
 
-                                        <div class="div-select position-relative m-0 p-0">
-                                            <select #select id="developmentArea"
-                                                class="m-0 mt-2 rounded-3 px-3 py-1 border-0 w-100 fw-light">
-                                                <option selected disabled>Escolha uma opão</option>
-                                                <option value="">Front-End</option>
-                                                <option value="">Back-End</option>
-                                                <option value="">Tech Lider</option>
-                                                <option value="">QA</option>
-                                            </select>
+                                </label>
 
-                                            <img src="assets/icons/create-vacancy/arrow-select.svg" alt=""
-                                                title="Selecione uma opção">
-                                        </div>
+                                <div class="mt-5">
+                                    <fieldset>
 
-                                    </label>
-
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="div-label">
-
-                                    <label for="skills overflow-hidden">
                                         <figure class="d-flex align-items-center m-0">
-                                            <img src="assets/icons/create-vacancy/list.svg" alt="Ícone de lista"
+                                            <img src="assets/icons/create-vacancy/locale.svg" alt="Ícone de lista"
                                                 title="Skills">
-                                            <figcaption class="fw-normal ms-2">
-                                                Quais habilidades serão necessárias para este cargo?
+                                            <figcaption class="fw-light ms-2">
+                                                Qual é a modalidade?
                                             </figcaption>
                                         </figure>
 
-                                        <input type="text" id="skills" placeholder="Ex: Angular"
-                                            class="m-0 mt-2 rounded-3 px-3 py-1 border-0 w-100">
-                                    </label>
+                                        <div class="d-flex flex-column justify-content-between pt-2 border-radius">
+                                            <label for="remote" class="mb-2 d-flex align-items-center">
+                                                <input type="radio" id="remote" name="modality" [(ngModel)]="modality"
+                                                    value="Remoto" class="me-2" />
+                                                Remoto
+                                            </label>
+
+                                            <label for="Hybrid" class="mb-2 d-flex align-items-center">
+                                                <input type="radio" id="Hybrid" name="modality" [(ngModel)]="modality"
+                                                    value="Híbrido" class="me-2" />
+                                                Híbrido
+                                            </label>
+
+                                            <label for="Classroom" class="mb-2 d-flex align-items-center">
+                                                <input type="radio" id="Classroom" name="modality"
+                                                    [(ngModel)]="modality" value="Presencial" class="me-2" />
+                                                Presencial
+                                            </label>
+
+                                        </div>
+                                    </fieldset>
 
                                 </div>
+
+                                <fieldset *ngIf="modality !== 'Remoto'" [disabled]="modality === 'Remoto'" class="mt-5">
+
+                                    <figure class="d-flex align-items-center m-0">
+                                        <img src="assets/icons/create-vacancy/date.svg" alt="Ícone de lista"
+                                            title="Skills">
+                                        <figcaption class="fw-light ms-2">
+                                            Quais os dias da semana?
+                                        </figcaption>
+                                    </figure>
+
+
+                                    <div class="d-flex flex-wrap pt-2 align-items-start justify-content-start">
+
+                                        <div class="col me-3">
+                                            <label for="seg" class="mb-1 d-flex align-items-center pe-2">
+                                                <input type="checkbox" id="seg" name="day-of-week" value="seg"
+                                                    class="me-2" />
+                                                Seg
+                                            </label>
+                                        </div>
+
+                                        <div class="col me-3">
+                                            <label for="ter" class="mb-1 d-flex align-items-center pe-2">
+                                                <input type="checkbox" id="ter" name="day-of-week" value="ter"
+                                                    class="me-2" />
+                                                Ter
+                                            </label>
+                                        </div>
+
+                                        <div class="col me-3">
+                                            <label for="qua" class="mb-1 d-flex align-items-center pe-2">
+                                                <input type="checkbox" id="qua" name="day-of-week" value="qua"
+                                                    class="me-2" />
+                                                Qua
+                                            </label>
+                                        </div>
+                                        <div class="col me-3">
+                                            <label for="qui" class="mb-1 d-flex align-items-center pe-2">
+                                                <input type="checkbox" id="qui" name="day-of-week" value="qui"
+                                                    class="me-2" />
+                                                Qui
+                                            </label>
+                                        </div>
+
+                                        <div class="col me-3">
+                                            <label for="sex" class="mb-1 d-flex align-items-center pe-2">
+                                                <input type="checkbox" id="sex" name="day-of-week" value="sex"
+                                                    class="me-2" />
+                                                Sex
+                                            </label>
+                                        </div>
+
+                                        <div class="col me-3">
+                                            <label for="sab" class="mb-1 d-flex align-items-center pe-2">
+                                                <input type="checkbox" id="sab" name="day-of-week" value="sab"
+                                                    class="me-2" />
+                                                Sab
+                                            </label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
                             </div>
 
+                            <div class="col-6 mt-2 mb-4 div-form-2 ">
+
+                                <fieldset
+                                    class="d-flex flex-column flex-wrap justify-content-between pt-2 border-radius">
+
+                                    <legend class="fs-6 fw-light">
+                                        Qual será o tipo de contrato?
+                                    </legend>
+
+                                    <label for="clt" class="mb-2 d-flex align-items-center">
+                                        <input type="radio" id="clt" name="contract" value="Remoto" class="me-2" />
+                                        CLT
+                                    </label>
+
+                                    <label for="estagio" class="mb-2 d-flex align-items-center">
+                                        <input type="radio" id="estagio" name="contract" value="Híbrido" class="me-2" />
+                                        Estágio
+                                    </label>
+
+                                    <label for="freelancer" class="mb-2 d-flex align-items-center">
+                                        <input type="radio" id="freelancer" name="contract" value="Presencial"
+                                            class="me-2" />
+                                        Freelancer
+                                    </label>
+
+                                    <label for="pessoa juridica" class="mb-2 d-flex align-items-center">
+                                        <input type="radio" id="pessoa juridica" name="contract" value="Presencial"
+                                            class="me-2" />
+                                        Pessoa Jurídica
+                                    </label>
+
+                                </fieldset>
+
+                                <fieldset class="d-flex flex-column justify-content-between pt-2 mt-3 border-radius">
+
+                                    <legend class="fs-6 fw-light">
+                                        Qual é o período?
+                                    </legend>
+
+                                    <div class="d-flex">
+
+                                        <div class="me-3">
+                                            <label for="meio periodo" class="mb-2 d-flex align-items-center">
+                                                <input type="radio" id="meio periodo" name="contact" value="Remoto"
+                                                    class="me-2" />
+                                                Meio período
+                                            </label>
+                                        </div>
+
+                                        <div class="me-3">
+                                            <label for="integral" class="mb-2 d-flex align-items-center">
+                                                <input type="radio" id="integral" name="contact" value="Híbrido"
+                                                    class="me-2" />
+                                                Integral
+                                            </label>
+                                        </div>
+
+                                    </div>
+
+                                </fieldset>
+
+                                <fieldset class="d-flex flex-column justify-content-between pt-2 mt-3">
+
+                                    <legend class="fs-6 fw-light">
+                                        Qual é o turno?
+                                    </legend>
+
+                                    <div class="d-flex flex-wrap pt-2 align-items-start justify-content-start">
+
+                                        <div class="col-2 me-3">
+                                            <label for="manha" class="mb-2 d-flex align-items-center">
+                                                <input type="radio" id="manha" name="shift" value="Remoto"
+                                                    class="me-2" />
+                                                Manhã
+                                            </label>
+                                        </div>
+
+                                        <div class="col-2 me-3">
+                                            <label for="tarde" class="mb-2 d-flex align-items-center">
+                                                <input type="radio" id="tarde" name="shift" value="Híbrido"
+                                                    class="me-2" />
+                                                Tarde
+                                            </label>
+                                        </div>
+
+                                        <div class="col-2 me-3">
+                                            <label for="noite" class="mb-2 d-flex align-items-center">
+                                                <input type="radio" id="noite" name="shift" value="Híbrido"
+                                                    class="me-2" />
+                                                Noite
+                                            </label>
+                                        </div>
+
+                                    </div>
+
+                                </fieldset>
+
+                            </div>
                         </div>
 
-                        <button type="submit" class="button border-0 py-2 rounded-3 mt-3 mb-2">
+                        <button type="submit" (click)="onSubmit()" class="button border-0 py-2 rounded-3 mt-3 mb-3">
                             CONTINUAR
                         </button>
                     </form>
-
                 </section>
-
             </div>
         </div>
         <app-footer></app-footer>

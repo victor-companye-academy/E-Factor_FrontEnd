@@ -3,31 +3,15 @@
         <app-sidebar></app-sidebar>
     </div>
 
-    <div class="w-100 fadeIn overflow-hidden">
-        <div class="w-100 container div-main fadeIn">
+    <div class="w-100 fadeIn h-100">
+        <div class="container px-4 div-main">
+            <div class="d-flex justify-content-end">
+                <app-header></app-header>
+            </div>
 
-            <div class="row px-4">
-                <div class="d-flex align-items-end">
-                    <button type="button"
-                        class="fadeIn border-0 mt-5 tobble w-100 d-flex justify-content-end bg-transparent">
-                        <img src="assets/icons/tobble.svg" alt="Icone seta" title="Mudar modo">
-                    </button>
-
-                    <button type="button" class="d-flex align-items-center border-0 bg-transparent mx-4">
-                        <img src="assets/icons/coin-factor.svg" width="20px" alt="Ícone da coin factor"
-                            title="Coin Factor">
-                        <span class="fw-medium ms-2">
-                            {{coin}}
-                        </span>
-                    </button>
-
-                    <button type="button" class="d-flex align-items-center border-0 bg-transparent">
-                        <img src="assets/icons/bell.svg" alt="Ícone de notificação">
-                    </button>
-                </div>
-
+            <div class="row px-4 div-content">
                 <div class="col">
-                    <section class="pb-1">
+                    <section>
                         <h1 class="fw-bold fs-5 mt-1 w-100 py-4 pb-0">
                             Criação de vaga
                         </h1>
