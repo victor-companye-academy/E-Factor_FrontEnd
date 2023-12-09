@@ -1,0 +1,276 @@
+<main class="d-flex w-100 main">
+    <div class="sidebar">
+        <app-sidebar></app-sidebar>
+    </div>
+
+    <div class="w-100 fadeIn overflow-hidden">
+        <div class="w-100 container div-main fadeIn">
+
+            <div class="row px-4">
+                <div class="d-flex align-items-end">
+                    <button type="button"
+                        class="fadeIn border-0 mt-5 tobble w-100 d-flex justify-content-end bg-transparent">
+                        <img src="assets/icons/tobble.svg" alt="Icone seta" title="Mudar modo">
+                    </button>
+
+                    <button type="button" class="d-flex align-items-center border-0 bg-transparent mx-4">
+                        <img src="assets/icons/coin-factor.svg" width="20px" alt="Ícone da coin factor"
+                            title="Coin Factor">
+                        <span class="fw-medium ms-2">
+                            {{coin}}
+                        </span>
+                    </button>
+
+                    <button type="button" class="d-flex align-items-center border-0 bg-transparent">
+                        <img src="assets/icons/bell.svg" alt="Ícone de notificação">
+                    </button>
+                </div>
+
+                <div class="d-flex gap-5 div-content">
+                    <div class="col">
+                        <section class="pb-1">
+                            <h1 class="fw-bold fs-5 mt-1 w-100 py-4 pb-0">
+                                Criação de usuário
+                            </h1>
+    
+                            <p>
+                                Criando um usuário para sua empresa na E-Factor você estará impactando vidas.
+                            </p>
+    
+                            <h2 class="coin-counter d-flex align-items-center mt-4 fs-3">
+                                <span>
+                                    <span class="coin me-2 fw-bold">Coin Factor</span> <span class="text-gray">restantes:</span>
+                                </span>
+                                <span class="coin-quantity d-flex">
+                                    <img src="assets/icons/coin-factor.svg" alt="Ícone da coin factor" title="Coin Facor"
+                                        class="mx-3" width="30px">
+                                    {{coin}}
+                                </span>
+                            </h2>
+    
+                            <div class="ms-2 mt-5 text-justify">
+                                <p>
+                                    Olá,
+                                </p>
+    
+                                <p>
+                                    Ao criar um novo usuário em nossa plataforma, queremos te informar que essa ação 
+                                    implica em um gasto de <span class="coin fw-semibold">1 Coin Factor</span>. Ou seja, o saldo da sua conta será reduzido 
+                                    proporcionalmente à quantidade de usuários que você criar.
+                                </p>
+    
+                                <p>
+                                    É crucial destacar que, se o seu saldo de <span class="coin fw-semibold">Coin Factor</span> não for suficiente para cobrir o 
+                                    custo da criação do usuário, infelizmente, não será possível prosseguir com o processo. 
+                                    Antes de começar, certifique-se de ter a quantidade adequada de Coin Factor disponível em sua conta.
+                                </p>
+    
+                                <p>
+                                    Além disso, ao criar um usuário para a sua empresa, ele terá a capacidade de <span class="coin fw-semibold">visualizar perfis de 
+                                    profissionais, criar e postar vagas</span>. Todas essas ações implicarão em um gasto no saldo total da conta da empresa.
+                                </p>
+    
+                                <p>
+                                    Estamos sempre disponíveis para esclarecer qualquer dúvida ou ajudá-lo no que for
+                                    necessário. Sinta-se à vontade para entrar em contato conosco atráves do e-mail
+                                    <span class="email">efactor@ajuda.com</span> sempre que precisar.
+                                </p>
+    
+                                <p>
+                                    Agradecemos por escolher a E-Factor e por fazer parte da nossa comunidade. Estamos 
+                                    à disposição para tornar a sua experiência conosco a melhor possível.
+                                </p>
+                            </div>
+                        </section>
+                    </div>
+    
+                    <section class="pb-2 rounded-3 border-0 w-100 col card-title-description">
+                        <form [formGroup]="form" (submit)="onSubmit()"
+                            class="w-100 h-100 d-flex flex-column align-items-end">
+                            <div class="h-100 rounded-3 p-4 w-100">
+                                <h5>Dados do Colaborador</h5>
+                                <label for="" class="text-color-primary mt-3 d-flex flex-column">
+                                    E-mail
+    
+                                    <input type="text" formControlName="email" class="fs-6 rounded-3 mt-2 title fw-light"
+                                        [ngClass]="{'invalid': emailEmpty || emailInvalid || emailsDontMatch}"
+                                        placeholder="Ex: efactor@email.com" maxlength="45"
+                                        (input)="validateEmailEmpty()" (blur)="validateEmailValid(0); validateEmailMatchValid()">
+    
+                                    <div class="d-flex">
+                                        <div *ngIf="emailEmpty" class="mt-1 ms-1">
+                                            <span class="invalid fw-light">Campo obrigatório</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex">
+                                        <div *ngIf="emailInvalid" class="mt-1 ms-1">
+                                            <span class="invalid fw-light">E-mail inválido</span>
+                                        </div>
+                                    </div>
+    
+                                </label>
+    
+                                <label for="" class="text-color-primary mt-3 d-flex flex-column">
+                                    Confirmação de e-mail
+    
+                                    <input type="text" formControlName="emailConfirmation" class="fs-6 rounded-3 mt-2 title fw-light"
+                                        [ngClass]="{'invalid': emailConfirmationEmpty || emailConfirmationInvalid || emailsDontMatch}"
+                                        placeholder="Ex: efactor@email.com" maxlength="45"
+                                        (input)="validateEmailConfirmationEmpty()" (blur)="validateEmailValid(1); validateEmailMatchValid()">
+    
+                                    <div class="d-flex">
+                                        <div *ngIf="emailConfirmationEmpty" class="mt-1 ms-1">
+                                            <span class="invalid fw-light">Campo obrigatório</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex">
+                                        <div *ngIf="emailConfirmationInvalid" class="mt-1 ms-1">
+                                            <span class="invalid fw-light">E-mail inválido</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex">
+                                        <div *ngIf="emailsDontMatch" class="mt-1 ms-1">
+                                            <span class="invalid fw-light">E-mails não conferem</span>
+                                        </div>
+                                    </div>
+    
+                                </label>
+    
+                                <label for="" class="text-color-primary mt-3 d-flex flex-column">
+                                    CPF
+    
+                                    <input type="text" formControlName="cpf" class="fs-6 rounded-3 mt-2 title fw-light"
+                                        [ngClass]="{'invalid': cpfEmpty || cpfInvalid}"
+                                        placeholder="123.456.789-10" maxlength="14"
+                                        (input)="validateCPFEmpty(); applyCpfMask($event)" (blur)="validateCpfValid()">
+    
+                                    <div class="d-flex">
+                                        <div *ngIf="cpfEmpty" class="mt-1 ms-1">
+                                            <span class="invalid fw-light">Campo obrigatório</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex">
+                                        <div *ngIf="cpfInvalid" class="mt-1 ms-1">
+                                            <span class="invalid fw-light">Cpf inválido</span>
+                                        </div>
+                                    </div>
+    
+                                </label>
+    
+                                <label for="" class="text-color-primary mt-3 d-flex flex-column">
+                                    Nome
+    
+                                    <input type="text" formControlName="name" class="fs-6 rounded-3 mt-2 title fw-light"
+                                        [ngClass]="{'invalid': nameEmpty}"
+                                        placeholder="João de Paulo" maxlength="45"
+                                        (input)="validateNameEmpty()">
+    
+                                    <div class="d-flex">
+                                        <div *ngIf="nameEmpty" class="mt-1 ms-1">
+                                            <span class="invalid fw-light">Campo obrigatório</span>
+                                        </div>
+                                    </div>
+    
+                                </label>
+    
+                                <div class="d-flex gap-3 justify-content-between double-input-row">
+                                    <label for="" class="text-color-primary mt-3 d-flex flex-column">
+                                        Celular
+        
+                                        <input type="text" formControlName="phone" class="fs-6 rounded-3 mt-2 title fw-light"
+                                            [ngClass]="{'invalid': phoneEmpty || phoneInvalid}"
+                                            placeholder="(00) 00000-0000" maxlength="15"
+                                            (input)="validatePhoneEmpty(); applyPhoneMask($event)" (blur)="validatePhoneValid()">
+        
+                                        <div class="d-flex">
+                                            <div *ngIf="phoneEmpty" class="mt-1 ms-1">
+                                                <span class="invalid fw-light">Campo obrigatório</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex">
+                                            <div *ngIf="phoneInvalid" class="mt-1 ms-1">
+                                                <span class="invalid fw-light">Número inválido</span>
+                                            </div>
+                                        </div>
+        
+                                    </label>
+        
+                                    <label for="" class="text-color-primary mt-3 d-flex flex-column w-100">
+                                        Data de nascimento
+        
+                                        <input type="date" formControlName="birthDate" class="fs-6 rounded-3 mt-2 title fw-light pe-3"
+                                            [ngClass]="{'invalid': birthDateEmpty || birthDateInvalid}"
+                                            maxlength="45"
+                                            (input)="validateBirthDateEmpty()" (blur)="validateBirthDateValid()">
+        
+                                        <div class="d-flex">
+                                            <div *ngIf="birthDateEmpty" class="mt-1 ms-1">
+                                                <span class="invalid fw-light">Campo obrigatório</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex">
+                                            <div *ngIf="birthDateInvalid" class="mt-1 ms-1">
+                                                <span class="invalid fw-light">Data inválida</span>
+                                            </div>
+                                        </div>
+        
+                                    </label>
+                                </div>
+    
+                                <label for="" class="text-color-primary mt-3 d-flex flex-column">
+                                    Senha
+    
+                                    <input type="text" formControlName="password" class="fs-6 rounded-3 mt-2 title fw-light"
+                                        [ngClass]="{'invalid': passwordEmpty || passwordDontMatch}"
+                                        placeholder="Ex: efactor@email.com" maxlength="45"
+                                        (input)="validatePasswordEmpty()" (blur)="validatePasswordMatchValid()">
+    
+                                    <div class="d-flex">
+                                        <div *ngIf="passwordEmpty" class="mt-1 ms-1">
+                                            <span class="invalid fw-light">Campo obrigatório</span>
+                                        </div>
+                                    </div>
+    
+                                </label>
+    
+                                <label for="" class="text-color-primary mt-3 d-flex flex-column">
+                                    Confirmação de senha
+    
+                                    <input type="text" formControlName="passwordConfirmation" class="fs-6 rounded-3 mt-2 title fw-light"
+                                        [ngClass]="{'invalid': passwordConfirmationEmpty || passwordDontMatch}"
+                                        placeholder="Ex: efactor@email.com" maxlength="45"
+                                        (input)="validatePasswordConfirmationEmpty()" (blur)="validatePasswordMatchValid()">
+    
+                                    <div class="d-flex">
+                                        <div *ngIf="passwordConfirmationEmpty" class="mt-1 ms-1">
+                                            <span class="invalid fw-light">Campo obrigatório</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex">
+                                        <div *ngIf="passwordDontMatch" class="mt-1 ms-1">
+                                            <span class="invalid fw-light">Senhas não conferem</span>
+                                        </div>
+                                    </div>
+    
+                                </label>
+                                
+                            </div>
+    
+                            <button type="submit" class="button border-0 py-2 rounded-3 mt-3 mb-2">
+                                CRIAR
+                            </button>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <app-footer></app-footer>
+    </div>
+</main>

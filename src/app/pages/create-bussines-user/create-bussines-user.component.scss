@@ -1,0 +1,107 @@
+:host {
+    color: var(--text);
+
+    .main {
+        min-height: 100vh;
+        .div-main {
+            min-height: 100vh;
+        }
+        h2,
+        h1,
+        h3,
+        h5,
+        span,
+        .text-color-primary {
+            color: var(--primary);
+        }
+
+        .text-gray, input {
+            color: var(--text);
+        }
+
+        .card-title-description {
+            margin-top: 5rem;
+            max-width: 35rem;
+            form {
+                height: auto;
+                & > div {
+                    background-color: var(--background);
+                    height: 100%;
+                }
+
+                .invalid {
+                    color: rgb(255, 106, 106);
+                    font-size: 0.8rem;
+                }
+
+                input,
+                textarea {
+                    &.invalid {
+                        border: 1.5px solid red;
+                    }
+                    border: none;
+                    outline: none;
+                    padding: 0.5rem 0 0.5rem 1rem;
+                }
+
+                .title {
+                    height: 40px;
+                }
+
+                textarea {
+                    min-height: 10rem;
+                    height: 30rem;
+                }
+
+                .description-max {
+                    font-size: 0.8rem;
+                }
+            }
+        }
+
+        p > span,
+        .coin {
+            color: #00b5a0;
+        }
+
+        .coin-quantity {
+            color: #ffc93e;
+            font-size: 2.5rem;
+        }
+
+        p > span.email {
+            color: var(--text);
+            text-decoration: underline;
+        }
+
+        .button {
+            cursor: pointer;
+            width: 14rem;
+            color: var(--text-white);
+            background-color: var(--secondary);
+
+            &:hover {
+                background-color: var(--primary);
+            }
+        }
+
+        .text-justify {
+            text-align: justify;
+        }
+    }
+
+    @media (max-width: 1247px){
+        .div-content{
+            flex-direction: column;
+            align-items: center;
+        } 
+    }
+    @media (max-width: 767px){
+        .double-input-row{
+            display: unset !important;
+        }
+        .coin-counter{
+            flex-direction: column;
+        }
+    }
+}

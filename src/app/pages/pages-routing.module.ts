@@ -21,6 +21,7 @@ import { RequestCoinFactorComponent } from './request-coin-factor/request-coin-f
 import { SendRequestComponent } from './send-request-coin/send-request.component';
 import { CreateVacancyDetailsComponent } from './create-vacancy-details/create-vacancy-details.component';
 import { ExtractComponent } from './extract/extract.component';
+import { CreateBussinesUserComponent } from './create-bussines-user/create-bussines-user.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -56,6 +57,7 @@ const routes: Routes = [
   { path: 'professional-profile/:id', component: ProfessionalProfileComponent },
   { path: 'newsletter', component: NewsletterComponent },
   { path: 'extract', component: ExtractComponent },
+  { path: 'new-business-user', component: CreateBussinesUserComponent },
   { path: '**', redirectTo: '' },
 ];
 
