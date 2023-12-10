@@ -38,6 +38,9 @@ export class CreateBussinesUserComponent {
   protected birthDateEmpty: boolean = false;
   protected birthDateInvalid: boolean = false;
 
+  protected showPassword: boolean = false;
+  protected showPasswordConfirmation: boolean = false;
+
   protected form = new FormGroup({
     email: new FormControl('',
       [
@@ -207,6 +210,28 @@ export class CreateBussinesUserComponent {
   }
 
   public onSubmit(): void {
+    this.validateFields();
+    
+    if (this.form.valid && this.allFieldsValid()) {
+      const newUser: BusinessUser = {
+        id: this.id || '',
+        businessId: this.businessId || '',
+        name: this.form.get('name')?.value || '',
+        email: this.form.get('email')?.value || '',
+        password: this.form.get('password')?.value || '',
+        cpf: this.form.get('cpf')?.value || '',
+        phone: this.form.get('phone')?.value || '',
+        birthDate: this.form.get('birthDate')?.value || '',
+      };
+  
+      this.createBusinessUserService.createNewBusinessUser(newUser);
+      this.router.navigateByUrl("/manage-business-users");
+    } else {
+      console.log('Formulário inválido');
+    }
+  }
+  
+  private validateFields(): void {
     this.validateEmailEmpty();
     this.validateEmailConfirmationEmpty();
     this.validateEmailValid(0);
@@ -222,38 +247,12 @@ export class CreateBussinesUserComponent {
     this.validatePhoneValid();
     this.validateBirthDateEmpty();
     this.validateBirthDateValid();
-
-    if (this.form.valid && !this.emailEmpty && !this.emailInvalid && !this.emailConfirmationEmpty && !this.emailConfirmationInvalid && !this.emailsDontMatch &&
+  }
+  
+  private allFieldsValid(): boolean {
+    return !this.emailEmpty && !this.emailInvalid && !this.emailConfirmationEmpty && !this.emailConfirmationInvalid && !this.emailsDontMatch &&
         !this.passwordEmpty && !this.passwordConfirmationEmpty && !this.passwordDontMatch && !this.cpfEmpty && !this.cpfInvalid && !this.nameEmpty &&
-        !this.phoneEmpty && !this.phoneInvalid && !this.birthDateEmpty && !this.birthDateInvalid) {
-
-      const email = this.form.get('email')?.value;
-      const emailConfirmation = this.form.get('emailConfirmation')?.value;
-      const password = this.form.get('password')?.value;
-      const passwordConfirmation = this.form.get('passwordConfirmation')?.value;
-      const cpf = this.form.get('cpf')?.value;
-      const name = this.form.get('name')?.value;
-      const phone = this.form.get('phone')?.value;
-      const birthDate = this.form.get('birthDate')?.value;
-
-      const newUser: BusinessUser = {
-        id: this.id || '',
-        businessId: this.businessId || '',
-        name: name || '',
-        email: email || '',
-        password: password || '',
-        cpf: cpf || '',
-        phone: phone || '',
-        birthDate: birthDate || '',
-      };
-
-      console.log(this.createBusinessUserService.listBusinessUsers());
-
-      this.createBusinessUserService.createNewBusinessUser(newUser);
-      this.router.navigateByUrl("/manage-business-users");
-    } else {
-      console.log('Formulário inválido');
-    }
+        !this.phoneEmpty && !this.phoneInvalid && !this.birthDateEmpty && !this.birthDateInvalid;
   }
 
   ngOnInit(): void {

@@ -117,6 +117,7 @@ import { SendRequestComponent } from './send-request-coin/send-request.component
 import { CreateVacancyDetailsComponent } from './create-vacancy-details/create-vacancy-details.component';
 import { ExtractComponent } from './extract/extract.component';
 import { CreateBussinesUserComponent } from './create-bussines-user/create-bussines-user.component';
+import { ListBusinessUsersComponent } from './list-business-users/list-business-users.component';
 
 @NgModule({
   declarations: [
@@ -142,6 +143,7 @@ import { CreateBussinesUserComponent } from './create-bussines-user/create-bussi
     CreateVacancyDetailsComponent,
     ExtractComponent,
     CreateBussinesUserComponent,
+    ListBusinessUsersComponent,
   ],
   imports: [
     CommonModule,

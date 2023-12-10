@@ -225,12 +225,16 @@
     
                                 <label for="" class="text-color-primary mt-3 d-flex flex-column">
                                     Senha
-    
-                                    <input type="text" formControlName="password" class="fs-6 rounded-3 mt-2 title fw-light"
-                                        [ngClass]="{'invalid': passwordEmpty || passwordDontMatch}"
-                                        placeholder="Ex: efactor@email.com" maxlength="45"
-                                        (input)="validatePasswordEmpty()" (blur)="validatePasswordMatchValid()">
-    
+
+                                    <div class="d-flex align-items-center mt-2">
+                                        <input [type]="showPassword ? 'text' : 'password'" formControlName="password" class="w-100 fs-6 rounded-3 title fw-light"
+                                            [ngClass]="{'invalid': passwordEmpty || passwordDontMatch}"
+                                            placeholder="Senha" maxlength="45"
+                                            (input)="validatePasswordEmpty()" (blur)="validatePasswordMatchValid()">
+                                        <img [src]="showPassword ? 'assets/icons/change-password/password-show.svg' : 'assets/icons/change-password/password.svg'"
+                                            (click)="showPassword = !showPassword" class="input-icon" width="20px" height="20px">
+                                    </div>
+
                                     <div class="d-flex">
                                         <div *ngIf="passwordEmpty" class="mt-1 ms-1">
                                             <span class="invalid fw-light">Campo obrigatório</span>
@@ -242,10 +246,14 @@
                                 <label for="" class="text-color-primary mt-3 d-flex flex-column">
                                     Confirmação de senha
     
-                                    <input type="text" formControlName="passwordConfirmation" class="fs-6 rounded-3 mt-2 title fw-light"
-                                        [ngClass]="{'invalid': passwordConfirmationEmpty || passwordDontMatch}"
-                                        placeholder="Ex: efactor@email.com" maxlength="45"
-                                        (input)="validatePasswordConfirmationEmpty()" (blur)="validatePasswordMatchValid()">
+                                    <div class="d-flex align-items-center mt-2">
+                                        <input [type]="showPasswordConfirmation ? 'text' : 'password'" formControlName="passwordConfirmation" class="w-100 fs-6 rounded-3 title fw-light"
+                                            [ngClass]="{'invalid': passwordConfirmationEmpty || passwordDontMatch}"
+                                            placeholder="Confirmação de senha" maxlength="45"
+                                            (input)="validatePasswordConfirmationEmpty()" (blur)="validatePasswordMatchValid()">
+                                        <img [src]="showPasswordConfirmation ? 'assets/icons/change-password/password-show.svg' : 'assets/icons/change-password/password.svg'"
+                                            (click)="showPasswordConfirmation = !showPasswordConfirmation" class="input-icon" width="20px" height="20px">
+                                    </div>
     
                                     <div class="d-flex">
                                         <div *ngIf="passwordConfirmationEmpty" class="mt-1 ms-1">
