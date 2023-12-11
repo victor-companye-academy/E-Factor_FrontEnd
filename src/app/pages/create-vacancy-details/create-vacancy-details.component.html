@@ -37,7 +37,7 @@
 
                                     <div class="p-fluid mt-2">
                                         <p-autoComplete (searchLocale)="true" id="skilss" [(ngModel)]="skills"
-                                            [suggestions]="FilteredItems" (completeMethod)="search($event)"
+                                            [suggestions]="FilteredItems" (completeMethod)="searchSkills($event)"
                                             [multiple]="true" [forceSelection]="true" placeholder="Ex: Angular"
                                             class="m-0 mt-2 rounded-3 px-3 py-3 border-0 w-100 fw-light p-autocomplete"
                                             name="skills"></p-autoComplete>
@@ -266,8 +266,6 @@
                                         </div>
 
                                     </div>
-
-                                    {{period}}
 
                                     <div *ngIf="isInValid['period']" class="mt-1 ms-1">
                                         <span class="invalid fw-light">Campo obrigatório</span>

@@ -99,8 +99,7 @@ export class CreateVacancyComponent {
       const title = this.form.get('title')?.value
       const description = this.form.get('description')?.value
 
-      this.createVacancyService.setTitle(title || '');
-      this.createVacancyService.setDescription(description || '');
+      this.createVacancyService.insertDescription(title || '', description || '');
 
       this.router.navigateByUrl("/create-vacancy/details");
     }

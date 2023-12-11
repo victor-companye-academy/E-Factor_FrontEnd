@@ -1,6 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AutoComplete } from 'primeng/autocomplete';
+import { Router } from '@angular/router';
+import { CreateVacancyService } from 'src/app/core/service/create-vacancy/create-vacancy.service';
 
 @Component({
   selector: 'app-create-vacancy-details',
@@ -8,9 +9,11 @@ import { AutoComplete } from 'primeng/autocomplete';
   styleUrls: ['./create-vacancy-details.component.scss']
 })
 export class CreateVacancyDetailsComponent {
+
+  constructor(private router: Router, private vacancyService: CreateVacancyService) { }
+
   protected FilteredItems!: any[];
 
-  //Valores para o formgroup
   protected skills: string[] | undefined;
   protected serniority: string | undefined;
   protected vacancyArea: string | undefined;
@@ -19,6 +22,10 @@ export class CreateVacancyDetailsComponent {
   protected contract: string | undefined;
   protected period: string | undefined;
   protected shift: string | undefined;
+
+  protected isInValid: any;
+  protected vacancyData: any;
+
 
   protected formDetails = new FormGroup({
     skills: new FormControl('', [Validators.nullValidator, Validators.required]),
@@ -60,8 +67,6 @@ export class CreateVacancyDetailsComponent {
     'Technical Writing', 'Blogging', 'Content Creation', 'Public Speaking',
     'Open Source Contribution', 'Community Building'
   ];
-
-  protected isInValid: any;
 
   private inValidate(formName: string): void {
     switch (formName) {
@@ -134,7 +139,7 @@ export class CreateVacancyDetailsComponent {
     }
   }
 
-  search(event: any) {
+  searchSkills(event: any) {
     let filtered: any[] = [];
     let query = event.query;
 
@@ -149,6 +154,7 @@ export class CreateVacancyDetailsComponent {
   }
 
   onSubmit() {
+
     this.formDetails.get('skills')?.setValue(this.skills as any)
     this.formDetails.get('serniority')?.setValue(this.serniority as any)
     this.formDetails.get('vacancyArea')?.setValue(this.vacancyArea as any)
@@ -158,12 +164,21 @@ export class CreateVacancyDetailsComponent {
     this.formDetails.get('period')?.setValue(this.period as any)
     this.formDetails.get('shift')?.setValue(this.shift as any)
 
+    const vacancy = this.vacancyService.getVacancy()
+
     for (let key in this.formDetails.controls) {
       this.inValidate(key);
     }
 
-    if (this.formDetails.valid) {
-      console.log(this.formDetails.value)
+    if ((vacancy.title === undefined || '' && vacancy.description === undefined || '') && this.formDetails.valid) {
+      this.router.navigateByUrl("/create-vacancy");
+    }
+
+    if (this.formDetails.valid && vacancy) {
+      this.vacancyService.insertDetails(this.skills as string[], this.serniority as string, this.vacancyArea as string, this.modality as string, this.daysOfWeek as string[], this.contract as string, this.period as string, this.shift as string)
+
+      //proxima página
+
     }
   }
 

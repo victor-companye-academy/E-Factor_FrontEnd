@@ -25,22 +25,33 @@ export class CreateVacancyService {
     coins: 100,
   }
 
-  private vacancyObj: any = {};
+  private vacancyObj: any | undefined= {};
 
-  public setTitle(title: string): void {
+  public insertDescription(title: string, description: string) {
     this.vacancyObj.title = title;
+    this.vacancyObj.description = description;
+
   }
 
-  public setDescription(description: string): void {
-    this.vacancyObj.description = description;
-    console.log(this.vacancyObj)
+  public insertDetails(skills:string[], serniority:String, vacancyArea:string, modality:string, daysOfWeek:string[], contract:string, period:string, shift:string){
+    this.vacancyObj.skills = skills;
+    this.vacancyObj.serniority = serniority;
+    this.vacancyObj.vacancyArea = vacancyArea;
+    this.vacancyObj.modality = modality;
+    this.vacancyObj.daysOfWeek = daysOfWeek;
+    this.vacancyObj.contract = contract;
+    this.vacancyObj.period = period;
+    this.vacancyObj.shift = shift;
+
+  }
+
+  public getVacancy(){
+    return this.vacancyObj
   }
 
   //método temporário (será inserido pelo backend?)
-  public setId(): void {
+  private setId(): void {
     this.vacancyObj.id = CreateVacancyService.id++;
-
-    console.log(this.vacancyObj)
   }
 
 }
