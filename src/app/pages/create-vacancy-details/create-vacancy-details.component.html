@@ -36,38 +36,46 @@
                                     </figure>
 
                                     <div class="p-fluid mt-2">
-                                        <p-autoComplete (searchLocale)="true" id="skilss-multiple" [(ngModel)]="skills"
+                                        <p-autoComplete (searchLocale)="true" id="skilss" [(ngModel)]="skills"
                                             [suggestions]="FilteredItems" (completeMethod)="search($event)"
                                             [multiple]="true" [forceSelection]="true" placeholder="Ex: Angular"
                                             class="m-0 mt-2 rounded-3 px-3 py-3 border-0 w-100 fw-light p-autocomplete"
                                             name="skills"></p-autoComplete>
                                     </div>
-      
+
+                                    <div *ngIf="isInValid['skills']" class="mt-1 ms-1">
+                                        <span class="invalid fw-light">Campo obrigatório</span>
+                                    </div>
+
                                 </label>
 
-                                <label for="seniority" class="mt-5 fw-light fs-6">
+                                <label for="serniority" class="mt-5 fw-light fs-6">
                                     Qual o nível de senioridade necessária?
 
                                     <div class="div-select position-relative m-0 p-0">
-                                        <select id="seniority"
+                                        <select id="serniority" [(ngModel)]="serniority" name="serniority"
                                             class="m-0 mt-2 rounded-3 px-3 py-1 border-0 w-100 fw-light">
                                             <option selected disabled hidden>...</option>
+                                            <option value="estagiario">Estagiário</option>
                                             <option value="junior">Junior</option>
                                             <option value="pleno">Pleno</option>
-                                            <option value="senior">Senior</option>
+                                            <option value="senior">Sênior</option>
                                         </select>
 
                                         <img src="assets/icons/create-vacancy/arrow-select.svg" alt=""
                                             title="Selecione uma opção">
                                     </div>
 
+                                    <div *ngIf="isInValid['serniority']" class="mt-1 ms-1">
+                                        <span class="invalid fw-light">Campo obrigatório</span>
+                                    </div>
                                 </label>
 
-                                <label for="developmentArea" class="mt-5 fw-light fs-6">
+                                <label for="vacancyArea" class="mt-5 fw-light fs-6">
                                     Qual é a área desta vaga?
 
                                     <div class="div-select position-relative m-0 p-0">
-                                        <select id="developmentArea"
+                                        <select id="vacancyArea" [(ngModel)]="vacancyArea" name="vacancyArea"
                                             class="m-0 mt-2 rounded-3 px-3 py-1 border-0 w-100 fw-light">
                                             <option selected disabled hidden>...</option>
                                             <option value="front-end">Front-End</option>
@@ -78,6 +86,10 @@
 
                                         <img src="assets/icons/create-vacancy/arrow-select.svg" alt=""
                                             title="Selecione uma opção">
+                                    </div>
+
+                                    <div *ngIf="isInValid['vacancyArea']" class="mt-1 ms-1">
+                                        <span class="invalid fw-light">Campo obrigatório</span>
                                     </div>
 
                                 </label>
@@ -95,29 +107,34 @@
 
                                         <div class="d-flex flex-column justify-content-between pt-2 border-radius">
                                             <label for="remote" class="mb-2 d-flex align-items-center">
-                                                <input type="radio" id="remote" name="modality" [(ngModel)]="modality"
-                                                    value="Remoto" class="me-2" />
+                                                <input type="radio" id="remote" [(ngModel)]="modality" name="modality"
+                                                    [(ngModel)]="modality" value="remoto" class="me-2" />
                                                 Remoto
                                             </label>
 
                                             <label for="Hybrid" class="mb-2 d-flex align-items-center">
-                                                <input type="radio" id="Hybrid" name="modality" [(ngModel)]="modality"
-                                                    value="Híbrido" class="me-2" />
+                                                <input type="radio" id="Hybrid" [(ngModel)]="modality" name="modality"
+                                                    [(ngModel)]="modality" value="hibrido" class="me-2" />
                                                 Híbrido
                                             </label>
 
                                             <label for="Classroom" class="mb-2 d-flex align-items-center">
-                                                <input type="radio" id="Classroom" name="modality"
-                                                    [(ngModel)]="modality" value="Presencial" class="me-2" />
+                                                <input type="radio" id="Classroom" [(ngModel)]="modality"
+                                                    name="modality" [(ngModel)]="modality" value="presnecial"
+                                                    class="me-2" />
                                                 Presencial
                                             </label>
 
+                                        </div>
+
+                                        <div *ngIf="isInValid['modality']" class="mt-1 ms-1">
+                                            <span class="invalid fw-light">Campo obrigatório</span>
                                         </div>
                                     </fieldset>
 
                                 </div>
 
-                                <fieldset *ngIf="modality !== 'Remoto'" [disabled]="modality === 'Remoto'" class="mt-5">
+                                <fieldset *ngIf="modality !== 'remoto'" [disabled]="modality === 'remoto'" class="mt-5">
 
                                     <figure class="d-flex align-items-center m-0">
                                         <img src="assets/icons/create-vacancy/date.svg" alt="Ícone de lista"
@@ -130,53 +147,58 @@
 
                                     <div class="d-flex flex-wrap pt-2 align-items-start justify-content-start">
 
-                                        <div class="col me-3">
+                                        <div class="me-3">
                                             <label for="seg" class="mb-1 d-flex align-items-center pe-2">
-                                                <input type="checkbox" id="seg" name="day-of-week" value="seg"
-                                                    class="me-2" />
+                                                <input type="checkbox" (change)="onChangeDays($event)" id="seg"
+                                                    name="day-of-week" value="seg" class="me-2" />
                                                 Seg
                                             </label>
                                         </div>
 
-                                        <div class="col me-3">
+                                        <div class="me-3">
                                             <label for="ter" class="mb-1 d-flex align-items-center pe-2">
-                                                <input type="checkbox" id="ter" name="day-of-week" value="ter"
-                                                    class="me-2" />
+                                                <input type="checkbox" (change)="onChangeDays($event)" id="ter"
+                                                    name="day-of-week" value="ter" class="me-2" />
                                                 Ter
                                             </label>
                                         </div>
 
-                                        <div class="col me-3">
+                                        <div class="me-3">
                                             <label for="qua" class="mb-1 d-flex align-items-center pe-2">
-                                                <input type="checkbox" id="qua" name="day-of-week" value="qua"
-                                                    class="me-2" />
+                                                <input type="checkbox" (change)="onChangeDays($event)" id="qua"
+                                                    name="day-of-week" value="qua" class="me-2" />
                                                 Qua
                                             </label>
                                         </div>
-                                        <div class="col me-3">
+                                        <div class="me-3">
                                             <label for="qui" class="mb-1 d-flex align-items-center pe-2">
-                                                <input type="checkbox" id="qui" name="day-of-week" value="qui"
-                                                    class="me-2" />
+                                                <input type="checkbox" (change)="onChangeDays($event)" id="qui"
+                                                    name="day-of-week" value="qui" class="me-2" />
                                                 Qui
                                             </label>
                                         </div>
 
-                                        <div class="col me-3">
+                                        <div class="me-3">
                                             <label for="sex" class="mb-1 d-flex align-items-center pe-2">
-                                                <input type="checkbox" id="sex" name="day-of-week" value="sex"
-                                                    class="me-2" />
+                                                <input type="checkbox" (change)="onChangeDays($event)" id="sex"
+                                                    name="day-of-week" value="sex" class="me-2" />
                                                 Sex
                                             </label>
                                         </div>
 
-                                        <div class="col me-3">
+                                        <div class="me-3">
                                             <label for="sab" class="mb-1 d-flex align-items-center pe-2">
-                                                <input type="checkbox" id="sab" name="day-of-week" value="sab"
-                                                    class="me-2" />
+                                                <input type="checkbox" (change)="onChangeDays($event)" id="sab"
+                                                    name="day-of-week" value="sab" class="me-2" />
                                                 Sab
                                             </label>
                                         </div>
                                     </div>
+
+                                    <div *ngIf="isInValid['daysOfWeek']" class="mt-1 ms-1">
+                                        <span class="invalid fw-light">Campo obrigatório</span>
+                                    </div>
+
                                 </fieldset>
 
                             </div>
@@ -196,21 +218,26 @@
                                     </label>
 
                                     <label for="estagio" class="mb-2 d-flex align-items-center">
-                                        <input type="radio" id="estagio" name="contract" value="Híbrido" class="me-2" />
+                                        <input type="radio" [(ngModel)]="contract" id="estagio" name="contract"
+                                            value="estagio" class="me-2" />
                                         Estágio
                                     </label>
 
                                     <label for="freelancer" class="mb-2 d-flex align-items-center">
-                                        <input type="radio" id="freelancer" name="contract" value="Presencial"
-                                            class="me-2" />
+                                        <input type="radio" [(ngModel)]="contract" id="freelancer" name="contract"
+                                            value="freelancer" class="me-2" />
                                         Freelancer
                                     </label>
 
-                                    <label for="pessoa juridica" class="mb-2 d-flex align-items-center">
-                                        <input type="radio" id="pessoa juridica" name="contract" value="Presencial"
-                                            class="me-2" />
+                                    <label for="pessoaJuridica" class="mb-2 d-flex align-items-center">
+                                        <input type="radio" [(ngModel)]="contract" id="pessoaJuridica" name="contract"
+                                            value="pessoa juridica" class="me-2" />
                                         Pessoa Jurídica
                                     </label>
+
+                                    <div *ngIf="isInValid['contract']" class="mt-1 ms-1">
+                                        <span class="invalid fw-light">Campo obrigatório</span>
+                                    </div>
 
                                 </fieldset>
 
@@ -220,24 +247,30 @@
                                         Qual é o período?
                                     </legend>
 
-                                    <div class="d-flex">
+                                    <div class="d-flex flex-wrap">
 
                                         <div class="me-3">
-                                            <label for="meio periodo" class="mb-2 d-flex align-items-center">
-                                                <input type="radio" id="meio periodo" name="contact" value="Remoto"
-                                                    class="me-2" />
+                                            <label for="meioPeriodo" class="mb-2 d-flex align-items-center">
+                                                <input type="radio" [(ngModel)]="period" id="meioPeriodo" name="period"
+                                                    value="Remoto" class="me-2" />
                                                 Meio período
                                             </label>
                                         </div>
 
                                         <div class="me-3">
                                             <label for="integral" class="mb-2 d-flex align-items-center">
-                                                <input type="radio" id="integral" name="contact" value="Híbrido"
-                                                    class="me-2" />
+                                                <input type="radio" [(ngModel)]="period" id="integral" name="period"
+                                                    value="integral" class="me-2" />
                                                 Integral
                                             </label>
                                         </div>
 
+                                    </div>
+
+                                    {{period}}
+
+                                    <div *ngIf="isInValid['period']" class="mt-1 ms-1">
+                                        <span class="invalid fw-light">Campo obrigatório</span>
                                     </div>
 
                                 </fieldset>
@@ -250,30 +283,34 @@
 
                                     <div class="d-flex flex-wrap pt-2 align-items-start justify-content-start">
 
-                                        <div class="col-2 me-3">
-                                            <label for="manha" class="mb-2 d-flex align-items-center">
-                                                <input type="radio" id="manha" name="shift" value="Remoto"
-                                                    class="me-2" />
-                                                Manhã
+                                        <div class="me-3">
+                                            <label for="manha" class="mb-2 d-flex align-items-center pe-2">
+                                                <input type="radio" [(ngModel)]="shift" id="manha" name="shift"
+                                                    value="manha" class="me-2" />
+                                                Manha
                                             </label>
                                         </div>
 
-                                        <div class="col-2 me-3">
-                                            <label for="tarde" class="mb-2 d-flex align-items-center">
-                                                <input type="radio" id="tarde" name="shift" value="Híbrido"
-                                                    class="me-2" />
+                                        <div class="me-3">
+                                            <label for="tarde" class="mb-2 d-flex align-items-center pe-2">
+                                                <input type="radio" [(ngModel)]="shift" id="tarde" name="shift"
+                                                    value="tarde" class="me-2" />
                                                 Tarde
                                             </label>
                                         </div>
 
-                                        <div class="col-2 me-3">
-                                            <label for="noite" class="mb-2 d-flex align-items-center">
-                                                <input type="radio" id="noite" name="shift" value="Híbrido"
-                                                    class="me-2" />
+                                        <div class="me-3">
+                                            <label for="noite" class="mb-2 d-flex align-items-center pe-2">
+                                                <input type="radio" [(ngModel)]="shift" id="noite" name="shift"
+                                                    value="noite" class="me-2" />
                                                 Noite
                                             </label>
                                         </div>
 
+                                    </div>
+
+                                    <div *ngIf="isInValid['shift']" class="mt-1 ms-1">
+                                        <span class="invalid fw-light">Campo obrigatório</span>
                                     </div>
 
                                 </fieldset>

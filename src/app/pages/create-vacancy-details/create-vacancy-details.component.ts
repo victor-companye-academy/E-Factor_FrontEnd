@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AutoComplete } from 'primeng/autocomplete';
 
 @Component({
@@ -11,24 +11,24 @@ export class CreateVacancyDetailsComponent {
   protected FilteredItems!: any[];
 
   //Valores para o formgroup
-  protected skills!: string[];
+  protected skills: string[] | undefined;
   protected serniority: string | undefined;
   protected vacancyArea: string | undefined;
   protected modality: string | undefined;
-  protected daysOfWeek: string | undefined;
+  protected daysOfWeek!: string[] | undefined;
   protected contract: string | undefined;
   protected period: string | undefined;
   protected shift: string | undefined;
 
   protected formDetails = new FormGroup({
-    skills: new FormControl(),
-    serniority: new FormControl(),
-    vacancyArea: new FormControl(),
-    modality: new FormControl(),
-    daysOfWeek: new FormControl(),
-    contract: new FormControl(),
-    period: new FormControl(),
-    shift: new FormControl(),
+    skills: new FormControl('', [Validators.nullValidator, Validators.required]),
+    serniority: new FormControl('', [Validators.nullValidator, Validators.required]),
+    vacancyArea: new FormControl('', [Validators.nullValidator, Validators.required]),
+    modality: new FormControl('', [Validators.nullValidator, Validators.required]),
+    daysOfWeek: new FormControl(''),
+    contract: new FormControl('', [Validators.nullValidator, Validators.required]),
+    period: new FormControl('', [Validators.nullValidator, Validators.required]),
+    shift: new FormControl('', [Validators.nullValidator, Validators.required]),
   })
 
   protected skillsList: Array<string> = [
@@ -61,6 +61,79 @@ export class CreateVacancyDetailsComponent {
     'Open Source Contribution', 'Community Building'
   ];
 
+  protected isInValid: any;
+
+  private inValidate(formName: string): void {
+    switch (formName) {
+      case 'skills':
+        if (this.formDetails.controls['skills']?.status === 'INVALID') {
+          this.isInValid.skills = true;
+          break;
+        }
+        this.isInValid.skills = false;
+        break;
+
+
+      case 'serniority':
+        if (this.formDetails.controls['serniority']?.status === 'INVALID') {
+          this.isInValid.serniority = true;
+          break;
+        }
+        this.isInValid.serniority = false;
+        break;
+
+      case 'vacancyArea':
+        if (this.formDetails.controls['vacancyArea']?.status === 'INVALID') {
+          this.isInValid.vacancyArea = true;
+          break;
+        }
+        this.isInValid.vacancyArea = false;
+        break;
+
+      case 'modality':
+        if (this.formDetails.controls['modality']?.status === 'INVALID') {
+          this.isInValid.modality = true;
+          break;
+        }
+        this.isInValid.modality = false;
+        break;
+
+      case 'daysOfWeek':
+        if (this.formDetails.controls['daysOfWeek']?.status === 'INVALID' || !this.daysOfWeek || this.daysOfWeek.length === 0) {
+          this.isInValid.daysOfWeek = true;
+          break;
+        }
+        this.isInValid.daysOfWeek = false;
+        break;
+
+      case 'contract':
+        if (this.formDetails.controls['contract']?.status === 'INVALID') {
+          this.isInValid.contract = true;
+          break;
+        }
+        this.isInValid.contract = false;
+        break;
+
+      case 'period':
+        if (this.formDetails.controls['period']?.status === 'INVALID') {
+          this.isInValid.period = true;
+          break;
+        }
+        this.isInValid.period = false;
+        break;
+
+      default:
+
+      case 'shift':
+        if (this.formDetails.controls['shift']?.status === 'INVALID') {
+          this.isInValid.shift = true;
+          break;
+        }
+        this.isInValid.shift = false;
+        break;
+    }
+  }
+
   search(event: any) {
     let filtered: any[] = [];
     let query = event.query;
@@ -76,9 +149,50 @@ export class CreateVacancyDetailsComponent {
   }
 
   onSubmit() {
+    this.formDetails.get('skills')?.setValue(this.skills as any)
+    this.formDetails.get('serniority')?.setValue(this.serniority as any)
+    this.formDetails.get('vacancyArea')?.setValue(this.vacancyArea as any)
+    this.formDetails.get('modality')?.setValue(this.modality as any)
+    this.formDetails.get('daysOfWeek')?.setValue(this.daysOfWeek as any)
+    this.formDetails.get('contract')?.setValue(this.contract as any)
+    this.formDetails.get('period')?.setValue(this.period as any)
+    this.formDetails.get('shift')?.setValue(this.shift as any)
+
+    for (let key in this.formDetails.controls) {
+      this.inValidate(key);
+    }
+
     if (this.formDetails.valid) {
-      this.formDetails.get('skills')?.setValue(this.skills)
       console.log(this.formDetails.value)
     }
+  }
+
+  onChangeDays(event: Event) {
+    const element = event.target as HTMLInputElement;
+    const value = element.value
+
+    if (element instanceof HTMLInputElement) {
+
+      if (element.type === 'checkbox') {
+        if (element.checked) {
+          this.daysOfWeek?.push(value)
+        } else {
+          this.daysOfWeek = this.daysOfWeek?.filter(e => e !== value)
+        }
+      }
+    }
+  }
+
+  ngOnInit() {
+    this.isInValid = {};
+
+    this.daysOfWeek = [];
+    this.skills = [];
+    this.vacancyArea = '';
+    this.modality = '';
+    this.contract = '';
+    this.period = '';
+    this.serniority = '';
+    this.shift = '';
   }
 }
