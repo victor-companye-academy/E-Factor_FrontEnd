@@ -177,7 +177,8 @@ export class CreateVacancyDetailsComponent {
     if (this.formDetails.valid && vacancy) {
       this.vacancyService.insertDetails(this.skills as string[], this.serniority as string, this.vacancyArea as string, this.modality as string, this.daysOfWeek as string[], this.contract as string, this.period as string, this.shift as string)
 
-      //proxima página
+      this.router.navigateByUrl("/create-vacancy/create");
+
 
     }
   }
@@ -199,15 +200,23 @@ export class CreateVacancyDetailsComponent {
   }
 
   ngOnInit() {
-    this.isInValid = {};
+    const vacancy = this.vacancyService.getVacancy()
+    
+    if (vacancy.title === undefined || '' && vacancy.description === undefined || '') {
+      this.router.navigateByUrl("/create-vacancy");
+    } else {
+      this.isInValid = {};
 
-    this.daysOfWeek = [];
-    this.skills = [];
-    this.vacancyArea = '';
-    this.modality = '';
-    this.contract = '';
-    this.period = '';
-    this.serniority = '';
-    this.shift = '';
+      this.daysOfWeek = [];
+      this.skills = [];
+      this.vacancyArea = '';
+      this.modality = '';
+      this.contract = '';
+      this.period = '';
+      this.serniority = '';
+      this.shift = '';
+    }
+
+
   }
 }

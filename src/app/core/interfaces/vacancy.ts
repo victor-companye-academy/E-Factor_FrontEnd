@@ -12,6 +12,7 @@ export interface Vacancy {
     status:string;
     contract: string;
     mode: string;
+    serniority:string;
     description: string;
     skills: Array<string>;
     showedInterest: Array<string>;

@@ -1,8 +1,9 @@
 <section *ngIf="card" class="row section-main p-4">
     <div class="col-5 col-xl-3 profile me-4">
         <section class="profile mb-5 rounded-4 p-5 d-flex flex-column align-items-center overflow-hidden">
-            <img [src]="card.businessInfo.photo || 'assets/imgs/default-profile.svg'" alt="foto de perfil" title="Logo da empresa" width="150px" height="150px"
-                class="border-0 rounded-circle object-fit-cover" style="background-color: #f2f4f7;">
+            <img [src]="card.businessInfo.photo || 'assets/imgs/default-profile.svg'" alt="foto de perfil"
+                title="Logo da empresa" width="150px" height="150px" class="border-0 rounded-circle object-fit-cover"
+                style="background-color: #f2f4f7;">
 
             <h2 class="fw-light fs-5 mt-4 text-center text-capitalize">
                 {{card.businessInfo.name}}
@@ -13,13 +14,16 @@
             </h3>
         </section>
 
-        <section class="details mb-5 rounded-4 p-5">
-            <h2 class="fw-light fs-5">
-                Detalhes adicionais
-            </h2>
+        <section class="details mb-5 rounded-4 py-5 px-4 overflow-hidden">
+            <div>
+                <h2 class="fw-light fs-5 row">
+                    Detalhes adicionais
+                </h2>
+            </div>
+
 
             <div *ngIf="card.businessInfo.cellphone">
-                <div >
+                <div>
                     <h4 class="fw-light fs-6 mt-4 mb-2">
                         Telefone
                     </h4>
@@ -48,9 +52,13 @@
                 </span>
             </div>
         </section>
-        <button type="button" (click)="show()" class="w-100 border-0 rounded-4 py-2 fs-5 fw-semibold button">
-            Demonstrar interesse
-        </button>
+
+        <div [ngStyle]="{'display': showInterest?'block':'none'}">
+            <button type="button" (click)="show()" class="w-100 border-0 rounded-4 py-2 fs-5 fw-semibold button mb-5">
+                Demonstrar interesse
+            </button>
+        </div>
+
     </div>
 
     <div class="col about">

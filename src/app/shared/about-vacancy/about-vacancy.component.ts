@@ -11,6 +11,7 @@ import { Vacancy } from 'src/app/core/interfaces/vacancy';
 export class AboutVacancyComponent {
 
   @Input({ alias: 'card' }) public card?: Vacancy;
+  @Input() public showInterest!:boolean;
 
   constructor(private messageService: MessageService) { }
 

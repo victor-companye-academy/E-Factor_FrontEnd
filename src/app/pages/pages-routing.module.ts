@@ -20,6 +20,7 @@ import { CreateVacancyComponent } from './create-vacancy/create-vacancy.componen
 import { RequestCoinFactorComponent } from './request-coin-factor/request-coin-factor.component';
 import { SendRequestComponent } from './send-request-coin/send-request.component';
 import { CreateVacancyDetailsComponent } from './create-vacancy-details/create-vacancy-details.component';
+import { CreateVacancyCreateComponent } from './create-vacancy-create/create-vacancy-create.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -42,7 +43,8 @@ const routes: Routes = [
     path: 'create-vacancy',
     children: [
       { path: '', component: CreateVacancyComponent },
-      { path: 'details', component: CreateVacancyDetailsComponent }
+      { path: 'details', component: CreateVacancyDetailsComponent }, 
+      { path: 'create', component: CreateVacancyCreateComponent }
     ]
   },
   {

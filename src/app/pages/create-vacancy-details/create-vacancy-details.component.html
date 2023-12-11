@@ -43,7 +43,7 @@
                                             name="skills"></p-autoComplete>
                                     </div>
 
-                                    <div *ngIf="isInValid['skills']" class="mt-1 ms-1">
+                                    <div *ngIf="isInValid && isInValid['skills']" class="mt-1 ms-1">
                                         <span class="invalid fw-light">Campo obrigatório</span>
                                     </div>
 
@@ -66,7 +66,7 @@
                                             title="Selecione uma opção">
                                     </div>
 
-                                    <div *ngIf="isInValid['serniority']" class="mt-1 ms-1">
+                                    <div *ngIf=" isInValid && isInValid['serniority']" class="mt-1 ms-1">
                                         <span class="invalid fw-light">Campo obrigatório</span>
                                     </div>
                                 </label>
@@ -88,7 +88,7 @@
                                             title="Selecione uma opção">
                                     </div>
 
-                                    <div *ngIf="isInValid['vacancyArea']" class="mt-1 ms-1">
+                                    <div *ngIf="isInValid && isInValid['vacancyArea']" class="mt-1 ms-1">
                                         <span class="invalid fw-light">Campo obrigatório</span>
                                     </div>
 
@@ -120,14 +120,14 @@
 
                                             <label for="Classroom" class="mb-2 d-flex align-items-center">
                                                 <input type="radio" id="Classroom" [(ngModel)]="modality"
-                                                    name="modality" [(ngModel)]="modality" value="presnecial"
+                                                    name="modality" [(ngModel)]="modality" value="presencial"
                                                     class="me-2" />
                                                 Presencial
                                             </label>
 
                                         </div>
 
-                                        <div *ngIf="isInValid['modality']" class="mt-1 ms-1">
+                                        <div *ngIf="isInValid && isInValid['modality']" class="mt-1 ms-1">
                                             <span class="invalid fw-light">Campo obrigatório</span>
                                         </div>
                                     </fieldset>
@@ -195,7 +195,7 @@
                                         </div>
                                     </div>
 
-                                    <div *ngIf="isInValid['daysOfWeek']" class="mt-1 ms-1">
+                                    <div *ngIf="isInValid && isInValid['daysOfWeek']" class="mt-1 ms-1">
                                         <span class="invalid fw-light">Campo obrigatório</span>
                                     </div>
 
@@ -213,7 +213,8 @@
                                     </legend>
 
                                     <label for="clt" class="mb-2 d-flex align-items-center">
-                                        <input type="radio" id="clt" name="contract" value="Remoto" class="me-2" />
+                                        <input type="radio" [(ngModel)]="contract" id="clt" name="contract"
+                                            value="Remoto" class="me-2" />
                                         CLT
                                     </label>
 
@@ -235,7 +236,7 @@
                                         Pessoa Jurídica
                                     </label>
 
-                                    <div *ngIf="isInValid['contract']" class="mt-1 ms-1">
+                                    <div *ngIf="isInValid && isInValid['contract']" class="mt-1 ms-1">
                                         <span class="invalid fw-light">Campo obrigatório</span>
                                     </div>
 
@@ -267,7 +268,7 @@
 
                                     </div>
 
-                                    <div *ngIf="isInValid['period']" class="mt-1 ms-1">
+                                    <div *ngIf="isInValid && isInValid['period']" class="mt-1 ms-1">
                                         <span class="invalid fw-light">Campo obrigatório</span>
                                     </div>
 
@@ -307,7 +308,7 @@
 
                                     </div>
 
-                                    <div *ngIf="isInValid['shift']" class="mt-1 ms-1">
+                                    <div *ngIf="isInValid && isInValid['shift']" class="mt-1 ms-1">
                                         <span class="invalid fw-light">Campo obrigatório</span>
                                     </div>
 
