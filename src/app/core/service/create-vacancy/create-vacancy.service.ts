@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Vacancy } from '../../interfaces/vacancy';
 import { BusinessInfo } from '../../interfaces/business-info';
+import { VacancyService } from '../vacancy/vacancy.service';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -8,8 +9,12 @@ import { Router } from '@angular/router';
 })
 export class CreateVacancyService {
 
+  constructor(private vacancyService: VacancyService, private router: Router) {
+  }
+
   //Atributo temporário (seraá inserido pelo backend?)
   private static id: number = 1;
+  private static wasSend: boolean = false;
 
   private vacancy: any | undefined = {};
 
@@ -33,7 +38,7 @@ export class CreateVacancyService {
 
   }
 
-  public insertDetails(skills: string[], serniority: String, vacancyArea: string, modality: string, daysOfWeek: string[], contract: string, period: string, shift: string) {
+  public insertDetails(skills: string[], serniority: string, vacancyArea: string, modality: string, daysOfWeek: string[], contract: string, period: string, shift: string) {
     this.vacancy.skills = skills;
     this.vacancy.serniority = serniority;
     this.vacancy.vacancyArea = vacancyArea;
@@ -42,26 +47,32 @@ export class CreateVacancyService {
     this.vacancy.contract = contract;
     this.vacancy.period = period;
     this.vacancy.shift = shift;
+    this.vacancy.days = '11/12/2023';
+    this.vacancy.status = 'Ultimas vagas';
+    this.vacancy.showedInterest = [];
   }
 
-  public getVacancy() {
-    return this.vacancy
+  private insertBusiness() {
+    this.vacancy.businessId = this.businessInfo.id;
+    this.vacancy.businessInfo = this.businessInfo;
   }
 
-  public createVacancy(): Vacancy | void {
-
+  public getVacancy(): Vacancy | any {
     if (this.vacancy) {
       const newVacancy: Vacancy = {
         id: this.setId(),
+        daysOfWeek: [],
+        period: this.vacancy.period,
+        shift: this.vacancy.shift,
         businessId: this.businessInfo.id,
         businessInfo: this.businessInfo,
-        position: this.vacancy.serniority,
+        vacancyArea: this.vacancy.serniority,
         title: this.vacancy.title,
-        days: '11/12/2023',
-        status: 'Ultimas vagas',
+        days: this.vacancy.days,
+        status: this.vacancy.status,
         serniority: this.vacancy.serniority,
         contract: this.vacancy.contract,
-        mode: this.vacancy.modality,
+        modality: this.vacancy.modality,
         description: this.vacancy.description,
         skills: this.vacancy.skills,
         showedInterest: []
@@ -69,6 +80,20 @@ export class CreateVacancyService {
 
       return newVacancy
     }
+  }
+
+  public getWasSend(): boolean {
+    return CreateVacancyService.wasSend;
+  }
+
+  public createVacancy() {
+    CreateVacancyService.wasSend = true;
+
+    this.insertBusiness()
+    this.vacancyService.insertVacancy(this.vacancy)
+    this.router.navigateByUrl('/create-vacancy')
+
+    this.vacancy = {}
   }
 
   //método temporário (será inserido pelo backend?)

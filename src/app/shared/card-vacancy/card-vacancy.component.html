@@ -1,16 +1,17 @@
-<article *ngIf="card" class="card d-flex border-0 rounded-4 container overflow-hidden"
+<article *ngIf="card && card.businessInfo"
+    class="card d-flex border-0 rounded-4 container overflow-hidden pt-4 pb-3 w-100 m-0"
     [ngClass]="{'flex-row': !isShort}" [ngStyle]="{'padding': isShort?'1rem': '1.56rem 0 1.5rem 5.5rem'}">
 
-    <section class="content position-relative">
+    <section class="content position-relative px-0" [ngClass]="{'w-100': isShort}">
         <img src="{{card.businessInfo.photo || 'assets/icons/bag.svg'}}" alt="Logo empresa"
             class="rounded-circle logo position-absolute bg-white"
             [ngClass]="card.businessInfo.photo ? 'object-fit-cover': 'object-fit-scale'" width="40px" height="40px"
             [ngStyle]="{'left': isShort?'0': '-65px'}">
 
-        <div class="d-flex align-items-start flex-wrap " [ngClass]="{'flex-column': isShort}">
-            <div class="title-company me-4" [ngClass]="{'ms-5':isShort}">
+        <div class="d-flex align-items-start flex-wrap w-100" [ngClass]="{'flex-column': isShort}">
+            <div class="title-company me-4 w-100" [ngClass]="{'ms-5':isShort}">
                 <h3 class="me-0 fw-light mb-0 text-start">{{card.businessInfo.name}}</h3>
-                <h2 class="m-0 fw-medium text-start">{{card.title}}</h2>
+                <h2 class="m-0 fw-medium w-100">{{card.title}}</h2>
             </div>
             <div class="status d-flex align-items-center flex-wrap mt-1" *ngIf="!isShort">
                 <img src="assets/icons/calendar.svg" alt="Icone de calendário" width="24px" height="24px"
@@ -20,36 +21,39 @@
             </div>
         </div>
 
-        <div class="description overflow-hidden" *ngIf="!isShort">
-            <p class="m-0 pe-5 mt-4 text-start border-0 overflow-hidden fw-light text-wrap">
+        <div class="description overflow-hidden me-5" *ngIf="!isShort">
+            <p class="m-0  mt-4 text-start border-0 overflow-hidden fw-light text-wrap pe-3">
                 {{card.description}}</p>
         </div>
     </section>
 
     <!-- ------------------------- -->
 
-    <section class="d-flex pb-2 content-2 align-items-center "
-        [ngClass]="{'flex-column': !isShort, 'justify-content-evenly': !isShort, 'me-2': !isShort,'flex-nowrap': isShort, 'mt-3':isShort, 'justify-content-between': isShort}">
+    <section class="d-flex content-2 align-items-center p-0 m-0 row flex-wrap container" sec
+        [ngClass]="{'flex-column': !isShort, 'justify-content-evenly': !isShort, 'me-2': !isShort,'flex-nowrap': isShort, 'mt-2':isShort, 'justify-content-between': isShort}">
 
-        <div>
-            <div class="d-flex align-items-center justify-content-start flex-nowrap mt-2" *ngIf="isShort">
-                <img src="assets/icons/calendar.svg" alt="Icone de calendário" width="24px" height="24px" class="me-1">
+        <div class="col d-flex flex-wrap justify-content-start px-1" *ngIf="isShort">
+
+            <div class="d-flex align-items-center justify-content-start flex-nowrap mt-2">
+                <img src="assets/icons/calendar.svg" alt="Icone de calendário" width="24px" height="24px" class="me-3">
                 <span class="bg-white px-3 rounded-5 me-3 fw-medium" [title]="card.days">{{card.days}}</span>
             </div>
 
-            <div class="d-flex align-items-center justify-content-start flex-nowrap mt-2" [ngClass]="{'mt-3':isShort}"
-                *ngIf="isShort">
-                <img src="assets/icons/map.svg" alt="Icone de mapa" class="me-2" width="24px" height="24px"
-                    class="me-1">
+            <div class="d-flex align-items-center justify-content-start flex-nowrap mt-2"
+                [ngClass]="{'mt-2':isShort, 'mt-3': !isShort}">
+                <img src="assets/icons/map.svg" alt="Icone de mapa" class="me-3" width="24px" height="24px"
+                    class="me-3">
                 <span class="rounded-5 bg-white px-3 fw-medium"
                     [title]="card.businessInfo.city">{{card.businessInfo.state}}</span>
             </div>
 
         </div>
 
-        <div>
+        <div class="col m-0 pt-0 ps-0 d-flex flex-column justify-content-center"
+            [ngStyle]="{'min-width': !isShort?'100%':'auto'}">
+
             <div class="d-flex align-items-center justify-content-start mt-2" *ngIf="!isShort">
-                <img src="assets/icons/map.svg" alt="Icone de mapa" class="me-1" width="24px" height="24px">
+                <img src="assets/icons/map.svg" alt="Icone de mapa" class="me-3" width="24px" height="24px">
                 <span class="rounded-5 bg-white px-3 fw-medium" [title]="card.businessInfo.city">
                     {{card.businessInfo.city}}
                 </span>
@@ -57,7 +61,8 @@
 
             <div>
                 <div class="d-flex align-items-center justify-content-start flex-nowrap mt-2">
-                    <img src="assets/icons/list.svg" alt="Icone de lista" width="24px" height="24px" class="me-1">
+
+                    <img src="assets/icons/list.svg" alt="Icone de lista" width="24px" height="24px" class="me-3">
                     <span class="me-2 rounded-5 bg-white px-3 fw-medium">
                         {{card.skills[0]}}
 
@@ -65,19 +70,22 @@
                     <span class="rounded-5 bg-white px-2 fw-medium" *ngIf="!(card.skills.length < 2)">
                         +{{card.skills.length - 1}}
                     </span>
+
                 </div>
             </div>
 
-            <div class="d-flex align-items-center justify-content-start flex-nowrap mt-2" [ngClass]="{'mt-3':isShort}">
-                <img src="assets/icons/desktop.svg" alt="Icone de computador" width="24px" height="24px" class="me-1">
+            <div class="d-flex align-items-center justify-content-start flex-nowrap mt-2">
+
+                <img src="assets/icons/desktop.svg" alt="Icone de computador" width="24px" height="24px" class="me-3">
                 <span class="rounded-5 bg-white px-3 fw-medium">
-                    {{card.mode}}
+                    {{card.modality}}
                 </span>
+
             </div>
 
             <div class="d-flex align-items-center justify-content-start flex-nowrap mt-2" *ngIf="!isShort">
                 <img src="assets/icons/bag.svg" alt="Icone de maleta" class="me-2 " width="24px" height="24px"
-                    class="me-1">
+                    class="me-3">
                 <span class="rounded-5 bg-white px-3 fw-medium" [title]="card.contract">{{card.contract}}</span>
             </div>
         </div>

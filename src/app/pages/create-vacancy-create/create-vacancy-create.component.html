@@ -21,13 +21,23 @@
                 </section>
 
                 <div class="vacancy-details rounded-4 m-0 p-4">
+                    <button type="button" (click)="onClose()"
+                        class="m-0 p-0 bg-transparent button-close border-0 roudned-circle">
+                        <img src="assets/icons/create-vacancy/close-circle.svg" alt="Ícone de fechar" title="Fechar">
+                    </button>
+
                     <about-vacancy [card]="vacancy" [showInterest]="showInterest"></about-vacancy>
                 </div>
 
                 <div class="w-100 d-flex justify-content-end ">
-                    <button type="submit" class="button border-0 py-2 rounded-3 my-5 fs-5">
+
+                    <p-toast></p-toast>
+
+                    <button type="button" (click)="onConfirm()"
+                        class="button border-0 py-2 rounded-3 my-5 fs-5">
                         Criar vaga
                     </button>
+
                 </div>
 
             </div>

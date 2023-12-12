@@ -154,7 +154,6 @@ export class CreateVacancyDetailsComponent {
   }
 
   onSubmit() {
-
     this.formDetails.get('skills')?.setValue(this.skills as any)
     this.formDetails.get('serniority')?.setValue(this.serniority as any)
     this.formDetails.get('vacancyArea')?.setValue(this.vacancyArea as any)
@@ -178,8 +177,6 @@ export class CreateVacancyDetailsComponent {
       this.vacancyService.insertDetails(this.skills as string[], this.serniority as string, this.vacancyArea as string, this.modality as string, this.daysOfWeek as string[], this.contract as string, this.period as string, this.shift as string)
 
       this.router.navigateByUrl("/create-vacancy/create");
-
-
     }
   }
 

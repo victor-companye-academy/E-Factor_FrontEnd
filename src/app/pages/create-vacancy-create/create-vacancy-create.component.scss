@@ -15,7 +15,23 @@
         }
 
         .vacancy-details {
+            position: relative;
             background-color: var(--background);
+
+            .button-close {
+                position: absolute;
+                top: 2rem;
+                right: 2rem;
+
+                img {
+                    transition: 0.2s;
+
+                    &:hover {
+                        transform: scale(1.2);
+                        transition: 0.2s;
+                    }
+                }
+            }
         }
 
         .button {

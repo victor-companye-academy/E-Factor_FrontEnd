@@ -21,7 +21,7 @@
 
             <section class="mt-0 w-100  py-1">
                 <div *ngIf="cardProfessional[1]" class="section-professional d-flex justify-content-center row">
-                    <div class="see-more pt-2 col-lg-12 col-xl-4">
+                    <div class="see-more pt-2 col-lg-12 col-xl-12 col-xxl-4">
                         <h3 class="fw-bold fs-6 mt-4">
                             Um mundo de profissionais ao seu alcance.
                         </h3>
@@ -36,10 +36,10 @@
                     </div>
 
                     <card-professional *ngIf="cardProfessional[1]" [short]="true" [card]="cardProfessional[1]"
-                        class="mt-4 col-lg-6 col-xl-4"></card-professional>
+                        class="mt-4 col-lg-6 col-xl-6 col-xxl-4"></card-professional>
 
                     <card-professional *ngIf="cardProfessional[0]" [short]="true" [card]="cardProfessional[0]"
-                        class="mt-4 col-lg-6 col-xl-4"></card-professional>
+                        class="mt-4 col-lg-6 col-xl-6 col-xxl-4"></card-professional>
 
                 </div>
             </section>
@@ -47,10 +47,10 @@
             <section class="w-100 py-1">
                 <div *ngIf="cardVacancy[1]" class="div-vacancy row justify-content-center">
 
-                    <card-vacancy [short]="true" [card]="cardVacancy[1]" class="mt-4 col-lg-6 col-xl-4"></card-vacancy>
-                    <card-vacancy [short]="true" [card]="cardVacancy[0]" class="mt-4 col-lg-6 col-xl-4"></card-vacancy>
+                    <card-vacancy [short]="true" [card]="cardVacancy[1]" class="mt-4 col-lg-6 col-xl-6 col-xxl-4"></card-vacancy>
+                    <card-vacancy [short]="true" [card]="cardVacancy[0]" class="mt-4 col-lg-6 col-xl-6 col-xxl-4"></card-vacancy>
 
-                    <div class="see-more d-flex flex-column align-items-end mt-4 col-lg-12 col-xl-4">
+                    <div class="see-more d-flex flex-column align-items-end mt-4 col-lg-12 col-xl-12 col-xxl-4">
                         <h3 class="fw-bold fs-6 text-end pt-2">
                             Um mundo de vagas ao seu alcance.
                         </h3>

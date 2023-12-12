@@ -6,14 +6,17 @@ export interface Vacancy {
     businessId: string,
     businessInfo: BusinessInfo,
 
-    position: string,
+    vacancyArea: string,
     title: string;
     days: string;
     status:string;
     contract: string;
-    mode: string;
+    modality: string;
     serniority:string;
     description: string;
     skills: Array<string>;
+    daysOfWeek:string[];
+    period:string;
+    shift:string;
     showedInterest: Array<string>;
 }
