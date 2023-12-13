@@ -1,11 +1,14 @@
 <section *ngIf="card" class="row section-main p-4">
     <div class="col-5 col-xl-3 profile me-4">
         <section class="profile mb-5 rounded-4 p-5 d-flex flex-column align-items-center overflow-hidden">
-            <img [src]="card.businessInfo.photo || 'assets/imgs/default-profile.svg'" alt="foto de perfil"
-                title="Logo da empresa" width="150px" height="150px" class="border-0 rounded-circle object-fit-cover"
-                style="background-color: #f2f4f7;">
 
-            <h2 class="fw-light fs-5 mt-4 text-center text-capitalize">
+            <img [src]="card.businessInfo.photo || 'assets/imgs/default-profile.svg'" alt="foto de perfil"
+                title="Logo da empresa" width="150px" height="150px"
+                class="cursor-pointer border-0 rounded-circle object-fit-cover" style="background-color: #f2f4f7;"
+                [routerLink]="['/business-profile', card.businessInfo.id]">
+
+            <h2 class="cursor-pointer fw-light fs-5 mt-4 text-center text-capitalize"
+                [routerLink]="['/business-profile', card.businessInfo.id]">
                 {{card.businessInfo.name}}
             </h2>
 

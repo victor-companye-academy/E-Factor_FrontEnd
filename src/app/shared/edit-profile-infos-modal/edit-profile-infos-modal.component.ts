@@ -22,6 +22,7 @@ export class EditProfileInfosModalComponent {
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {
     this.pageType = this.route.snapshot.url[0].path;
+    console.log(this.pageType);
   }
 
   onPhotoChange(event: any) {
@@ -94,7 +95,7 @@ export class EditProfileInfosModalComponent {
       'Rondônia': ['Porto Velho', 'Ji-Paraná', 'Ariquemes'],
       'Roraima': ['Boa Vista', 'Caracaraí', 'Rorainópolis'],
       'Santa Catarina': ['Florianópolis', 'Joinville', 'Blumenau'],
-      'São Paulo': ['São Paulo', 'Guarulhos', 'Campinas'],
+      'São Paulo': ['São Paulo', 'Guarulhos', 'Campinas', 'Guarujá'],
       'Sergipe': ['Aracaju', 'Nossa Senhora do Socorro', 'Lagarto'],
       'Tocantins': ['Palmas', 'Araguaína', 'Gurupi'],
     };
@@ -122,8 +123,9 @@ export class EditProfileInfosModalComponent {
   }
 
   verifyInfos() {
-    if (this.pageType == 'profissional-profile') {
+    if (this.pageType == 'professional-profile') {
       if (this.editedProfile.name.trim() == '' ||
+          !this.editedProfile.name.match(/^[a-zA-Z. ]+$/) ||
           this.editedProfile.age.trim() == '' ||
           parseInt(this.editedProfile.age) <= 0 ||
           this.editedProfile.city == '' ||
@@ -136,7 +138,7 @@ export class EditProfileInfosModalComponent {
       } else {
         return this.isValid = true;
       }
-    } else {
+    } else if (this.pageType == 'business-profile') {
       if (this.editedProfile.name.trim() == '' ||
           this.editedProfile.city == '' ||
           this.editedProfile.state == '' ||
@@ -148,6 +150,7 @@ export class EditProfileInfosModalComponent {
         return this.isValid = true;
       }
     }
+    return false;
   }
 
   applyPhoneMask(event: any): void {

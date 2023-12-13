@@ -94,20 +94,43 @@ export class VacancyService {
 
     dataStorage = sessionStorage.getItem(this.keyStorage);
 
+    console.log("entrei no serviço");
+
+    dataStorage = sessionStorage.getItem('vacancies');
+
     if (dataStorage) {
-      try {
-        console.log("Usando sessionStorage");
-        return JSON.parse(dataStorage);
-      } catch (error) {
-        console.error("Erro ao analisar os dados armazenados:", error);
-      }
+      console.log("Usando sessionStorage");
+
+      return JSON.parse(dataStorage);
     }
 
     sessionStorage.setItem(this.keyStorage, JSON.stringify(this.vacanciesArray));
     console.log("Usando requisição para API");
 
     return this.vacanciesArray;
+  }
 
+  public updateVacancys(updatedVacancy: any) {
+    const vacanciesArray: Array<Vacancy> = this.listVacancies();
+    const index = vacanciesArray.findIndex(vacancy => vacancy.id === vacancy.id);
+  
+    if (index !== -1) {
+      vacanciesArray[index] = updatedVacancy;
+      sessionStorage.setItem('vacancies', JSON.stringify(vacanciesArray));
+    }
+  }
+
+  public addNewVacancy(newVacancy: any) {
+    const vacanciesArray: Array<Vacancy> = this.listVacancies();
+    vacanciesArray.push(newVacancy);
+    sessionStorage.setItem('vacancies', JSON.stringify(vacanciesArray));
+  }
+
+  public deleteVacancy(id: string) {
+    const vacanciesArray: Array<Vacancy> = this.listVacancies();
+    const index = vacanciesArray.findIndex(vacancy => vacancy.id === id);
+    vacanciesArray.splice(index, 1);
+    sessionStorage.setItem('vacancies', JSON.stringify(vacanciesArray));
   }
 
   insertVacancy(vacancy: Vacancy): number {
@@ -125,7 +148,6 @@ export class VacancyService {
   }
 
   listVacanciesByBusiness(id: string): Array<Vacancy> {
-    console.log(this.listVacancies().filter(e => e.businessId === id))
     return this.listVacancies().filter(e => e.businessId === id);
   }
 }
