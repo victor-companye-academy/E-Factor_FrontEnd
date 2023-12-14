@@ -52,11 +52,13 @@ export class CreateBussinesUserComponent {
       ]),
     password: new FormControl('',
       [
-        Validators.required
+        Validators.required,
+        Validators.minLength(8)
       ]),
     passwordConfirmation: new FormControl('',
       [
-        Validators.required
+        Validators.required,
+        Validators.minLength(8)
       ]),
     cpf: new FormControl('',
       [
@@ -122,7 +124,7 @@ export class CreateBussinesUserComponent {
   validatePasswordEmpty(): void {
     const password: string | null = this.form.get('password')!.value;
   
-    if (password?.trim() === '' || !password) {
+    if (password?.trim() === '' || !password || (password?.length ?? 0) < 8) {
       this.passwordEmpty = true;
     } else {
       this.passwordEmpty = false;
@@ -132,7 +134,7 @@ export class CreateBussinesUserComponent {
   validatePasswordConfirmationEmpty(): void {
     const passwordConfirmation: string | null = this.form.get('passwordConfirmation')!.value;
   
-    if (passwordConfirmation?.trim() === '' || !passwordConfirmation) {
+    if (passwordConfirmation?.trim() === '' || !passwordConfirmation || (passwordConfirmation?.length ?? 0) < 8) {
       this.passwordConfirmationEmpty = true;
     } else {
       this.passwordConfirmationEmpty = false;
@@ -222,10 +224,11 @@ export class CreateBussinesUserComponent {
         cpf: this.form.get('cpf')?.value || '',
         phone: this.form.get('phone')?.value || '',
         birthDate: this.form.get('birthDate')?.value || '',
+        date: new Date().toISOString(),
       };
   
       this.createBusinessUserService.createNewBusinessUser(newUser);
-      this.router.navigateByUrl("/manage-business-users");
+      this.router.navigateByUrl("/manage-business-users/" + this.businessId);
     } else {
       console.log('Formulário inválido');
     }

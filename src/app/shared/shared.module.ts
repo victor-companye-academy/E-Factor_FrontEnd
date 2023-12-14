@@ -21,6 +21,8 @@ import { FilterComponent } from './filter/filter.component';
 import { SearchComponent } from './search/search.component';
 import { ToastModule } from 'primeng/toast';
 import { AboutVacancyComponent } from './about-vacancy/about-vacancy.component';
+import { EditBusinessUserModalComponent } from './edit-business-user-modal/edit-business-user-modal.component';
+import { DeleteBusinessUserModalComponent } from './delete-business-user-modal/delete-business-user-modal.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { AboutVacancyComponent } from './about-vacancy/about-vacancy.component';
     SearchComponent,
     AboutVacancyComponent,
     AboutVacancyComponent,
-    HeaderComponent
+    HeaderComponent,
+    EditBusinessUserModalComponent,
+    DeleteBusinessUserModalComponent
   ],
   imports: [
     CommonModule,
@@ -71,7 +75,9 @@ import { AboutVacancyComponent } from './about-vacancy/about-vacancy.component';
     FilterComponent,
     SearchComponent,
     AboutVacancyComponent,
-    HeaderComponent
+    HeaderComponent,
+    EditBusinessUserModalComponent,
+    DeleteBusinessUserModalComponent
   ]
 })
 export class SharedModule { }

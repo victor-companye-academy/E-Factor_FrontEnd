@@ -16,17 +16,17 @@
                 <button type="button" title="Em análise" class="rounded-4 btn pending text-start ps-3" (click)="filterSolicitations('Em Análise')"
                 [ngClass]="{'active': filterSelected === 'Em Análise'}">
                     <p>Em análise</p>
-                    <h1 class="display-3 fw-bold">1</h1>
+                    <h1 class="display-3 fw-bold">{{pending}}</h1>
                 </button>
                 <button type="button" title="Aprovadas" class="rounded-4 btn approved text-start ps-3" (click)="filterSolicitations('Aprovado')"
                 [ngClass]="{'active': filterSelected === 'Aprovado'}">
                     <p>Aprovadas</p>
-                    <h1 class="display-3 fw-bold">12</h1>
+                    <h1 class="display-3 fw-bold">{{approved}}</h1>
                 </button>
                 <button type="button" title="Reprovadas" class="rounded-4 btn rejected text-start ps-3" (click)="filterSolicitations('Reprovado')"
                 [ngClass]="{'active': filterSelected === 'Reprovado'}">
                     <p>Reprovadas</p>
-                    <h1 class="display-3 fw-bold">3</h1>
+                    <h1 class="display-3 fw-bold">{{rejected}}</h1>
                 </button>
                 <button type="button" title="+ Coin Factor" class="rounded-4 btn btn-principal fw-bold fs-5">
                     + Coin Factor
