@@ -8,7 +8,7 @@ export interface Vacancy {
 
     vacancyArea: string,
     title: string;
-    days: string;
+    day: string;
     status:string;
     contract: string;
     modality: string;
@@ -19,4 +19,6 @@ export interface Vacancy {
     period:string;
     shift:string;
     showedInterest: Array<string>;
+    createDate:string;
+    expirationDate: string;
 }

@@ -43,7 +43,7 @@
                                             name="skills"></p-autoComplete>
                                     </div>
 
-                                    <div *ngIf="isInValid && isInValid['skills']" class="mt-1 ms-1">
+                                    <div *ngIf="validation && validation['skills']" class="mt-1 ms-1">
                                         <span class="invalid fw-light">Campo obrigatório</span>
                                     </div>
 
@@ -66,7 +66,7 @@
                                             title="Selecione uma opção">
                                     </div>
 
-                                    <div *ngIf=" isInValid && isInValid['serniority']" class="mt-1 ms-1">
+                                    <div *ngIf=" validation && validation['serniority']" class="mt-1 ms-1">
                                         <span class="invalid fw-light">Campo obrigatório</span>
                                     </div>
                                 </label>
@@ -89,7 +89,7 @@
                                             title="Selecione uma opção">
                                     </div>
 
-                                    <div *ngIf="isInValid && isInValid['vacancyArea']" class="mt-1 ms-1">
+                                    <div *ngIf="validation && validation['vacancyArea']" class="mt-1 ms-1">
                                         <span class="invalid fw-light">Campo obrigatório</span>
                                     </div>
 
@@ -128,7 +128,7 @@
 
                                         </div>
 
-                                        <div *ngIf="isInValid && isInValid['modality']" class="mt-1 ms-1">
+                                        <div *ngIf="validation && validation['modality']" class="mt-1 ms-1">
                                             <span class="invalid fw-light">Campo obrigatório</span>
                                         </div>
                                     </fieldset>
@@ -196,7 +196,7 @@
                                         </div>
                                     </div>
 
-                                    <div *ngIf="isInValid && isInValid['daysOfWeek']" class="mt-1 ms-1">
+                                    <div *ngIf="validation && validation['daysOfWeek']" class="mt-1 ms-1">
                                         <span class="invalid fw-light">Campo obrigatório</span>
                                     </div>
 
@@ -213,22 +213,16 @@
                                         Qual será o tipo de contrato?
                                     </legend>
 
-                                    <label for="clt" class="mb-2 d-flex align-items-center">
-                                        <input type="radio" [(ngModel)]="contract" id="clt" name="contract"
-                                            value="Remoto" class="me-2" />
-                                        CLT
-                                    </label>
-
                                     <label for="estagio" class="mb-2 d-flex align-items-center">
                                         <input type="radio" [(ngModel)]="contract" id="estagio" name="contract"
                                             value="estagio" class="me-2" />
                                         Estágio
                                     </label>
 
-                                    <label for="freelancer" class="mb-2 d-flex align-items-center">
-                                        <input type="radio" [(ngModel)]="contract" id="freelancer" name="contract"
-                                            value="freelancer" class="me-2" />
-                                        Freelancer
+                                    <label for="clt" class="mb-2 d-flex align-items-center">
+                                        <input type="radio" [(ngModel)]="contract" id="clt" name="contract"
+                                            value="Remoto" class="me-2" />
+                                        CLT
                                     </label>
 
                                     <label for="pessoaJuridica" class="mb-2 d-flex align-items-center">
@@ -237,7 +231,13 @@
                                         Pessoa Jurídica
                                     </label>
 
-                                    <div *ngIf="isInValid && isInValid['contract']" class="mt-1 ms-1">
+                                    <label for="freelancer" class="mb-2 d-flex align-items-center">
+                                        <input type="radio" [(ngModel)]="contract" id="freelancer" name="contract"
+                                            value="freelancer" class="me-2" />
+                                        Freelancer
+                                    </label>
+
+                                    <div *ngIf="validation && validation['contract']" class="mt-1 ms-1">
                                         <span class="invalid fw-light">Campo obrigatório</span>
                                     </div>
 
@@ -269,7 +269,7 @@
 
                                     </div>
 
-                                    <div *ngIf="isInValid && isInValid['period']" class="mt-1 ms-1">
+                                    <div *ngIf="validation && validation['period']" class="mt-1 ms-1">
                                         <span class="invalid fw-light">Campo obrigatório</span>
                                     </div>
 
@@ -309,11 +309,29 @@
 
                                     </div>
 
-                                    <div *ngIf="isInValid && isInValid['shift']" class="mt-1 ms-1">
+                                    <div *ngIf="validation && validation['shift']" class="mt-1 ms-1">
                                         <span class="invalid fw-light">Campo obrigatório</span>
                                     </div>
 
                                 </fieldset>
+
+                                <label class="d-flex flex-column justify-content-between pt-2 mt-3 fs-6 fw-light"
+                                    for="calender">
+                                    Disponível até:
+
+                                    <input type="date" name="data" id="calender" [(ngModel)]="expirationDate" required
+                                        class="mt-3 p-3 rounded-3" style="color: var(--text-gray)">
+
+                                    <div *ngIf="validation && validation['expirationDate'] && !mesageError"
+                                        class="mt-1 ms-1">
+                                        <span class="invalid fw-light">Campo obrigatório</span>
+                                    </div>
+
+                                    <div *ngIf="mesageError" class="mt-1 ms-1">
+                                        <span class="invalid fw-light">{{mesageError}}</span>
+                                    </div>
+
+                                </label>
 
                             </div>
                         </div>

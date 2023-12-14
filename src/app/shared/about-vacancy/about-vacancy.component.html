@@ -12,7 +12,7 @@
                 {{card.businessInfo.name}}
             </h2>
 
-            <h3 class="fw-bold fs-5 mt-4 primary-color text-center text-capitalize">
+            <h3 class="fw-bold fs-5 mt-4 primary-color text-center text-capitalize d-flex flex-wrap">
                 {{card.title}}
             </h3>
         </section>
@@ -69,9 +69,9 @@
             <h2 class="fw-semibold fs-4 primary-color text-center">
                 Sobre a Vaga
             </h2>
-            <span *ngIf="card.status" class="text-center status rounded-4 ms-4 px-3 text-capitalize">
+            <!-- <span *ngIf="card.status" class="text-center status rounded-4 ms-4 px-3 text-capitalize">
                 {{card.status}}
-            </span>
+            </span> -->
         </div>
 
         <section>
@@ -129,7 +129,7 @@
                                     Data da Criação
                                 </h4>
                                 <span class="fw-bold fs-6 text-capitalize">
-                                    {{card.days}}
+                                    {{card.createDate}}
                                 </span>
                             </div>
                         </div>

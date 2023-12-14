@@ -68,8 +68,13 @@
                     outline: none;
                     border: none;
 
-                    &[type="text"] {
+                    &[type="text"],
+                    &[type="date"] {
                         height: 2.5rem;
+                    }
+
+                    &[type="date"] {
+                        max-width: 12rem;
                     }
 
                     &[type="radio"],

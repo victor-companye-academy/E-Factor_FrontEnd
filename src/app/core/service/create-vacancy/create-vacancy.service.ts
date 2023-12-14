@@ -3,6 +3,7 @@ import { Vacancy } from '../../interfaces/vacancy';
 import { BusinessInfo } from '../../interfaces/business-info';
 import { VacancyService } from '../vacancy/vacancy.service';
 import { Router } from '@angular/router';
+import { formattedDate } from 'src/app/core/utils/formattedDate';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +39,7 @@ export class CreateVacancyService {
 
   }
 
-  public insertDetails(skills: string[], serniority: string, vacancyArea: string, modality: string, daysOfWeek: string[], contract: string, period: string, shift: string) {
+  public insertDetails(skills: string[], serniority: string, vacancyArea: string, modality: string, daysOfWeek: string[], contract: string, period: string, shift: string, expirationDate: string) {
     this.vacancy.skills = skills;
     this.vacancy.serniority = serniority;
     this.vacancy.vacancyArea = vacancyArea;
@@ -47,9 +48,11 @@ export class CreateVacancyService {
     this.vacancy.contract = contract;
     this.vacancy.period = period;
     this.vacancy.shift = shift;
-    this.vacancy.days = '11/12/2023';
-    this.vacancy.status = 'Ultimas vagas';
+    // this.vacancy.days = '11/12/2023';
+    // this.vacancy.status = 'Ultimas vagas';
     this.vacancy.showedInterest = [];
+    this.vacancy.expirationDate = expirationDate;
+    this.vacancy.createDate = formattedDate(new Date());
   }
 
   private insertBusiness() {
@@ -68,28 +71,27 @@ export class CreateVacancyService {
         businessInfo: this.businessInfo,
         vacancyArea: this.vacancy.serniority,
         title: this.vacancy.title,
-        days: this.vacancy.days,
+        day: this.vacancy.day,
         status: this.vacancy.status,
         serniority: this.vacancy.serniority,
         contract: this.vacancy.contract,
         modality: this.vacancy.modality,
         description: this.vacancy.description,
         skills: this.vacancy.skills,
-        showedInterest: []
+        showedInterest: [],
+        expirationDate: this.vacancy.expirationDate,
+        createDate: this.vacancy.createDate
       }
-
       return newVacancy
     }
-  }
-
-  public getWasSend(): boolean {
-    return CreateVacancyService.wasSend;
   }
 
   public createVacancy() {
     CreateVacancyService.wasSend = true;
 
+    this.businessInfo.coins -= 1;
     this.insertBusiness()
+
     this.vacancyService.insertVacancy(this.vacancy)
     this.router.navigateByUrl('/create-vacancy')
 

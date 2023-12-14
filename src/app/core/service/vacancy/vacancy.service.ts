@@ -15,7 +15,7 @@ export class VacancyService {
   private vacanciesArray: Array<Vacancy> = [
     {
       id: '1',
-      days: '11/12/2023',
+      day: '11/12/2023',
       showedInterest: [],
       status: 'Ultimas vagas',
       businessId: '1',
@@ -49,10 +49,12 @@ export class VacancyService {
       contract: "pessoa juridica",
       period: "Remoto",
       shift: "manha",
+      createDate: '14/11/2023',
+      expirationDate:'20/12/2023'
     },
     {
       id: '2',
-      days: '11/12/2023',
+      day: '11/12/2023',
       showedInterest: [],
       status: 'Ultimas vagas',
       businessId: '1',
@@ -86,6 +88,8 @@ export class VacancyService {
       contract: "pessoa juridica",
       period: "Remoto",
       shift: "manha",
+      createDate: '10/12/2023',
+      expirationDate:'20/12/2023'
     }
   ];
 
@@ -113,7 +117,7 @@ export class VacancyService {
   public updateVacancys(updatedVacancy: any) {
     const vacanciesArray: Array<Vacancy> = this.listVacancies();
     const index = vacanciesArray.findIndex(vacancy => vacancy.id === vacancy.id);
-  
+
     if (index !== -1) {
       vacanciesArray[index] = updatedVacancy;
       sessionStorage.setItem('vacancies', JSON.stringify(vacanciesArray));
@@ -133,7 +137,7 @@ export class VacancyService {
     sessionStorage.setItem('vacancies', JSON.stringify(vacanciesArray));
   }
 
-  insertVacancy(vacancy: Vacancy): number {
+  public insertVacancy(vacancy: Vacancy): number {
     vacancy.id = (this.vacanciesArray.length + 1).toString()
     console.log(this.listVacancies())
 
@@ -143,11 +147,11 @@ export class VacancyService {
     return lastposition;
   }
 
-  listInterestedVacancies(id: string): Array<Vacancy> {
+  public listInterestedVacancies(id: string): Array<Vacancy> {
     return this.listVacancies().filter(e => e.showedInterest.includes(id));
   }
 
-  listVacanciesByBusiness(id: string): Array<Vacancy> {
+  public listVacanciesByBusiness(id: string): Array<Vacancy> {
     return this.listVacancies().filter(e => e.businessId === id);
   }
 }

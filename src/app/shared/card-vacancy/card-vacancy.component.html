@@ -1,6 +1,6 @@
 <article *ngIf="card && card.businessInfo"
-    class="card d-flex border-0 rounded-4 container overflow-hidden py-4 w-100 m-0"
-    [ngClass]="{'flex-row': !isShort}" [ngStyle]="{'padding': isShort?'1rem': '1.56rem 0 1.5rem 5.5rem'}">
+    class="card d-flex border-0 rounded-4 container overflow-hidden py-4 w-100 m-0" [ngClass]="{'flex-row': !isShort}"
+    [ngStyle]="{'padding': isShort?'1rem': '1.56rem 0 1.5rem 5.5rem'}">
 
     <section class="content position-relative px-0" [ngClass]="{'w-100': isShort}">
         <img src="{{card.businessInfo.photo || 'assets/icons/bag.svg'}}" alt="Logo empresa"
@@ -16,8 +16,8 @@
             <div class="status d-flex align-items-center flex-wrap mt-1" *ngIf="!isShort">
                 <img src="assets/icons/calendar.svg" alt="Icone de calendário" width="24px" height="24px"
                     class="me-3 mt-2">
-                <span class="bg-white px-3 rounded-5 me-3 fw-medium mt-2">{{card.days}}</span>
-                <span class="px-3 rounded-5 fw-medium bg-var-primary mt-2" *ngIf="card.status">{{card.status}}</span>
+                <span class="bg-white px-3 rounded-5 me-3 fw-medium mt-2">{{card.day}}</span>
+                <!-- <span class="px-3 rounded-5 fw-medium bg-var-primary mt-2" *ngIf="card.status">{{card.status}}</span> -->
             </div>
         </div>
 
@@ -29,14 +29,13 @@
 
     <!-- ------------------------- -->
 
-    <section class="d-flex content-2 align-items-center p-0 m-0 row flex-wrap container" sec
+    <section class="d-flex content-2 align-items-center p-0 m-0 row flex-wrap container"
         [ngClass]="{'flex-column': !isShort, 'justify-content-evenly': !isShort, 'me-2': !isShort,'flex-nowrap': isShort, 'mt-2':isShort, 'justify-content-between': isShort}">
-
         <div class="col d-flex flex-wrap justify-content-start px-1" *ngIf="isShort">
 
             <div class="d-flex align-items-center justify-content-start flex-nowrap mt-3">
                 <img src="assets/icons/calendar.svg" alt="Icone de calendário" width="24px" height="24px" class="me-3">
-                <span class="bg-white px-3 rounded-5 me-3 fw-medium" [title]="card.days">{{card.days}}</span>
+                <span class="bg-white px-3 rounded-5 me-3 fw-medium" [title]="card.day">{{card.day}}</span>
             </div>
 
             <div class="d-flex align-items-center justify-content-start flex-nowrap mt-3">
@@ -48,7 +47,7 @@
 
         </div>
 
-        <div class="col m-0 pt-0 ps-0 d-flex flex-column justify-content-center"
+        <div class="m-0 pt-0 ps-0 d-flex flex-column justify-content-center"
             [ngStyle]="{'min-width': !isShort?'100%':'auto'}">
 
             <div class="d-flex align-items-center justify-content-start mt-3" *ngIf="!isShort">
@@ -88,6 +87,7 @@
                 <span class="rounded-5 bg-white px-3 fw-medium" [title]="card.contract">{{card.contract}}</span>
             </div>
         </div>
+
     </section>
 
 </article>
