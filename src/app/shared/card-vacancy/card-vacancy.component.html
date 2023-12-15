@@ -16,8 +16,8 @@
             <div class="status d-flex align-items-center flex-wrap mt-1" *ngIf="!isShort">
                 <img src="assets/icons/calendar.svg" alt="Icone de calendário" width="24px" height="24px"
                     class="me-3 mt-2">
-                <span class="bg-white px-3 rounded-5 me-3 fw-medium mt-2">{{card.day}}</span>
-                <!-- <span class="px-3 rounded-5 fw-medium bg-var-primary mt-2" *ngIf="card.status">{{card.status}}</span> -->
+                <span class="bg-white px-3 rounded-5 me-3 fw-medium mt-2">Há 1 semana</span>
+                <span class="px-3 rounded-5 fw-medium bg-var-primary mt-2" *ngIf="card.status">Há 1 semana</span>
             </div>
         </div>
 
@@ -29,9 +29,9 @@
 
     <!-- ------------------------- -->
 
-    <section class="d-flex content-2 align-items-center p-0 m-0 row flex-wrap container"
+    <section class="d-flex align-items-center p-0 m-0 row container"
         [ngClass]="{'flex-column': !isShort, 'justify-content-evenly': !isShort, 'me-2': !isShort,'flex-nowrap': isShort, 'mt-2':isShort, 'justify-content-between': isShort}">
-        <div class="col d-flex flex-wrap justify-content-start px-1" *ngIf="isShort">
+        <div class="col d-flex flex-wrap flex-column justify-content-start px-1" *ngIf="isShort">
 
             <div class="d-flex align-items-center justify-content-start flex-nowrap mt-3">
                 <img src="assets/icons/calendar.svg" alt="Icone de calendário" width="24px" height="24px" class="me-3">
@@ -47,7 +47,7 @@
 
         </div>
 
-        <div class="m-0 pt-0 ps-0 d-flex flex-column justify-content-center"
+        <div class=" col m-0 pt-0 ps-0 d-flex flex-column justify-content-center"
             [ngStyle]="{'min-width': !isShort?'100%':'auto'}">
 
             <div class="d-flex align-items-center justify-content-start mt-3" *ngIf="!isShort">
