@@ -9,8 +9,8 @@
         </div>
 
         <div class="table-section container">
-            <h2 class="fw-bold mt-4">Extrato Coin Factor</h2>
-            <p>Aqui, você pode verificar rapidamente o status das suas solicitações: aprovadas, reprovadas ou em análise.</p>
+            <h2 class="fw-bold mt-4">Solicitações</h2>
+            <p>Gerencie as solicitações, aprove ou reprove as solicitações em análise.</p>
 
             <div class="d-flex flex-wrap justify-content-start align-items-center gap-3 filter-buttons my-4">
                 <button type="button" title="Em análise" class="rounded-4 btn pending text-start ps-3" (click)="filterSolicitations('Em Análise')"
@@ -28,9 +28,6 @@
                     <p>Reprovadas</p>
                     <h1 class="display-3 fw-bold">{{rejected}}</h1>
                 </button>
-                <button type="button" title="+ Coin Factor" class="rounded-4 btn btn-principal fw-bold fs-5">
-                    + Coin Factor
-                </button>
             </div>
             <div class="container py-5 px-3 error-page" *ngIf="!(solicitations.length > 0) && !solicitationError">
                 <div class="h-100 d-flex flex-column p-5 align-items-center justify-content-center">
@@ -41,7 +38,7 @@
                     </h2>
         
                     <p class="text-center mt-3 fw-light fadeIn ">
-                        Não foi encontrado solicitações para a sua conta. Para conferir seu extrato, faça uma solicitação e acompanhe por aqui a movimentação de solicitações em sua conta.
+                        Não foi encontrado solicitações. Acompanhe por aqui a movimentação de solicitações na plataforma.
                     </p>
                 </div>
             </div>
@@ -54,7 +51,7 @@
                     </h2>
         
                     <p class="text-center mt-3 fw-light fadeIn ">
-                        Ocorreu um erro ao carregar as solicitações de sua conta. Recarregue a página ou tente novamente mais tarde.
+                        Ocorreu um erro ao carregar as solicitações. Recarregue a página ou tente novamente mais tarde.
                     </p>
                 </div>
             </div>

@@ -8,7 +8,7 @@ export interface Vacancy {
 
     position: string,
     title: string;
-    days: string;
+    creationDate: string;
     status:string;
     contract: string;
     mode: string;

@@ -206,8 +206,13 @@ export class CreateBussinesUserComponent {
   validateBirthDateValid(): void {
     const birthDate: string | null = this.form.get('birthDate')!.value;
     const birthDateLength = (birthDate?.length ?? 0);
+    const minimumAge: number = 16;
     if (birthDateLength > 0 && birthDate !== null) {
-      this.birthDateInvalid = (new Date(birthDate) > new Date());
+      const currentDate: Date = new Date();
+      const dateOfBirth: Date = new Date(birthDate);
+
+      const age: number = currentDate.getFullYear() - dateOfBirth.getFullYear();
+      this.birthDateInvalid = !(age > minimumAge || (age === minimumAge && currentDate.getMonth() >= dateOfBirth.getMonth()));
     }
   }
 
@@ -224,7 +229,7 @@ export class CreateBussinesUserComponent {
         cpf: this.form.get('cpf')?.value || '',
         phone: this.form.get('phone')?.value || '',
         birthDate: this.form.get('birthDate')?.value || '',
-        date: new Date().toISOString(),
+        creationDate: new Date().toISOString(),
       };
   
       this.createBusinessUserService.createNewBusinessUser(newUser);

@@ -32,7 +32,7 @@ export class CreateBusinessUserService {
         cpf: '111.111.111-11',
         phone: '(11) 11111-1111',
         birthDate: '01-01-2000',
-        date: '01-01-2022',
+        creationDate: '01-01-2022',
       },
       {
         id: '2',
@@ -43,7 +43,7 @@ export class CreateBusinessUserService {
         cpf: '111.111.111-11',
         phone: '(11) 11111-1111',
         birthDate: '01-01-2000',
-        date: '02-01-2022',
+        creationDate: '02-01-2022',
       },
       {
         id: '3',
@@ -54,7 +54,7 @@ export class CreateBusinessUserService {
         cpf: '111.111.111-11',
         phone: '(11) 11111-1111',
         birthDate: '01-01-2000',
-        date: '03-01-2022',
+        creationDate: '03-01-2022',
       },
       {
         id: '4',
@@ -65,7 +65,7 @@ export class CreateBusinessUserService {
         cpf: '111.111.111-11',
         phone: '(11) 11111-1111',
         birthDate: '01-01-2000',
-        date: '04-01-2022',
+        creationDate: '04-01-2022',
       },
       {
         id: '5',
@@ -76,7 +76,7 @@ export class CreateBusinessUserService {
         cpf: '111.111.111-11',
         phone: '(11) 11111-1111',
         birthDate: '01-01-2000',
-        date: '01-01-2022',
+        creationDate: '01-01-2022',
       },
     ]
 

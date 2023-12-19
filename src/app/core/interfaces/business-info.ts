@@ -8,4 +8,5 @@ export interface BusinessInfo {
     cellphone: string;
     about: string;
     coins: number;
+    creationDate: string;
   }

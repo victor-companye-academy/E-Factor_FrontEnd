@@ -31,13 +31,13 @@ export class ListBusinessUsersComponent {
   onSort(event: SortEvent) {
     event.data?.sort((a: any, b: any) => {
       let result = 0;
-      if (new Date(a.date) < new Date(b.date)) {
+      if (new Date(a.creationDate) < new Date(b.creationDate)) {
         result = 1;
       }
-      if (new Date(a.date) > new Date(b.date)) {
+      if (new Date(a.creationDate) > new Date(b.creationDate)) {
         result = -1;
       }
-      if (new Date(a.date) == new Date(b.date)) {
+      if (new Date(a.creationDate) == new Date(b.creationDate)) {
         result = 0;
       }
       return event.order ? event.order * result : 0;

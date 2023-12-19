@@ -7,5 +7,5 @@ export interface BusinessUser{
     cpf: string,
     phone: string,
     birthDate: string,
-    date: string,
+    creationDate: string,
 }
