@@ -1,5 +1,5 @@
 :host {
-    color: var(--text);
+    color: var(--text-gray);
 
     .main {
         min-height: 100vh;
@@ -96,6 +96,28 @@
                     }
                 }
 
+                .skills {
+                    input {
+                        background-color: white;
+                        padding-left: 0.7rem;
+                    }
+
+                    ul {
+                        li {
+                            padding: 0.2rem 1rem;
+                            background-color: var(--background);
+
+                            button {
+                                color: var(--text);
+                                font-size: 0.8rem;
+                                &:hover {
+                                    color: var(--primary);
+                                }
+                            }
+                        }
+                    }
+                }
+
                 .button {
                     cursor: pointer;
                     width: 14rem;
@@ -111,31 +133,50 @@
     }
 }
 
-:host ::ng-deep {
-    .p-autocomplete {
-        margin: 0 !important;
-        padding: 0 !important;
-        width: 100%;
-        min-height: 2.6rem;
+// :host ::ng-deep {
+//     .p-autocomplete {
+//         margin: 0 !important;
+//         padding: 0 !important;
+//         width: 100%;
+//         min-height: 2.6rem;
 
-        .p-autocomplete-token {
-            background-color: var(--background);
-        }
+//         .p-autocomplete-token {
+//             background-color: var(--background);
+//         }
 
-        .p-autocomplete-multiple-container,
-        ul {
-            li:last-child {
-                min-width: 100%;
-            }
-        }
+//         .p-autocomplete-token-label {
+//             padding: 0.2rem 0.5rem;
+//         }
 
-        input,
-        ul,
-        li {
-            background-color: white;
-            border: 0 !important;
-            margin: 0 !important;
-            padding: 0.1rem 0.3rem 0.1rem 0.3rem !important;
-        }
-    }
-}
+//         .p-autocomplete-multiple-container,
+//         ul {
+//             li {
+//                 margin-top: 1rem;
+//                 margin: 50rem;
+//                 padding: 0;
+//                 margin: 10rem;
+//             }
+//             .p-autocomplete-token-icon {
+//                 display: flex;
+//                 justify-content: center;
+//                 align-items: center;
+//                 margin: 0;
+//                 padding: 0 0.5rem 0 0.2rem;
+//                 width: 2rem;
+//             }
+
+//             li:last-child {
+//                 min-width: 100%;
+//             }
+//         }
+
+//         input,
+//         ul,
+//         li {
+//             background-color: white;
+//             border: 0 !important;
+//             margin: 0 !important;
+//             // padding: 0.1rem 0.3rem 0.1rem 0.3rem !important;
+//         }
+//     }
+// }

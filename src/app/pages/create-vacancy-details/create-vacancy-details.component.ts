@@ -12,7 +12,9 @@ export class CreateVacancyDetailsComponent {
 
   constructor(private router: Router, private vacancyService: CreateVacancyService) { }
 
-  protected FilteredItems!: any[];
+  // protected filteredItems!: any[];
+  protected skillsInput: string = '';
+  protected suggestionsSkills!: string[];
 
   protected skills: string[] | undefined;
   protected serniority: string | undefined;
@@ -196,18 +198,23 @@ export class CreateVacancyDetailsComponent {
     }
   }
 
-  searchSkills(event: any) {
-    let filtered: any[] = [];
-    let query = event.query;
+  onSuggestionItems(event: Event): void {
+    const inputValue: string = (event.target as HTMLInputElement).value;
 
-    for (let i = 0; i < (this.skillsList as any[]).length; i++) {
-      let skill = (this.skillsList as any[])[i];
-      if (skill.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-        filtered.push(skill);
-      }
-    }
+    this.suggestionsSkills = this.suggestionsSkills = this.skillsList.filter(item =>
+      item.toLowerCase().startsWith(inputValue.toLowerCase()));
+  }
 
-    this.FilteredItems = filtered;
+  onStartOfSuggestion(suggestion: string) {
+    const inputValue: string = this.skillsInput;
+    const startOfSuggestion: string = suggestion.substring(0, inputValue.length);
+    return startOfSuggestion
+  }
+
+  onRestOfSuggestion(suggestion: string) {
+    const inputValue: string = this.skillsInput;
+    const restOfSuggestion: string = suggestion.substring(inputValue.length);
+    return restOfSuggestion;
   }
 
   onChangeDays(event: Event) {
@@ -268,11 +275,14 @@ export class CreateVacancyDetailsComponent {
     }
   }
 
+
+
   ngOnInit() {
+    // this.filteredItems = ['test1', 'asdest2', 'test1', 'test2', 'tesasdasdt1', 'test2', 'test1', 'testsdasd2', 'testasda1', 'test2', 'test1', 'test2', 'test1', 'test2']
     const vacancy = this.vacancyService.getVacancy()
 
     if (vacancy.title === undefined || '' && vacancy.description === undefined || '') {
-      this.router.navigateByUrl("/create-vacancy");
+      // this.router.navigateByUrl("/create-vacancy");
     } else {
       this.validation = {};
 
