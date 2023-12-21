@@ -9,10 +9,8 @@ import { CreateVacancyService } from 'src/app/core/service/create-vacancy/create
   styleUrls: ['./create-vacancy-details.component.scss']
 })
 export class CreateVacancyDetailsComponent {
-
   constructor(private router: Router, private vacancyService: CreateVacancyService) { }
 
-  // protected filteredItems!: any[];
   protected skillsInput: string = '';
   protected suggestionsSkills!: string[];
 
@@ -198,6 +196,22 @@ export class CreateVacancyDetailsComponent {
     }
   }
 
+  onAddSkill(skill: string): void {
+    this.skillsInput = ''
+
+    if (this.skills) {
+      let index = this.skills.indexOf(skill);
+
+      if (index === -1) {
+        this.skills?.push(skill)
+      }
+    }
+  }
+
+  onRemoveSkill(skill: string): void {
+    this.skills = this.skills?.filter(element => element !== skill)
+  }
+
   onSuggestionItems(event: Event): void {
     const inputValue: string = (event.target as HTMLInputElement).value;
 
@@ -269,20 +283,15 @@ export class CreateVacancyDetailsComponent {
 
       this.vacancyService.insertDetails(this.skills as string[], this.serniority as string, this.vacancyArea as string, this.modality as string, this.daysOfWeek as string[], this.contract as string, this.period as string, this.shift as string, this.expirationDate as string)
 
-      console.log(vacancy)
-
       this.router.navigateByUrl("/create-vacancy/create");
     }
   }
 
-
-
   ngOnInit() {
-    // this.filteredItems = ['test1', 'asdest2', 'test1', 'test2', 'tesasdasdt1', 'test2', 'test1', 'testsdasd2', 'testasda1', 'test2', 'test1', 'test2', 'test1', 'test2']
     const vacancy = this.vacancyService.getVacancy()
 
     if (vacancy.title === undefined || '' && vacancy.description === undefined || '') {
-      // this.router.navigateByUrl("/create-vacancy");
+      this.router.navigateByUrl("/create-vacancy");
     } else {
       this.validation = {};
 

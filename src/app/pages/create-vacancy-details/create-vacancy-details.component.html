@@ -41,16 +41,15 @@
                                         <input [(ngModel)]="skillsInput" (keyup)="onSuggestionItems($event)"
                                             name="skills" id="skills" type="text"
                                             placeholder="Digite as habilidades aqui..."
-                                            class="w-100 rounded-3 fw-light mb-2">
+                                            class="w-100 rounded-3 fw-light">
 
                                         <ul *ngIf="skillsInput" class="px-2 pb-1 mx-2 my-0 suggestions">
-                                            <li class="bg-transparent p-0"
-                                                *ngFor="let suggestion of suggestionsSkills">
+                                            <li class="bg-transparent p-0" *ngFor="let skill of suggestionsSkills">
 
-                                                <button type="button"
-                                                    class="border-0 bg-transparent w-100 text-start fw-light text-capitalize ">
+                                                <button type="button" (click)="onAddSkill(skill)"
+                                                    class="border-0 bg-transparent w-100 text-start fw-light text-capitalize">
                                                     <span
-                                                        class="fw-semibold">{{onStartOfSuggestion(suggestion)}}</span>{{onRestOfSuggestion(suggestion)}}
+                                                        class="fw-semibold">{{onStartOfSuggestion(skill)}}</span>{{onRestOfSuggestion(skill)}}
                                                 </button>
 
                                                 <hr class="p-0 m-1">
@@ -58,11 +57,17 @@
                                             </li>
                                         </ul>
 
-                                        <ul class="mt-2 m-0 p-0 d-flex flex-wrap px-2 pb-2">
-                                            <li class="m-1 fw-light rounded-4 d-flex bg-gray m-0">
-                                                test
-                                                <button type="button"
-                                                    class="h-100 ms-3 border-0 bg-transparent">&times;</button>
+                                        <ul *ngIf="skills && skills.length > 0"
+                                            class="mt-2 m-0 p-0 d-flex flex-wrap px-2 pb-2">
+                                            <li class="m-1 fw-light rounded-4 d-flex bg-gray m-0 fadeIn"
+                                                *ngFor="let skill of skills">
+                                                {{skill}}
+
+                                                <button type="button" (click)=" onRemoveSkill(skill)"
+                                                    class="h-100 ms-3 border-0 bg-transparent">
+                                                    &times;
+                                                </button>
+
                                             </li>
                                         </ul>
 
@@ -371,7 +376,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" (click)="onSubmit()" class="button border-0 py-2 rounded-3 mt-3 mb-3">
+                        <button type="button" (click)="onSubmit()" class="button border-0 py-2 rounded-3 mt-3 mb-3">
                             CONTINUAR
                         </button>
                     </form>

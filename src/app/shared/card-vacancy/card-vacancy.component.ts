@@ -22,13 +22,8 @@ export class CardVacancyComponent {
 
     const days = (1000 * 60 * 60 * 24);
 
-    // console.log('Data da vaga: ' + date)
-    // console.log('Data de hoje: ' + formattedDate(new Date()))
-
     const decimalNumber = (new Date().getTime() - new Date(year, month, day).getTime()) / days;
     const differenceInDays = Math.floor(decimalNumber);
-
-    console.log(differenceInDays)
 
     if (differenceInDays === 0) {
       return 'Hoje';
