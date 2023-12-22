@@ -22,12 +22,17 @@
             max-height: 100px;
         }
 
+        .section-description{
+            min-width: 75%;
+            max-width: 75%;
+        }
+
         .description {
             p {
-                background-color: antiquewhite;
                 max-height: 65px;
             }
         }
+
 
         span {
             max-height: 20px;

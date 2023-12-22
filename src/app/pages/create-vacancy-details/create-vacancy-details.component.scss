@@ -24,6 +24,10 @@
                 }
 
                 .invalid {
+                    border: 1.5px solid red;
+                }
+
+                .message-invalid {
                     color: rgb(255, 106, 106);
                     font-size: 0.8rem;
                 }

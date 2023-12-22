@@ -2,7 +2,7 @@
     class="card d-flex border-0 rounded-4 container overflow-hidden py-4 w-100 m-0" [ngClass]="{'flex-row': !isShort}"
     [ngStyle]="{'padding': isShort?'1rem': '1.56rem 0 1.5rem 5.5rem'}">
 
-    <section class="content position-relative px-0" [ngClass]="{'w-100': isShort}">
+    <section class="content section-description position-relative px-0" [ngClass]="{'w-100': isShort}">
         <img src="{{card.businessInfo.photo || 'assets/icons/bag.svg'}}" alt="Logo empresa"
             class="rounded-circle logo position-absolute bg-white"
             [ngClass]="card.businessInfo.photo ? 'object-fit-cover': 'object-fit-scale'" width="40px" height="40px"
@@ -10,8 +10,8 @@
 
         <div class="d-flex align-items-start flex-wrap w-100" [ngClass]="{'flex-column': isShort}">
             <div class="title-company me-4 w-100" [ngClass]="{'ms-5':isShort}">
-                <h3 class="me-0 fw-light mb-0 text-start">{{card.businessInfo.name}}</h3>
-                <h2 class="m-0 fw-medium w-100">{{card.title}}</h2>
+                <h3 class="me-0 fw-light mb-0 text-start text-capitalize">{{card.businessInfo.name}}</h3>
+                <h2 class="m-0 fw-medium w-100 text-capitalize">{{card.title}}</h2>
             </div>
 
             <!--  -->
@@ -24,20 +24,22 @@
         </div>
 
         <div class="description overflow-hidden me-5" *ngIf="!isShort">
-            <p class="m-0  mt-4 text-start border-0 overflow-hidden fw-light text-wrap pe-3">
+            <p class="m-0  mt-4 text-start border-0 overflow-hidden fw-light text-wrap pe-3 text-capitalize">
                 {{card.description}}</p>
         </div>
     </section>
 
     <!-- ------------------------- -->
 
-    <section class="d-flex align-items-center p-0 m-0 row container"
+    <section class="d-flex align-items-center p-0 m-0 row container about position-relative  "
         [ngClass]="{'flex-column': !isShort, 'justify-content-evenly': !isShort, 'me-2': !isShort,'flex-nowrap': isShort, 'mt-2':isShort, 'justify-content-between': isShort}">
+
         <div class="col d-flex flex-wrap flex-column justify-content-start px-1" *ngIf="isShort">
 
             <div class="d-flex align-items-center justify-content-start flex-nowrap mt-3">
                 <img src="assets/icons/calendar.svg" alt="Icone de calendário" width="24px" height="24px" class="me-3">
-                <span class="bg-white px-3 rounded-5 me-3 fw-medium" [title]="card.day">{{card.day}}</span>
+                <span class="bg-white px-3 rounded-5 me-3 fw-medium"
+                    [title]="differenceInDays">{{differenceInDays}}</span>
             </div>
 
             <div class="d-flex align-items-center justify-content-start flex-nowrap mt-3">
@@ -88,6 +90,7 @@
                     class="me-3">
                 <span class="rounded-5 bg-white px-3 fw-medium" [title]="card.contract">{{card.contract}}</span>
             </div>
+
         </div>
 
     </section>

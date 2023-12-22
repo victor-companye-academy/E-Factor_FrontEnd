@@ -35,7 +35,14 @@ export class CardVacancyComponent {
       return 'Há Uma semana atrás';
     }
     else if (differenceInDays > 7) {
-      return `${Math.floor(differenceInDays / 7)} semanas atrás`;
+      const weeks = Math.floor(differenceInDays / 7);
+
+      if (weeks < 2) {
+        return 'Há Uma semana atrás';
+      } 
+      else {
+        return `${weeks} semanas atrás`;
+      }
     }
     else if ((differenceInDays === 30 && month === 4 || month === 6 || month === 9 || month === 11)
       ||
