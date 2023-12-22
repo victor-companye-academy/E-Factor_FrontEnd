@@ -106,6 +106,7 @@ export class CreateVacancyComponent {
   }
 
   ngOnInit(): void {
+    this.createVacancyService.setWasSendVacancy(false)
     this.coin = 50;
 
     this.titleMaxLength = 50;

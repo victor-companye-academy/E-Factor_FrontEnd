@@ -25,7 +25,28 @@
 
         <div class="description overflow-hidden me-5" *ngIf="!isShort">
             <p class="m-0  mt-4 text-start border-0 overflow-hidden fw-light text-wrap pe-3 text-capitalize">
-                {{card.description}}</p>
+
+                <!-- <span><span class="fw-semibold">Área da vaga:</span> {{card.vacancyArea}}</span>
+                <br>
+
+                <span><span class="fw-semibold">Modalidade:</span> {{card.modality}}</span>
+                <br *ngIf="card.daysOfWeek.length > 0">
+
+                <span *ngIf="card.daysOfWeek.length > 0"><span class="fw-semibold">Dias da semana:</span><span
+                        *ngFor="let day of card.daysOfWeek; let i = index"> {{day}}<span
+                            *ngIf="i !== card.daysOfWeek.length -1">,</span></span></span>
+                <br>
+
+                <span><span class="fw-semibold">Período:</span> {{card.period}}</span>
+                <br>
+
+                <span><span class="fw-semibold">Turno:</span> {{card.shift}}</span>
+                <br>
+
+                <br> -->
+
+                {{card.description}}
+            </p>
         </div>
     </section>
 

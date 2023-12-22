@@ -75,7 +75,28 @@
         </div>
 
         <section>
+
             <p class="fw-light text-capitalize" [ngStyle]="{'height': card.businessInfo.cellphone?'30.8rem':'26rem'}">
+
+                <span><span class="fw-semibold">Área da vaga:</span> {{card.vacancyArea}}</span>
+                <br>
+
+                <span><span class="fw-semibold">Modalidade:</span> {{card.modality}}</span>
+                <br *ngIf="card.daysOfWeek.length > 0">
+
+                <span *ngIf="card.daysOfWeek.length > 0"><span class="fw-semibold">Dias da semana:</span><span
+                        *ngFor="let day of card.daysOfWeek; let i = index"> {{day}}<span
+                            *ngIf="i !== card.daysOfWeek.length -1">,</span></span></span>
+                <br>
+
+                <span><span class="fw-semibold">Período:</span> {{card.period}}</span>
+                <br>
+
+                <span><span class="fw-semibold">Turno:</span> {{card.shift}}</span>
+                <br>
+
+                <br>
+
                 {{card.description}}
             </p>
         </section>

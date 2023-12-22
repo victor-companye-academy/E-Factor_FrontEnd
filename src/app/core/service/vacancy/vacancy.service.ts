@@ -44,10 +44,10 @@ export class VacancyService {
       ],
       serniority: "junior",
       vacancyArea: "front-end",
-      modality: "remoto",
-      daysOfWeek: [],
+      modality: "hibrido",
+      daysOfWeek: ['Seg,Qua,Sex'],
       contract: "pessoa juridica",
-      period: "Remoto",
+      period: "Integral",
       shift: "manha",
       createDate: '14/11/2023',
       expirationDate:'20/12/2023'
@@ -86,7 +86,7 @@ export class VacancyService {
       modality: "remoto",
       daysOfWeek: [],
       contract: "pessoa juridica",
-      period: "Remoto",
+      period: "Integral",
       shift: "manha",
       createDate: '10/12/2023',
       expirationDate:'20/12/2023'

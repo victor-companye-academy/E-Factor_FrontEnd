@@ -15,9 +15,17 @@ export class CreateVacancyService {
 
   //Atributo temporário (seraá inserido pelo backend?)
   private static id: number = 1;
-  private static wasSend: boolean = false;
+  private static wasSendVacancy: boolean = false;
 
   private vacancy: any | undefined = {};
+
+  public getWasSendVacancy(): boolean {
+    return CreateVacancyService.wasSendVacancy;
+  }
+
+  public setWasSendVacancy(wasSend:boolean): void {
+    CreateVacancyService.wasSendVacancy = wasSend;
+  }
 
   //Temporário, será recuperado essa informacao da autenticação
   protected businessInfo: BusinessInfo = {
@@ -64,7 +72,7 @@ export class CreateVacancyService {
     if (this.vacancy) {
       const newVacancy: Vacancy = {
         id: this.setId(),
-        daysOfWeek: [],
+        daysOfWeek: this.vacancy.daysOfWeek,
         period: this.vacancy.period,
         shift: this.vacancy.shift,
         businessId: this.businessInfo.id,
@@ -87,13 +95,13 @@ export class CreateVacancyService {
   }
 
   public createVacancy() {
-    CreateVacancyService.wasSend = true;
+    CreateVacancyService.wasSendVacancy = true;
 
     this.businessInfo.coins -= 1;
     this.insertBusiness()
 
     this.vacancyService.insertVacancy(this.vacancy)
-    this.router.navigateByUrl('/create-vacancy')
+    // this.router.navigateByUrl('/create-vacancy')
 
     this.vacancy = {}
   }
