@@ -579,6 +579,29 @@ export class ProfessionalService {
     {
       id: "25",
       photo: '',
+      name: 'João Silva 24',
+      age: '13',
+      city: 'São Paulo',
+      state: 'São Paulo',
+      email: 'ericris@email.com',
+      cellphone: '(11) 98907-6032',
+      seniority: 'Junior',
+      about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...',
+      experience: [
+        { institution: 'Cogna Educação', start: '2022-01-01', end: '', current: true, role: 'Analista de Desenvolvimento Sênior', description: 'Lorem ipsum dolor sit amet consectetur. Eget consequat quis quis diam nisl aliquet. Est in consequat consequat vel sagittis suspendisse id. Porttitor lacus dignissim fames porta interdum neque. Vitae consequat gravida neque eu adipiscing massa nulla adipiscing quis.' },
+        { institution: 'Samsung Brasil', start: '2022-02-01', end: '2023-02-01', current: false, role: 'Desenvolvedor Front-End Pleno', description: 'Lorem ipsum dolor sit amet consectetur. Morbi scelerisque sit lectus arcu vulputate.' },
+        { institution: 'IFSP | Instituto Federal de Educação, Ciência e Tecnologia de São Paulo', start: '2021-07-01', end: '2021-12-01', current: false, role: 'Monitor de Programação em C++', description: 'Lorem ipsum dolor sit amet consectetur. Eget consequat quis quis diam nisl aliquet. Est in consequat consequat vel sagittis suspendisse id. Porttitor lacus dignissim fames porta interdum neque.' },
+      ],
+      education: [
+        { institution: 'IFSP | Instituto Federal de Educação, Ciência e Tecnologia de São Paulo', start: '2017-01-01', end: '2021-12-01', current: false, title: 'Curso Técnico Integrado Informática', description: 'Lorem ipsum dolor sit amet consectetur. Eget consequat quis quis diam nisl aliquet. Est in consequat consequat vel sagittis suspendisse id. Porttitor lacus dignissim fames porta interdum neque.' }
+      ],
+      skills: ['HTML', 'CSS', 'JavaScript', 'PHP', 'Java', 'Python', 'C#', 'Ruby', 'Swift', 'TypeScript', 'React', 'Angular', 'Vue.js', 'Node.js', 'Express.js', 'Django', 'Flask', 'Spring Boot'],
+      languages: [{ language: 'Português - BR', level: 'Nativo'}, { language: 'Inglês', level: 'Básico'}],
+      creationDate: '2023-12-16'
+    },
+    {
+      id: "26",
+      photo: '',
       name: 'João Silva 25',
       age: '13',
       city: 'São Paulo',
@@ -597,7 +620,7 @@ export class ProfessionalService {
       ],
       skills: ['HTML', 'CSS', 'JavaScript', 'PHP', 'Java', 'Python', 'C#', 'Ruby', 'Swift', 'TypeScript', 'React', 'Angular', 'Vue.js', 'Node.js', 'Express.js', 'Django', 'Flask', 'Spring Boot'],
       languages: [{ language: 'Português - BR', level: 'Nativo'}, { language: 'Inglês', level: 'Básico'}],
-      creationDate: '2019-01-01'
+      creationDate: '2023-12-20'
     }];
 
     sessionStorage.setItem(key, JSON.stringify(professionalsArray));

@@ -1,0 +1,67 @@
+main{
+    h1, h2{
+        color: #177093;
+    }
+    p{
+        color: var(--text);
+    }
+    p-sortIcon{
+        filter: brightness(0) saturate(100%) invert(36%) sepia(20%) saturate(485%) hue-rotate(195deg) brightness(96%) contrast(90%) opacity(50%);
+    }
+    th{
+        color: var(--text) !important;
+    }
+
+    .indicator{
+        border-radius: 1rem 0 0 1rem;
+        background-color: #177093;
+    }
+
+    .indicator::before {
+        content: "";
+        display: inline-block;
+        width: -1px;
+        margin-right: 5px;
+    }
+    
+    button{
+        height: 2.5rem;
+        color: var(--text-white);
+        background-color: #177093b2;
+        transition: 0.5s;
+
+        &:hover{
+            background-color: #177093; 
+            transition: 0.5s;
+        }
+    }
+    
+    .informative-cards, .recent-cards{
+        div{
+            width: 15rem;
+            background-color: var(--background);
+
+            img{
+                width: 1.87463rem;
+                height: 1.875rem;
+            }
+        }
+    }
+
+    .table-card{
+        color: var(--text);
+        background-color: var(--background);
+    }
+
+    @media (max-width: 1314px) {
+        .recent-section{
+            flex-direction: column;
+            .recent-cards{
+                flex-direction: row !important;
+            }
+            .header-table{
+                flex-direction: column;
+            }
+        }
+    }
+}

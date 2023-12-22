@@ -16,6 +16,11 @@ export class SolicitationsListComponent {
   protected filterSelected: string = '';
   protected solicitationError: boolean = false;
 
+  protected isApproveModalOpen: boolean = false;
+  protected isRejectModalOpen: boolean = false;
+  protected selectedSolicitationId: number = -1;
+  protected solicitation: CoinSolicitations = this.solicitations[this.selectedSolicitationId];
+
   protected pending: number = this.coinSolicitationsService.listCoinSolicitations().filter(solicitation => solicitation.status === 'Em Análise').length;
   protected approved: number = this.coinSolicitationsService.listCoinSolicitations().filter(solicitation => solicitation.status === 'Aprovado').length;
   protected rejected: number = this.coinSolicitationsService.listCoinSolicitations().filter(solicitation => solicitation.status === 'Reprovado').length;
@@ -45,5 +50,34 @@ export class SolicitationsListComponent {
     this.filterSelected = status;
     this.solicitations = this.coinSolicitationsService.listCoinSolicitations();
     this.solicitations = this.solicitations.filter(solicitation => solicitation.status === status);
+  }
+
+  openApproveModal(index: number) {
+    this.selectedSolicitationId = index;
+    this.solicitation = this.solicitations[this.selectedSolicitationId];
+    this.isRejectModalOpen = false;
+    this.isApproveModalOpen = true;
+  }
+
+  openRejectModal(index: number) {
+    this.selectedSolicitationId = index;
+    this.solicitation = this.solicitations[this.selectedSolicitationId];
+    this.isApproveModalOpen = false;
+    this.isRejectModalOpen = true;
+  }
+
+  closeModal() {
+    this.isApproveModalOpen = false;
+    this.isRejectModalOpen = false;
+  }
+
+  saveChanges(updatedSolicitation: any) {
+    this.solicitation = updatedSolicitation;
+    this.coinSolicitationsService.updateCoinSolicitation(this.solicitation);
+    this.pending = this.coinSolicitationsService.listCoinSolicitations().filter(solicitation => solicitation.status === 'Em Análise').length;
+    this.approved = this.coinSolicitationsService.listCoinSolicitations().filter(solicitation => solicitation.status === 'Aprovado').length;
+    this.rejected = this.coinSolicitationsService.listCoinSolicitations().filter(solicitation => solicitation.status === 'Reprovado').length;
+
+    this.closeModal();
   }
 }
