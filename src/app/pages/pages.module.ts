@@ -119,6 +119,7 @@ import { CreateVacancyCreateComponent } from './create-vacancy-create/create-vac
 import { ExtractComponent } from './extract/extract.component';
 import { CreateBussinesUserComponent } from './create-bussines-user/create-bussines-user.component';
 import { ListBusinessUsersComponent } from './list-business-users/list-business-users.component';
+import { VacanciesCreatedComponent } from './vacancies-created/vacancies-created.component';
 
 @NgModule({
   declarations: [
@@ -146,6 +147,7 @@ import { ListBusinessUsersComponent } from './list-business-users/list-business-
     ExtractComponent,
     CreateBussinesUserComponent,
     ListBusinessUsersComponent,
+    VacanciesCreatedComponent,
   ],
   imports: [
     CommonModule,

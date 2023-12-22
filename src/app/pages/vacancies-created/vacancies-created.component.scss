@@ -1,0 +1,53 @@
+:host {
+    color: var(--text);
+
+    .main {
+        min-height: 100vh;
+        h2,
+        h1,
+        h3,
+        span,
+        .text-color-primary {
+            color: var(--primary);
+        }
+
+        .div-main {
+            min-height: 100vh;
+            h2 {
+                font-size: 1.4rem;
+                font-weight: 700;
+                color: var(--secondary);
+            }
+
+            p {
+                color: var(--text-gray);
+            }
+
+            .section-main {
+                min-height: 62.5rem;
+            }
+
+            .div-filter {
+                position: sticky;
+                top: 8vh;
+            }
+
+            img.notFound {
+                width: 8rem;
+            }
+
+            .cursor-pointer{
+                cursor: pointer;
+            }
+        }
+    }
+
+    button {
+        background: var(--secondary);
+
+        color: var(--text-white);
+        &:hover {
+            background: var(--primary);
+        }
+    }
+}

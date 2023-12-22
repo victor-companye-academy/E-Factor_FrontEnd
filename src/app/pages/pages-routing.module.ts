@@ -23,6 +23,7 @@ import { CreateVacancyDetailsComponent } from './create-vacancy-details/create-v
 import { CreateVacancyCreateComponent } from './create-vacancy-create/create-vacancy-create.component';
 import { ExtractComponent } from './extract/extract.component';
 import { CreateBussinesUserComponent } from './create-bussines-user/create-bussines-user.component';
+import { VacanciesCreatedComponent } from './vacancies-created/vacancies-created.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -41,11 +42,12 @@ const routes: Routes = [
   { path: 'confirm-code/:email', component: CodeConfirmationComponent },
   { path: 'change-password', component: ChangePasswordComponent },
   { path: 'create-business-user', component: BusinessUserComponent },
+  { path: 'vacancies-created', component: VacanciesCreatedComponent },
   {
     path: 'create-vacancy',
     children: [
       { path: '', component: CreateVacancyComponent },
-      { path: 'details', component: CreateVacancyDetailsComponent }, 
+      { path: 'details', component: CreateVacancyDetailsComponent },
       { path: 'create', component: CreateVacancyCreateComponent }
     ]
   },

@@ -11,7 +11,7 @@ export class FooterComponent {
   protected arrayMenu: Array<MenuFooter> = [
     {
       title: "Empresa",
-      routers: [['/create-vacancy', 'Criar vaga'], ['/search-professionals', 'Buscar profissional'], ['/login', 'Criar conta']]
+      routers: [['/vacancies-created', 'Criar vaga'], ['/search-professionals', 'Buscar profissional'], ['/login', 'Criar conta']]
     },
     {
       title: "Profissional",
