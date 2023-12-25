@@ -79,7 +79,7 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-usersList let-i="rowIndex">
                     
-                    <tr>
+                    <tr [routerLink]="['/professional-profile', usersList.id]" style="cursor: pointer">
                         <td class="px-0">
                             <span class="indicator py-3 me-4"></span>
                             {{ usersList.creationDate | date: "dd/MM/yyyy"}}

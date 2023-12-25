@@ -11,25 +11,25 @@
                 todos os dados da plataforma E-Factor.</p>
 
             <div class="informative-cards d-flex gap-4 flex-wrap">
-                <div class="rounded-3 p-3">
+                <div class="rounded-3 p-3" [routerLink]="['/admin/professionals-list']">
                     <img src="assets/icons/dashboard/professionals.svg" alt="">
                     <h1 class="fw-bold display-3">{{totalProfessionals}}</h1>
                     <p>Total de profissionais 
                         na plataforma.</p>
                 </div>
-                <div class="rounded-3 p-3">
+                <div class="rounded-3 p-3" [routerLink]="['/admin/business-list']">
                     <img src="assets/icons/dashboard/business.svg" alt="">
                     <h1 class="fw-bold display-3">{{totalBusiness}}</h1>
                     <p>Total de empresas
                         na plataforma.</p>
                 </div>
-                <div class="rounded-3 p-3">
+                <div class="rounded-3 p-3" [routerLink]="['/admin/vacancys-list']">
                     <img src="assets/icons/dashboard/vacancys.svg" alt="">
                     <h1 class="fw-bold display-3">{{totalVacancies}}</h1>
                     <p>Total de vagas na 
                         plataforma.</p>
                 </div>
-                <div class="rounded-3 p-3">
+                <div class="rounded-3 p-3" [routerLink]="['/admin/solicitations-list']">
                     <img src="assets/icons/dashboard/solicitations.svg" alt="">
                     <h1 class="fw-bold display-3">{{totalSolicitations}}</h1>
                     <p>Total de solicitações
@@ -58,7 +58,7 @@
                     </div>
                     <p-table
                     [value]="pendingSolicitations"
-                    [paginator]="true"
+                    [paginator]="false"
                     [rows]="5"
                     [showCurrentPageReport]="false"
                     [tableStyle]="{ 'min-width': '46rem' }"

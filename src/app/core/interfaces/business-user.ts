@@ -8,4 +8,5 @@ export interface BusinessUser{
     phone: string,
     birthDate: string,
     creationDate: string,
+    isActive: boolean
 }

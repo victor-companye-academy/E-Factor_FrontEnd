@@ -78,7 +78,7 @@
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-businessList let-i="rowIndex">
-                    <tr [routerLink]="['/business-profile', businessList.id]">
+                    <tr [routerLink]="['/business-profile', businessList.id]" style="cursor: pointer">
                         <td class="px-0">
                             <span class="indicator py-3 me-4"></span>
                             {{ businessList.creationDate | date: "dd/MM/yyyy"}}

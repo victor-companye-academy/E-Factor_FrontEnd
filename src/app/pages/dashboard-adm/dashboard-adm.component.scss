@@ -48,9 +48,16 @@ main{
         }
     }
 
+    .informative-cards {
+        div{
+            cursor: pointer;
+        }
+    }
+
     .table-card{
         color: var(--text);
         background-color: var(--background);
+        min-width: 48rem;
     }
 
     @media (max-width: 1314px) {

@@ -72,10 +72,10 @@
             >
                 <ng-template pTemplate="header">
                     <tr>
-                        <th style="width:25%; border-radius: 15px 0 0 0" pSortableColumn="date">Data de criação<p-sortIcon field="date"></p-sortIcon></th>
-                        <th style="width:25%">Empresa</th>
-                        <th style="width:25%">Cargo</th>
-                        <th style="width:25%; border-radius: 0 15px 0 0">Assunto</th>
+                        <th style="width:20%; border-radius: 15px 0 0 0" pSortableColumn="date">Data de criação<p-sortIcon field="date"></p-sortIcon></th>
+                        <th style="width:20%">Empresa</th>
+                        <th style="width:20%">Cargo</th>
+                        <th style="width:40%; border-radius: 0 15px 0 0">Título</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-vacanciesList let-i="rowIndex">
@@ -86,7 +86,7 @@
                         </td>
                         <td>{{ vacanciesList.businessInfo.name }}</td>
                         <td>{{ vacanciesList.position.substring(0, 1).toUpperCase() + vacanciesList.position.substring(1) }}</td>  
-                        <td>{{ vacanciesList.description.substring(0, 35) }}</td>
+                        <td>{{ vacanciesList.description.substring(0, 50) + (vacanciesList.description.length > 50 ? '...' : '') }}</td>
                     </tr>
                 </ng-template>
             </p-table>

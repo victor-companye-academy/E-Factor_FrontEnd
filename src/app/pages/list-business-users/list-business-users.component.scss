@@ -35,16 +35,23 @@ main{
         height: 2rem;
     }
 
-    .delete{
-        background-color: #F7A19B;
+    .delete, .ativate{
         color: var(--text-white);
         border-radius: 0.5rem;
         border: none;
-        width: 5.7rem;
+        width: 7rem;
         height: 2rem;
         img{
             filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(352deg) brightness(117%) contrast(101%);
         }
+    }
+
+    .delete{
+        background-color: rgba(255, 51, 51, 0.575);
+    }
+
+    .ativate{
+        background-color: rgba(0, 128, 0, 0.575);
     }
     
     .search {

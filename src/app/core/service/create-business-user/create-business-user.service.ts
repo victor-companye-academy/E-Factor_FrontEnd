@@ -33,6 +33,7 @@ export class CreateBusinessUserService {
         phone: '(11) 11111-1111',
         birthDate: '01-01-2000',
         creationDate: '01-01-2022',
+        isActive: true
       },
       {
         id: '2',
@@ -44,6 +45,7 @@ export class CreateBusinessUserService {
         phone: '(11) 11111-1111',
         birthDate: '01-01-2000',
         creationDate: '02-01-2022',
+        isActive: true
       },
       {
         id: '3',
@@ -55,6 +57,7 @@ export class CreateBusinessUserService {
         phone: '(11) 11111-1111',
         birthDate: '01-01-2000',
         creationDate: '03-01-2022',
+        isActive: true
       },
       {
         id: '4',
@@ -66,6 +69,7 @@ export class CreateBusinessUserService {
         phone: '(11) 11111-1111',
         birthDate: '01-01-2000',
         creationDate: '04-01-2022',
+        isActive: false
       },
       {
         id: '5',
@@ -77,6 +81,7 @@ export class CreateBusinessUserService {
         phone: '(11) 11111-1111',
         birthDate: '01-01-2000',
         creationDate: '01-01-2022',
+        isActive: true
       },
     ]
 
@@ -96,6 +101,20 @@ export class CreateBusinessUserService {
     const businessUsersArray: Array<BusinessUser> = this.listBusinessUsers();
     const index = businessUsersArray.findIndex(businessUser => businessUser.id === id);
     businessUsersArray.splice(index, 1);
+    sessionStorage.setItem('business-users', JSON.stringify(businessUsersArray));
+  }
+
+  disableBusinessUser(id: string) {
+    const businessUsersArray: Array<BusinessUser> = this.listBusinessUsers();
+    const index = businessUsersArray.findIndex(businessUser => businessUser.id === id);
+    businessUsersArray[index].isActive = false;
+    sessionStorage.setItem('business-users', JSON.stringify(businessUsersArray));
+  }
+
+  ativateBusinessUser(id: string) {
+    const businessUsersArray: Array<BusinessUser> = this.listBusinessUsers();
+    const index = businessUsersArray.findIndex(businessUser => businessUser.id === id);
+    businessUsersArray[index].isActive = true;
     sessionStorage.setItem('business-users', JSON.stringify(businessUsersArray));
   }
 
