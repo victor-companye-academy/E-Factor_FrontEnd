@@ -8,7 +8,7 @@
     *ngIf="isDeleteUserModalOpen"
     [user]="user"
     (closeModal)="closeEditModal()"
-    (confirmDelete)="deleteUser($event)"
+    (confirmDelete)="disableUser($event)"
 ></app-delete-business-user-modal>
 <main class="d-flex w-100 main">
     <div class="sidebar">
@@ -87,24 +87,25 @@
             >
                 <ng-template pTemplate="header">
                     <tr>
-                        <th style="width:25%" pSortableColumn="date">Data de criação<p-sortIcon field="date"></p-sortIcon></th>
+                        <th style="width:25%; border-radius: 15px 0 0 0" pSortableColumn="date">Data de criação<p-sortIcon field="date"></p-sortIcon></th>
                         <th style="width:25%">Nome</th>
                         <th style="width:25%">E-mail</th>
-                        <th style="width:25%">Ação</th>
+                        <th style="width:25%; border-radius: 0 15px 0 0">Ação</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-usersList let-i="rowIndex">
                     
                     <tr>
                         <td class="px-0">
-                            <span class="indicator py-3 me-4 bg-success"></span>
+                            <span class="indicator py-3 me-4 {{usersList.isActive ? 'bg-success' : 'bg-danger'}}"></span>
                             {{ usersList.creationDate | date: "dd/MM/yyyy"}}
                         </td>
                         <td>{{ usersList.name }}</td>
                         <td>{{ usersList.email }}</td>
                         <td class="d-flex gap-3">
                             <button class="edit py-1 px-2" (click)="openEditModal(i)">Editar<img src="assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
-                            <button class="delete py-1 px-2" (click)="openDeleteModal(i)">Excluir<img src="assets/icons/trash.svg" alt="Excluir" class="ms-2"></button>
+                            <button class="delete py-1 px-2 d-flex align-items-center justify-content-between" (click)="openDeleteModal(i)" *ngIf="usersList.isActive">Desativar<img src="assets/icons/x.svg" alt="Excluir" class="ms-2"></button>
+                            <button class="ativate py-1 px-2 d-flex align-items-center justify-content-between" (click)="ativateUser(usersList)" *ngIf="!(usersList.isActive)">Ativar<img src="assets/icons/check.svg" alt="Excluir" class="ms-2"></button>
                         </td>
                         
                     </tr>

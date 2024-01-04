@@ -23,6 +23,7 @@ import { ToastModule } from 'primeng/toast';
 import { AboutVacancyComponent } from './about-vacancy/about-vacancy.component';
 import { EditBusinessUserModalComponent } from './edit-business-user-modal/edit-business-user-modal.component';
 import { DeleteBusinessUserModalComponent } from './delete-business-user-modal/delete-business-user-modal.component';
+import { ApproveSolicitationModalComponent } from './approve-solicitation-modal/approve-solicitation-modal.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { DeleteBusinessUserModalComponent } from './delete-business-user-modal/d
     AboutVacancyComponent,
     HeaderComponent,
     EditBusinessUserModalComponent,
-    DeleteBusinessUserModalComponent
+    DeleteBusinessUserModalComponent,
+    ApproveSolicitationModalComponent
   ],
   imports: [
     CommonModule,
@@ -77,7 +79,8 @@ import { DeleteBusinessUserModalComponent } from './delete-business-user-modal/d
     AboutVacancyComponent,
     HeaderComponent,
     EditBusinessUserModalComponent,
-    DeleteBusinessUserModalComponent
+    DeleteBusinessUserModalComponent,
+    ApproveSolicitationModalComponent
   ]
 })
 export class SharedModule { }

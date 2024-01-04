@@ -1,14 +1,19 @@
+<app-approve-solicitation-modal
+    *ngIf="isApproveModalOpen || isRejectModalOpen"
+    [solicitation]="solicitation"
+    [approve]="isApproveModalOpen"
+    [reject]="isRejectModalOpen"
+    (closeModal)="closeModal()"
+    (confirmAction)="saveChanges($event)"
+></app-approve-solicitation-modal>
 <main class="d-flex w-100 main">
     <div class="sidebar">
         <app-sidebar></app-sidebar>
     </div>
 
     <div class="w-100 fadeIn overflow-hidden">
-        <div class="w-100 container div-main px-4">
-            <app-header></app-header>
-        </div>
 
-        <div class="table-section container">
+        <div class="table-section container d-flex flex-column justify-content-center">
             <h2 class="fw-bold mt-4">Solicitações</h2>
             <p>Gerencie as solicitações, aprove ou reprove as solicitações em análise.</p>
 
@@ -68,13 +73,13 @@
             >
                 <ng-template pTemplate="header">
                     <tr>
-                        <th style="width:25%" pSortableColumn="date">Data da solicitação<p-sortIcon field="date"></p-sortIcon></th>
+                        <th style="width:25%; border-radius: 15px 0 0 0" pSortableColumn="date">Data da solicitação<p-sortIcon field="date"></p-sortIcon></th>
                         <th style="width:25%">Status</th>
-                        <th style="width:25%">Valor</th>
                         <th style="width:25%">E-mail</th>
+                        <th style="width:25%; border-radius: 0 15px 0 0">Ação</th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-solicitations>
+                <ng-template pTemplate="body" let-solicitations let-i="rowIndex">
                     
                     <tr>
                         <td class="px-0">
@@ -82,8 +87,12 @@
                             {{ solicitations.date | date: "dd/MM/yyyy"}}
                         </td>
                         <td>{{ solicitations.status }}</td>
-                        <td>{{ solicitations.amount }}</td>
                         <td>{{ solicitations.email }}</td>
+                        <td class="d-flex gap-3" *ngIf="solicitations.status === 'Em Análise'">
+                            <button class="btn bg-success text-white py-1 px-2" (click)="openApproveModal(i)">Aprovar</button>
+                            <button class="btn bg-danger text-white py-1 px-2" (click)="openRejectModal(i)">Reprovar</button>
+                        </td>
+                        <td *ngIf="solicitations.status !== 'Em Análise'">Nenhuma ação é necessária</td>
                     </tr>
                 </ng-template>
             </p-table>

@@ -122,6 +122,7 @@ import { ProfessionalsListComponent } from './professionals-list/professionals-l
 import { BusinessListComponent } from './business-list/business-list.component';
 import { VacancysListComponent } from './vacancys-list/vacancys-list.component';
 import { SolicitationsListComponent } from './solicitations-list/solicitations-list.component';
+import { DashboardAdmComponent } from './dashboard-adm/dashboard-adm.component';
 
 @NgModule({
   declarations: [
@@ -152,6 +153,7 @@ import { SolicitationsListComponent } from './solicitations-list/solicitations-l
     BusinessListComponent,
     VacancysListComponent,
     SolicitationsListComponent,
+    DashboardAdmComponent,
   ],
   imports: [
     CommonModule,

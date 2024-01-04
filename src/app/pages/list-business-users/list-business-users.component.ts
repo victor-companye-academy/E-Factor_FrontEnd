@@ -82,8 +82,14 @@ export class ListBusinessUsersComponent {
     this.closeEditModal();
   }
 
-  deleteUser(userToDelete: any){
-    this.createBusinessUserService.deleteBusinessUser(userToDelete.id);
+  disableUser(userToDisable: any){
+    this.createBusinessUserService.disableBusinessUser(userToDisable.id);
+    this.usersList = this.createBusinessUserService.getUsersByBusinessId(this.id);
+    this.closeEditModal();
+  }
+
+  ativateUser(userToActivate: any){
+    this.createBusinessUserService.ativateBusinessUser(userToActivate.id);
     this.usersList = this.createBusinessUserService.getUsersByBusinessId(this.id);
     this.closeEditModal();
   }

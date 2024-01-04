@@ -230,6 +230,7 @@ export class CreateBussinesUserComponent {
         phone: this.form.get('phone')?.value || '',
         birthDate: this.form.get('birthDate')?.value || '',
         creationDate: new Date().toISOString(),
+        isActive: true
       };
   
       this.createBusinessUserService.createNewBusinessUser(newUser);

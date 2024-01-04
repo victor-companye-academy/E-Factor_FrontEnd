@@ -27,6 +27,7 @@ import { ProfessionalsListComponent } from './professionals-list/professionals-l
 import { BusinessListComponent } from './business-list/business-list.component';
 import { VacancysListComponent } from './vacancys-list/vacancys-list.component';
 import { SolicitationsListComponent } from './solicitations-list/solicitations-list.component';
+import { DashboardAdmComponent } from './dashboard-adm/dashboard-adm.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -67,7 +68,7 @@ const routes: Routes = [
   {
     path: 'admin',
     children: [
-      { path: '', component: ProfessionalsListComponent },
+      { path: '', component: DashboardAdmComponent },
       { path: 'professionals-list', component: ProfessionalsListComponent },
       { path: 'business-list', component: BusinessListComponent },
       { path: 'vacancys-list', component: VacancysListComponent },
