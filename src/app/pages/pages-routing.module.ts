@@ -22,6 +22,12 @@ import { SendRequestComponent } from './send-request-coin/send-request.component
 import { CreateVacancyDetailsComponent } from './create-vacancy-details/create-vacancy-details.component';
 import { ExtractComponent } from './extract/extract.component';
 import { CreateBussinesUserComponent } from './create-bussines-user/create-bussines-user.component';
+import { ListBusinessUsersComponent } from './list-business-users/list-business-users.component';
+import { ProfessionalsListComponent } from './professionals-list/professionals-list.component';
+import { BusinessListComponent } from './business-list/business-list.component';
+import { VacancysListComponent } from './vacancys-list/vacancys-list.component';
+import { SolicitationsListComponent } from './solicitations-list/solicitations-list.component';
+import { DashboardAdmComponent } from './dashboard-adm/dashboard-adm.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -58,6 +64,17 @@ const routes: Routes = [
   { path: 'newsletter', component: NewsletterComponent },
   { path: 'extract', component: ExtractComponent },
   { path: 'new-business-user', component: CreateBussinesUserComponent },
+  { path: 'manage-business-users/:id', component: ListBusinessUsersComponent },
+  {
+    path: 'admin',
+    children: [
+      { path: '', component: DashboardAdmComponent },
+      { path: 'professionals-list', component: ProfessionalsListComponent },
+      { path: 'business-list', component: BusinessListComponent },
+      { path: 'vacancys-list', component: VacancysListComponent },
+      { path: 'solicitations-list', component: SolicitationsListComponent }
+    ]
+  },
   { path: '**', redirectTo: '' },
 ];
 

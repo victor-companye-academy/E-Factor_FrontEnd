@@ -1,0 +1,14 @@
+<div class="modal-container centralizeOnScreen fadeInFromCenter">
+    <form (ngSubmit)="onSubmit()">
+        <h3 class="fw-bold mb-4">Desativar Usuário</h3>
+
+        <p>Ao desativar um usuário da sua empresa, o mesmo não terá mais acesso ao sistema. Você poderá reativar o usuário quando quiser.</p>
+
+        <p>Tem certeza de que deseja continuar?</p>
+
+        <div class="d-flex justify-content-end gap-2 mt-3">
+            <button type="button" class="btn cancel" (click)="cancelEdit()">Cancelar</button>
+            <button type="submit" class="btn save bg-danger">Desativar</button>
+        </div>
+    </form>
+</div>

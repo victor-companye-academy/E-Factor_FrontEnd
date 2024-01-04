@@ -52,11 +52,13 @@ export class CreateBussinesUserComponent {
       ]),
     password: new FormControl('',
       [
-        Validators.required
+        Validators.required,
+        Validators.minLength(8)
       ]),
     passwordConfirmation: new FormControl('',
       [
-        Validators.required
+        Validators.required,
+        Validators.minLength(8)
       ]),
     cpf: new FormControl('',
       [
@@ -122,7 +124,7 @@ export class CreateBussinesUserComponent {
   validatePasswordEmpty(): void {
     const password: string | null = this.form.get('password')!.value;
   
-    if (password?.trim() === '' || !password) {
+    if (password?.trim() === '' || !password || (password?.length ?? 0) < 8) {
       this.passwordEmpty = true;
     } else {
       this.passwordEmpty = false;
@@ -132,7 +134,7 @@ export class CreateBussinesUserComponent {
   validatePasswordConfirmationEmpty(): void {
     const passwordConfirmation: string | null = this.form.get('passwordConfirmation')!.value;
   
-    if (passwordConfirmation?.trim() === '' || !passwordConfirmation) {
+    if (passwordConfirmation?.trim() === '' || !passwordConfirmation || (passwordConfirmation?.length ?? 0) < 8) {
       this.passwordConfirmationEmpty = true;
     } else {
       this.passwordConfirmationEmpty = false;
@@ -204,8 +206,13 @@ export class CreateBussinesUserComponent {
   validateBirthDateValid(): void {
     const birthDate: string | null = this.form.get('birthDate')!.value;
     const birthDateLength = (birthDate?.length ?? 0);
+    const minimumAge: number = 16;
     if (birthDateLength > 0 && birthDate !== null) {
-      this.birthDateInvalid = (new Date(birthDate) > new Date());
+      const currentDate: Date = new Date();
+      const dateOfBirth: Date = new Date(birthDate);
+
+      const age: number = currentDate.getFullYear() - dateOfBirth.getFullYear();
+      this.birthDateInvalid = !(age > minimumAge || (age === minimumAge && currentDate.getMonth() >= dateOfBirth.getMonth()));
     }
   }
 
@@ -222,10 +229,12 @@ export class CreateBussinesUserComponent {
         cpf: this.form.get('cpf')?.value || '',
         phone: this.form.get('phone')?.value || '',
         birthDate: this.form.get('birthDate')?.value || '',
+        creationDate: new Date().toISOString(),
+        isActive: true
       };
   
       this.createBusinessUserService.createNewBusinessUser(newUser);
-      this.router.navigateByUrl("/manage-business-users");
+      this.router.navigateByUrl("/manage-business-users/" + this.businessId);
     } else {
       console.log('Formulário inválido');
     }

@@ -16,17 +16,17 @@
                 <button type="button" title="Em análise" class="rounded-4 btn pending text-start ps-3" (click)="filterSolicitations('Em Análise')"
                 [ngClass]="{'active': filterSelected === 'Em Análise'}">
                     <p>Em análise</p>
-                    <h1 class="display-3 fw-bold">1</h1>
+                    <h1 class="display-3 fw-bold">{{pending}}</h1>
                 </button>
                 <button type="button" title="Aprovadas" class="rounded-4 btn approved text-start ps-3" (click)="filterSolicitations('Aprovado')"
                 [ngClass]="{'active': filterSelected === 'Aprovado'}">
                     <p>Aprovadas</p>
-                    <h1 class="display-3 fw-bold">12</h1>
+                    <h1 class="display-3 fw-bold">{{approved}}</h1>
                 </button>
                 <button type="button" title="Reprovadas" class="rounded-4 btn rejected text-start ps-3" (click)="filterSolicitations('Reprovado')"
                 [ngClass]="{'active': filterSelected === 'Reprovado'}">
                     <p>Reprovadas</p>
-                    <h1 class="display-3 fw-bold">3</h1>
+                    <h1 class="display-3 fw-bold">{{rejected}}</h1>
                 </button>
                 <button type="button" title="+ Coin Factor" class="rounded-4 btn btn-principal fw-bold fs-5">
                     + Coin Factor
@@ -54,7 +54,7 @@
                     </h2>
         
                     <p class="text-center mt-3 fw-light fadeIn ">
-                        Ocorreu um erro ao carregar a a solicitações de sua conta. Recarregue a página ou tente novamente mais tarde.
+                        Ocorreu um erro ao carregar as solicitações de sua conta. Recarregue a página ou tente novamente mais tarde.
                     </p>
                 </div>
             </div>
@@ -71,10 +71,10 @@
             >
                 <ng-template pTemplate="header">
                     <tr>
-                        <th style="width:25%" pSortableColumn="date">Data da solicitação<p-sortIcon field="date"></p-sortIcon></th>
+                        <th style="width:25%; border-radius: 15px 0 0 0" pSortableColumn="date">Data da solicitação<p-sortIcon field="date"></p-sortIcon></th>
                         <th style="width:25%">Status</th>
                         <th style="width:25%">Valor</th>
-                        <th style="width:25%">E-mail</th>
+                        <th style="width:25%; border-radius: 0 15px 0 0">E-mail</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-solicitations>

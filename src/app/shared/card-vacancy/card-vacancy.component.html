@@ -15,7 +15,7 @@
             <div class="status d-flex align-items-center flex-wrap mt-1" *ngIf="!isShort">
                 <img src="assets/icons/calendar.svg" alt="Icone de calendário" width="24px" height="24px"
                     class="me-3 mt-2">
-                <span class="bg-white px-3 rounded-5 me-3 fw-medium mt-2">{{card.days}}</span>
+                <span class="bg-white px-3 rounded-5 me-3 fw-medium mt-2">{{card.creationDate}}</span>
                 <span class="px-3 rounded-5 fw-medium bg-var-primary mt-2" *ngIf="card.status">{{card.status}}</span>
             </div>
         </div>
@@ -34,7 +34,7 @@
         <div>
             <div class="d-flex align-items-center justify-content-start flex-nowrap mt-2" *ngIf="isShort">
                 <img src="assets/icons/calendar.svg" alt="Icone de calendário" width="24px" height="24px" class="me-1">
-                <span class="bg-white px-3 rounded-5 me-3 fw-medium" [title]="card.days">{{card.days}}</span>
+                <span class="bg-white px-3 rounded-5 me-3 fw-medium" [title]="card.creationDate">{{card.creationDate}}</span>
             </div>
 
             <div class="d-flex align-items-center justify-content-start flex-nowrap mt-2" [ngClass]="{'mt-3':isShort}"

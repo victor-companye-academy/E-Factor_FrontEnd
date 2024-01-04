@@ -7,4 +7,6 @@ export interface BusinessUser{
     cpf: string,
     phone: string,
     birthDate: string,
+    creationDate: string,
+    isActive: boolean
 }

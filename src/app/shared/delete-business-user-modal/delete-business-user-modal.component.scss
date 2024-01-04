@@ -1,0 +1,38 @@
+.modal-container{
+    background-color: white;
+    padding: 1.25rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    border-radius: 0.75rem;
+    width: 50%;
+    max-height: 90vh;
+    overflow: auto;
+
+    label, h3{
+        color: var(--primary);
+    }
+    input, select, textarea{
+        border-radius: 0.75rem;
+        color: var(--text);
+        &::placeholder{
+            color: var(--text);
+        }
+    }
+    textarea {
+        height: 200px;
+    }
+
+    @media (max-width: 991px){
+        width: 90%;
+    }
+}
+button{
+    border-radius: 0.75rem;
+}
+.cancel{
+    border: 1.5px solid var(--primary);
+    color: var(--primary);
+}
+.save{
+    background-color: var(--primary);
+    color: var(--text-white);
+}

@@ -32,6 +32,8 @@ export class CreateBusinessUserService {
         cpf: '111.111.111-11',
         phone: '(11) 11111-1111',
         birthDate: '01-01-2000',
+        creationDate: '01-01-2022',
+        isActive: true
       },
       {
         id: '2',
@@ -42,6 +44,8 @@ export class CreateBusinessUserService {
         cpf: '111.111.111-11',
         phone: '(11) 11111-1111',
         birthDate: '01-01-2000',
+        creationDate: '02-01-2022',
+        isActive: true
       },
       {
         id: '3',
@@ -52,6 +56,8 @@ export class CreateBusinessUserService {
         cpf: '111.111.111-11',
         phone: '(11) 11111-1111',
         birthDate: '01-01-2000',
+        creationDate: '03-01-2022',
+        isActive: true
       },
       {
         id: '4',
@@ -62,6 +68,8 @@ export class CreateBusinessUserService {
         cpf: '111.111.111-11',
         phone: '(11) 11111-1111',
         birthDate: '01-01-2000',
+        creationDate: '04-01-2022',
+        isActive: false
       },
       {
         id: '5',
@@ -72,6 +80,8 @@ export class CreateBusinessUserService {
         cpf: '111.111.111-11',
         phone: '(11) 11111-1111',
         birthDate: '01-01-2000',
+        creationDate: '01-01-2022',
+        isActive: true
       },
     ]
 
@@ -94,13 +104,27 @@ export class CreateBusinessUserService {
     sessionStorage.setItem('business-users', JSON.stringify(businessUsersArray));
   }
 
+  disableBusinessUser(id: string) {
+    const businessUsersArray: Array<BusinessUser> = this.listBusinessUsers();
+    const index = businessUsersArray.findIndex(businessUser => businessUser.id === id);
+    businessUsersArray[index].isActive = false;
+    sessionStorage.setItem('business-users', JSON.stringify(businessUsersArray));
+  }
+
+  ativateBusinessUser(id: string) {
+    const businessUsersArray: Array<BusinessUser> = this.listBusinessUsers();
+    const index = businessUsersArray.findIndex(businessUser => businessUser.id === id);
+    businessUsersArray[index].isActive = true;
+    sessionStorage.setItem('business-users', JSON.stringify(businessUsersArray));
+  }
+
   updateBusinessUser(updatedBusinessUser: BusinessUser) {
     const businessUsersArray: Array<BusinessUser> = this.listBusinessUsers();
     const index = businessUsersArray.findIndex(businessUser => businessUser.id === updatedBusinessUser.id);
   
     if (index !== -1) {
       businessUsersArray[index] = updatedBusinessUser;
-      sessionStorage.setItem('vacancies', JSON.stringify(businessUsersArray));
+      sessionStorage.setItem('business-users', JSON.stringify(businessUsersArray));
     }
   }
 
