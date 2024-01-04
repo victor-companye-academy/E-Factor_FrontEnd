@@ -6,8 +6,7 @@ Este projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli
 
 ## Pré-requisitos
 
-Certifique-se de ter o Node.js e o npm (Node Package Manager) instalados em sua máquina. Você pode baixá-los em [nodejs.org](https://nodejs.org/).
-Além disso, você também precisará do Angular CLI instalado. Caso ainda não possua, basta executar o seguinte comando no terminal: `npm install -g @angular/cli`.
+Certifique-se de ter o Node.js e o npm (Node Package Manager) instalados em sua máquina. Você pode baixá-los em [nodejs.org](https://nodejs.org/). Além disso, você também precisará do Angular CLI instalado. Caso ainda não possua, basta executar o seguinte comando no terminal: `npm install -g @angular/cli`.
 
 ## Rodando o Projeto Localmente
 
