@@ -8,12 +8,12 @@ export class CoinSolicitationsService {
 
   constructor() { }
 
-  listCoinSolicitations(): Array<CoinSolicitations>{
-    console.log("entrei no serviço");
+  private keyRequestCoin: string = 'coin-solicitations';
 
+  listCoinSolicitations(): Array<CoinSolicitations> {
     let dataStorage: string | null;
 
-    dataStorage = sessionStorage.getItem('coin-solicitations');
+    dataStorage = sessionStorage.getItem(this.keyRequestCoin);
 
     if (dataStorage) {
       console.log("Usando sessionStorage");
@@ -88,7 +88,7 @@ export class CoinSolicitationsService {
       },
     ]
 
-    sessionStorage.setItem('coin-solicitations', JSON.stringify(solicitationsArray));
+    sessionStorage.setItem(this.keyRequestCoin, JSON.stringify(solicitationsArray));
     console.log("Usando requisição para API");
 
     return solicitationsArray;

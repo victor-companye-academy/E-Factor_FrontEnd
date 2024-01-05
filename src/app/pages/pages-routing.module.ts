@@ -46,7 +46,8 @@ const routes: Routes = [
   {
     path: 'create-vacancy',
     children: [
-      { path: '', component: CreateVacancyComponent },
+      { path: '', component: VacanciesCreatedComponent },
+      { path: 'vacancy', component: CreateVacancyComponent },
       { path: 'details', component: CreateVacancyDetailsComponent },
       { path: 'create', component: CreateVacancyCreateComponent }
     ]

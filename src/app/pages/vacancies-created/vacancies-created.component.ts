@@ -18,7 +18,7 @@ export class VacanciesCreatedComponent {
   protected visible: boolean = false;
   protected card?: Vacancy;
 
-  protected vacancy: Array<Vacancy> = this.vacancyService.listVacancies()
+  protected vacancy: Array<Vacancy> = this.vacancyService.listCompanyVacancies()
   protected vacancySearch: Array<Vacancy> = this.vacancy;
 
   protected first: number = 0;
@@ -76,42 +76,7 @@ export class VacanciesCreatedComponent {
         if (search.hasOwnProperty(key)) {
           const searchKey = key as keyof Search;
 
-          if (typeof search[searchKey] === 'boolean' && search[searchKey]) {
-            switch (searchKey) {
-              case 'angular':
-                newArray = this.searchBySkill(newArray, searchKey)
-                break;
-
-              case 'html':
-                newArray = this.searchBySkill(newArray, searchKey)
-                break;
-
-              case 'javascript':
-                newArray = this.searchBySkill(newArray, searchKey)
-                break;
-
-              case 'typescript':
-                newArray = this.searchBySkill(newArray, searchKey)
-                break;
-
-              case 'estagio':
-                newArray = this.searchByPosition(newArray, searchKey)
-                break;
-
-              case 'junior':
-                newArray = this.searchByPosition(newArray, searchKey)
-                break;
-
-              case 'pleno':
-                newArray = this.searchByPosition(newArray, searchKey)
-                break;
-
-              case 'senior':
-                newArray = this.searchByPosition(newArray, searchKey)
-                break;
-            }
-          }
-          else if (typeof search[searchKey] === 'string' && search[searchKey]) {
+          if (typeof search[searchKey] === 'string' && search[searchKey]) {
             switch (searchKey) {
               case 'otherPosition':
                 newArray = this.searchByPosition(newArray, search[searchKey])

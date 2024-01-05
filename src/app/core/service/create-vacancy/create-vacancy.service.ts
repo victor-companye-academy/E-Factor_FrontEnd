@@ -77,7 +77,7 @@ export class CreateVacancyService {
         shift: this.vacancy.shift,
         businessId: this.businessInfo.id,
         businessInfo: this.businessInfo,
-        vacancyArea: this.vacancy.serniority,
+        vacancyArea: this.vacancy.vacancyArea,
         title: this.vacancy.title,
         day: this.vacancy.day,
         status: this.vacancy.status,

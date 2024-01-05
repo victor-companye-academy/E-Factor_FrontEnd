@@ -204,7 +204,8 @@
                                         <div class="me-3">
                                             <label for="seg" class="mb-1 d-flex align-items-center pe-2">
                                                 <input type="checkbox" (change)="onChangeDays($event)" id="seg"
-                                                    name="day-of-week" value="seg" class="me-2" [ngClass]="{'invalid': validation['daysOfWeek']}"/>
+                                                    name="day-of-week" value="seg" class="me-2"
+                                                    [ngClass]="{'invalid': validation['daysOfWeek']}" />
                                                 Seg
                                             </label>
                                         </div>
@@ -212,7 +213,8 @@
                                         <div class="me-3">
                                             <label for="ter" class="mb-1 d-flex align-items-center pe-2">
                                                 <input type="checkbox" (change)="onChangeDays($event)" id="ter"
-                                                    name="day-of-week" value="ter" class="me-2" [ngClass]="{'invalid': validation['daysOfWeek']}"/>
+                                                    name="day-of-week" value="ter" class="me-2"
+                                                    [ngClass]="{'invalid': validation['daysOfWeek']}" />
                                                 Ter
                                             </label>
                                         </div>
@@ -220,14 +222,16 @@
                                         <div class="me-3">
                                             <label for="qua" class="mb-1 d-flex align-items-center pe-2">
                                                 <input type="checkbox" (change)="onChangeDays($event)" id="qua"
-                                                    name="day-of-week" value="qua" class="me-2" [ngClass]="{'invalid': validation['daysOfWeek']}"/>
+                                                    name="day-of-week" value="qua" class="me-2"
+                                                    [ngClass]="{'invalid': validation['daysOfWeek']}" />
                                                 Qua
                                             </label>
                                         </div>
                                         <div class="me-3">
                                             <label for="qui" class="mb-1 d-flex align-items-center pe-2">
                                                 <input type="checkbox" (change)="onChangeDays($event)" id="qui"
-                                                    name="day-of-week" value="qui" class="me-2" [ngClass]="{'invalid': validation['daysOfWeek']}"/>
+                                                    name="day-of-week" value="qui" class="me-2"
+                                                    [ngClass]="{'invalid': validation['daysOfWeek']}" />
                                                 Qui
                                             </label>
                                         </div>
@@ -235,7 +239,8 @@
                                         <div class="me-3">
                                             <label for="sex" class="mb-1 d-flex align-items-center pe-2">
                                                 <input type="checkbox" (change)="onChangeDays($event)" id="sex"
-                                                    name="day-of-week" value="sex" class="me-2" [ngClass]="{'invalid': validation['daysOfWeek']}"/>
+                                                    name="day-of-week" value="sex" class="me-2"
+                                                    [ngClass]="{'invalid': validation['daysOfWeek']}" />
                                                 Sex
                                             </label>
                                         </div>
@@ -243,7 +248,8 @@
                                         <div class="me-3">
                                             <label for="sab" class="mb-1 d-flex align-items-center pe-2">
                                                 <input type="checkbox" (change)="onChangeDays($event)" id="sab"
-                                                    name="day-of-week" value="sab" class="me-2" [ngClass]="{'invalid': validation['daysOfWeek']}"/>
+                                                    name="day-of-week" value="sab" class="me-2"
+                                                    [ngClass]="{'invalid': validation['daysOfWeek']}" />
                                                 Sab
                                             </label>
                                         </div>
@@ -268,25 +274,29 @@
 
                                     <label for="estagio" class="mb-2 d-flex align-items-center">
                                         <input type="radio" [(ngModel)]="contract" id="estagio" name="contract"
-                                            value="estagio" class="me-2" [ngClass]="{'invalid': validation['contract']}"/>
+                                            value="estagio" class="me-2"
+                                            [ngClass]="{'invalid': validation['contract']}" />
                                         Estágio
                                     </label>
 
                                     <label for="clt" class="mb-2 d-flex align-items-center">
                                         <input type="radio" [(ngModel)]="contract" id="clt" name="contract"
-                                            value="Remoto" class="me-2" [ngClass]="{'invalid': validation['contract']}"/>
+                                            value="Remoto" class="me-2"
+                                            [ngClass]="{'invalid': validation['contract']}" />
                                         CLT
                                     </label>
 
                                     <label for="pessoaJuridica" class="mb-2 d-flex align-items-center">
                                         <input type="radio" [(ngModel)]="contract" id="pessoaJuridica" name="contract"
-                                            value="pessoa juridica" class="me-2" [ngClass]="{'invalid': validation['contract']}"/>
+                                            value="pessoa juridica" class="me-2"
+                                            [ngClass]="{'invalid': validation['contract']}" />
                                         Pessoa Jurídica
                                     </label>
 
                                     <label for="freelancer" class="mb-2 d-flex align-items-center">
                                         <input type="radio" [(ngModel)]="contract" id="freelancer" name="contract"
-                                            value="freelancer" class="me-2" [ngClass]="{'invalid': validation['contract']}"/>
+                                            value="freelancer" class="me-2"
+                                            [ngClass]="{'invalid': validation['contract']}" />
                                         Freelancer
                                     </label>
 
@@ -307,7 +317,8 @@
                                         <div class="me-3">
                                             <label for="meioPeriodo" class="mb-2 d-flex align-items-center">
                                                 <input type="radio" [(ngModel)]="period" id="meioPeriodo" name="period"
-                                                    value="Remoto" class="me-2" [ngClass]="{'invalid': validation['period']}"/>
+                                                    value="Remoto" class="me-2"
+                                                    [ngClass]="{'invalid': validation['period']}" />
                                                 Meio período
                                             </label>
                                         </div>
@@ -315,7 +326,8 @@
                                         <div class="me-3">
                                             <label for="integral" class="mb-2 d-flex align-items-center">
                                                 <input type="radio" [(ngModel)]="period" id="integral" name="period"
-                                                    value="integral" class="me-2" [ngClass]="{'invalid': validation['period']}"/>
+                                                    value="integral" class="me-2"
+                                                    [ngClass]="{'invalid': validation['period']}" />
                                                 Integral
                                             </label>
                                         </div>
@@ -339,7 +351,8 @@
                                         <div class="me-3">
                                             <label for="manha" class="mb-2 d-flex align-items-center pe-2">
                                                 <input type="radio" [(ngModel)]="shift" id="manha" name="shift"
-                                                    value="manhã" class="me-2" [ngClass]="{'invalid': validation['shift']}"/>
+                                                    value="manhã" class="me-2"
+                                                    [ngClass]="{'invalid': validation['shift']}" />
                                                 Manhã
                                             </label>
                                         </div>
@@ -347,7 +360,8 @@
                                         <div class="me-3">
                                             <label for="tarde" class="mb-2 d-flex align-items-center pe-2">
                                                 <input type="radio" [(ngModel)]="shift" id="tarde" name="shift"
-                                                    value="tarde" class="me-2" [ngClass]="{'invalid': validation['shift']}"/>
+                                                    value="tarde" class="me-2"
+                                                    [ngClass]="{'invalid': validation['shift']}" />
                                                 Tarde
                                             </label>
                                         </div>
@@ -355,7 +369,8 @@
                                         <div class="me-3">
                                             <label for="noite" class="mb-2 d-flex align-items-center pe-2">
                                                 <input type="radio" [(ngModel)]="shift" id="noite" name="shift"
-                                                    value="noite" class="me-2" [ngClass]="{'invalid': validation['shift']}"/>
+                                                    value="noite" class="me-2"
+                                                    [ngClass]="{'invalid': validation['shift']}" />
                                                 Noite
                                             </label>
                                         </div>

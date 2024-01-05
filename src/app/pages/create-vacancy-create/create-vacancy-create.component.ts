@@ -22,7 +22,7 @@ export class CreateVacancyCreateComponent {
       if (!this.vacancyService.getWasSendVacancy()) {
         this.vacancyService.createVacancy();
 
-        this.messageService.add({ severity: 'success', summary: '', detail: 'Vaga criado com sucesso!' });
+        this.messageService.add({ severity: 'success', summary: '', detail: 'Vaga criada com sucesso!' });
       }
 
     } else {
