@@ -1,0 +1,60 @@
+<main class="d-flex w-100 main">
+    <div class="sidebar">
+        <app-sidebar></app-sidebar>
+    </div>
+
+    <div class="w-100 fadeIn overflow-hidden">
+        <div class="w-100 container div-main px-4">
+            <app-header></app-header>
+
+            <h1 class="fw-bold fs-5 mt-1 w-100 py-4 overflow-hidden">
+                Fique por dentro de tudo o que estamos fazendo
+            </h1>
+
+            <div>
+                <section class="container text-center mt-0 pt-4">
+                    <h2 class="fw-bold fs-5">
+                        Notícias
+                    </h2>
+
+                    <div class="text-start mt-5">
+                        <div class="row m-0">
+                            <p-carousel [value]="novelties" [numVisible]="2" [numScroll]="1" [showIndicators]="true"
+                                [responsiveOptions]="responsiveOptions" [circular]="true" [autoplayInterval]="4000"
+                                class="col-12">
+
+                                <ng-template let-card pTemplate="novelties">
+                                    <card-newsletter [card]="card" class="mx-2"></card-newsletter>
+                                </ng-template>
+
+                            </p-carousel>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div>
+                <section class="container text-center my-5 pt-4 pb-5">
+                    <h2 class="fw-bold fs-5">
+                        Cursos
+                    </h2>
+
+                    <div class="text-start mt-5">
+                        <div class="row m-0">
+                            <p-carousel [value]="courses" [numVisible]="2" [numScroll]="1" [showIndicators]="true"
+                                [responsiveOptions]="responsiveOptions" [circular]="true" [autoplayInterval]="4000"
+                                class="col-12">
+
+                                <ng-template let-card pTemplate="courses">
+                                    <card-newsletter [card]="card" class="mx-2"></card-newsletter>
+                                </ng-template>
+
+                            </p-carousel>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <app-footer class="footer"></app-footer>
+    </div>
+</main>

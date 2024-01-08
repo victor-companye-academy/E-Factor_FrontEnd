@@ -1,0 +1,58 @@
+.logo{
+    width: 9.66369rem;
+    left: 1.5rem;
+    top: 2rem;
+    cursor: pointer;
+}
+
+.input-icon{
+    width: 1.25rem;
+    margin-left: -2.375rem;
+}
+
+.entrar-fields{
+    width: 27rem;
+    height: 35.125rem;
+
+    h1{
+        color: var(--primary);
+    }
+
+    input{
+        width: 20.625rem;
+        height: 2.5rem;
+        border: none;
+        border-radius: 0.75rem;
+        background: var(--tertiary);
+    }
+
+    ::placeholder{
+        color: var(--text);
+    }
+
+    button{
+        background-color: var(--primary);
+        color: var(--text-white);
+        border-radius: 0.75rem;
+        width: 40%;
+    }
+
+    a{
+        color: var(--text);
+    }
+}
+
+.criar-fields{
+    width: 27rem;
+    height: 35.125rem;
+    background-color: var(--primary);
+    color: var(--text-white);
+    border-radius: 0.9375rem;
+
+    button{
+        background-color: var(--text-white);
+        color: var(--primary);
+        border-radius: 0.75rem;
+        width: 40%;
+    }
+}

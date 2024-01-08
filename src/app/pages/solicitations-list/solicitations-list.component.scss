@@ -1,0 +1,96 @@
+main{
+    .table-section{
+        min-height: 80vh;
+    }
+    h2{
+        color: var(--primary);
+    }
+    p{
+        color: var(--text);
+    }
+    .filter-buttons{
+        button{
+            width: 13.1875rem;
+            height: 8.125rem;
+            background-color: var(--background);
+        }
+        .btn-principal{
+            background-color: var(--secondary);
+            color: var(--text-white);
+            &:hover{
+                background-color: var(--primary);
+            }
+        }
+        @media (max-width: 992px) {
+            justify-content: center !important;
+        }
+    }
+    .pending{
+        color: var(--primary);
+        p{
+            color: var(--primary);
+        }
+        &.active{
+            color: var(--text-white) !important;
+            background-color: var(--secondary) !important;
+            p{
+                color: var(--text-white) !important;
+            }
+        }
+    }
+    .approved{
+        color: #00b5a0b2;
+        p{
+            color: #00b5a0b2;
+        }
+        &.active{
+            color: var(--text-white) !important;
+            background-color: #00b5a0b2 !important;
+            p{
+                color: var(--text-white) !important;
+            }
+        }
+    }
+    .rejected{
+        color: #ff0000b2;
+        p{
+            color: #ff0000b2;
+        }
+        &.active{
+            color: var(--text-white) !important;
+            background-color: #ff0000b2 !important;
+            p{
+                color: var(--text-white) !important;
+            }
+        }
+    }
+    p-sortIcon{
+        filter: brightness(0) saturate(100%) invert(36%) sepia(20%) saturate(485%) hue-rotate(195deg) brightness(96%) contrast(90%) opacity(50%);
+    }
+    th{
+        color: var(--text) !important;
+    }
+
+    .indicator{
+        border-radius: 1rem 0 0 1rem;
+    }
+
+    .indicator::before {
+        content: "";
+        display: inline-block;
+        width: -1px;
+        margin-right: 5px;
+    }
+    
+    .bg-pending {
+        background-color: var(--secondary);
+    }
+
+    .bg-approved {
+        background-color: #00b5a0b2;
+    }
+    
+    .bg-rejected {
+        background-color: #ff0000b2;
+    }
+}

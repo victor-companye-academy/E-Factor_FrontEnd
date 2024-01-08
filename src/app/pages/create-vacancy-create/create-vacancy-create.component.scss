@@ -1,0 +1,48 @@
+:host {
+    color: var(--text);
+
+    .main {
+        min-height: 100vh;
+        .div-main {
+            min-height: 100vh;
+        }
+        h2,
+        h1,
+        h3,
+        span,
+        .text-color-primary {
+            color: var(--primary);
+        }
+
+        .vacancy-details {
+            position: relative;
+            background-color: var(--background);
+
+            .button-close {
+                position: absolute;
+                top: 2rem;
+                right: 2rem;
+
+                img {
+                    transition: 0.2s;
+
+                    &:hover {
+                        transform: scale(1.2);
+                        transition: 0.2s;
+                    }
+                }
+            }
+        }
+
+        .button {
+            cursor: pointer;
+            width: 14rem;
+            color: var(--text-white);
+            background-color: var(--secondary);
+
+            &:hover {
+                background-color: var(--primary);
+            }
+        }
+    }
+}

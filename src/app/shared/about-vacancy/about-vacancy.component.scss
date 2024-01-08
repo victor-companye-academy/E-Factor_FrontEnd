@@ -1,0 +1,55 @@
+:host {
+    h2,
+    h3,
+    h4 {
+        margin: 0;
+    }
+    .primary-color {
+        color: var(--primary);
+    }
+    .section-main {
+        .about {
+            span.status {
+                font-size: 0.85rem;
+                background: var(--secondary);
+                color: var(--text-white);
+            }
+            section {
+                .card {
+                    // background: var(--white); 
+                    background-color: white;
+                    color: var(--text);
+                }
+            }
+
+            p {
+                overflow-y: auto;
+            }
+        }
+
+        .profile {
+            .cursor-pointer {
+                cursor: pointer;
+            }
+
+            section {
+                background: var(--white);
+
+                img {
+                    border: none;
+                    box-shadow: 5px 5px 20px #b3b3b3;
+                }
+            }
+
+            button {
+                background: var(--secondary);
+                color: var(--text-white);
+
+                &:hover {
+                    background-color: var(--primary);
+                    transition: 0.5s;
+                }
+            }
+        }
+    }
+}

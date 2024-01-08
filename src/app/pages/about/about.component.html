@@ -1,0 +1,80 @@
+<main class="d-flex w-100 main">
+    <div class="sidebar">
+        <app-sidebar></app-sidebar>
+    </div>
+
+    <div class="w-100 fadeIn overflow-hidden h-100">
+        <div class="w-100 container px-4">
+            <app-header></app-header>
+
+            <h1 class="fw-bold fs-5 mt-1 w-100 py-4">
+                Sobre a E-Factor
+            </h1>
+
+            <section class="mt-5 w-100 py-4">
+                <div class="div-aboult">
+                    <h2 class="fw-bold fs-5 text-center">
+                        Como funciona a E-factor
+                    </h2>
+
+                    <div class="row mt-4">
+                        <span *ngFor="let card of about" class="col-lg-6 col-xl-4">
+                            <card-details [card]="card" class="mt-4"></card-details>
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="d-flex flex-column align-items-center mt-5 overflow-hidden px-4">
+                <h2 class="fw-bold fs-5">
+                    Objetivos
+                </h2>
+                <p class="text-center fw-light mt-4">
+                    Lorem ipsum dolor sit amet consectetur. Facilisis pharetra placerat pretium vitae varius quis.
+                    Molestie
+                    fames sit eu aliquam faucibus. Erat sapien in elit semper eu sit fames habitant viverra. Nunc
+                    tincidunt
+                    ultrices aliquam fames tellus eros pellentesque a pulvinar. Facilisis ornare dolor pellentesque
+                    vivamus
+                    enim. Rhoncus sed id quam tellus elit tellus non. Aliquam amet sagittis urna lectus cursus
+                    consectetur.
+                    Malesuada lectus ut nulla facilisi. Placerat aliquet sagittis eu sed. Eget feugiat cursus augue
+                    felis
+                    semper.
+                    Id elit fames molestie lorem lacus vehicula sagittis consequat nibh. Tellus volutpat in viverra nisl
+                    gravida vitae. Massa molestie elementum scelerisque vulputate massa lacus facilisi. Nulla nam
+                    laoreet
+                    porta consectetur quisque.
+                </p>
+            </section>
+
+            <section class="overflow-hidden mt-5 w-100 d-flex justify-content-center">
+                <img src="assets/imgs/brazilian-regions.svg" class="mt-4 mb-4 col-12 col-xl-10"
+                    alt="Mapa do Brasil com destaque onde há maior números de pessoas impactadas." title="Mapa">
+            </section>
+
+            <section class="mt-5 mb-5 py-4 w-100">
+                <div class="text-center">
+                    <h2 class="fw-bold fs-5">
+                        Depoimentos
+                    </h2>
+                    <div class="text-start mt-5">
+                        <div class="row m-0">
+                            <p-carousel [value]="testimonials" [numVisible]="3" [numScroll]="3"
+                                [responsiveOptions]="responsiveOptions" [circular]="true" [autoplayInterval]="4000"
+                                class="col-12">
+
+                                <ng-template let-card pTemplate="item">
+                                    <card-details [card]="card" class="mx-2"></card-details>
+                                </ng-template>
+
+                            </p-carousel>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <app-footer class="footer"></app-footer>
+    </div>
+
+</main>

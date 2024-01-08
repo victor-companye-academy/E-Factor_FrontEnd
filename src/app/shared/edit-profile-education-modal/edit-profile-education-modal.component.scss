@@ -1,0 +1,66 @@
+.modal-container{
+    background-color: white;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    border-radius: 0.75rem;
+    width: 50%;
+    max-height: 90vh;
+    overflow: auto;
+
+    .fixed-top {
+        position: sticky !important;
+        background-color: white;
+
+        .cursor-pointer {
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 50%;
+
+            img {
+                filter: brightness(0) saturate(100%) invert(52%) sepia(52%) saturate(95%) hue-rotate(192deg) brightness(95%) contrast(93%);
+            }
+            &:hover {
+                img {
+                    filter: invert(99%) sepia(6%) saturate(187%) hue-rotate(331deg) brightness(114%) contrast(100%);
+                }
+                background-color: var(--primary);
+                transition: 0.3s;
+            }
+          }
+    }
+    
+    input, select, textarea{
+        border-radius: 0.75rem;
+        color: var(--text);
+        &::placeholder{
+            color: var(--text);
+        }
+    }
+    .form-check-input:checked {
+        border: none;
+        background-color: var(--primary);
+    }
+    label{
+        color: var(--primary);
+    }
+    textarea {
+        height: 200px;
+    }
+
+    @media (max-width: 991px){
+        width: 90%;
+    }
+}
+button{
+    border-radius: 0.75rem;
+}
+.cancel{
+    border: 1.5px solid var(--primary);
+    color: var(--primary);
+}
+.save{
+    background-color: var(--primary);
+    color: var(--text-white);
+}
+.trash-icon{
+    filter: invert(85%) sepia(27%) saturate(7097%) hue-rotate(347deg) brightness(102%) contrast(96%);
+}

@@ -1,0 +1,38 @@
+:host {
+    cursor: pointer;
+    overflow: hidden;
+    .card {
+        background-color: var(--background);
+        color: var(--text);
+
+        max-height: 18.75rem;
+        min-height: 12.5rem;
+
+        .bg-var-primary {
+            background-color: var(--primary);
+            color: var(--text-white);
+        }
+
+        h2 {
+            font-size: 1.125rem;
+        }
+
+        p,
+        h3,
+        span {
+            text-align: center;
+            font-size: 0.85rem;
+            background: none;
+        }
+
+        span {
+            max-height: 20px;
+            overflow: hidden;
+        }
+
+        .description p {
+            margin-left: 2rem;
+            max-height: 40px;
+        }
+    }
+}

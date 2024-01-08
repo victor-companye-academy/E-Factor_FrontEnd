@@ -1,0 +1,169 @@
+:host {
+    #sidebar {
+        position: relative;
+        background-color: var(--background);
+        width: 15.625rem;
+
+        #logo {
+            width: 9.688rem;
+        }
+
+        #nav-links {
+            span {
+                cursor: pointer;
+                height: 3.125rem;
+            }
+
+            a {
+                color: var(--text);
+            }
+
+            .active-link {
+                img {
+                    filter: invert(74%) sepia(85%) saturate(611%) hue-rotate(326deg) brightness(102%) contrast(96%);
+                }
+
+                div {
+                    width: 0.625rem;
+                    height: 3.125rem;
+                    background-color: var(--primary);
+                    border-radius: 0rem 0.313rem 0.313rem 0rem;
+                    left: 0;
+                }
+
+                a {
+                    color: var(--primary);
+                }
+            }
+
+            .active-link-adm {
+                img {
+                    filter: invert(36%) sepia(18%) saturate(2347%) hue-rotate(154deg) brightness(93%) contrast(86%);
+                }
+
+                div {
+                    width: 0.625rem;
+                    height: 3.125rem;
+                    background-color: #177093;
+                    border-radius: 0rem 0.313rem 0.313rem 0rem;
+                    left: 0;
+                }
+
+                a {
+                    color: #177093;
+                }
+            }
+        }
+
+        .menu {
+            left: 0;
+            top: 15%;
+            padding: 0 1.5rem 0 2.5rem;
+        }
+
+        #login {
+            display: flex;
+            width: 12rem;
+            height: 2.5rem;
+
+            bottom: 7.4%;
+
+            background-color: var(--secondary);
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: 0.3s;
+
+            &:hover {
+                background-color: var(--primary);
+                transition: 0.3s;
+            }
+
+            div {
+                a {
+                    color: #fff;
+                }
+            }
+        }
+
+        .login-adm{
+            background-color: #177093b2 !important;
+            &:hover{
+                background-color: #177093 !important;
+            }
+        }
+
+        @media screen and (max-width: 990px) {
+            width: 2rem;
+            #logo {
+                width: 2rem;
+                margin-left: -1rem;
+            }
+            #login {
+                width: 2rem;
+                margin-left: -1rem;
+                padding: 0 !important;
+                justify-content: center !important;
+                align-items: center !important;
+                img{
+                    vertical-align: unset;
+                    margin: 0 !important;
+                }
+            }
+            img{
+                width: 1rem;
+            }
+            .active-link {
+                div {
+                    width: 0.2rem !important;
+                }
+            }
+        }
+
+        @media screen and (min-height: 570px) {
+            .menu {
+                overflow-y: auto;
+                height: 60%;
+            }
+        }
+
+        @media screen and (max-height: 570px) {
+            .menu {
+                overflow-y: auto;
+                height: 58%;
+            }
+        }
+        @media screen and (max-height: 500px) {
+            .menu {
+                overflow-y: auto;
+                height: 54%;
+            }
+        }
+
+        @media screen and (max-height: 415px) {
+            .menu {
+                overflow-y: auto;
+                height: 50%;
+            }
+        }
+
+        @media screen and (max-height: 340px) {
+            .menu {
+                overflow-y: auto;
+                height: 45%;
+            }
+        }
+
+        @media screen and (max-height: 284px) {
+            .menu {
+                top: 20%;
+                overflow-y: auto;
+                height: 30%;
+            }
+        }
+        @media screen and (max-height: 200px) {
+            .menu {
+                display: none;
+            }
+        }
+    }
+}

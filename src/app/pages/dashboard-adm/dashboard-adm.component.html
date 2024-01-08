@@ -1,0 +1,93 @@
+<main class="d-flex w-100 main">
+    <div class="sidebar">
+        <app-sidebar></app-sidebar>
+    </div>
+
+    <div class="w-100 fadeIn overflow-hidden">
+
+        <div class="table-section container d-flex flex-column justify-content-center py-5 px-3">
+            <h2 class="fw-bold">Olá, Administrador</h2>
+            <p>Esse é o seu painel administrativo, onde você tem acesso a 
+                todos os dados da plataforma E-Factor.</p>
+
+            <div class="informative-cards d-flex gap-4 flex-wrap">
+                <div class="rounded-3 p-3" [routerLink]="['/admin/professionals-list']">
+                    <img src="assets/icons/dashboard/professionals.svg" alt="">
+                    <h1 class="fw-bold display-3">{{totalProfessionals}}</h1>
+                    <p>Total de profissionais 
+                        na plataforma.</p>
+                </div>
+                <div class="rounded-3 p-3" [routerLink]="['/admin/business-list']">
+                    <img src="assets/icons/dashboard/business.svg" alt="">
+                    <h1 class="fw-bold display-3">{{totalBusiness}}</h1>
+                    <p>Total de empresas
+                        na plataforma.</p>
+                </div>
+                <div class="rounded-3 p-3" [routerLink]="['/admin/vacancys-list']">
+                    <img src="assets/icons/dashboard/vacancys.svg" alt="">
+                    <h1 class="fw-bold display-3">{{totalVacancies}}</h1>
+                    <p>Total de vagas na 
+                        plataforma.</p>
+                </div>
+                <div class="rounded-3 p-3" [routerLink]="['/admin/solicitations-list']">
+                    <img src="assets/icons/dashboard/solicitations.svg" alt="">
+                    <h1 class="fw-bold display-3">{{totalSolicitations}}</h1>
+                    <p>Total de solicitações
+                        na plataforma.</p>
+                </div>
+            </div>
+
+            <div class="recent-section my-3 d-flex gap-4">
+                <div class="recent-cards d-flex gap-4 flex-wrap flex-column">
+                    <div class="rounded-3 p-3">
+                        <p>Novos profissionais na 
+                            plataforma.</p>
+                        <h1 class="fw-bold display-3">{{recentProfessionals}}</h1>
+                    </div>
+                    <div class="rounded-3 p-3">
+                        <p>Novas empresas na 
+                            plataforma.</p>
+                        <h1 class="fw-bold display-3">{{recentBusiness}}</h1>
+                    </div>
+                </div>
+
+                <div class="p-3 table-card rounded-3">
+                    <div class="d-flex justify-content-between align-items-center mb-3 header-table">
+                        <h5 class="fw-bold">Solicitações pendentes</h5>
+                        <button class="btn" [routerLink]="['solicitations-list']">Ver todas</button>
+                    </div>
+                    <p-table
+                    [value]="pendingSolicitations"
+                    [paginator]="false"
+                    [rows]="5"
+                    [showCurrentPageReport]="false"
+                    [tableStyle]="{ 'min-width': '46rem' }"
+                    [rowsPerPageOptions]="[5, 10, 20]"
+                    (sortFunction)="onSort($event)"
+                    [customSort]="true"
+                    *ngIf="pendingSolicitations.length > 0 && !solicitationError"
+                    >
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="width:25%; border-radius: 15px 0 0 0" pSortableColumn="date">Data de criação<p-sortIcon field="date"></p-sortIcon></th>
+                                <th style="width:25%">Nome</th>
+                                <th style="width:25%; border-radius: 0 15px 0 0" >E-mail</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-pendingSolicitations let-i="rowIndex">
+                            <tr>
+                                <td class="px-0">
+                                    <span class="indicator py-3 me-4"></span>
+                                    {{ pendingSolicitations.date | date: "dd/MM/yyyy"}}
+                                </td>
+                                <td>{{ getBusinessNameBySolicitationId(pendingSolicitations.businessId) }}</td>
+                                <td>{{ pendingSolicitations.email }}</td>  
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </div>
+        <app-footer></app-footer>
+    </div>
+</main>
