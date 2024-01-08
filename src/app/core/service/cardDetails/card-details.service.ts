@@ -20,12 +20,17 @@ export class CardDetailsService {
       },
       {
         title: "Anny",
-        description: "Passei pela jornada Gamer em 2021 e Hoje atuo como desenvolvedora de softwares em uma empresa parceria do Educ360. Agradeço por esse projeto mudar as vidas de muitos jovens, assim como fez com a minha."
+        description: "Passei pela jornada Gamer em 2021 e Hoje atuo como desenvolvedora em uma empresa parceria do Educ360. Agradeço por esse projeto mudar as vidas de muitos jovens, assim como fez com a minha."
       },
       {
         title: "Cainã",
         description: "Chamar o Projeto Elias, no Parque Vila Maria, zona norte de São Paulo, de escolinha, é um eufemismo. Adolescente como Cainã Lellis da Silva, 16, descobriu, ao participar da parceria do projeto Educ360°."
-      },]
+      },
+      {
+        title: "Victor",
+        description: "Realizei o treinamento há um ano e hoje estou atuando como desenvolvedor em uma das empresas parceiras do instituto, além de ter a oportunidade de poder participar do desenvolvimento da plataforma E-factor."
+      }
+    ]
   }
 
   public listAbout(): Array<CardDetails> {

@@ -17,6 +17,10 @@ export class ExtractComponent {
   protected filterSelected: string = '';
   protected solicitationError: boolean = false;
 
+  protected pending: number = this.coinSolicitationsService.listCoinSolicitationsById(this.id).filter(solicitation => solicitation.status === 'Em Análise').length;
+  protected approved: number = this.coinSolicitationsService.listCoinSolicitationsById(this.id).filter(solicitation => solicitation.status === 'Aprovado').length;
+  protected rejected: number = this.coinSolicitationsService.listCoinSolicitationsById(this.id).filter(solicitation => solicitation.status === 'Reprovado').length;
+
   onSort(event: SortEvent) {
     event.data?.sort((a: any, b: any) => {
       let result = 0;

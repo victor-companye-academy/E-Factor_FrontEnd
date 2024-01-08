@@ -1,1 +1,117 @@
-<p>list-business-users works!</p>
+<app-edit-business-user-modal
+    *ngIf="isEditUserModalOpen"
+    [user]="user"
+    (closeModal)="closeEditModal()"
+    (saveChanges)="saveProfileChanges($event)"
+></app-edit-business-user-modal>
+<app-delete-business-user-modal
+    *ngIf="isDeleteUserModalOpen"
+    [user]="user"
+    (closeModal)="closeEditModal()"
+    (confirmDelete)="disableUser($event)"
+></app-delete-business-user-modal>
+<main class="d-flex w-100 main">
+    <div class="sidebar">
+        <app-sidebar></app-sidebar>
+    </div>
+
+    <div class="w-100 fadeIn overflow-hidden">
+        <div class="w-100 container div-main px-4">
+            <app-header></app-header>
+        </div>
+
+        <div class="table-section container">
+            <h2 class="fw-bold mt-4">Gerenciar Usuários</h2>
+            <p>Gerencie seus usuários, exclua ou edite quando quiser.</p>
+
+            <div class="d-flex flex-wrap justify-content-start align-items-center gap-3 filter-buttons my-4">
+                <section class="container search rounded-4 pt-3 pb-4">
+                    <div>
+                        <form (ngSubmit)="filterUsers()" class="row align-items-end justify-content-center px-3">
+                            <label for="emailSearch" class="cursor-pointer fw-normal d-flex flex-column col-5">
+                                E-mail
+                                <input type="text" id="emailSearch" maxlength="20" placeholder="Ex: email@efactor.com"
+                                    class="px-3 border-0 mt-2" [(ngModel)]="emailSearch" name="email">
+                            </label>
+                
+                            <label for="nameSearch" class="cursor-pointer fw-normal d-flex flex-column col-5">
+                                Nome
+                                <input type="text" id="nameSearch" maxlength="20" placeholder="Ex: João Silva" 
+                                class="px-3 border-0 mt-2" [(ngModel)]="nameSearch" name="name">
+                            </label>
+                
+                            <div class="col-2">
+                                <button type="submit"
+                                    class="overflow-hidden rounded-3 border-0 fs-5 fw-medium">Pesquisar</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+            <div class="container py-5 px-3 error-page" *ngIf="!(usersList.length > 0) && !solicitationError">
+                <div class="h-100 d-flex flex-column p-5 align-items-center justify-content-center">
+                    <img src="assets/imgs/sem-resultado.svg" alt="Não encontramos nada..."
+                        title="Não encontramos nada." class="notFound mb-4 fadeIn">
+                    <h2 class="fadeIn">
+                        Não encontramos nada...
+                    </h2>
+        
+                    <p class="text-center mt-3 fw-light fadeIn ">
+                        Não foram encontrados resultados para sua pesquisa. Por favor, confira a ortografia, os filtros aplicados ou faça uma nova pesquisa.
+                    </p>
+                </div>
+            </div>
+            <div class="container py-5 px-3 error-page" *ngIf="solicitationError">
+                <div class="h-100 d-flex flex-column p-5 align-items-center justify-content-center">
+                    <img src="assets/imgs/erro-resultado.svg" alt="Não encontramos nada..."
+                        title="Não encontramos nada." class="notFound mb-4 fadeIn">
+                    <h2 class="fadeIn text-danger">
+                        Desculpe, estamos com uma instabilidade
+                    </h2>
+        
+                    <p class="text-center mt-3 fw-light fadeIn ">
+                        Ocorreu um erro ao carregar. Recarregue a página ou tente novamente mais tarde.
+                    </p>
+                </div>
+            </div>
+            <p-table
+                [value]="usersList"
+                [paginator]="true"
+                [rows]="5"
+                [showCurrentPageReport]="false"
+                [tableStyle]="{ 'min-width': '50rem' }"
+                [rowsPerPageOptions]="[5, 10, 20]"
+                (sortFunction)="onSort($event)"
+                [customSort]="true"
+                *ngIf="usersList.length > 0 && !solicitationError"
+            >
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width:25%; border-radius: 15px 0 0 0" pSortableColumn="date">Data de criação<p-sortIcon field="date"></p-sortIcon></th>
+                        <th style="width:25%">Nome</th>
+                        <th style="width:25%">E-mail</th>
+                        <th style="width:25%; border-radius: 0 15px 0 0">Ação</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-usersList let-i="rowIndex">
+                    
+                    <tr>
+                        <td class="px-0">
+                            <span class="indicator py-3 me-4 {{usersList.isActive ? 'bg-success' : 'bg-danger'}}"></span>
+                            {{ usersList.creationDate | date: "dd/MM/yyyy"}}
+                        </td>
+                        <td>{{ usersList.name }}</td>
+                        <td>{{ usersList.email }}</td>
+                        <td class="d-flex gap-3">
+                            <button class="edit py-1 px-2" (click)="openEditModal(i)">Editar<img src="assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
+                            <button class="delete py-1 px-2 d-flex align-items-center justify-content-between" (click)="openDeleteModal(i)" *ngIf="usersList.isActive">Desativar<img src="assets/icons/x.svg" alt="Excluir" class="ms-2"></button>
+                            <button class="ativate py-1 px-2 d-flex align-items-center justify-content-between" (click)="ativateUser(usersList)" *ngIf="!(usersList.isActive)">Ativar<img src="assets/icons/check.svg" alt="Excluir" class="ms-2"></button>
+                        </td>
+                        
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <app-footer></app-footer>
+    </div>
+</main>

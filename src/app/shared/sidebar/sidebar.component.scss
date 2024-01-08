@@ -35,6 +35,24 @@
                     color: var(--primary);
                 }
             }
+
+            .active-link-adm {
+                img {
+                    filter: invert(36%) sepia(18%) saturate(2347%) hue-rotate(154deg) brightness(93%) contrast(86%);
+                }
+
+                div {
+                    width: 0.625rem;
+                    height: 3.125rem;
+                    background-color: #177093;
+                    border-radius: 0rem 0.313rem 0.313rem 0rem;
+                    left: 0;
+                }
+
+                a {
+                    color: #177093;
+                }
+            }
         }
 
         .menu {
@@ -53,15 +71,24 @@
             background-color: var(--secondary);
             border-radius: 0.75rem;
             cursor: pointer;
+            transition: 0.3s;
 
             &:hover {
                 background-color: var(--primary);
+                transition: 0.3s;
             }
 
             div {
                 a {
                     color: #fff;
                 }
+            }
+        }
+
+        .login-adm{
+            background-color: #177093b2 !important;
+            &:hover{
+                background-color: #177093 !important;
             }
         }
 

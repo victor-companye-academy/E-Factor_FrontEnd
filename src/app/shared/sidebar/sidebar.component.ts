@@ -9,12 +9,17 @@ import { SidebarLinks } from 'src/app/core/interfaces/sidebar-links';
 })
 export class SidebarComponent {
 
+  isAdm: boolean;
+
   constructor(private router: Router) {
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         window.scrollTo(0, 0);
+
       }
     });
+    const url = window.location.href;
+    this.isAdm = url.includes("admin");
   }
 
   protected arrayLinksSidebar: Array<SidebarLinks> = [
@@ -46,6 +51,29 @@ export class SidebarComponent {
       title: "Extrato",
       parameters: ['/extract', 'assets/icons/sidebar/extrato.svg']
     }
+  ]
+
+  protected arrayLinksAdminSidebar: Array<SidebarLinks> = [
+    {
+      title: "Página inicial",
+      parameters: ['/admin/', 'assets/icons/sidebar/pagina-inicial.svg']
+    },
+    {
+      title: "Profissionais",
+      parameters: ['/admin/professionals-list', 'assets/icons/sidebar/profissionais.svg']
+    },
+    {
+      title: "Empresas",
+      parameters: ['/admin/business-list', 'assets/icons/sidebar/empresas.svg']
+    },
+    {
+      title: "Vagas",
+      parameters: ['/admin/vacancys-list', 'assets/icons/sidebar/vagas.svg']
+    },
+    {
+      title: "Solicitações",
+      parameters: ['/admin/solicitations-list', 'assets/icons/sidebar/solicitacoes.svg']
+    },
   ]
 
   isCollapsed = window.innerWidth < 991;

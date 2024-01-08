@@ -27,6 +27,7 @@ export class VacancyService {
       businessId: '1',
       businessInfo: {
         id: "1",
+        creationDate:'',
         photo: 'assets/imgs/bradesco-photo.png',
         name: 'Banco Bradesco S.A',
         city: 'São Paulo',
@@ -66,6 +67,7 @@ export class VacancyService {
       businessId: '1',
       businessInfo: {
         id: "1",
+        creationDate:'',
         photo: 'assets/imgs/bradesco-photo.png',
         name: 'Banco Bradesco S.A',
         city: 'São Paulo',
@@ -105,6 +107,7 @@ export class VacancyService {
       businessId: '2',
       businessInfo: {
         id: "2",
+        creationDate:'',
         photo: 'assets/imgs/bradesco-photo.png',
         name: 'Banco Bradesco S.A',
         city: 'São Paulo',
@@ -144,6 +147,7 @@ export class VacancyService {
       businessId: '2',
       businessInfo: {
         id: "2",
+        creationDate:'',
         photo: 'assets/imgs/bradesco-photo.png',
         name: 'Banco Bradesco S.A',
         city: 'São Paulo',
@@ -187,7 +191,6 @@ export class VacancyService {
 
       return JSON.parse(dataStorage);
     }
-
     sessionStorage.setItem(this.keyVacanciesStorage, JSON.stringify(this.vacanciesArray));
     console.log("Usando requisição para API");
 

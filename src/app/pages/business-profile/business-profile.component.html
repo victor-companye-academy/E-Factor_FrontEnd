@@ -90,7 +90,7 @@
                         </section>
                         <section class="d-flex flex-column align-items-center gap-3 p-4">
                             <p>Acesse o painel para gerenciar seus moderadores.</p>
-                            <button class="btn btn-view-all">Moderadores</button>
+                            <button class="btn btn-view-all" [routerLink]="['/manage-business-users/' + businessInfo.id]">Moderadores</button>
                         </section>
                     </div>
                 </div>

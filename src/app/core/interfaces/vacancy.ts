@@ -5,7 +5,6 @@ export interface Vacancy {
 
     businessId: string,
     businessInfo: BusinessInfo,
-
     vacancyArea: string,
     title: string;
     day: string;

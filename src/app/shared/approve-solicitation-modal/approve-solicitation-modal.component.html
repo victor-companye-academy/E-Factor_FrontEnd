@@ -1,0 +1,17 @@
+<div class="modal-container centralizeOnScreen fadeInFromCenter">
+    <form (ngSubmit)="onSubmit()">
+        <h3 class="fw-bold mb-4" *ngIf="approve">Aprovar Solicitação</h3>
+        <h3 class="fw-bold mb-4" *ngIf="reject">Reprovar Solicitação</h3>
+
+        <p>Ao aprovar ou reprovar uma solicitação, você não poderá reverter essa ação. Infelizmente,
+           não será possível alterar o status da solicitação após aprovada ou reprovada.</p>
+
+        <p>Tem certeza de que deseja continuar?</p>
+
+        <div class="d-flex justify-content-end gap-2 mt-3">
+            <button type="button" class="btn cancel" (click)="cancelEdit()">Cancelar</button>
+            <button type="submit" class="btn save bg-success" *ngIf="approve">Aprovar</button>
+            <button type="submit" class="btn save bg-danger" *ngIf="reject">Reprovar</button>
+        </div>
+    </form>
+</div>

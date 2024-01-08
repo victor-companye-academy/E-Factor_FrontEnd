@@ -91,3 +91,8 @@ body {
     overflow: hidden;
     transition: 0.3s;
 }
+
+// borda inferior paginator arredondada
+.p-datatable .p-paginator-bottom{
+    border-radius: 0 0 15px 15px !important;
+}

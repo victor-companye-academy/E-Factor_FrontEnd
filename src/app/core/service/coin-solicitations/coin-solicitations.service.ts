@@ -86,6 +86,38 @@ export class CoinSolicitationsService {
         amount: 100,
         email: 'bradesco@email.com'
       },
+      {
+        id: '9',
+        businessId: '2',
+        date: '11-02-2019',
+        status: 'Aprovado',
+        amount: 100,
+        email: 'inter@email.com'
+      },
+      {
+        id: '10',
+        businessId: '2',
+        date: '11-02-2019',
+        status: 'Aprovado',
+        amount: 100,
+        email: 'inter@email.com'
+      },
+      {
+        id: '11',
+        businessId: '2',
+        date: '11-02-2019',
+        status: 'Aprovado',
+        amount: 100,
+        email: 'inter@email.com'
+      },
+      {
+        id: '12',
+        businessId: '2',
+        date: '11-02-2019',
+        status: 'Em Análise',
+        amount: 100,
+        email: 'inter@email.com'
+      },
     ]
 
     sessionStorage.setItem(this.keyRequestCoin, JSON.stringify(solicitationsArray));
@@ -96,5 +128,15 @@ export class CoinSolicitationsService {
 
   listCoinSolicitationsById(id: string): Array<CoinSolicitations> {
     return this.listCoinSolicitations().filter(e => e.businessId === id);
+  }
+
+  updateCoinSolicitation(coinSolicitation: CoinSolicitations) {
+    const coinSolicitations = this.listCoinSolicitations();
+    const index = coinSolicitations.findIndex(e => e.id === coinSolicitation.id);
+    if (index !== -1) {
+      coinSolicitations[index] = coinSolicitation;
+      console.log(coinSolicitations)
+      sessionStorage.setItem('coin-solicitations', JSON.stringify(coinSolicitations));
+    }
   }
 }
