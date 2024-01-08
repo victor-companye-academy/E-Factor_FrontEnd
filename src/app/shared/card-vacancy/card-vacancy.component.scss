@@ -1,11 +1,7 @@
 :host {
-    overflow: hidden;
     .card {
         background-color: var(--background);
         color: var(--text);
-
-        max-height: 11.875rem;
-        min-height: 10,369rem;
 
         .bg-var-primary {
             background-color: var(--primary);
@@ -25,6 +21,11 @@
             max-height: 100px;
         }
 
+        .section-description {
+            min-width: 75%;
+            max-width: 75%;
+        }
+
         .description {
             p {
                 max-height: 65px;
@@ -40,6 +41,20 @@
                 p {
                     display: none;
                 }
+            }
+        }
+
+        @media screen and (max-width: 1450px) {
+            .section-description {
+                min-width: 65%;
+                max-width: 65%;
+            }
+        }
+
+        @media screen and (max-width: 1150px) {
+            .section-description {
+                min-width: 55%;
+                max-width: 55%;
             }
         }
     }

@@ -1,14 +1,19 @@
-<div class="modal-container centralizeOnScreen fadeIn">
+<div class="modal-container px-3 pb-3 centralizeOnScreen fadeInFromCenter">
+    <div class="fixed-top d-flex justify-content-end align-items-center gap-3 py-3">
+        <div class="cursor-pointer p-1 d-flex align-items-center">
+            <img src="assets/icons/x.svg" alt="close" (click)="cancelEdit()" class="m-1">
+        </div>
+    </div>
     <form (ngSubmit)="onSubmit()">
         <div class="d-flex justify-content-between align-items-center">
-            <label for="experience" class="fw-bold fs-5">Experiências:</label>
+            <label for="experience" id="experience" class="fw-bold fs-5">Experiências:</label>
             <button type="button" class="btn save" (click)="addExperience()">Adicionar</button>
         </div>
         <p class="fw-light">* Campos obrigatórios</p>
         <div *ngFor="let experience of editedProfile.experience; let i = index" class="mt-5">
             <div class="d-flex justify-content-between align-items-center">
                 <h6 for="experience" class="fw-bold">Experiência {{editedProfile.experience.length - i}}</h6>
-                <button type="button" class="btn cancel" (click)="deleteExperience(i); verifyExperience()">Excluir<img src="../../assets/icons/trash.svg" alt="Excluir" class="ms-2 trash-icon"></button>
+                <button type="button" class="btn cancel" (click)="deleteExperience(i); verifyExperience()">Excluir<img src="assets/icons/trash.svg" alt="Excluir" class="ms-2 trash-icon"></button>
             </div>
             <ng-container [ngModelGroup]="i.toString()">
                 <label for="experience">Instituição *</label>

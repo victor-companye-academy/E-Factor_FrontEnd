@@ -26,7 +26,7 @@
                     <div class="ms-5">
                         <h5 class="name fw-bold">{{businessInfo.name}}</h5>
                         <p class="info-text fw-light">{{businessInfo.city}}, {{businessInfo.state}}</p>
-                        <div class="d-flex gap-3 mt-3">
+                        <div class="d-flex gap-3 mt-3 info-div">
                             <div>
                                 <p class="info-text mb-1 fw-light">E-mail</p>
                                 <p>{{businessInfo.email}}</p>
@@ -39,7 +39,7 @@
                     </div>
                 </div>
             </section>
-            <div class="d-flex gap-3">
+            <div class="about-div d-flex gap-3">
                 <div *ngIf="!isLogged ? businessInfo.about.trim().length > 0 : true" [ngClass]="isLogged ? 'about w-75' : 'w-100'">
                     <div class="d-flex justify-content-between align-items-center mt-4">
                         <h5 class="fw-bold">Sobre a empresa</h5>
@@ -51,7 +51,7 @@
                         </div>
                     </section>
                 </div>
-                <div *ngIf="isLogged && true" class="w-25">
+                <div *ngIf="isLogged && true" class="coin-div w-25">
                     <div class="d-flex justify-content-between align-items-center mt-2">
                         <h5 class="fw-bold mt-4 mb-2">Coin Factor</h5>
                     </div>
@@ -64,18 +64,18 @@
                     </section>
                 </div>
             </div>
-            <div class="d-flex gap-3">
+            <div class="vacancys-div d-flex gap-3">
                 <div *ngIf="!isLogged && !(cardVacancy.length > 0) ? false : true" [ngClass]="isLogged ? 'about w-75' : 'w-100'">
                     <h5 class="fw-bold mt-4">Vagas recentes</h5>
                     <div class="d-flex flex-column align-items-center gap-3" *ngIf="(cardVacancy.length > 0)">
                         <span *ngFor="let card of cardVacancy; let i = index" class="mx-1">
-                            <card-vacancy [short]="false" [card]="card" class="mt-4" *ngIf="i < 3"></card-vacancy>
+                            <card-vacancy [short]="isCollapsed ? true : false" [card]="card" class="mt-4" *ngIf="i < 3"></card-vacancy>
                         </span>
                         <button class=" w-25 btn btn-view-all fw-bold mt-3" [routerLink]="['{{businessInfo.id}}-all-vacancies']">Ver tudo</button>
                     </div>
                     <div class="d-flex flex-column align-items-center gap-3 py-4" *ngIf="!(cardVacancy.length > 0)">
                         <p>Parece que você ainda não possui nenhuma vaga cadastrada, sinta-se a vontade para publicar uma agora mesmo.</p>
-                        <button class=" w-25 btn btn-view-all fw-bold mt-3" [routerLink]="['{{businessInfo.id}}-all-vacancies']">Publicar vaga</button>
+                        <button class="w-25 btn btn-view-all fw-bold mt-3" [routerLink]="['{{businessInfo.id}}-all-vacancies']">Publicar vaga</button>
                     </div>
                 </div>
                 <div *ngIf="isLogged && true" class="w-25">
@@ -86,11 +86,11 @@
                         <section class="d-flex flex-column align-items-center gap-3 p-4">
                             <img src="assets/icons/sidebar/profissionais.svg" alt="Coin Factor" class="user-img">
                             <p class="user-text">Você tem a opção de cadastrar moderadores que estarão lá para auxiliá-lo na publicação de vagas, análise de candidatos e muito mais. Porém, é importante lembrar que cada moderador custará <span class="text-green">10 Coin Factor.</span> Os moderadores utilizarão os Coin Factor disponíveis em sua conta, e estamos aqui para responder a quaisquer dúvidas. Sinta-se à vontade para entrar em contato conosco pelo e-mail efactor@ajuda.com, estamos aqui para ajudar!</p>
-                            <button class="btn btn-view-all">Criar moderador</button>
+                            <button class="btn btn-view-all" [routerLink]="['/new-business-user']">Criar moderador</button>
                         </section>
                         <section class="d-flex flex-column align-items-center gap-3 p-4">
                             <p>Acesse o painel para gerenciar seus moderadores.</p>
-                            <button class="btn btn-view-all">Moderadores</button>
+                            <button class="btn btn-view-all" [routerLink]="['/manage-business-users/' + businessInfo.id]">Moderadores</button>
                         </section>
                     </div>
                 </div>

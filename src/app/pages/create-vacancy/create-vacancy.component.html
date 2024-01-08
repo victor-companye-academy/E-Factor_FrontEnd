@@ -3,31 +3,15 @@
         <app-sidebar></app-sidebar>
     </div>
 
-    <div class="w-100 fadeIn overflow-hidden">
-        <div class="w-100 container div-main fadeIn">
+    <div class="w-100 fadeIn h-100">
+        <div class="container px-4 div-main">
+            <div class="d-flex justify-content-end">
+                <app-header></app-header>
+            </div>
 
-            <div class="row px-4">
-                <div class="d-flex align-items-end">
-                    <button type="button"
-                        class="fadeIn border-0 mt-5 tobble w-100 d-flex justify-content-end bg-transparent">
-                        <img src="assets/icons/tobble.svg" alt="Icone seta" title="Mudar modo">
-                    </button>
-
-                    <button type="button" class="d-flex align-items-center border-0 bg-transparent mx-4">
-                        <img src="assets/icons/coin-factor.svg" width="20px" alt="Ícone da coin factor"
-                            title="Coin Factor">
-                        <span class="fw-medium ms-2">
-                            {{coin}}
-                        </span>
-                    </button>
-
-                    <button type="button" class="d-flex align-items-center border-0 bg-transparent">
-                        <img src="assets/icons/bell.svg" alt="Ícone de notificação">
-                    </button>
-                </div>
-
+            <div class="row px-4 div-content">
                 <div class="col">
-                    <section class="pb-1">
+                    <section>
                         <h1 class="fw-bold fs-5 mt-1 w-100 py-4 pb-0">
                             Criação de vaga
                         </h1>
@@ -93,12 +77,14 @@
                     <form [formGroup]="form" (submit)="onSubmit()"
                         class="w-100 h-100 d-flex flex-column align-items-end">
                         <div class="h-100 rounded-3 p-4 w-100">
-                            <label for="" class="text-color-primary mt-3 d-flex flex-column">
+                            <label for="title" class="text-color-primary mt-3 d-flex flex-column">
                                 Titulo da vaga
 
-                                <input type="text" formControlName="title" class="fs-6 rounded-3 mt-2 title fw-light"
+                                <input type="text" formControlName="title" id="title"
+                                    class="fs-6 rounded-3 mt-2 title fw-light"
                                     [ngClass]="{'invalid': titleEmpty || isInvalidTitleLength}"
-                                    placeholder="Ex: Vaga para Desenvolvedor Junior em Angular" maxlength="45"
+                                    placeholder="Ex: Vaga para Desenvolvedor Junior em Angular"
+                                    [maxlength]="titleMaxLength" [minlength]="titleMinLength"
                                     (keyup)="onKeyupTitle($event)">
 
                                 <div class="d-flex">
@@ -112,9 +98,7 @@
                                     </div>
                                 </div>
 
-
                             </label>
-
 
                             <label for="description" class="text-color-primary mt-3 d-flex flex-column">
                                 Descrição da vaga

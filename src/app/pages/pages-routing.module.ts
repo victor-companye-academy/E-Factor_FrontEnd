@@ -20,6 +20,16 @@ import { CreateVacancyComponent } from './create-vacancy/create-vacancy.componen
 import { RequestCoinFactorComponent } from './request-coin-factor/request-coin-factor.component';
 import { SendRequestComponent } from './send-request-coin/send-request.component';
 import { CreateVacancyDetailsComponent } from './create-vacancy-details/create-vacancy-details.component';
+import { CreateVacancyCreateComponent } from './create-vacancy-create/create-vacancy-create.component';
+import { ExtractComponent } from './extract/extract.component';
+import { CreateBussinesUserComponent } from './create-bussines-user/create-bussines-user.component';
+import { VacanciesCreatedComponent } from './vacancies-created/vacancies-created.component';
+import { ListBusinessUsersComponent } from './list-business-users/list-business-users.component';
+import { ProfessionalsListComponent } from './professionals-list/professionals-list.component';
+import { BusinessListComponent } from './business-list/business-list.component';
+import { VacancysListComponent } from './vacancys-list/vacancys-list.component';
+import { SolicitationsListComponent } from './solicitations-list/solicitations-list.component';
+import { DashboardAdmComponent } from './dashboard-adm/dashboard-adm.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -38,11 +48,14 @@ const routes: Routes = [
   { path: 'confirm-code/:email', component: CodeConfirmationComponent },
   { path: 'change-password', component: ChangePasswordComponent },
   { path: 'create-business-user', component: BusinessUserComponent },
+  { path: 'vacancies-created', component: VacanciesCreatedComponent },
   {
     path: 'create-vacancy',
     children: [
-      {path:'', component: CreateVacancyComponent},
-      {path:'details', component: CreateVacancyDetailsComponent}
+      { path: '', component: VacanciesCreatedComponent },
+      { path: 'vacancy', component: CreateVacancyComponent },
+      { path: 'details', component: CreateVacancyDetailsComponent },
+      { path: 'create', component: CreateVacancyCreateComponent }
     ]
   },
   {
@@ -54,6 +67,19 @@ const routes: Routes = [
   { path: 'business-profile/:id', component: BusinessProfileComponent },
   { path: 'professional-profile/:id', component: ProfessionalProfileComponent },
   { path: 'newsletter', component: NewsletterComponent },
+  { path: 'extract', component: ExtractComponent },
+  { path: 'new-business-user', component: CreateBussinesUserComponent },
+  { path: 'manage-business-users/:id', component: ListBusinessUsersComponent },
+  {
+    path: 'admin',
+    children: [
+      { path: '', component: DashboardAdmComponent },
+      { path: 'professionals-list', component: ProfessionalsListComponent },
+      { path: 'business-list', component: BusinessListComponent },
+      { path: 'vacancys-list', component: VacancysListComponent },
+      { path: 'solicitations-list', component: SolicitationsListComponent }
+    ]
+  },
   { path: '**', redirectTo: '' },
 ];
 

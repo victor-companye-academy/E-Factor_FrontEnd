@@ -1,27 +1,25 @@
-# EducFrontEfactor
+# Efactor FrontEnd
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.3.
+Repositório da equipe do FrontEnd do projeto da plataforma EFactor.
 
-## Development server
+Este projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli) versão 16.2.3.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Pré-requisitos
 
-## Code scaffolding
+Certifique-se de ter o Node.js e o npm (Node Package Manager) instalados em sua máquina. Você pode baixá-los em [nodejs.org](https://nodejs.org/). Além disso, você também precisará do Angular CLI instalado. Caso ainda não possua, basta executar o seguinte comando no terminal: `npm install -g @angular/cli`.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Configuração do Projeto
 
-## Build
+1. Clone o repositório para a sua máquina. Rode o seguinte comando no terminal de onde ficará o projeto:
+`git clone https://github.com/victor-companye-academy/E-Factor_FrontEnd.git`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+2. Instale as dependências do projeto:
+`npm install`
 
-## Running unit tests
+## Rodando o Projeto Localmente
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Para iniciar o servidor de desenvolvimento e visualizar o projeto localmente, utilize o comando: `ng serve`. Finalizado o deploy navegue para: `http://localhost:4200/`.
 
-## Running end-to-end tests
+## Mais ajuda
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Para conseguir mais informações sobre comandos que podem ser úteis você pode utilizar `ng help` ou visitar a página [Angular CLI Overview and Command Reference](https://angular.io/cli).

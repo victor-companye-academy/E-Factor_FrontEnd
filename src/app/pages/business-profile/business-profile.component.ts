@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BusinessService } from 'src/app/core/service/business/business.service';
 import { Vacancy } from 'src/app/core/interfaces/vacancy';
@@ -12,6 +12,7 @@ import { VacancyService } from 'src/app/core/service/vacancy/vacancy.service';
 export class BusinessProfileComponent {
 
   protected isLogged: boolean = true;
+  protected isCollapsed = window.innerWidth < 991;
   protected showCellphone = true;
   protected isEditInfoModalOpen = false;
   protected isEditAboutModalOpen = false;
@@ -22,6 +23,11 @@ export class BusinessProfileComponent {
   protected id = this.route.snapshot.paramMap.get('id')?.toString() || '';
   protected businessInfo = this.businessService.listBusiness().find(professional => professional.id === this.id);
   protected cardVacancy: Array<Vacancy> = this.vacancyService.listVacanciesByBusiness(this.id);
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize(event: Event) {
+    this.isCollapsed = window.innerWidth < 991;
+  }
 
   openEditModal(index: number) {
     switch (index) {

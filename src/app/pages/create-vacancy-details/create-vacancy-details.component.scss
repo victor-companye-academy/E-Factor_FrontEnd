@@ -1,85 +1,186 @@
 :host {
-    color: var(--text);
+    color: var(--text-gray);
 
     .main {
         min-height: 100vh;
         .div-main {
             min-height: 100vh;
+            .div-content {
+                min-height: 83vh;
+            }
         }
         h2,
-        h1,
-        h3,
-        span,
-        .text-color-primary {
+        h1 {
             color: var(--primary);
         }
 
-        .text-gray {
-            color: var(--text);
-        }
-
-        .card-title-description {
+        .section-content {
             form {
-                height: auto;
-                & > div {
+                .div-card {
                     background-color: var(--background);
-                    height: 100%;
+                    .div-label {
+                        max-width: 28rem;
+                    }
                 }
 
                 .invalid {
+                    border: 1.5px solid red;
+                }
+
+                .message-invalid {
                     color: rgb(255, 106, 106);
                     font-size: 0.8rem;
                 }
 
-                input,
-                textarea {
-                    &.invalid {
-                        border: 1.5px solid red;
+                .div-form-1 {
+                    padding-right: 4rem;
+                }
+
+                .div-form-2 {
+                    padding-left: 4rem;
+                }
+
+                label,
+                figcaption,
+                fieldset {
+                    min-width: 100%;
+                    color: var(--text);
+                }
+
+                .div-select {
+                    select {
+                        outline: none;
+                        height: 2.6rem;
+                        appearance: none;
                     }
-                    border: none;
+                    img {
+                        position: absolute;
+                        top: 50%;
+                        right: 1rem;
+                    }
+                }
+
+                .border-radius {
+                    input {
+                        &[type="radio"] {
+                            border-radius: 50%;
+                        }
+                    }
+                }
+
+                input {
                     outline: none;
-                    padding: 0.5rem 0 0.5rem 1rem;
+                    border: none;
+
+                    &[type="text"],
+                    &[type="date"] {
+                        height: 2.5rem;
+                    }
+
+                    &[type="date"] {
+                        max-width: 12rem;
+                    }
+
+                    &[type="radio"],
+                    &[type="checkbox"] {
+                        max-height: 2rem;
+                        appearance: none;
+                        content: " sdasd";
+                        background-color: white;
+                        height: 1rem;
+                        width: 1rem;
+
+                        &:checked {
+                            background-color: var(--primary);
+                        }
+                    }
+
+                    &::placeholder {
+                        font-weight: 300;
+                    }
                 }
 
-                .title {
-                    height: 40px;
+                .skills {
+                    input {
+                        background-color: white;
+                        padding-left: 0.7rem;
+                    }
+
+                    ul {
+                        li {
+                            padding: 0.2rem 1rem;
+                            background-color: var(--background);
+
+                            button {
+                                color: var(--text);
+                                font-size: 0.8rem;
+                                &:hover {
+                                    color: var(--primary);
+                                }
+                            }
+                        }
+                    }
                 }
 
-                textarea {
-                    min-height: 10rem;
-                    height: 30rem;
+                .button {
+                    cursor: pointer;
+                    width: 14rem;
+                    color: var(--text-white);
+                    background-color: var(--secondary);
+
+                    &:hover {
+                        background-color: var(--primary);
+                    }
                 }
-
-                .description-max {
-                    font-size: 0.8rem;
-                }
-            }
-        }
-
-        p > span,
-        .coin {
-            color: #00b5a0;
-        }
-
-        .coin-quantity {
-            color: #ffc93e;
-            font-size: 2.5rem;
-        }
-
-        p > span.email {
-            color: var(--text);
-            text-decoration: underline;
-        }
-
-        .button {
-            cursor: pointer;
-            width: 14rem;
-            color: var(--text-white);
-            background-color: var(--secondary);
-
-            &:hover {
-                background-color: var(--primary);
             }
         }
     }
 }
+
+// :host ::ng-deep {
+//     .p-autocomplete {
+//         margin: 0 !important;
+//         padding: 0 !important;
+//         width: 100%;
+//         min-height: 2.6rem;
+
+//         .p-autocomplete-token {
+//             background-color: var(--background);
+//         }
+
+//         .p-autocomplete-token-label {
+//             padding: 0.2rem 0.5rem;
+//         }
+
+//         .p-autocomplete-multiple-container,
+//         ul {
+//             li {
+//                 margin-top: 1rem;
+//                 margin: 50rem;
+//                 padding: 0;
+//                 margin: 10rem;
+//             }
+//             .p-autocomplete-token-icon {
+//                 display: flex;
+//                 justify-content: center;
+//                 align-items: center;
+//                 margin: 0;
+//                 padding: 0 0.5rem 0 0.2rem;
+//                 width: 2rem;
+//             }
+
+//             li:last-child {
+//                 min-width: 100%;
+//             }
+//         }
+
+//         input,
+//         ul,
+//         li {
+//             background-color: white;
+//             border: 0 !important;
+//             margin: 0 !important;
+//             // padding: 0.1rem 0.3rem 0.1rem 0.3rem !important;
+//         }
+//     }
+// }

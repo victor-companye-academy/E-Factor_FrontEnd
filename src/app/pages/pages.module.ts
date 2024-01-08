@@ -115,6 +115,16 @@ import { CreateVacancyComponent } from './create-vacancy/create-vacancy.componen
 import { RequestCoinFactorComponent } from './request-coin-factor/request-coin-factor.component';
 import { SendRequestComponent } from './send-request-coin/send-request.component';
 import { CreateVacancyDetailsComponent } from './create-vacancy-details/create-vacancy-details.component';
+import { CreateVacancyCreateComponent } from './create-vacancy-create/create-vacancy-create.component';
+import { ExtractComponent } from './extract/extract.component';
+import { CreateBussinesUserComponent } from './create-bussines-user/create-bussines-user.component';
+import { ListBusinessUsersComponent } from './list-business-users/list-business-users.component';
+import { VacanciesCreatedComponent } from './vacancies-created/vacancies-created.component';
+import { ProfessionalsListComponent } from './professionals-list/professionals-list.component';
+import { BusinessListComponent } from './business-list/business-list.component';
+import { VacancysListComponent } from './vacancys-list/vacancys-list.component';
+import { SolicitationsListComponent } from './solicitations-list/solicitations-list.component';
+import { DashboardAdmComponent } from './dashboard-adm/dashboard-adm.component';
 
 @NgModule({
   declarations: [
@@ -138,6 +148,16 @@ import { CreateVacancyDetailsComponent } from './create-vacancy-details/create-v
     RequestCoinFactorComponent,
     SendRequestComponent,
     CreateVacancyDetailsComponent,
+    CreateVacancyCreateComponent,
+    ExtractComponent,
+    CreateBussinesUserComponent,
+    ListBusinessUsersComponent,
+    VacanciesCreatedComponent,
+    ProfessionalsListComponent,
+    BusinessListComponent,
+    VacancysListComponent,
+    SolicitationsListComponent,
+    DashboardAdmComponent,
   ],
   imports: [
     CommonModule,

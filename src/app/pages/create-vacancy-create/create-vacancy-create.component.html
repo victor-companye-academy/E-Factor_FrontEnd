@@ -1,0 +1,48 @@
+<main class="d-flex w-100 main">
+    <div class="sidebar">
+        <app-sidebar></app-sidebar>
+    </div>
+
+    <div class="w-100 fadeIn h-100">
+        <div class="container px-4 div-main">
+            <div class="d-flex justify-content-end ">
+                <app-header></app-header>
+            </div>
+
+            <div class="row div-content">
+                <section class="p-0">
+                    <h1 class="fw-bold fs-5 mt-1 w-100 py-4 pb-0">
+                        Resumo da vaga
+                    </h1>
+
+                    <p>
+                        Publicando sua vaga na e-factor você estará impactando vidas.
+                    </p>
+                </section>
+
+                <div class="vacancy-details rounded-4 m-0 p-4">
+                    <button type="button" (click)="onClose()"
+                        class="m-0 p-0 bg-transparent button-close border-0 roudned-circle">
+                        <img src="assets/icons/create-vacancy/close-circle.svg" alt="Ícone de fechar" title="Fechar">
+                    </button>
+
+                    <about-vacancy [card]="vacancy" [showInterest]="showInterest"></about-vacancy>
+                </div>
+
+                <div class="w-100 d-flex justify-content-end ">
+
+                    <p-toast></p-toast>
+
+                    <button type="button" (click)="onConfirm()" class="button border-0 py-2 rounded-3 my-5 fs-5">
+                        Criar vaga
+                    </button>
+
+                </div>
+
+            </div>
+
+
+        </div>
+        <app-footer></app-footer>
+    </div>
+</main>

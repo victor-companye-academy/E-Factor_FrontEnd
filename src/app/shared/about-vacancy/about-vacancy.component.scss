@@ -16,7 +16,8 @@
             }
             section {
                 .card {
-                    background: var(--white);
+                    // background: var(--white); 
+                    background-color: white;
                     color: var(--text);
                 }
             }
@@ -27,10 +28,16 @@
         }
 
         .profile {
+            .cursor-pointer {
+                cursor: pointer;
+            }
+
             section {
                 background: var(--white);
+
                 img {
                     border: none;
+                    box-shadow: 5px 5px 20px #b3b3b3;
                 }
             }
 

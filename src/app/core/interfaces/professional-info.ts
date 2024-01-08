@@ -13,4 +13,5 @@ export interface ProfessionalInfo {
     education: Array<{ institution: string, start: string, end: string, current: boolean, title: string, description: string }>,
     skills: Array<string>,
     languages: Array<{ language: string, level: string}>
+    creationDate: string
   }

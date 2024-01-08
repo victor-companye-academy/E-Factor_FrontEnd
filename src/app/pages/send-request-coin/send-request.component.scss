@@ -5,6 +5,10 @@
         min-height: 100vh;
         .div-main {
             min-height: 100vh;
+
+            .div-content {
+                min-height: 83vh;
+            }
         }
         h2,
         h1,
@@ -18,19 +22,22 @@
             width: 13rem;
         }
 
-        .card p {
-            padding: 0 7.5rem;
-            color: var(--text);
+        .card {
+            background-color: var(--background);
+            p {
+                padding: 0 7.5rem;
+                color: var(--text);
 
-            & > span,
-            .coin {
-                color: #00b5a0;
+                & > span,
+                .coin {
+                    color: #00b5a0;
+                }
+
+                & > span.email {
+                    color: var(--text);
+                    text-decoration: underline;
+                }
             }
-        }
-
-        .card p > span.email {
-            color: var(--text);
-            text-decoration: underline;
         }
 
         .button-ok {
@@ -41,10 +48,6 @@
             &:hover {
                 background-color: var(--primary);
             }
-        }
-
-        .card {
-            background-color: var(--background);
         }
     }
 }

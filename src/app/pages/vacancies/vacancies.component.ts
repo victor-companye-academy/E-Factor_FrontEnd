@@ -161,7 +161,7 @@ export class VacanciesComponent {
   }
 
   private searchByPosition(list: Array<Vacancy>, search: string): Array<Vacancy> {
-    const newList: Array<Vacancy> = list.filter(card => formatText(card.position.toLowerCase()) === formatText(search.toLowerCase()))
+    const newList: Array<Vacancy> = list.filter(card => formatText(card.serniority.toLowerCase()) === formatText(search.toLowerCase()))
     return newList
   }
 

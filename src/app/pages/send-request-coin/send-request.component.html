@@ -3,28 +3,13 @@
         <app-sidebar></app-sidebar>
     </div>
 
-    <div class="w-100 fadeIn overflow-hidden">
-        <div class="w-100 container div-main fadeIn">
-            <div class="row px-4">
-                <div class="d-flex align-items-end">
-                    <button type="button"
-                        class="fadeIn border-0 mt-5 tobble w-100 d-flex justify-content-end bg-transparent">
-                        <img src="assets/icons/tobble.svg" alt="Icone seta" title="Mudar modo">
-                    </button>
+    <div class="w-100 fadeIn h-100">
+        <div class="container px-4 div-main">
+            <div class="d-flex justify-content-end">
+                <app-header></app-header>
+            </div>
 
-                    <button type="button" class="d-flex align-items-center border-0 bg-transparent mx-4">
-                        <img src="assets/icons/coin-factor.svg" width="20px" alt="Ícone da coin factor" title="Coin Factor">
-                        <span class="fw-medium ms-2">
-                            {{coin}}
-                        </span>
-                    </button>
-
-                    <button type="button" class="d-flex align-items-center border-0 bg-transparent">
-                        <img src="assets/icons/bell.svg" alt="Ícone de notificação">
-                    </button>
-                </div>
-
-
+            <div class="row px-4 div-content">
                 <section>
                     <h1 class="fw-bold fs-5 mt-1 w-100 py-4 pb-0">
                         Coin Factor solicitado
@@ -37,33 +22,39 @@
                     </p>
                 </section>
 
-                <section class="mt-1 pb-3 rounded-3 card border-0 align-items-center overflow-hidden card mb-4">
+                <section>
+                    <div class="rounded-3 card border-0 align-items-center">
+                        <img src="assets/logo-efactor.svg" alt="Ícone grande do ecoin" title="Coin Factor"
+                            class="my-5 logo pt-3">
 
-                    <img src="assets/logo-efactor.svg" alt="Ícone grande do ecoin" title="Coin Factor"
-                        class="my-5 logo pt-3">
+                        <p class="w-100 text-center">
+                            Olá,
+                        </p>
 
-                    <p class="w-100 text-center">
-                        Olá,
-                    </p>
+                        <p class="w-100 text-center">
+                            Queremos informar que a sua solicitação de <span class="fw-medium">Coin Factor</span> foi
+                            recebida e está atualmente em processo
+                            de análise por nossa equipe de administradores do site. Fique tranquilo, em breve você
+                            receberá
+                            uma mensagem no endereço de e-mail cadastrado na sua conta, com a atualização sobre o status
+                            da
+                            sua solicitação.
+                        </p>
 
-                    <p class="w-100 text-center">
-                        Queremos informar que a sua solicitação de <span class="fw-medium">Coin Factor</span> foi
-                        recebida e está atualmente em processo
-                        de análise por nossa equipe de administradores do site. Fique tranquilo, em breve você receberá
-                        uma mensagem no endereço de e-mail cadastrado na sua conta, com a atualização sobre o status da
-                        sua solicitação.
-                    </p>
+                        <p class="w-100 text-center">
+                            Agradecemos pela sua paciência enquanto trabalhamos para garantir que tudo ocorra da melhor
+                            forma possível. Se você tiver alguma dúvida ou precisar de mais informações, não hesite em
+                            entrar em contato conosco atráves do e-mail <span class="email">efactor@ajuda.com</span>.
+                            Estamos aqui para ajudar.
+                        </p>
+                        <p-toast></p-toast>
 
-                    <p class="w-100 text-center">
-                        Agradecemos pela sua paciência enquanto trabalhamos para garantir que tudo ocorra da melhor
-                        forma possível. Se você tiver alguma dúvida ou precisar de mais informações, não hesite em
-                        entrar em contato conosco atráves do e-mail <span class="email">efactor@ajuda.com</span>. Estamos aqui para ajudar.
-                    </p>
-                    <p-toast></p-toast>
+                        <button type="button" class="my-5 rounded-3 py-1 border-0 button-ok" (click)="showSuccess()">
+                            Entendido
+                        </button>
 
-                    <button type="button" class="my-5 rounded-3 py-1 border-0 button-ok" (click)="showSuccess()">
-                        Entendido
-                    </button>
+                    </div>
+
 
                 </section>
             </div>

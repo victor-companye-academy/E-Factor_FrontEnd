@@ -1,0 +1,102 @@
+<app-approve-solicitation-modal
+    *ngIf="isApproveModalOpen || isRejectModalOpen"
+    [solicitation]="solicitation"
+    [approve]="isApproveModalOpen"
+    [reject]="isRejectModalOpen"
+    (closeModal)="closeModal()"
+    (confirmAction)="saveChanges($event)"
+></app-approve-solicitation-modal>
+<main class="d-flex w-100 main">
+    <div class="sidebar">
+        <app-sidebar></app-sidebar>
+    </div>
+
+    <div class="w-100 fadeIn overflow-hidden">
+
+        <div class="table-section container d-flex flex-column justify-content-center">
+            <h2 class="fw-bold mt-4">Solicitações</h2>
+            <p>Gerencie as solicitações, aprove ou reprove as solicitações em análise.</p>
+
+            <div class="d-flex flex-wrap justify-content-start align-items-center gap-3 filter-buttons my-4">
+                <button type="button" title="Em análise" class="rounded-4 btn pending text-start ps-3" (click)="filterSolicitations('Em Análise')"
+                [ngClass]="{'active': filterSelected === 'Em Análise'}">
+                    <p>Em análise</p>
+                    <h1 class="display-3 fw-bold">{{pending}}</h1>
+                </button>
+                <button type="button" title="Aprovadas" class="rounded-4 btn approved text-start ps-3" (click)="filterSolicitations('Aprovado')"
+                [ngClass]="{'active': filterSelected === 'Aprovado'}">
+                    <p>Aprovadas</p>
+                    <h1 class="display-3 fw-bold">{{approved}}</h1>
+                </button>
+                <button type="button" title="Reprovadas" class="rounded-4 btn rejected text-start ps-3" (click)="filterSolicitations('Reprovado')"
+                [ngClass]="{'active': filterSelected === 'Reprovado'}">
+                    <p>Reprovadas</p>
+                    <h1 class="display-3 fw-bold">{{rejected}}</h1>
+                </button>
+            </div>
+            <div class="container py-5 px-3 error-page" *ngIf="!(solicitations.length > 0) && !solicitationError">
+                <div class="h-100 d-flex flex-column p-5 align-items-center justify-content-center">
+                    <img src="assets/imgs/sem-resultado.svg" alt="Não encontramos nada..."
+                        title="Não encontramos nada." class="notFound mb-4 fadeIn">
+                    <h2 class="fadeIn">
+                        Não encontramos nada...
+                    </h2>
+        
+                    <p class="text-center mt-3 fw-light fadeIn ">
+                        Não foi encontrado solicitações. Acompanhe por aqui a movimentação de solicitações na plataforma.
+                    </p>
+                </div>
+            </div>
+            <div class="container py-5 px-3 error-page" *ngIf="solicitationError">
+                <div class="h-100 d-flex flex-column p-5 align-items-center justify-content-center">
+                    <img src="assets/imgs/erro-resultado.svg" alt="Não encontramos nada..."
+                        title="Não encontramos nada." class="notFound mb-4 fadeIn">
+                    <h2 class="fadeIn text-danger">
+                        Desculpe, estamos com uma instabilidade
+                    </h2>
+        
+                    <p class="text-center mt-3 fw-light fadeIn ">
+                        Ocorreu um erro ao carregar as solicitações. Recarregue a página ou tente novamente mais tarde.
+                    </p>
+                </div>
+            </div>
+            <p-table
+                [value]="solicitations"
+                [paginator]="true"
+                [rows]="5"
+                [showCurrentPageReport]="false"
+                [tableStyle]="{ 'min-width': '50rem' }"
+                [rowsPerPageOptions]="[5, 10, 20]"
+                (sortFunction)="onSort($event)"
+                [customSort]="true"
+                *ngIf="solicitations.length > 0 && !solicitationError"
+            >
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width:25%; border-radius: 15px 0 0 0" pSortableColumn="date">Data da solicitação<p-sortIcon field="date"></p-sortIcon></th>
+                        <th style="width:25%">Status</th>
+                        <th style="width:25%">E-mail</th>
+                        <th style="width:25%; border-radius: 0 15px 0 0">Ação</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-solicitations let-i="rowIndex">
+                    
+                    <tr>
+                        <td class="px-0">
+                            <span class="indicator py-3 me-4" [ngClass]="{'bg-approved': solicitations.status === 'Aprovado', 'bg-rejected': solicitations.status === 'Reprovado', 'bg-pending': solicitations.status === 'Em Análise'}"></span>
+                            {{ solicitations.date | date: "dd/MM/yyyy"}}
+                        </td>
+                        <td>{{ solicitations.status }}</td>
+                        <td>{{ solicitations.email }}</td>
+                        <td class="d-flex gap-3" *ngIf="solicitations.status === 'Em Análise'">
+                            <button class="btn bg-success text-white py-1 px-2" (click)="openApproveModal(i)">Aprovar</button>
+                            <button class="btn bg-danger text-white py-1 px-2" (click)="openRejectModal(i)">Reprovar</button>
+                        </td>
+                        <td *ngIf="solicitations.status !== 'Em Análise'">Nenhuma ação é necessária</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <app-footer></app-footer>
+    </div>
+</main>
