@@ -26,6 +26,19 @@ export class VacanciesComponent {
   protected totalRecords: number = this.vacancySearch.length || 0
   private searchObj: Search | undefined;
 
+  protected isLogged: boolean = false;
+  protected isBlockNonloggedModalOpen: boolean = false;
+
+  //
+
+  openNonLoggedModal() {
+    this.isBlockNonloggedModalOpen = true;
+  }
+
+  closeNonLoggedModal() {
+    this.isBlockNonloggedModalOpen = false;
+  }
+
   protected setSearch(event: Search) {
     this.first = 0
 

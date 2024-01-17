@@ -15,15 +15,13 @@ export class HomeComponent implements OnInit {
 
   constructor(private cardDetailsService: CardDetailsService, private professionalService: ProfessionalService, private vacancyService: VacancyService) { }
 
+  protected isLogged: boolean = false;
   protected about: Array<CardDetails> = this.cardDetailsService.listAbout();
-
   protected testimonials: Array<CardDetails> = this.cardDetailsService.listTestimonials();
-
   protected cardVacancy: Array<Vacancy> = this.vacancyService.listVacancies();
-
   protected cardProfessional: Array<ProfessionalInfo> = this.professionalService.listProfessionals();
-
   public responsiveOptions: any[] | undefined;
+  protected isBlockNonloggedModalOpen: boolean = false;
 
   ngOnInit() {
     this.responsiveOptions = [
@@ -38,5 +36,13 @@ export class HomeComponent implements OnInit {
         numScroll: 1
       }
     ];
+  }
+
+  openNonLoggedModal() {
+    this.isBlockNonloggedModalOpen = true;
+  }
+
+  closeNonLoggedModal() {
+    this.isBlockNonloggedModalOpen = false;
   }
 }

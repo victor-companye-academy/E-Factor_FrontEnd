@@ -10,6 +10,7 @@ import { formattedDate } from 'src/app/core/utils/formattedDate';
 export class CardVacancyComponent {
   @Input({ alias: 'short' }) public isShort?: boolean;
   @Input({ alias: 'card' }) public card?: Vacancy;
+  @Input({ alias: 'isLogged' }) public isLogged?: boolean;
 
   protected differenceInDays!: string;;
 

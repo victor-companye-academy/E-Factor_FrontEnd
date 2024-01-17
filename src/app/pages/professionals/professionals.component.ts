@@ -27,7 +27,18 @@ export class ProfessionalsComponent {
   protected totalRecords: number = this.professionalSearch.length || 0
   private searchObj: Search | undefined;
 
+  protected isLogged: boolean = false;
+  protected isBlockNonloggedModalOpen: boolean = false;
+
   //
+
+  openNonLoggedModal() {
+    this.isBlockNonloggedModalOpen = true;
+  }
+
+  closeNonLoggedModal() {
+    this.isBlockNonloggedModalOpen = false;
+  }
 
   protected setSearch(event: Search) {
     this.first = 0
@@ -177,9 +188,12 @@ export class ProfessionalsComponent {
     this.visible = true;
   }
 
-  protected modal(id: string):void{
-    const element = document.querySelector('[about-vacancy]');
-  }
+  // protected modal(id: string):void{
+  //   if(!this.isLogged){
+  //     return this.openNonLoggedModal();
+  //   }
+  //   const element = document.querySelector('[about-vacancy]');
+  // }
 
   protected onPageChange(event: PaginatorState) {
     window.scrollTo(0, 120);
