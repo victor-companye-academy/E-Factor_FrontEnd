@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { SidebarLinks } from 'src/app/core/interfaces/sidebar-links';
+import { AuthService } from 'src/app/core/service/auth/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,8 +11,9 @@ import { SidebarLinks } from 'src/app/core/interfaces/sidebar-links';
 export class SidebarComponent {
 
   isAdm: boolean;
+  role: string;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService: AuthService) {
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         window.scrollTo(0, 0);
@@ -20,6 +22,7 @@ export class SidebarComponent {
     });
     const url = window.location.href;
     this.isAdm = url.includes("admin");
+    this.role = this.authService.getRole();
   }
 
   protected arrayLinksSidebar: Array<SidebarLinks> = [

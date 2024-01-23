@@ -56,9 +56,14 @@ body {
 }
 
 .btn-continue{
+    width: 8rem;
+    height: 2.5rem;
     background-color: var(--primary);
-    color: var(--text-white);
     border-radius: 0.75rem;
+    border: none;
+    p, div{
+        color: var(--text-white)
+    }
 }
 
 @media (max-width: 558px) {

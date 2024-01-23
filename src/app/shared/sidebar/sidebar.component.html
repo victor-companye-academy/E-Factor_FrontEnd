@@ -2,7 +2,8 @@
     <img [src]="isCollapsed ? (isAdm ? 'assets/favicon-adm.svg' : 'assets/favicon.svg') : (isAdm ? 'assets/logo-efactor-adm.svg' : 'assets/logo-efactor.svg')" alt="logo e-factor" title="e-factor" id="logo" class="mb-5 position-fixed" [ngClass]="{'ms-4': !isCollapsed}">
     <nav class="position-fixed menu flex-column justify-content-between position-fixed mt-5" [ngClass]="{'px-2 ': isCollapsed}">
         <div id="nav-links" *ngFor="let link of (isAdm ? arrayLinksAdminSidebar : arrayLinksSidebar); let i = index" class="p-2">
-            <span [routerLinkActive]="(isAdm ? 'active-link-adm' : 'active-link')" [routerLink]="link.parameters[0]" [routerLinkActiveOptions]="{exact: true}" class="d-flex justify-content-start align-items-center">
+            <span [routerLinkActive]="(isAdm ? 'active-link-adm' : 'active-link')" [routerLink]="link.parameters[0]" 
+                [routerLinkActiveOptions]="{exact: true}" class="d-flex justify-content-start align-items-center" *ngIf="this.role.includes('GESTOR') ? true : i <= 4">
                 <div class="position-absolute"></div>
                 <img src="{{link.parameters[1]}}" alt="{{link.title}}" class="me-3">
                 <a class="text-decoration-none" *ngIf="!isCollapsed">

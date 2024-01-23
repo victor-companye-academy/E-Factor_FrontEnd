@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { PaginatorState } from 'primeng/paginator';
 import { ProfessionalInfo } from 'src/app/core/interfaces/professional-info';
 import { Search } from 'src/app/core/interfaces/search';
+import { AuthService } from 'src/app/core/service/auth/auth.service';
 import { ProfessionalService } from 'src/app/core/service/professional/professional.service';
 import { formatText } from 'src/app/core/utils/formatText';
 
@@ -13,7 +14,11 @@ import { formatText } from 'src/app/core/utils/formatText';
 })
 export class ProfessionalsComponent {
 
-  constructor(private professionalService: ProfessionalService) { }
+  constructor(private professionalService: ProfessionalService, private authService: AuthService) { 
+    if (this.authService.isAuthenticated()) {
+      this.isLogged = true;
+    }
+  }
 
 
   protected readonly rows: number = 10;

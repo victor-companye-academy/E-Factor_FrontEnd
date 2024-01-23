@@ -4,6 +4,7 @@ import { Vacancy } from 'src/app/core/interfaces/vacancy';
 import { Search } from 'src/app/core/interfaces/search';
 import { VacancyService } from 'src/app/core/service/vacancy/vacancy.service';
 import { formatText } from 'src/app/core/utils/formatText';
+import { AuthService } from 'src/app/core/service/auth/auth.service';
 
 @Component({
   selector: 'app-vacancies',
@@ -12,7 +13,11 @@ import { formatText } from 'src/app/core/utils/formatText';
 })
 export class VacanciesComponent {
 
-  constructor(private vacancyService: VacancyService) { }
+  constructor(private vacancyService: VacancyService, private authService: AuthService) { 
+    if (this.authService.isAuthenticated()) {
+      this.isLogged = true;
+    }
+  }
 
   protected readonly rows: number = 10;
   protected toShow: boolean = true;
