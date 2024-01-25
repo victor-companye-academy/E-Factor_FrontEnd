@@ -23,6 +23,6 @@ export class AboutVacancyComponent {
 
   assignInterest(){
     this.card?.showedInterest?.push("2")
-    this.vacancyService.updateVacancys(this.card);
+    this.vacancyService.updateVacancy(this.card);
   }
 }

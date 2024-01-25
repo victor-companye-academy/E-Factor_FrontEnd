@@ -182,4 +182,5 @@ export class VacanciesComponent {
     this.card = card
     this.visible = true;
   }
+
 }
