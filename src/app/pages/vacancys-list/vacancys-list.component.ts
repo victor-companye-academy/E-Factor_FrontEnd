@@ -38,10 +38,10 @@ export class VacancysListComponent {
   filterVacancies(){
     this.vacanciesList = this.vacancyService.listVacancies();
     if(this.nameSearch.length > 0){
-      this.vacanciesList = this.vacanciesList.filter(vacancy => vacancy.businessInfo.name.toLowerCase().includes(this.nameSearch.toLowerCase()));
+      this.vacanciesList = this.vacanciesList.filter(vacancy => vacancy.nomeEmpresa.toLowerCase().includes(this.nameSearch.toLowerCase()));
     }
     if(this.positionSearch.length > 0){
-      this.vacanciesList = this.vacanciesList.filter(vacancy => vacancy.serniority.toLowerCase().includes(this.positionSearch.toLowerCase()));
+      this.vacanciesList = this.vacanciesList.filter(vacancy => vacancy.senioridade.toLowerCase().includes(this.positionSearch.toLowerCase()));
     }
   }
 }

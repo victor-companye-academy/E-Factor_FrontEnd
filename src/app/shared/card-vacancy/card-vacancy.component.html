@@ -1,17 +1,17 @@
-<article *ngIf="card && card.businessInfo"
+<article *ngIf="card && card.idEmpresa"
     class="card d-flex border-0 rounded-4 container overflow-hidden py-4 w-100 m-0" [ngClass]="{'flex-row': !isShort}"
     [ngStyle]="{'padding': isShort?'1rem': '1.56rem 0 1.5rem 5.5rem'}">
 
     <section class="content section-description position-relative px-0" [ngClass]="{'w-100': isShort}">
-        <img src="{{card.businessInfo.photo || 'assets/icons/bag.svg'}}" alt="Logo empresa"
+        <img src="{{card.fotoPerfil || 'assets/icons/bag.svg'}}" alt="Logo empresa"
             class="rounded-circle logo position-absolute bg-white"
-            [ngClass]="card.businessInfo.photo ? 'object-fit-cover': 'object-fit-scale'" width="40px" height="40px"
+            [ngClass]="card.fotoPerfil ? 'object-fit-cover': 'object-fit-scale'" width="40px" height="40px"
             [ngStyle]="{'left': isShort?'0': '-65px'}">
 
         <div class="d-flex align-items-start flex-wrap w-100" [ngClass]="{'flex-column': isShort}">
             <div class="title-company me-4 w-100" [ngClass]="{'ms-5':isShort}">
-                <h3 class="me-0 fw-light mb-0 text-start text-capitalize">{{card.businessInfo.name}}</h3>
-                <h2 class="m-0 fw-medium w-100 text-capitalize">{{card.title}}</h2>
+                <h3 class="me-0 fw-light mb-0 text-start text-capitalize">{{card.nomeEmpresa}}</h3>
+                <h2 class="m-0 fw-medium w-100 text-capitalize">{{card.tituloVaga}}</h2>
             </div>
 
             <!--  -->
@@ -45,7 +45,7 @@
 
                 <br> -->
 
-                {{card.description}}
+                {{card.descricaoVaga}}
             </p>
         </div>
     </section>
@@ -60,14 +60,15 @@
             <div class="d-flex align-items-center justify-content-start flex-nowrap mt-3">
                 <img src="assets/icons/calendar.svg" alt="Icone de calendário" width="24px" height="24px" class="me-3">
                 <span class="bg-white px-3 rounded-5 me-3 fw-medium"
-                    [title]="card.createDate">{{card.createDate}}</span>
+                    [title]="card.horaInclusao">{{card.horaInclusao}}</span>
             </div>
 
             <div class="d-flex align-items-center justify-content-start flex-nowrap mt-3">
                 <img src="assets/icons/map.svg" alt="Icone de mapa" class="me-3" width="24px" height="24px"
                     class="me-3">
-                <span class="rounded-5 bg-white px-3 fw-medium"
-                    [title]="card.businessInfo.city">{{card.businessInfo.state}}</span>
+                <span class="rounded-5 bg-white px-3 fw-medium">
+                    <!-- [title]="card.businessInfo.city">{{card.businessInfo.state}} --> Estado onde a empresa fica
+                </span>
             </div>
 
         </div>
@@ -77,8 +78,8 @@
 
             <div class="d-flex align-items-center justify-content-start mt-3" *ngIf="!isShort">
                 <img src="assets/icons/map.svg" alt="Icone de mapa" class="me-3" width="24px" height="24px">
-                <span class="rounded-5 bg-white px-3 fw-medium" [title]="card.businessInfo.city">
-                    {{card.businessInfo.city}}
+                <span class="rounded-5 bg-white px-3 fw-medium" title="card.businessInfo.city">
+                    <!-- {{card.businessInfo.city}} --> Aqui ficará a cidade onde a empresa fica
                 </span>
             </div>
 
@@ -87,11 +88,11 @@
 
                     <img src="assets/icons/list.svg" alt="Icone de lista" width="24px" height="24px" class="me-3">
                     <span class="me-2 rounded-5 bg-white px-3 fw-medium">
-                        {{card.skills[0]}}
+                        {{card.habilidades[0]}}
 
                     </span>
-                    <span class="rounded-5 bg-white px-2 fw-medium" *ngIf="!(card.skills.length < 2)">
-                        +{{card.skills.length - 1}}
+                    <span class="rounded-5 bg-white px-2 fw-medium" *ngIf="!(card.habilidades.length < 2)">
+                        +{{card.habilidades.length - 1}}
                     </span>
 
                 </div>
@@ -101,7 +102,7 @@
 
                 <img src="assets/icons/desktop.svg" alt="Icone de computador" width="24px" height="24px" class="me-3">
                 <span class="rounded-5 bg-white px-3 fw-medium">
-                    {{card.modality}}
+                    {{card.modalidade}}
                 </span>
 
             </div>
@@ -109,7 +110,7 @@
             <div class="d-flex align-items-center justify-content-start flex-nowrap mt-3" *ngIf="!isShort">
                 <img src="assets/icons/bag.svg" alt="Icone de maleta" class="me-2 " width="24px" height="24px"
                     class="me-3">
-                <span class="rounded-5 bg-white px-3 fw-medium" [title]="card.contract">{{card.contract}}</span>
+                <span class="rounded-5 bg-white px-3 fw-medium" [title]="card.tipoContrato">{{card.tipoContrato}}</span>
             </div>
 
         </div>

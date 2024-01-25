@@ -2,18 +2,18 @@
     <div class="col-5 col-xl-3 profile me-4">
         <section class="profile mb-5 rounded-4 p-5 d-flex flex-column align-items-center overflow-hidden">
 
-            <img [src]="card.businessInfo.photo || 'assets/imgs/default-profile.svg'" alt="foto de perfil"
+            <img [src]="card.fotoPerfil || 'assets/imgs/default-profile.svg'" alt="foto de perfil"
                 title="Logo da empresa" width="150px" height="150px"
                 class="cursor-pointer border-0 rounded-circle object-fit-cover" style="background-color: #f2f4f7;"
-                [routerLink]="['/business-profile', card.businessInfo.id]">
+                [routerLink]="['/business-profile', card.idEmpresa]">
 
             <h2 class="cursor-pointer fw-light fs-5 mt-4 text-center text-capitalize"
-                [routerLink]="['/business-profile', card.businessInfo.id]">
-                {{card.businessInfo.name}}
+                [routerLink]="['/business-profile', card.idEmpresa]">
+                {{card.nomeEmpresa}}
             </h2>
 
             <h3 class="fw-bold fs-5 mt-4 primary-color text-center text-capitalize d-flex flex-wrap">
-                {{card.title}}
+                {{card.tituloVaga}}
             </h3>
         </section>
 
@@ -25,14 +25,15 @@
             </div>
 
 
-            <div *ngIf="card.businessInfo.cellphone">
+            <!-- <div *ngIf="card.businessInfo.cellphone" > -->
+            <div>
                 <div>
                     <h4 class="fw-light fs-6 mt-4 mb-2">
                         Telefone
                     </h4>
 
                     <span class="fw-semibold fs-6">
-                        {{card.businessInfo.cellphone}}
+                        <!-- {{card.businessInfo.cellphone}} --> Telefone da empresa
                     </span>
                 </div>
             </div>
@@ -42,7 +43,7 @@
                     E-mail
                 </h4>
                 <span class="fw-semibold fs-6">
-                    {{card.businessInfo.email}}
+                    <!-- {{card.businessInfo.email}} --> Email da empresa
                 </span>
             </div>
 
@@ -51,13 +52,14 @@
                     Endereço
                 </h4>
                 <span class="fw-semibold fs-6">
-                    {{card.businessInfo.city}} - {{card.businessInfo.state}}
+                    <!-- {{card.businessInfo.city}} - {{card.businessInfo.state}} --> Localidade da empresa
                 </span>
             </div>
         </section>
 
         <div [ngStyle]="{'display': showInterest?'block':'none'}">
-            <button type="button" (click)="show()" class="w-100 border-0 rounded-4 py-2 fs-5 fw-semibold button mb-5">
+            <button type="button" class="w-100 border-0 rounded-4 py-2 fs-5 fw-semibold button mb-5">
+                <!-- (click)="show()" -->
                 Demonstrar interesse
             </button>
         </div>
@@ -76,28 +78,34 @@
 
         <section>
 
-            <p class="fw-light text-capitalize" [ngStyle]="{'height': card.businessInfo.cellphone?'30.8rem':'26rem'}">
+            <p class="fw-light text-capitalize" >
+                <!-- [ngStyle]="{'height': card.businessInfo.cellphone?'30.8rem':'26rem'}" -->
 
-                <span><span class="fw-semibold">Área da vaga:</span> {{card.vacancyArea}}</span>
+                <span>
+                    <span class="fw-semibold">
+                        Área da vaga:
+                    </span>
+                    <!-- {{card.vacancyArea}} --> Area da vaga
+                </span>
                 <br>
 
-                <span><span class="fw-semibold">Modalidade:</span> {{card.modality}}</span>
+                <!-- <span><span class="fw-semibold">Modalidade:</span> {{card.modalidade}}</span>
                 <br *ngIf="card.daysOfWeek.length > 0">
 
                 <span *ngIf="card.daysOfWeek.length > 0"><span class="fw-semibold">Dias da semana:</span><span
                         *ngFor="let day of card.daysOfWeek; let i = index"> {{day}}<span
                             *ngIf="i !== card.daysOfWeek.length -1">,</span></span></span>
-                <br>
+                <br> -->
 
-                <span><span class="fw-semibold">Período:</span> {{card.period}}</span>
+                <!-- <span><span class="fw-semibold">Período:</span> {{card.period}}</span>
                 <br>
 
                 <span><span class="fw-semibold">Turno:</span> {{card.shift}}</span>
                 <br>
 
-                <br>
+                <br> -->
 
-                {{card.description}}
+                {{card.descricaoVaga}}
             </p>
         </section>
 
@@ -115,7 +123,7 @@
                                     Senioridade
                                 </h4>
                                 <span class="fw-bold fs-6 text-capitalize">
-                                    {{card.serniority}}
+                                    {{card.senioridade}}
                                 </span>
                             </div>
                         </div>
@@ -126,7 +134,7 @@
                                     Contrato
                                 </h4>
                                 <span class="fw-bold fs-6 text-capitalize">
-                                    {{card.contract}}
+                                    {{card.tipoContrato}}
                                 </span>
                             </div>
                         </div>
@@ -139,7 +147,7 @@
                                     Modalidade
                                 </h4>
                                 <span class="fw-bold fs-6 text-capitalize">
-                                    {{card.modality}}
+                                    {{card.modalidade}}
                                 </span>
                             </div>
                         </div>
@@ -150,7 +158,7 @@
                                     Data da Criação
                                 </h4>
                                 <span class="fw-bold fs-6 text-capitalize">
-                                    {{card.createDate}}
+                                    {{card.horaInclusao}}
                                 </span>
                             </div>
                         </div>
@@ -164,7 +172,7 @@
                     Habilidades
                 </h2>
                 <ul class="mt-4 p-0 d-flex flex-wrap">
-                    <li class="card border-0 px-3 m-2 rounded-4 text-capitalize" *ngFor="let item of card.skills">
+                    <li class="card border-0 px-3 m-2 rounded-4 text-capitalize" *ngFor="let item of card.habilidades">
                         {{item}}
                     </li>
                 </ul>

@@ -56,8 +56,6 @@ export class CreateVacancyService {
     this.vacancy.contract = contract;
     this.vacancy.period = period;
     this.vacancy.shift = shift;
-    // this.vacancy.days = '11/12/2023';
-    // this.vacancy.status = 'Ultimas vagas';
     this.vacancy.showedInterest = [];
     this.vacancy.expirationDate = expirationDate;
     this.vacancy.createDate = formattedDate(new Date());
@@ -71,24 +69,27 @@ export class CreateVacancyService {
   public getVacancy(): Vacancy | any {
     if (this.vacancy) {
       const newVacancy: Vacancy = {
-        id: this.setId(),
-        daysOfWeek: this.vacancy.daysOfWeek,
-        period: this.vacancy.period,
-        shift: this.vacancy.shift,
-        businessId: this.businessInfo.id,
-        businessInfo: this.businessInfo,
-        vacancyArea: this.vacancy.vacancyArea,
-        title: this.vacancy.title,
-        day: this.vacancy.day,
-        status: this.vacancy.status,
-        serniority: this.vacancy.serniority,
-        contract: this.vacancy.contract,
-        modality: this.vacancy.modality,
-        description: this.vacancy.description,
-        skills: this.vacancy.skills,
+        idVaga: this.setId(),
+        // daysOfWeek: this.vacancy.daysOfWeek,
+        // period: this.vacancy.period,
+        // shift: this.vacancy.shift,
+        idEmpresa: this.businessInfo.id,
+        // businessInfo: this.businessInfo,
+        // vacancyArea: this.vacancy.vacancyArea,
+        tituloVaga: this.vacancy.title,
+        // day: this.vacancy.day,
+        ativo: this.vacancy.status,
+        senioridade: this.vacancy.serniority,
+        tipoContrato: this.vacancy.contract,
+        modalidade: this.vacancy.modality,
+        descricaoVaga: this.vacancy.description,
+        habilidades: this.vacancy.skills,
         showedInterest: [],
-        expirationDate: this.vacancy.expirationDate,
-        createDate: this.vacancy.createDate
+        // expirationDate: this.vacancy.expirationDate,
+        horaInclusao: this.vacancy.createDate,
+        fotoPerfil: '',
+        fotoCapa: undefined,
+        nomeEmpresa: ''
       }
       return newVacancy
     }

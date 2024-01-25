@@ -16,13 +16,13 @@ export class AboutVacancyComponent {
 
   constructor(private messageService: MessageService, private vacancyService: VacancyService) { }
 
-  show() {
-    this.messageService.add({ severity: 'success', summary: 'Parabéns', detail: 'Seu interesse na vaga foi registrado!' });
-    this.assignInterest();
-  }
+  // show() {
+  //   this.messageService.add({ severity: 'success', summary: 'Parabéns', detail: 'Seu interesse na vaga foi registrado!' });
+  //   this.assignInterest();
+  // }
 
-  assignInterest(){
-    this.card?.showedInterest?.push("2")
-    this.vacancyService.updateVacancy(this.card);
-  }
+  // assignInterest(){
+  //   this.card?.showedInterest?.push("2")
+  //   this.vacancyService.updateVacancy(this.card);
+  // }
 }

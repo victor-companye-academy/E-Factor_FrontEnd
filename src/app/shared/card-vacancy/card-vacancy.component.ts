@@ -14,7 +14,7 @@ export class CardVacancyComponent {
   protected differenceInDays!: string;;
 
   onDays(): string {
-    const date = this.card?.createDate;
+    const date = this.card?.horaInclusao;
 
     const year = parseInt(date?.slice(6) as string);
     const month = parseInt(date?.slice(3, 5) as string) - 1;

@@ -19,7 +19,7 @@ export class VacancyService {
   private businessId = '1';
 
   private filterCompany(): Array<Vacancy> {
-    return this.vacanciesArray.filter(company => company.businessId === this.businessId);
+    return this.vacanciesArray.filter(company => company.idEmpresa === this.businessId);
   }
 
   private vacanciesArray: Array<Vacancy> = []
@@ -241,7 +241,7 @@ export class VacancyService {
 
   public updateVacancy(updatedVacancy: any) {
     const vacanciesArray: Array<Vacancy> = this.listVacancies();
-    const index = vacanciesArray.findIndex(vacancy => vacancy.id === vacancy.id);
+    const index = vacanciesArray.findIndex(vacancy => vacancy.idVaga === vacancy.idVaga);
 
     if (index !== -1) {
       vacanciesArray[index] = updatedVacancy;
@@ -257,13 +257,13 @@ export class VacancyService {
 
   public deleteVacancy(id: string) {
     const vacanciesArray: Array<Vacancy> = this.listVacancies();
-    const index = vacanciesArray.findIndex(vacancy => vacancy.id === id);
+    const index = vacanciesArray.findIndex(vacancy => vacancy.idVaga === id);
     vacanciesArray.splice(index, 1);
     sessionStorage.setItem(this.keyVacanciesStorage, JSON.stringify(vacanciesArray));
   }
 
   public insertVacancy(vacancy: Vacancy): number {
-    vacancy.id = (this.vacanciesArray.length + 1).toString()
+    vacancy.idVaga = (this.vacanciesArray.length + 1).toString()
     console.log(this.listVacancies())
 
     const lastposition = this.vacanciesArray.push(vacancy);
@@ -274,10 +274,11 @@ export class VacancyService {
   }
 
   public listInterestedVacancies(id: string): Array<Vacancy> {
-    return this.listVacancies().filter(e => e.showedInterest.includes(id));
+    // return this.listVacancies().filter(e => e.showedInterest.includes(id));
+    return this.listCompanyVacancies().filter( e=> e.idVaga.includes(id))
   }
 
   public listVacanciesByBusiness(id: string): Array<Vacancy> {
-    return this.listVacancies().filter(e => e.businessId === id);
+    return this.listVacancies().filter(e => e.idEmpresa === id);
   }
 }

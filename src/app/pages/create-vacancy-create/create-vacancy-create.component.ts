@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Vacancy } from 'src/app/core/interfaces/vacancy';
 import { CreateVacancyService } from 'src/app/core/service/create-vacancy/create-vacancy.service';
-import { VacancyService } from 'src/app/core/service/vacancy/vacancy.service';
 
 @Component({
   selector: 'create-vacancy-create',
@@ -40,7 +39,7 @@ export class CreateVacancyCreateComponent {
     this.vacancy = this.vacancyService.getVacancy() as Vacancy;
     this.showInterest = false;
 
-    if (this.vacancy.title === undefined || '' && this.vacancy.description === undefined || '') {
+    if (this.vacancy.tituloVaga === undefined || '' && this.vacancy.descricaoVaga === undefined || '') {
       this.router.navigateByUrl("/create-vacancy");
 
     }
