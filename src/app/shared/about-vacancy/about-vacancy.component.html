@@ -2,9 +2,9 @@
     <div class="col-5 col-xl-3 profile me-4">
         <section class="profile mb-5 rounded-4 p-5 d-flex flex-column align-items-center overflow-hidden">
 
-            <img [src]="card.fotoPerfil" (error)="onImageError()" alt=""
+            <img src="data:image;base64,{{card.fotoPerfil }}" (error)="onImageError()" alt=""
                 title="Logo da empresa" width="150px" height="150px"
-                class="cursor-pointer border-0 rounded-circle object-fit-cover" style="background-color: #f2f4f7;"
+                class="cursor-pointer border-0 rounded-circle img-fluid" style="background-color: #f2f4f7;"
                 [routerLink]="['/business-profile', card.idEmpresa]">
 
             <h2 class="cursor-pointer fw-light fs-5 mt-4 text-center text-capitalize"

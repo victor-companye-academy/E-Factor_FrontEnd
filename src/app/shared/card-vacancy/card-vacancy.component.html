@@ -2,8 +2,8 @@
     [ngClass]="{'flex-row': !isShort}" [ngStyle]="{'padding': isShort?'1rem': '1.56rem 0 1.5rem 5.5rem'}">
 
     <section class="content section-description position-relative px-0" [ngClass]="{'w-100': isShort}">
-        <img [src]="card.fotoPerfil" (error)="onImageError()"  alt=""
-            class="rounded-circle logo position-absolute bg-white"
+        <img src="data:image;base64,{{card.fotoPerfil }}" (error)="onImageError()"  alt=" "
+            class="rounded-circle logo position-absolute bg-white img-fluid"
             [ngClass]="card.fotoPerfil ? 'object-fit-cover': 'object-fit-scale'" width="40px" height="40px"
             [ngStyle]="{'left': isShort?'0': '-65px'}">
 
