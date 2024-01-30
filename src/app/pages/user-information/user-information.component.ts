@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserInformationInputs } from 'src/app/core/interfaces/user-information-inputs';
 import { RegisterBusinessService } from 'src/app/core/service/register-business/register-business.service';
+import { RegisterProfessionalService } from 'src/app/core/service/register-professional/register-professional.service';
 
 @Component({
   selector: 'app-user-information',
@@ -20,7 +21,7 @@ export class UserInformationComponent {
   protected cnpjValid: boolean = false;
   protected emailValid: boolean = false;
 
-  constructor(private router: Router, private route: ActivatedRoute, private registerBusinessService: RegisterBusinessService) {
+  constructor(private router: Router, private route: ActivatedRoute, private registerBusinessService: RegisterBusinessService, private registerProfessionalService: RegisterProfessionalService) {
     this.path = this.route.snapshot.url[0].path;
     
     if (this.path === 'informacoes-profissional') {
@@ -68,7 +69,7 @@ export class UserInformationComponent {
           title: "Senioridade *",
           parameters: ['Selecione', 'text', 'select'],
           value: '',
-          select: ['Estagiário', 'Trainee', 'Júnior', 'Plano', 'Sênior']
+          select: ['Estágio', 'Trainee', 'Júnior', 'Pleno', 'Sênior', "Especialista"]
         }
     ],
     [
@@ -113,6 +114,24 @@ export class UserInformationComponent {
 
   protected userAdressComponents: Array<any> = []
 
+  populateUserInformations(){
+    if (this.pageType == 0) {
+      this.populatePersonalInformations();
+    } else {
+      this.populateBusinessInformations();
+    }
+    this.populateAdressComponents(this.userAdressComponents);
+    this.getLinkDestinationContinue();
+  }
+
+  populatePersonalInformations(){
+    this.registerProfessionalService.professionalInformations.nomeCompleto = this.arrayUserInformationInputs[this.pageType][0].value;
+    this.registerProfessionalService.professionalInformations.cpf = this.arrayUserInformationInputs[this.pageType][1].value;
+    this.registerProfessionalService.professionalInformations.contato.telefone = this.arrayUserInformationInputs[this.pageType][2].value;
+    this.registerProfessionalService.professionalInformations.dataNascimento = this.arrayUserInformationInputs[this.pageType][3].value;
+    this.registerProfessionalService.professionalInformations.nivel = this.arrayUserInformationInputs[this.pageType][5].value;
+  }
+
   populateBusinessInformations(){
     this.registerBusinessService.businessInformations.cnpj = this.arrayUserInformationInputs[this.pageType][0].value;
     this.registerBusinessService.businessInformations.inscricaoEstadual = this.arrayUserInformationInputs[this.pageType][1].value;
@@ -120,21 +139,28 @@ export class UserInformationComponent {
     this.registerBusinessService.businessInformations.razaoSocial = this.arrayUserInformationInputs[this.pageType][3].value;
     this.registerBusinessService.businessInformations.nomeFantasia = this.arrayUserInformationInputs[this.pageType][4].value;
     this.registerBusinessService.businessInformations.contato.email = this.arrayUserInformationInputs[this.pageType][5].value;
-
-    this.populateAdressComponents(this.userAdressComponents);
   }
 
   populateAdressComponents(adressComponents: any){
     this.userAdressComponents = adressComponents;
-    this.registerBusinessService.businessInformations.endereco.cep = this.userAdressComponents[0].value;
-    this.registerBusinessService.businessInformations.endereco.cidade = this.userAdressComponents[1].value;
-    this.registerBusinessService.businessInformations.endereco.estado = this.userAdressComponents[2].value;
-    this.registerBusinessService.businessInformations.endereco.bairro = this.userAdressComponents[3].value;
-    this.registerBusinessService.businessInformations.endereco.logradouro = this.userAdressComponents[4].value;
-    this.registerBusinessService.businessInformations.endereco.numero = parseInt(this.userAdressComponents[5].value);
-    this.registerBusinessService.businessInformations.endereco.complemento = this.userAdressComponents[6].value;
 
-    this.getLinkDestinationContinue();
+    if (this.pageType === 0) {
+      this.registerProfessionalService.professionalInformations.endereco.cep = this.userAdressComponents[0].value;
+      this.registerProfessionalService.professionalInformations.endereco.cidade = this.userAdressComponents[1].value;
+      this.registerProfessionalService.professionalInformations.endereco.estado = this.userAdressComponents[2].value;
+      this.registerProfessionalService.professionalInformations.endereco.bairro = this.userAdressComponents[3].value;
+      this.registerProfessionalService.professionalInformations.endereco.logradouro = this.userAdressComponents[4].value;
+      this.registerProfessionalService.professionalInformations.endereco.numero = parseInt(this.userAdressComponents[5].value);
+      this.registerProfessionalService.professionalInformations.endereco.complemento = this.userAdressComponents[6].value;
+    } else {
+      this.registerBusinessService.businessInformations.endereco.cep = this.userAdressComponents[0].value;
+      this.registerBusinessService.businessInformations.endereco.cidade = this.userAdressComponents[1].value;
+      this.registerBusinessService.businessInformations.endereco.estado = this.userAdressComponents[2].value;
+      this.registerBusinessService.businessInformations.endereco.bairro = this.userAdressComponents[3].value;
+      this.registerBusinessService.businessInformations.endereco.logradouro = this.userAdressComponents[4].value;
+      this.registerBusinessService.businessInformations.endereco.numero = parseInt(this.userAdressComponents[5].value);
+      this.registerBusinessService.businessInformations.endereco.complemento = this.userAdressComponents[6].value;
+    }
   }
 
   inputMasks(event: any, index: number) {
@@ -382,5 +408,9 @@ export class UserInformationComponent {
     } else {
       this.router.navigate(['/selecionar-usuario']);
     }
+  }
+
+  formatSelectValue(input: string): string {
+    return input.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
   }
 }

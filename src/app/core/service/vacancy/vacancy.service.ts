@@ -56,7 +56,7 @@ export class VacancyService {
       contract: "pessoa juridica",
       period: "Integral",
       shift: "manha",
-      createDate: '14/11/2023',
+      createDate: '2023-11-11',
       expirationDate: '20/12/2023'
     },
     {
@@ -96,7 +96,7 @@ export class VacancyService {
       contract: "pessoa juridica",
       period: "Integral",
       shift: "manha",
-      createDate: '10/12/2023',
+      createDate: '2023-12-10',
       expirationDate: '20/12/2023'
     }
     , {
@@ -136,7 +136,7 @@ export class VacancyService {
       contract: "pessoa juridica",
       period: "Integral",
       shift: "manha",
-      createDate: '14/11/2023',
+      createDate: '2023-11-14',
       expirationDate: '20/12/2023'
     },
     {
@@ -176,7 +176,7 @@ export class VacancyService {
       contract: "pessoa juridica",
       period: "Integral",
       shift: "manha",
-      createDate: '10/12/2023',
+      createDate: '2023-12-11',
       expirationDate: '20/12/2023'
     }
   ];

@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { BusinessInfo } from '../../interfaces/business-info';
+import { map } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BusinessService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
   public listBusiness():Array<BusinessInfo> {
 
@@ -86,5 +89,16 @@ export class BusinessService {
       businessArray[index] = updatedBusiness;
       sessionStorage.setItem('businesses', JSON.stringify(businessArray));
     }
+  }
+
+  public returnBusinessFromLoggedUser() {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+  
+    return this.httpClient.get('http://localhost:8085/ms-empresa/v1/empresa-logado', { headers })
+      .pipe(
+        map(response => response)
+      );
   }
 }

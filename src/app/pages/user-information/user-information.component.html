@@ -21,9 +21,9 @@
                 </div>
                 <div *ngIf="input.parameters[2] == 'select'">
                     <label>{{input.title}}</label>
-                    <select title="teste" name="frutas" class="form-select ps-3 pe-3 mt-1" (change)="inputMasks($event, i)">
+                    <select title="select" name="select" class="form-select ps-3 pe-3 mt-1" (change)="inputMasks($event, i)">
                         <option disabled selected value>Selecione</option>
-                        <option *ngFor="let input of arrayUserInformationInputs[pageType][i].select" value="{{i}}">{{input}}</option>
+                        <option *ngFor="let input of arrayUserInformationInputs[pageType][i].select" value="{{formatSelectValue(input)}}">{{input}}</option>
                     </select>
                 </div>
             </div>
@@ -44,7 +44,7 @@
             <p>1/2</p>
         </div>
         <div class="mt-2">
-            <button class="btn fw-bold btn-continue w-100" (click)="populateBusinessInformations()" [disabled]="!isContinueBtnActive">CONTINUAR</button>
+            <button class="btn fw-bold btn-continue w-100" (click)="populateUserInformations()" [disabled]="!isContinueBtnActive">CONTINUAR</button>
         </div>
     </div>
 </body>

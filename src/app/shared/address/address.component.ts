@@ -51,11 +51,7 @@ export class AddressComponent {
   checkInputs() {
     const paginaAtiva = this.addressComponents;
 
-    if (paginaAtiva[6].value == '') {
-      paginaAtiva[6].value = ' ';
-    }
-
-    const todosPreenchidos = paginaAtiva.every((input) => input.value !== '');
+    const todosPreenchidos = paginaAtiva.slice(0, paginaAtiva.length - 1).every((input) => input.value !== '');
     
     if (todosPreenchidos) {
       this.inputsFilled.emit(true);

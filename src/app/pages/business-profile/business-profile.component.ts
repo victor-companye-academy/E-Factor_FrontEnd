@@ -1,8 +1,9 @@
 import { Component, HostListener } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BusinessService } from 'src/app/core/service/business/business.service';
 import { Vacancy } from 'src/app/core/interfaces/vacancy';
 import { VacancyService } from 'src/app/core/service/vacancy/vacancy.service';
+import { AuthService } from 'src/app/core/service/auth/auth.service';
 
 @Component({
   selector: 'app-business-profile',
@@ -18,7 +19,8 @@ export class BusinessProfileComponent {
   protected isEditAboutModalOpen = false;
   protected modalIndex: number = -1;
 
-  constructor (private vacancyService: VacancyService, private route: ActivatedRoute, private businessService: BusinessService) { }
+  constructor (private router: Router, private vacancyService: VacancyService, private route: ActivatedRoute, 
+    private businessService: BusinessService, private authService: AuthService) { }
   
   protected id = this.route.snapshot.paramMap.get('id')?.toString() || '';
   protected businessInfo = this.businessService.listBusiness().find(professional => professional.id === this.id);
@@ -64,5 +66,12 @@ export class BusinessProfileComponent {
     console.log('Perfil Atualizado:', updatedProfile);
 
     this.closeEditModal();
+  }
+
+  logout() {
+    if (this.authService.isAuthenticated()) {
+      this.authService.removeToken();
+    }
+    this.router.navigate(['/login']);
   }
 }

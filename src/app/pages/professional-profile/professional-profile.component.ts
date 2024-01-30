@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Vacancy } from 'src/app/core/interfaces/vacancy';
 import { VacancyService } from 'src/app/core/service/vacancy/vacancy.service';
 import { ProfessionalService } from 'src/app/core/service/professional/professional.service';
+import { AuthService } from 'src/app/core/service/auth/auth.service';
 
 @Component({
   selector: 'app-professional-profile',
@@ -14,12 +15,20 @@ export class ProfessionalProfileComponent {
   protected isLogged: boolean = true;
   protected showCellphone = true;
 
-  constructor (private route: ActivatedRoute, private vacancyService: VacancyService, private professionalService: ProfessionalService) {}
+  constructor (private router: Router, private route: ActivatedRoute, private vacancyService: VacancyService, 
+    private professionalService: ProfessionalService, private authService: AuthService) {
+      // this.professionalInfo = this.professionalService.returnProfessionalFromLoggedUser().subscribe((professional) => {
+      //   this.professionalInfo = professional;
+      // });
+      // console.log(this.professionalInfo);
+    }
   
   
   protected id:string = this.route.snapshot.paramMap.get('id')?.toString() || '';
   protected professionalInfo = this.professionalService.listProfessionals().find(professional => professional.id === this.id);
+  // protected professionalInfo: any;
   protected cardVacancy: Array<Vacancy> = this.vacancyService.listInterestedVacancies(this.id);
+
   protected isEditInfoModalOpen = false;
   protected isEditAboutModalOpen = false;
   protected isEditExperienceModalOpen = false;
@@ -100,5 +109,12 @@ export class ProfessionalProfileComponent {
   getDate(date: string) {
     const formattedDate = new Date(date).toLocaleDateString('pt-BR', { year: 'numeric', month: 'long' });
     return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+  }
+
+  logout() {
+    if (this.authService.isAuthenticated()) {
+      this.authService.removeToken();
+    }
+    this.router.navigate(['/login']);
   }
 }

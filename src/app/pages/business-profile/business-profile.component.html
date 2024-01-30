@@ -109,6 +109,11 @@
                 </p>
             </div>
         </div>
+        <div class="d-flex justify-content-center align-items-center mb-5">
+            <button class="btn btn-danger rounded-3" *ngIf="isLogged" (click)="logout()">
+                SAIR
+            </button>
+        </div>
         <app-footer class="footer"></app-footer>
     </div>
 </main>

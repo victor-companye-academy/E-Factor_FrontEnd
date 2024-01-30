@@ -22,13 +22,13 @@ export class VacancysListComponent {
   onSort(event: SortEvent) {
     event.data?.sort((a: any, b: any) => {
       let result = 0;
-      if (new Date(a.creationDate) < new Date(b.creationDate)) {
+      if (new Date(a.createDate) < new Date(b.createDate)) {
         result = 1;
       }
-      if (new Date(a.creationDate) > new Date(b.creationDate)) {
+      if (new Date(a.createDate) > new Date(b.createDate)) {
         result = -1;
       }
-      if (new Date(a.creationDate) == new Date(b.creationDate)) {
+      if (new Date(a.createDate) == new Date(b.createDate)) {
         result = 0;
       }
       return event.order ? event.order * result : 0;

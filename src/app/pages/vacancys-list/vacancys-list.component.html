@@ -82,10 +82,10 @@
                     <tr>
                         <td class="px-0">
                             <span class="indicator py-3 me-4"></span>
-                            {{ vacanciesList.creationDate | date: "dd/MM/yyyy"}}
+                            {{ vacanciesList.createDate | date: "dd/MM/yyyy"}}
                         </td>
                         <td>{{ vacanciesList.businessInfo.name }}</td>
-                        <td>{{ vacanciesList.position.substring(0, 1).toUpperCase() + vacanciesList.position.substring(1) }}</td>  
+                        <td>{{ vacanciesList.serniority.substring(0, 1).toUpperCase() + vacanciesList.serniority.substring(1) }}</td>  
                         <td>{{ vacanciesList.description.substring(0, 50) + (vacanciesList.description.length > 50 ? '...' : '') }}</td>
                     </tr>
                 </ng-template>

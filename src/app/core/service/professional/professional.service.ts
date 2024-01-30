@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { ProfessionalInfo } from '../../interfaces/professional-info';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfessionalService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
   public listProfessionals(): Array<ProfessionalInfo> {
     let dataStorage: string | null;
@@ -636,5 +639,16 @@ export class ProfessionalService {
       professionalsArray[index] = updatedProfessional;
       sessionStorage.setItem('key', JSON.stringify(professionalsArray));
     }
+  }
+
+  public returnProfessionalFromLoggedUser() {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+  
+    return this.httpClient.get('http://localhost:8085/ms-profissional/v1/detalhe-profissional?id_usuario=' + this.authService.getId(), { headers })
+      .pipe(
+        map(response => response)
+      );
   }
 }

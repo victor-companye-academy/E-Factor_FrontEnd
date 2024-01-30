@@ -2,27 +2,42 @@ import { Component, HostListener } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { SidebarLinks } from 'src/app/core/interfaces/sidebar-links';
 import { AuthService } from 'src/app/core/service/auth/auth.service';
+import { UtilService } from 'src/app/core/service/util/util.service';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent {
 
   isAdm: boolean;
   role: string;
+  userName: string = '';
+  profilePicture: string = '';
 
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(private router: Router, private authService: AuthService, private utilService: UtilService) {
+
+    const url = window.location.href;
+    this.role = this.authService.getRole();
+    this.isAdm = this.role == 'ADMINISTRADOR';
+
+    if (this.router.url == '/' && this.isAdm){
+      this.router.navigate(['/admin']);
+    }
+
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         window.scrollTo(0, 0);
-
       }
     });
-    const url = window.location.href;
-    this.isAdm = url.includes("admin");
-    this.role = this.authService.getRole();
+
+    this.utilService.userName$.subscribe((name: string) => {
+      this.userName = name;
+    });
+    this.utilService.profilePicture$.subscribe((picture: string) => {
+      this.profilePicture = `data:image/png;base64,${picture}`
+    })
   }
 
   protected arrayLinksSidebar: Array<SidebarLinks> = [
@@ -84,5 +99,15 @@ export class SidebarComponent {
   @HostListener('window:resize', ['$event'])
   onWindowResize(event: Event) {
     this.isCollapsed = window.innerWidth < 991;
+  }
+
+  getLinkDestination() {
+    if (this.role == 'PROFISSIONAL') {
+      return '/professional-profile/' + this.authService.getId();
+    } else if (this.role.includes('GESTOR')) {
+      return '/business-profile/' + this.authService.getId();
+    } else {
+      return '/login';
+    }
   }
 }

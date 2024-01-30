@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PersonalDataInputs } from 'src/app/core/interfaces/personal-data-inputs';
 import { RegisterBusinessService } from 'src/app/core/service/register-business/register-business.service';
+import { RegisterProfessionalService } from 'src/app/core/service/register-professional/register-professional.service';
 
 @Component({
   selector: 'app-personal-data',
@@ -17,7 +18,7 @@ export class PersonalDataComponent {
   protected isInputPasswordValid = false;
   protected elementoComErro: Array<number> = [-1, -1, -1, -1, -1];
 
-  constructor(private router: Router, private route: ActivatedRoute, private registerBusinessService: RegisterBusinessService) {
+  constructor(private router: Router, private route: ActivatedRoute, private registerBusinessService: RegisterBusinessService, private registerProfessionalService: RegisterProfessionalService) {
     this.path = this.route.snapshot.url[0].path;
     
     if (this.path === 'criar-conta-profissional') {
@@ -175,6 +176,22 @@ export class PersonalDataComponent {
   clearErrorMessage(i: number) {
     this.arrayPersonalDataInputs[this.pageType][i].label = '';
     this.elementoComErro[i] = -1;
+  }
+
+  populateUserInformations() {
+    if (this.pageType == 0) {
+      this.populateProfessionalInformations();
+    } else {
+      this.populateManagerInformations();
+    }
+  }
+  
+  populateProfessionalInformations() {
+    this.registerProfessionalService.professionalInformations.login = this.input[0];
+    this.registerProfessionalService.professionalInformations.contato.email = this.input[0];
+    this.registerProfessionalService.professionalInformations.senha = this.input[2];
+
+    this.getLinkDestinationContinue();
   }
 
   populateManagerInformations() {

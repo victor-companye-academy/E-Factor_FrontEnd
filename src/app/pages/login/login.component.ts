@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/service/auth/auth.service';
 import { LoginService } from 'src/app/core/service/login/login.service';
 
@@ -9,16 +10,18 @@ import { LoginService } from 'src/app/core/service/login/login.service';
 })
 export class LoginComponent {
 
-  constructor(private loginService: LoginService, private authService: AuthService) {
-    if (this.authService.isAuthenticated()) {
-      this.authService.removeToken();
-    }
-  }
+  constructor(private router: Router, private loginService: LoginService, private authService: AuthService) {}
 
   showPassword: boolean = false;
   protected email: string = "";
   protected password: string = "";
   protected isLoading: boolean = false;
+
+  ngOnInit(): void {
+    if (this.authService.isAuthenticated()) {
+      this.authService.removeToken();
+    }
+  }
 
   showPasswordToggle(){
     this.showPassword = !this.showPassword;

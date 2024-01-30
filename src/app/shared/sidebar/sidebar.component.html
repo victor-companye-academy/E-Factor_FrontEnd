@@ -14,10 +14,20 @@
     </nav>
 
     <button type="button" id="login" class="justify-content-between align-items-center p-3 position-fixed border-0"
-        [routerLink]="['/login']" [ngClass]="{'login-adm': isAdm}">
-        <div class="p-0 mt-2 mb-1">
+        [routerLink]="[getLinkDestination()]" [ngClass]="{'login-adm': isAdm}">
+        <div class="p-0 mt-2 mb-1" *ngIf="role == 'undefined'">
             <img src="assets/icons/sidebar/entrar.svg" alt="Entrar" class="nav-icons me-2 mb-2 mt-1">
             <a class="fw-bold text-decoration-none" *ngIf="!isCollapsed">Entrar</a>
+        </div>
+        <div class="p-0 mt-2 mb-1" *ngIf="role == 'ADMINISTRADOR'">
+            <img src="assets/icons/sidebar/logout.svg" alt="Entrar" class="nav-icons me-2 mb-2 mt-1">
+            <a class="fw-bold text-decoration-none" *ngIf="!isCollapsed">Sair</a>
+        </div>
+        <div class="p-0 mt-2 mb-1 d-flex" *ngIf="role != 'ADMINISTRADOR' && role != 'undefined'">
+            <div class="bg-white rounded-circle px-1 mb-1">
+                <img [src]="profilePicture.length > 22 ? profilePicture : 'assets/icons/user.svg'" alt="Entrar" class="nav-icons mb-1" [ngClass]="{'profilePicture': profilePicture.length > 22}">
+            </div>
+            <a class="fw-bold text-decoration-none ms-2" *ngIf="!isCollapsed">{{ userName.substring(0, 10) + (userName.length > 10 ? '...' : '') }}</a>
         </div>
         <img src="assets/icons/sidebar/arrow.svg" alt="Entrar" class="nav-icons" *ngIf="!isCollapsed">
     </button>

@@ -7,7 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AuthService {
 
-  constructor(private cookieService: CookieService) { }
+  constructor(private cookieService: CookieService) {}
 
   private tokenKey = 'access_token';
 
@@ -19,11 +19,11 @@ export class AuthService {
     const expirationDate = new Date();
     expirationDate.setHours(expirationDate.getHours() + 2);
 
-    this.cookieService.set(this.tokenKey, token, expirationDate);
+    this.cookieService.set(this.tokenKey, token, expirationDate, '/');
   }
 
   removeToken(): void {
-    this.cookieService.delete(this.tokenKey);
+    this.cookieService.delete(this.tokenKey, '/');
   }
 
   isAuthenticated(): boolean {
@@ -49,6 +49,15 @@ export class AuthService {
       const token = this.getToken();
       const decodedToken: any = jwt_decode.decode(token!);
       return decodedToken['x-role'];
+    }
+    return "undefined";
+  }
+
+  getId() {
+    if (this.isAuthenticated()) {
+      const token = this.getToken();
+      const decodedToken: any = jwt_decode.decode(token!);
+      return decodedToken['sub'];
     }
     return "undefined";
   }
