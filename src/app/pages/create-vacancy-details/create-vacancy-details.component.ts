@@ -14,14 +14,15 @@ export class CreateVacancyDetailsComponent {
   protected skillsInput: string = '';
   protected suggestionsSkills!: string[];
 
-  protected skills: string[] | undefined;
-  protected serniority: string | undefined;
-  protected vacancyArea: string | undefined;
-  protected modality: string | undefined;
+  protected habilidades: string[] | undefined;
+  protected senioridade: string | undefined;
+  protected modalidade: string | undefined;
   protected daysOfWeek!: string[] | undefined;
-  protected contract: string | undefined;
+  protected tipoContrato: string | undefined;
   protected period: string | undefined;
   protected shift: string | undefined;
+  protected vacancyArea: string | undefined;
+
   protected expirationDate!: string;
 
   protected validation: any;
@@ -30,15 +31,16 @@ export class CreateVacancyDetailsComponent {
   protected mesageError: string | undefined;
 
   protected formDetails = new FormGroup({
-    skills: new FormControl('', [Validators.nullValidator, Validators.required]),
-    serniority: new FormControl('', [Validators.nullValidator, Validators.required]),
+    habilidades: new FormControl('', [Validators.nullValidator, Validators.required]),
+    senioridade: new FormControl('', [Validators.nullValidator, Validators.required]),
     vacancyArea: new FormControl('', [Validators.nullValidator, Validators.required]),
-    modality: new FormControl('', [Validators.nullValidator, Validators.required]),
+    modalidade: new FormControl('', [Validators.nullValidator, Validators.required]),
     daysOfWeek: new FormControl(''),
-    contract: new FormControl('', [Validators.nullValidator, Validators.required]),
+    tipoContrato: new FormControl('', [Validators.nullValidator, Validators.required]),
     period: new FormControl('', [Validators.nullValidator, Validators.required]),
     shift: new FormControl('', [Validators.nullValidator, Validators.required]),
     expirationDate: new FormControl('', [Validators.nullValidator, Validators.required]),
+
   })
 
   protected skillsList: Array<string> = [
@@ -73,20 +75,20 @@ export class CreateVacancyDetailsComponent {
 
   private inValidate(formName: string): void {
     switch (formName) {
-      case 'skills':
-        if (this.formDetails.controls['skills']?.status === 'INVALID') {
-          this.validation.skills = true;
+      case 'habilidades':
+        if (this.formDetails.controls['habilidades']?.status === 'INVALID') {
+          this.validation.habilidades = true;
           break;
         }
-        this.validation.skills = false;
+        this.validation.habilidades = false;
         break;
 
-      case 'serniority':
-        if (this.formDetails.controls['serniority']?.status === 'INVALID') {
-          this.validation.serniority = true;
+      case 'senioridade':
+        if (this.formDetails.controls['senioridade']?.status === 'INVALID') {
+          this.validation.senioridade = true;
           break;
         }
-        this.validation.serniority = false;
+        this.validation.senioridade = false;
         break;
 
       case 'vacancyArea':
@@ -97,28 +99,28 @@ export class CreateVacancyDetailsComponent {
         this.validation.vacancyArea = false;
         break;
 
-      case 'modality':
-        if (this.formDetails.controls['modality']?.status === 'INVALID') {
-          this.validation.modality = true;
+      case 'modalidade':
+        if (this.formDetails.controls['modalidade']?.status === 'INVALID') {
+          this.validation.modalidade = true;
           break;
         }
-        this.validation.modality = false;
+        this.validation.modalidade = false;
         break;
 
       case 'daysOfWeek':
-        if ((this.formDetails.controls['daysOfWeek']?.status === 'INVALID' || !this.daysOfWeek || this.daysOfWeek.length === 0) && this.modality !== 'remoto') {
+        if ((this.formDetails.controls['daysOfWeek']?.status === 'INVALID' || !this.daysOfWeek || this.daysOfWeek.length === 0) && this.modalidade !== 'remoto') {
           this.validation.daysOfWeek = true;
           break;
         }
         this.validation.daysOfWeek = false;
         break;
 
-      case 'contract':
-        if (this.formDetails.controls['contract']?.status === 'INVALID') {
-          this.validation.contract = true;
+      case 'tipoContrato':
+        if (this.formDetails.controls['tipoContrato']?.status === 'INVALID') {
+          this.validation.tipoContrato = true;
           break;
         }
-        this.validation.contract = false;
+        this.validation.tipoContrato = false;
         break;
 
       case 'period':
@@ -196,20 +198,20 @@ export class CreateVacancyDetailsComponent {
     }
   }
 
-  onAddSkill(skill: string): void {
+  onAddSkill(habilidades: string): void {
     this.skillsInput = ''
 
-    if (this.skills) {
-      let index = this.skills.indexOf(skill);
+    if (this.habilidades) {
+      let index = this.habilidades.indexOf(habilidades);
 
       if (index === -1) {
-        this.skills?.push(skill)
+        this.habilidades?.push(habilidades)
       }
     }
   }
 
-  onRemoveSkill(skill: string): void {
-    this.skills = this.skills?.filter(element => element !== skill)
+  onRemoveSkill(habilidades: string): void {
+    this.habilidades = this.habilidades?.filter(element => element !== habilidades)
   }
 
   onSuggestionItems(event: Event): void {
@@ -248,12 +250,12 @@ export class CreateVacancyDetailsComponent {
   }
 
   onSubmit() {
-    this.formDetails.get('skills')?.setValue(this.skills as any);
-    this.formDetails.get('serniority')?.setValue(this.serniority as any);
+    this.formDetails.get('habilidades')?.setValue(this.habilidades as any);
+    this.formDetails.get('senioridade')?.setValue(this.senioridade as any);
     this.formDetails.get('vacancyArea')?.setValue(this.vacancyArea as any);
-    this.formDetails.get('modality')?.setValue(this.modality as any);
+    this.formDetails.get('modalidade')?.setValue(this.modalidade as any);
     this.formDetails.get('daysOfWeek')?.setValue(this.daysOfWeek as any);
-    this.formDetails.get('contract')?.setValue(this.contract as any);
+    this.formDetails.get('tipoContrato')?.setValue(this.tipoContrato as any);
     this.formDetails.get('period')?.setValue(this.period as any);
     this.formDetails.get('shift')?.setValue(this.shift as any);
     this.formDetails.get('expirationDate')?.setValue(this.expirationDate as any);
@@ -281,7 +283,19 @@ export class CreateVacancyDetailsComponent {
 
     if (this.formDetails.valid && vacancy && !isInvalid) {
 
-      this.vacancyService.insertDetails(this.skills as string[], this.serniority as string, this.vacancyArea as string, this.modality as string, this.daysOfWeek as string[], this.contract as string, this.period as string, this.shift as string, this.expirationDate as string)
+      let moreDetails = `
+      <span class="fw-semibold">Área da vaga: </span>${this.vacancyArea}<br> 
+      <span class="fw-semibold">Período: </span>${this.period}<br>
+      <span class="fw-semibold">Turno: </span>${this.shift}<br>
+      `;
+
+      if (this.daysOfWeek && this.daysOfWeek?.length > 0) {
+        moreDetails += `
+      <span class="fw-semibold">Dias da semana:</span>${this.daysOfWeek}<br>
+        `;
+      }
+
+      this.vacancyService.insertDetails(this.habilidades as string[], this.senioridade as string, this.modalidade as string, this.tipoContrato as string, moreDetails as string)
 
       this.router.navigateByUrl("/create-vacancy/create");
     }
@@ -290,18 +304,18 @@ export class CreateVacancyDetailsComponent {
   ngOnInit() {
     const vacancy = this.vacancyService.getVacancy()
 
-    if (vacancy.title === undefined || '' && vacancy.description === undefined || '') {
+    if (vacancy.tituloVaga === undefined || '' && vacancy.descricaoVaga === undefined || '') {
       this.router.navigateByUrl("/create-vacancy");
     } else {
       this.validation = {};
 
       this.daysOfWeek = [];
-      this.skills = [];
+      this.habilidades = [];
       this.vacancyArea = '';
-      this.modality = '';
-      this.contract = '';
+      this.modalidade = '';
+      this.tipoContrato = '';
       this.period = '';
-      this.serniority = '';
+      this.senioridade = '';
       this.shift = '';
 
     }

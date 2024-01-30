@@ -39,6 +39,8 @@ export class CreateVacancyCreateComponent {
     this.vacancy = this.vacancyService.getVacancy() as Vacancy;
     this.showInterest = false;
 
+    console.log(this.vacancy)
+
     if (this.vacancy.tituloVaga === undefined || '' && this.vacancy.descricaoVaga === undefined || '') {
       this.router.navigateByUrl("/create-vacancy");
 

@@ -153,15 +153,16 @@ export class VacanciesComponent {
   }
 
   private searchBySkill(list: Array<Vacancy>, search: string): Array<Vacancy> {
-    const newList = list
-      .filter(card => card.habilidades
-        .map(skill => skill.toLowerCase())
-        .includes(formatText(search.toLowerCase())));
+    const newList: Array<Vacancy> = list.filter(card => {
+      const lowerSearch = formatText(search.toLowerCase());
+      return card.habilidades.some(skill => formatText(skill.toLowerCase()).startsWith(lowerSearch));
+    });
+  
     return newList;
   }
 
   private searchByPosition(list: Array<Vacancy>, search: string): Array<Vacancy> {
-    const newList: Array<Vacancy> = list.filter(card => formatText(card.senioridade.toLowerCase()) === formatText(search.toLowerCase()))
+    const newList: Array<Vacancy> = list.filter(card => formatText(card.senioridade.toLowerCase()).includes(formatText(search.toLowerCase())))
     return newList
   }
 

@@ -2,7 +2,7 @@
     <div class="col-5 col-xl-3 profile me-4">
         <section class="profile mb-5 rounded-4 p-5 d-flex flex-column align-items-center overflow-hidden">
 
-            <img [src]="card.fotoPerfil || 'assets/imgs/default-profile.svg'" alt="foto de perfil"
+            <img [src]="card.fotoPerfil" (error)="onImageError()" alt=""
                 title="Logo da empresa" width="150px" height="150px"
                 class="cursor-pointer border-0 rounded-circle object-fit-cover" style="background-color: #f2f4f7;"
                 [routerLink]="['/business-profile', card.idEmpresa]">
@@ -24,16 +24,14 @@
                 </h2>
             </div>
 
-
-            <!-- <div *ngIf="card.businessInfo.cellphone" > -->
-            <div>
+            <div *ngIf="card.telefone">
                 <div>
                     <h4 class="fw-light fs-6 mt-4 mb-2">
                         Telefone
                     </h4>
 
                     <span class="fw-semibold fs-6">
-                        <!-- {{card.businessInfo.cellphone}} --> Telefone da empresa
+                        {{card.telefone}}
                     </span>
                 </div>
             </div>
@@ -43,7 +41,7 @@
                     E-mail
                 </h4>
                 <span class="fw-semibold fs-6">
-                    <!-- {{card.businessInfo.email}} --> Email da empresa
+                    {{card.email}}
                 </span>
             </div>
 
@@ -52,7 +50,7 @@
                     Endereço
                 </h4>
                 <span class="fw-semibold fs-6">
-                    <!-- {{card.businessInfo.city}} - {{card.businessInfo.state}} --> Localidade da empresa
+                    {{card.endereco.cidade}} - {{card.endereco.estado}}
                 </span>
             </div>
         </section>
@@ -66,50 +64,25 @@
 
     </div>
 
-    <div class="col about">
-        <div class="d-flex align-items-center mb-4">
-            <h2 class="fw-semibold fs-4 primary-color text-center">
-                Sobre a Vaga
-            </h2>
-            <!-- <span *ngIf="card.status" class="text-center status rounded-4 ms-4 px-3 text-capitalize">
+    <div class="col about d-flex flex-column justify-content-between">
+        <div>
+            <div class="d-flex align-items-center mb-4">
+                <h2 class="fw-semibold fs-4 primary-color text-center">
+                    Sobre a Vaga
+                </h2>
+                <!-- <span *ngIf="card.status" class="text-center status rounded-4 ms-4 px-3 text-capitalize">
                 {{card.status}}
             </span> -->
+            </div>
+
+            <section>
+                <p class="fw-light text-capitalize" [ngStyle]="{'height': card.telefone?'30.8rem':'26rem'}"
+                    [innerHTML]="card.descricaoVaga">
+                </p>
+            </section>
         </div>
 
-        <section>
-
-            <p class="fw-light text-capitalize" >
-                <!-- [ngStyle]="{'height': card.businessInfo.cellphone?'30.8rem':'26rem'}" -->
-
-                <span>
-                    <span class="fw-semibold">
-                        Área da vaga:
-                    </span>
-                    <!-- {{card.vacancyArea}} --> Area da vaga
-                </span>
-                <br>
-
-                <!-- <span><span class="fw-semibold">Modalidade:</span> {{card.modalidade}}</span>
-                <br *ngIf="card.daysOfWeek.length > 0">
-
-                <span *ngIf="card.daysOfWeek.length > 0"><span class="fw-semibold">Dias da semana:</span><span
-                        *ngFor="let day of card.daysOfWeek; let i = index"> {{day}}<span
-                            *ngIf="i !== card.daysOfWeek.length -1">,</span></span></span>
-                <br> -->
-
-                <!-- <span><span class="fw-semibold">Período:</span> {{card.period}}</span>
-                <br>
-
-                <span><span class="fw-semibold">Turno:</span> {{card.shift}}</span>
-                <br>
-
-                <br> -->
-
-                {{card.descricaoVaga}}
-            </p>
-        </section>
-
-        <div class="row">
+        <div class="row mb-5 pb-5">
             <section class="container col-6">
                 <h2 class="fw-semibold fs-4 primary-color text-start mt-4">
                     Dados da vaga
@@ -158,7 +131,7 @@
                                     Data da Criação
                                 </h4>
                                 <span class="fw-bold fs-6 text-capitalize">
-                                    {{card.horaInclusao}}
+                                    {{card.horaInclusao.split(' ')[0]}}
                                 </span>
                             </div>
                         </div>

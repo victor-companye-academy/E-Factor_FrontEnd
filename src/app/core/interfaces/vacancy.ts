@@ -1,25 +1,23 @@
+import { AddressCompany } from "./address-company";
 
 export interface Vacancy {
     idVaga: string,
-
     idEmpresa: string,
-    fotoPerfil: string;
+    
+    ativo:boolean;
+    endereco: AddressCompany,
+    email:string,
+    telefone:string,
+    fotoPerfil: string,
     fotoCapa:any,
     nomeEmpresa:string,
-    // businessInfo: BusinessInfo,
-    // vacancyArea: string,
-    tituloVaga: string;
-    // day: string;
-    ativo:boolean;
-    tipoContrato: string;
-    modalidade: string;
-    senioridade:string;
-    descricaoVaga: string;
-    habilidades: Array<string>;
-    // daysOfWeek:string[];
-    // period:string;
-    // shift:string;
-    horaInclusao:string;
+    tituloVaga: string,
+    tipoContrato: string,
+    modalidade: string,
+    senioridade:string,
+    descricaoVaga: string,
+    habilidades: Array<string>,
+    horaInclusao:string,
     showedInterest:string[]
 
 // ------------------------------------------------------------
@@ -29,7 +27,7 @@ export interface Vacancy {
     // businessId: string,
     // businessInfo: BusinessInfo,
     // vacancyArea: string,
-    // title: string;
+    // title: string,
     // day: string;
     // status:string;
     // contract: string;

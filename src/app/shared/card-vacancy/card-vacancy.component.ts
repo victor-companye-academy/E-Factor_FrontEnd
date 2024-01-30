@@ -55,6 +55,13 @@ export class CardVacancyComponent {
       return 'Sem diferença significativa';
     }
   }
+  
+  onImageError() {
+    // Se ocorrer um erro ao carregar a imagem, define o src para a imagem padrão
+    if (this.card) {
+      this.card.fotoPerfil = 'assets/imgs/default-profile.svg';
+    }
+  }
 
   ngOnInit() {
     this.differenceInDays = this.onDays()

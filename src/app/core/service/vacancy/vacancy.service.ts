@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Vacancy } from '../../interfaces/vacancy';
-import { BusinessService } from '../business/business.service';
-import { BusinessInfo } from '../../interfaces/business-info';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -23,7 +21,7 @@ export class VacancyService {
   }
 
   private vacanciesArray: Array<Vacancy> = []
-  //   {
+    // {
   //     id: '1',
   //     day: '11/12/2023',
   //     showedInterest: [],
@@ -53,13 +51,12 @@ export class VacancyService {
   //       "MySQL",
   //       "Java"
   //     ],
-  //     serniority: "junior",
+
   //     vacancyArea: "front-end",
-  //     modality: "hibrido",
-  //     daysOfWeek: ['Seg,Qua,Sex'],
-  //     contract: "pessoa juridica",
   //     period: "Integral",
   //     shift: "manha",
+  //     daysOfWeek: ['Seg,Qua,Sex'],
+  
   //     createDate: '14/11/2023',
   //     expirationDate: '20/12/2023'
   //   },
@@ -205,7 +202,7 @@ export class VacancyService {
         console.log(this.vacanciesArray)
 
       },
-      error: err => console.log(err)
+      error: err => console.log('Error em processar a requisição da listagem de vagas')
     })
 
     return this.vacanciesArray;

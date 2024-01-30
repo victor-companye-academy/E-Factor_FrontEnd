@@ -25,11 +25,11 @@
                         <div class="div-card rounded-3 w-100 p-4 row m-0">
                             <div class="col-6 mt-2 mb-4 div-form-1">
 
-                                <label for="skills">
+                                <label for="Skills">
 
                                     <figure class="d-flex align-items-center m-0">
                                         <img src="assets/icons/create-vacancy/list.svg" alt="Ícone de lista"
-                                            title="Skills">
+                                            title="Habilidades">
                                         <figcaption class="fw-light ms-2">
                                             Quais habilidades serão necessárias para este cargo?
                                         </figcaption>
@@ -39,9 +39,9 @@
 
                                     <div class="skills mt-2 bg-white rounded-3">
                                         <input [(ngModel)]="skillsInput" (keyup)="onSuggestionItems($event)"
-                                            name="skills" id="skills" type="text"
+                                            name="habilidades" id="habilidades" type="text"
                                             placeholder="Digite as habilidades aqui..." class="w-100 rounded-3 fw-light"
-                                            [ngClass]="{'invalid': validation['skills']}">
+                                            [ngClass]="{'invalid': validation['habilidades']}">
 
                                         <ul *ngIf="skillsInput" class="px-2 pb-1 mx-2 my-0 suggestions">
                                             <li class="bg-transparent p-0" *ngFor="let skill of suggestionsSkills">
@@ -57,13 +57,13 @@
                                             </li>
                                         </ul>
 
-                                        <ul *ngIf="skills && skills.length > 0"
+                                        <ul *ngIf="habilidades && habilidades.length > 0"
                                             class="mt-2 m-0 p-0 d-flex flex-wrap px-2 pb-2">
                                             <li class="m-1 fw-light rounded-4 d-flex bg-gray m-0 fadeIn"
-                                                *ngFor="let skill of skills">
-                                                {{skill}}
+                                                *ngFor="let habilidade of habilidades">
+                                                {{habilidade}}
 
-                                                <button type="button" (click)=" onRemoveSkill(skill)"
+                                                <button type="button" (click)=" onRemoveSkill(habilidade)"
                                                     class="h-100 ms-3 border-0 bg-transparent">
                                                     &times;
                                                 </button>
@@ -83,21 +83,21 @@
 
                                     <!--  -->
 
-                                    <div *ngIf="validation && validation['skills']" class="mt-1 ms-1">
+                                    <div *ngIf="validation && validation['habilidades']" class="mt-1 ms-1">
                                         <span class="message-invalid  fw-light">Campo obrigatório</span>
                                     </div>
 
                                 </label>
 
-                                <label for="serniority" class="mt-5 fw-light fs-6">
+                                <label for="seniority" class="mt-5 fw-light fs-6">
                                     Qual o nível de senioridade necessária?
 
                                     <div
                                         class="div-select position-relative m-0 p-0 d-flex w-100 justify-content-center">
 
                                         <div class="rounded-3 mt-2 w-100"
-                                            [ngClass]="{'invalid': validation['serniority']}">
-                                            <select id="serniority" [(ngModel)]="serniority" name="serniority"
+                                            [ngClass]="{'invalid': validation['senioridade']}">
+                                            <select id="seniority" [(ngModel)]="senioridade" name="senioridade"
                                                 class="m-0 rounded-3 px-3 py-1 border-0 w-100 fw-light">
                                                 <option selected disabled hidden>...</option>
                                                 <option value="estagiario">Estagiário</option>
@@ -112,7 +112,7 @@
                                             title="Selecione uma opção">
                                     </div>
 
-                                    <div *ngIf=" validation && validation['serniority']" class="mt-1 ms-1">
+                                    <div *ngIf=" validation && validation['senioridade']" class="mt-1 ms-1">
                                         <span class="message-invalid  fw-light">Campo obrigatório</span>
                                     </div>
                                 </label>
@@ -151,7 +151,7 @@
 
                                         <figure class="d-flex align-items-center m-0">
                                             <img src="assets/icons/create-vacancy/locale.svg" alt="Ícone de lista"
-                                                title="Skills">
+                                                title="modalidade">
                                             <figcaption class="fw-light ms-2">
                                                 Qual é a modalidade?
                                             </figcaption>
@@ -159,40 +159,40 @@
 
                                         <div class="d-flex flex-column justify-content-between pt-2 border-radius">
                                             <label for="remote" class="mb-2 d-flex align-items-center">
-                                                <input type="radio" id="remote" [(ngModel)]="modality" name="modality"
-                                                    [(ngModel)]="modality" value="remoto" class="me-2"
-                                                    [ngClass]="{'invalid': validation['modality']}" />
+                                                <input type="radio" id="remote" [(ngModel)]="modalidade" name="modalidade"
+                                                    [(ngModel)]="modalidade" value="remoto" class="me-2"
+                                                    [ngClass]="{'invalid': validation['modalidade']}" />
                                                 Remoto
                                             </label>
 
                                             <label for="Hybrid" class="mb-2 d-flex align-items-center">
-                                                <input type="radio" id="Hybrid" [(ngModel)]="modality" name="modality"
-                                                    [(ngModel)]="modality" value="híbrido" class="me-2"
-                                                    [ngClass]="{'invalid': validation['modality']}" />
+                                                <input type="radio" id="Hybrid" [(ngModel)]="modalidade" name="modalidade"
+                                                    [(ngModel)]="modalidade" value="híbrido" class="me-2"
+                                                    [ngClass]="{'invalid': validation['modalidade']}" />
                                                 Híbrido
                                             </label>
 
                                             <label for="Classroom" class="mb-2 d-flex align-items-center">
-                                                <input type="radio" id="Classroom" [(ngModel)]="modality"
-                                                    name="modality" [(ngModel)]="modality" value="presencial"
-                                                    class="me-2" [ngClass]="{'invalid': validation['modality']}" />
+                                                <input type="radio" id="Classroom" [(ngModel)]="modalidade"
+                                                    name="modalidade" [(ngModel)]="modalidade" value="presencial"
+                                                    class="me-2" [ngClass]="{'invalid': validation['modalidade']}" />
                                                 Presencial
                                             </label>
 
                                         </div>
 
-                                        <div *ngIf="validation && validation['modality']" class="mt-1 ms-1">
+                                        <div *ngIf="validation && validation['modalidade']" class="mt-1 ms-1">
                                             <span class="message-invalid  fw-light">Campo obrigatório</span>
                                         </div>
                                     </fieldset>
 
                                 </div>
 
-                                <fieldset *ngIf="modality !== 'remoto'" [disabled]="modality === 'remoto'" class="mt-5">
+                                <fieldset *ngIf="modalidade !== 'remoto'" [disabled]="modalidade === 'remoto'" class="mt-5">
 
                                     <figure class="d-flex align-items-center m-0">
                                         <img src="assets/icons/create-vacancy/date.svg" alt="Ícone de lista"
-                                            title="Skills">
+                                            title="data">
                                         <figcaption class="fw-light ms-2">
                                             Quais os dias da semana?
                                         </figcaption>
@@ -273,34 +273,34 @@
                                     </legend>
 
                                     <label for="estagio" class="mb-2 d-flex align-items-center">
-                                        <input type="radio" [(ngModel)]="contract" id="estagio" name="contract"
+                                        <input type="radio" [(ngModel)]="tipoContrato" id="estagio" name="tipoContrato"
                                             value="estagio" class="me-2"
-                                            [ngClass]="{'invalid': validation['contract']}" />
+                                            [ngClass]="{'invalid': validation['tipoContrato']}" />
                                         Estágio
                                     </label>
 
                                     <label for="clt" class="mb-2 d-flex align-items-center">
-                                        <input type="radio" [(ngModel)]="contract" id="clt" name="contract"
+                                        <input type="radio" [(ngModel)]="tipoContrato" id="clt" name="tipoContrato"
                                             value="Remoto" class="me-2"
-                                            [ngClass]="{'invalid': validation['contract']}" />
+                                            [ngClass]="{'invalid': validation['tipoContrato']}" />
                                         CLT
                                     </label>
 
                                     <label for="pessoaJuridica" class="mb-2 d-flex align-items-center">
-                                        <input type="radio" [(ngModel)]="contract" id="pessoaJuridica" name="contract"
+                                        <input type="radio" [(ngModel)]="tipoContrato" id="pessoaJuridica" name="tipoContrato"
                                             value="pessoa juridica" class="me-2"
-                                            [ngClass]="{'invalid': validation['contract']}" />
+                                            [ngClass]="{'invalid': validation['tipoContrato']}" />
                                         Pessoa Jurídica
                                     </label>
 
                                     <label for="freelancer" class="mb-2 d-flex align-items-center">
-                                        <input type="radio" [(ngModel)]="contract" id="freelancer" name="contract"
+                                        <input type="radio" [(ngModel)]="tipoContrato" id="freelancer" name="tipoContrato"
                                             value="freelancer" class="me-2"
-                                            [ngClass]="{'invalid': validation['contract']}" />
+                                            [ngClass]="{'invalid': validation['tipoContrato']}" />
                                         Freelancer
                                     </label>
 
-                                    <div *ngIf="validation && validation['contract']" class="mt-1 ms-1">
+                                    <div *ngIf="validation && validation['tipoContrato']" class="mt-1 ms-1">
                                         <span class="message-invalid  fw-light">Campo obrigatório</span>
                                     </div>
 
@@ -317,7 +317,7 @@
                                         <div class="me-3">
                                             <label for="meioPeriodo" class="mb-2 d-flex align-items-center">
                                                 <input type="radio" [(ngModel)]="period" id="meioPeriodo" name="period"
-                                                    value="Remoto" class="me-2"
+                                                    value="meio período" class="me-2"
                                                     [ngClass]="{'invalid': validation['period']}" />
                                                 Meio período
                                             </label>
