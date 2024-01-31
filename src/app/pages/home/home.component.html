@@ -45,7 +45,7 @@
             </section>
 
             <section class="w-100 py-1">
-                <div *ngIf="cardVacancy[1]" class="div-vacancy row justify-content-center">
+                <div *ngIf="cardVacancy && cardVacancy.length >= 2 && cardVacancy[1]" class="div-vacancy row justify-content-center">
 
                     <card-vacancy [short]="true" [card]="cardVacancy[1]" class="mt-4 col-lg-6 col-xl-6 col-xxl-4" [routerLink]="['/search-vacancies']"></card-vacancy>
                     <card-vacancy [short]="true" [card]="cardVacancy[0]" class="mt-4 col-lg-6 col-xl-6 col-xxl-4" [routerLink]="['/search-vacancies']"></card-vacancy>

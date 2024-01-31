@@ -19,13 +19,25 @@ export class HomeComponent implements OnInit {
 
   protected testimonials: Array<CardDetails> = this.cardDetailsService.listTestimonials();
 
-  protected cardVacancy: Array<Vacancy> = this.vacancyService.listVacancies();
+  protected cardVacancy!: Array<Vacancy>;
 
   protected cardProfessional: Array<ProfessionalInfo> = this.professionalService.listProfessionals();
 
   public responsiveOptions: any[] | undefined;
 
-  ngOnInit() {
+  protected async initializeVacanciesList(): Promise<void> {
+    try {
+      this.cardVacancy = await this.vacancyService.listVacancies();
+    } catch (error) {
+      console.error('Erro ao inicializar a lista de vagas:', error);
+    }
+  }
+
+
+  async ngOnInit() {
+
+    await this.initializeVacanciesList();
+
     this.responsiveOptions = [
       {
         breakpoint: '1199px',

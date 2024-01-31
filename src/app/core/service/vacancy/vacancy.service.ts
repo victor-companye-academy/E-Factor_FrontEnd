@@ -21,7 +21,9 @@ export class VacancyService {
   }
 
   private vacanciesArray: Array<Vacancy> = []
-    // {
+  
+
+  // {
   //     id: '1',
   //     day: '11/12/2023',
   //     showedInterest: [],
@@ -56,7 +58,7 @@ export class VacancyService {
   //     period: "Integral",
   //     shift: "manha",
   //     daysOfWeek: ['Seg,Qua,Sex'],
-  
+
   //     createDate: '14/11/2023',
   //     expirationDate: '20/12/2023'
   //   },
@@ -182,29 +184,26 @@ export class VacancyService {
   //   }
   // ];
 
-  public listVacancies(): Array<Vacancy> {
+  public async listVacancies(): Promise<Array<Vacancy>> {
     let dataStorage: string | null;
-
+  
     dataStorage = sessionStorage.getItem(this.keyVacanciesStorage);
-
+  
     if (dataStorage && JSON.parse(dataStorage).length > 0) {
       console.log("Usando sessionStorage");
-
       return JSON.parse(dataStorage);
     }
-
-    this.getVacancies().subscribe({
-      next: res => {
-        this.vacanciesArray = [...res]
-
-        sessionStorage.setItem(this.keyVacanciesStorage, JSON.stringify(this.vacanciesArray));
-        console.log("Usando requisição para API");
-        console.log(this.vacanciesArray)
-
-      },
-      error: err => console.log('Error em processar a requisição da listagem de vagas')
-    })
-
+  
+    try {
+      const res = await this.getVacancies().toPromise();
+      this.vacanciesArray = [...res];
+      sessionStorage.setItem(this.keyVacanciesStorage, JSON.stringify(this.vacanciesArray));
+      console.log("Usando requisição para API");
+      console.log(this.vacanciesArray);
+    } catch (error) {
+      console.log('Erro ao processar a requisição da listagem de vagas', error);
+    }
+  
     return this.vacanciesArray;
   }
 
@@ -236,28 +235,44 @@ export class VacancyService {
       );
   }
 
-  public updateVacancy(updatedVacancy: any) {
-    const vacanciesArray: Array<Vacancy> = this.listVacancies();
-    const index = vacanciesArray.findIndex(vacancy => vacancy.idVaga === vacancy.idVaga);
-
-    if (index !== -1) {
-      vacanciesArray[index] = updatedVacancy;
-      sessionStorage.setItem('vacancies', JSON.stringify(vacanciesArray));
+  public async updateVacancy(updatedVacancy: any) {
+    try {
+      const vacanciesArray: Array<Vacancy> = await this.listVacancies();
+      const index = vacanciesArray.findIndex(vacancy => vacancy.idVaga === updatedVacancy.idVaga);
+  
+      if (index !== -1) {
+        vacanciesArray[index] = updatedVacancy;
+        sessionStorage.setItem('vacancies', JSON.stringify(vacanciesArray));
+      }
+    } catch (error) {
+      console.error('Erro ao atualizar vaga:', error);
     }
   }
 
-  public addNewVacancy(newVacancy: any) {
-    const vacanciesArray: Array<Vacancy> = this.listVacancies();
-    vacanciesArray.push(newVacancy);
-    sessionStorage.setItem(this.keyVacanciesStorage, JSON.stringify(vacanciesArray));
+  public async addNewVacancy(newVacancy: any) {
+    try {
+      const vacanciesArray: Array<Vacancy> = await this.listVacancies();
+      vacanciesArray.push(newVacancy);
+      sessionStorage.setItem(this.keyVacanciesStorage, JSON.stringify(vacanciesArray));
+    } catch (error) {
+      console.error('Erro ao adicionar nova vaga:', error);
+    }
   }
 
-  public deleteVacancy(id: string) {
-    const vacanciesArray: Array<Vacancy> = this.listVacancies();
-    const index = vacanciesArray.findIndex(vacancy => vacancy.idVaga === id);
-    vacanciesArray.splice(index, 1);
-    sessionStorage.setItem(this.keyVacanciesStorage, JSON.stringify(vacanciesArray));
+  public async deleteVacancy(id: string) {
+    try {
+      const vacanciesArray: Array<Vacancy> = await this.listVacancies();
+      const index = vacanciesArray.findIndex(vacancy => vacancy.idVaga === id);
+  
+      if (index !== -1) {
+        vacanciesArray.splice(index, 1);
+        sessionStorage.setItem(this.keyVacanciesStorage, JSON.stringify(vacanciesArray));
+      }
+    } catch (error) {
+      console.error('Erro ao excluir vaga:', error);
+    }
   }
+  
 
   public insertVacancy(vacancy: Vacancy): number {
     vacancy.idVaga = (this.vacanciesArray.length + 1).toString()
@@ -271,11 +286,19 @@ export class VacancyService {
   }
 
   public listInterestedVacancies(id: string): Array<Vacancy> {
-    // return this.listVacancies().filter(e => e.showedInterest.includes(id));
-    return this.listCompanyVacancies().filter( e=> e.idVaga.includes(id))
+    return this.listCompanyVacancies().filter(e => e.idVaga.includes(id))
   }
 
-  public listVacanciesByBusiness(id: string): Array<Vacancy> {
-    return this.listVacancies().filter(e => e.idEmpresa === id);
+  public async listVacanciesByBusiness(id: string): Promise<Array<Vacancy>> {
+    try {
+      const allVacancies: Array<Vacancy> = await this.listVacancies();
+      const vacanciesByBusiness: Array<Vacancy> = allVacancies.filter(vacancy => vacancy.idEmpresa === id);
+      return vacanciesByBusiness;
+    } catch (error) {
+      console.error('Erro ao listar vagas por empresa:', error);
+      return [];
+    }
   }
+  
+
 }

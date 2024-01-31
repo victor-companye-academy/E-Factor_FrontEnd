@@ -32,7 +32,7 @@ export class DashboardAdmComponent {
   protected oneWeekAgo = new Date();
   protected totalProfessionals: number = this.professionalService.listProfessionals().length;
   protected totalBusiness: number = this.businessService.listBusiness().length;
-  protected totalVacancies: number = this.vacancyService.listVacancies().length;
+  protected totalVacancies!: number;
   protected totalSolicitations: number = this.solicitationService.listCoinSolicitations().length;
 
   protected recentProfessionals: number;
@@ -62,5 +62,18 @@ export class DashboardAdmComponent {
   getBusinessNameBySolicitationId(id: string): string {
     const business = this.businessService.listBusiness().find(business => business.id === id);
     return business?.name || '';
+  }
+
+  async updateTotalVacancies() {
+    try {
+      const vacanciesList = await this.vacancyService.listVacancies();
+      this.totalVacancies = vacanciesList.length;
+    } catch (error) {
+      console.error('Erro ao obter o total de vagas:', error);
+    }
+  }
+
+  async ngOnInit(){
+    await this.updateTotalVacancies();
   }
 }

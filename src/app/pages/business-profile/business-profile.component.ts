@@ -18,11 +18,11 @@ export class BusinessProfileComponent {
   protected isEditAboutModalOpen = false;
   protected modalIndex: number = -1;
 
-  constructor (private vacancyService: VacancyService, private route: ActivatedRoute, private businessService: BusinessService) { }
-  
+  constructor(private vacancyService: VacancyService, private route: ActivatedRoute, private businessService: BusinessService) { }
+
   protected id = this.route.snapshot.paramMap.get('id')?.toString() || '';
   protected businessInfo = this.businessService.listBusiness().find(professional => professional.id === this.id);
-  protected cardVacancy: Array<Vacancy> = this.vacancyService.listVacanciesByBusiness(this.id);
+  protected cardVacancy!: Array<Vacancy>;
 
   @HostListener('window:resize', ['$event'])
   onWindowResize(event: Event) {
@@ -48,7 +48,7 @@ export class BusinessProfileComponent {
   }
 
   saveProfileChanges(updatedProfile: any) {
-    if (this.businessInfo){
+    if (this.businessInfo) {
       switch (this.modalIndex) {
         case 0:
           this.businessInfo = updatedProfile;
@@ -64,5 +64,17 @@ export class BusinessProfileComponent {
     console.log('Perfil Atualizado:', updatedProfile);
 
     this.closeEditModal();
+  }
+
+  async initializeCardVacancy() {
+    try {
+      this.cardVacancy = await this.vacancyService.listVacanciesByBusiness(this.id);
+    } catch (error) {
+      console.error('Erro ao inicializar a lista de vagas por empresa:', error);
+    }
+  }
+
+  async ngOnInit() {
+    await this.initializeCardVacancy();
   }
 }

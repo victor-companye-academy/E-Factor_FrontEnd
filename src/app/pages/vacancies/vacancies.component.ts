@@ -19,11 +19,11 @@ export class VacanciesComponent {
   protected visible: boolean = false;
   protected card?: Vacancy;
 
-  protected vacancy: Array<Vacancy> = this.vacancyService.listVacancies()
+  protected vacancy!: Array<Vacancy>;
   protected vacancySearch: Array<Vacancy> = this.vacancy;
 
   protected first: number = 0;
-  protected totalRecords: number = this.vacancySearch.length || 0
+  protected totalRecords: number = (this.vacancySearch && this.vacancySearch.length) || 0;
   private searchObj: Search | undefined;
 
   protected setSearch(event: Search) {
@@ -56,7 +56,11 @@ export class VacanciesComponent {
       else {
         this.vacancySearch = this.pagination(this.vacancy);
 
-        this.totalRecords = this.vacancy.length;
+        if (this.vacancy) {
+          this.totalRecords = this.vacancy.length;
+        } else {
+          this.totalRecords = 0;
+        }
 
         return this.vacancySearch;
       }
@@ -157,7 +161,7 @@ export class VacanciesComponent {
       const lowerSearch = formatText(search.toLowerCase());
       return card.habilidades.some(skill => formatText(skill.toLowerCase()).startsWith(lowerSearch));
     });
-  
+
     return newList;
   }
 
@@ -167,7 +171,7 @@ export class VacanciesComponent {
   }
 
   private pagination(list: Array<Vacancy>): Array<Vacancy> {
-    const newList = list.slice(this.first, (this.rows + this.first))
+    const newList = list ? list.slice(this.first, (this.rows + this.first)) : [];
     return newList;
   }
 
@@ -182,6 +186,19 @@ export class VacanciesComponent {
   protected showDialog(card: Vacancy) {
     this.card = card
     this.visible = true;
+  }
+
+  protected async initializeVacanciesList(): Promise<void> {
+    try {
+      this.vacancy = await this.vacancyService.listVacancies();
+      this.vacancySearch = await this.vacancyService.listVacancies();
+    } catch (error) {
+      console.error('Erro ao inicializar a lista de vagas:', error);
+    }
+  }
+
+  async ngOnInit() {
+    await this.initializeVacanciesList();
   }
 
 }

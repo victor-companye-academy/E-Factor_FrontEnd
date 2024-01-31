@@ -12,7 +12,7 @@ export class VacancysListComponent {
 
   constructor (private vacancyService: VacancyService) { }
 
-  protected vacanciesList: Array<Vacancy> = this.vacancyService.listVacancies();
+  protected vacanciesList!: Array<Vacancy>;
   protected filterSelected: string = '';
   protected solicitationError: boolean = false;
 
@@ -35,13 +35,36 @@ export class VacancysListComponent {
     });
   }
 
-  filterVacancies(){
-    this.vacanciesList = this.vacancyService.listVacancies();
-    if(this.nameSearch.length > 0){
-      this.vacanciesList = this.vacanciesList.filter(vacancy => vacancy.nomeEmpresa.toLowerCase().includes(this.nameSearch.toLowerCase()));
+  async filterVacancies() {
+    try {
+      this.vacanciesList = await this.vacancyService.listVacancies();
+  
+      if (this.nameSearch.length > 0) {
+        this.vacanciesList = this.vacanciesList.filter(vacancy =>
+          vacancy.nomeEmpresa.toLowerCase().includes(this.nameSearch.toLowerCase())
+        );
+      }
+  
+      if (this.positionSearch.length > 0) {
+        this.vacanciesList = this.vacanciesList.filter(vacancy =>
+          vacancy.senioridade.toLowerCase().includes(this.positionSearch.toLowerCase())
+        );
+      }
+    } catch (error) {
+      console.error('Erro ao filtrar vagas:', error);
     }
-    if(this.positionSearch.length > 0){
-      this.vacanciesList = this.vacanciesList.filter(vacancy => vacancy.senioridade.toLowerCase().includes(this.positionSearch.toLowerCase()));
+  }
+  
+
+  protected async initializeVacanciesList(): Promise<void> {
+    try {
+      this.vacanciesList = await this.vacancyService.listVacancies();
+    } catch (error) {
+      console.error('Erro ao inicializar a lista de vagas:', error);
     }
+  }
+
+  async ngOnInit(){
+    await this.initializeVacanciesList();
   }
 }
