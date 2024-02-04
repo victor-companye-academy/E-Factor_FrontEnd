@@ -7,11 +7,12 @@
         <div class="w-100 container div-main px-4">
             <app-header></app-header>
 
-            <section class="mb-0 w-100 py-4">
+            <section class="mb-0 w-100 py-4 fadeInLeft">
                 <div
-                    class="fadeInDown d-flex flex-column justify-content-center align-items-start background-students rounded-4 px-5 overflow-hidden">
-                    <img src="assets/icons/logo-site.svg" width="270px" alt="Logo e-factor" title="e-factor">
-                    <h1 class="fw-bold fs-6 mt-1">O seu profissional ou sua vaga na palma da sua mão de um jeito
+                    class="fadeIn d-flex flex-column justify-content-center align-items-start background-students rounded-4 px-5 overflow-hidden">
+                    <img src="assets/icons/logo-site.svg" width="270px" alt="Logo e-factor" title="e-factor"
+                        class="fadeIn">
+                    <h1 class="fw-bold fs-6 mt-1 fadeIn">O seu profissional ou sua vaga na palma da sua mão de um jeito
                         diferente.
                     </h1>
                 </div>
@@ -19,13 +20,14 @@
 
             <!--   -->
 
-            <section class="mt-0 w-100  py-1">
-                <div *ngIf="cardProfessional[1]" class="section-professional d-flex justify-content-center row">
-                    <div class="see-more pt-2 col-lg-12 col-xl-12 col-xxl-4">
-                        <h3 class="fw-bold fs-6 mt-4">
+            <section class="mt-0 w-100  py-1 fadeInDown">
+                <div *ngIf="cardProfessional && cardProfessional[1]"
+                    class="section-professional d-flex justify-content-center row fadeIn">
+                    <div class="see-more pt-2 col-lg-12 col-xl-12 col-xxl-4 fadeIn">
+                        <h3 class="fw-bold fs-6 mt-4 fadeIn">
                             Um mundo de profissionais ao seu alcance.
                         </h3>
-                        <p class="fw-light mt-3">
+                        <p class="fw-light mt-3 fadeIn">
                             Encontre profissionais capacitados com a categoria de sua preferência.
                         </p>
 
@@ -36,25 +38,28 @@
                     </div>
 
                     <card-professional *ngIf="cardProfessional[1]" [short]="true" [card]="cardProfessional[1]"
-                        class="mt-4 col-lg-6 col-xl-6 col-xxl-4"></card-professional>
+                        class="mt-4 col-lg-6 col-xl-6 col-xxl-4 fadeIn"></card-professional>
 
                     <card-professional *ngIf="cardProfessional[0]" [short]="true" [card]="cardProfessional[0]"
-                        class="mt-4 col-lg-6 col-xl-6 col-xxl-4"></card-professional>
+                        class="mt-4 col-lg-6 col-xl-6 col-xxl-4 fadeIn"></card-professional>
 
                 </div>
             </section>
 
-            <section class="w-100 py-1">
-                <div *ngIf="cardVacancy && cardVacancy.length >= 2 && cardVacancy[1]" class="div-vacancy row justify-content-center">
+            <section class="w-100 py-1 fadeInDown">
+                <div *ngIf="cardVacancy && cardVacancy.length >= 2 && cardVacancy[1]"
+                    class="div-vacancy row justify-content-center fadeIn">
 
-                    <card-vacancy [short]="true" [card]="cardVacancy[1]" class="mt-4 col-lg-6 col-xl-6 col-xxl-4" [routerLink]="['/search-vacancies']"></card-vacancy>
-                    <card-vacancy [short]="true" [card]="cardVacancy[0]" class="mt-4 col-lg-6 col-xl-6 col-xxl-4" [routerLink]="['/search-vacancies']"></card-vacancy>
+                    <card-vacancy [short]="true" [card]="cardVacancy[1]" class="mt-4 col-lg-6 col-xl-6 col-xxl-4"
+                        [routerLink]="['/search-vacancies']"></card-vacancy>
+                    <card-vacancy [short]="true" [card]="cardVacancy[0]" class="mt-4 col-lg-6 col-xl-6 col-xxl-4"
+                        [routerLink]="['/search-vacancies']"></card-vacancy>
 
-                    <div class="see-more d-flex flex-column align-items-end mt-4 col-lg-12 col-xl-12 col-xxl-4">
-                        <h3 class="fw-bold fs-6 text-end pt-2">
+                    <div class="see-more d-flex flex-column align-items-end mt-4 col-lg-12 col-xl-12 col-xxl-4 fadeIn">
+                        <h3 class="fw-bold fs-6 text-end pt-2 fadeIn">
                             Um mundo de vagas ao seu alcance.
                         </h3>
-                        <p class="fw-light mt-2 text-end">
+                        <p class="fw-light mt-2 text-end fadeIn">
                             Encontre vagas da forma onde você se enquada com a categoria de sua
                             preferência..
                         </p>

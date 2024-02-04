@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CardDetails } from 'src/app/core/interfaces/card-details';
+import { ProfessionalCard } from 'src/app/core/interfaces/professional-card';
 import { ProfessionalInfo } from 'src/app/core/interfaces/professional-info';
 import { Vacancy } from 'src/app/core/interfaces/vacancy';
 import { CardDetailsService } from 'src/app/core/service/cardDetails/card-details.service';
@@ -21,7 +22,7 @@ export class HomeComponent implements OnInit {
 
   protected cardVacancy!: Array<Vacancy>;
 
-  protected cardProfessional: Array<ProfessionalInfo> = this.professionalService.listProfessionals();
+  protected cardProfessional!: Array<ProfessionalCard>;
 
   public responsiveOptions: any[] | undefined;
 
@@ -33,10 +34,18 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  protected async initializeProfessionalsList(): Promise<void> {
+    try {
+      this.cardProfessional = await this.professionalService.listProfessionals();
+    } catch (error) {
+      console.error('Erro ao inicializar a lista de vagas:', error);
+    }
+  }
 
   async ngOnInit() {
 
     await this.initializeVacanciesList();
+    await this.initializeProfessionalsList();
 
     this.responsiveOptions = [
       {

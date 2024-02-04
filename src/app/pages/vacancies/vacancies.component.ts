@@ -17,7 +17,7 @@ export class VacanciesComponent {
   protected readonly rows: number = 10;
   protected toShow: boolean = true;
   protected visible: boolean = false;
-  protected card?: Vacancy;
+  protected vacancyCard?: Vacancy;
 
   protected vacancy!: Array<Vacancy>;
   protected vacancySearch: Array<Vacancy> = this.vacancy;
@@ -184,7 +184,7 @@ export class VacanciesComponent {
   }
 
   protected showDialog(card: Vacancy) {
-    this.card = card
+    this.vacancyCard = card
     this.visible = true;
   }
 

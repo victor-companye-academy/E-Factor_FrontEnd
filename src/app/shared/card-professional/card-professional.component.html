@@ -1,8 +1,8 @@
 <article *ngIf="card" class="card d-flex border-0 rounded-4 card container flex-column px-3 pt-3 overflow-hidden"
-    [ngClass]="{'flex-row': !isShort}" [routerLink]="['/professional-profile', card.id]">
+    [ngClass]="{'flex-row': !isShort}" [routerLink]="['/professional-profile', card.idUsuario]">
 
     <section class="content d-flex overflow-hidden">
-        <img src="{{ card.photo || 'assets/imgs/default-profile.svg' }}" alt="Logo usuario"
+        <img src='assets/imgs/default-profile.svg' alt="Logo usuario"
             class="rounded-circle object-fit-cover bg-white" [ngStyle]="{'width': isShort? '44.90px': '41.85px'}"
             height="40px">
 
@@ -10,18 +10,18 @@
             <div class="d-flex align-items-start flex-wrap" [ngClass]="{'flex-column': isShort}">
                 <div class="title-professional ms-2 overflow-hidden">
                     <h3 class="me-0 fw-light mb-0 text-start">
-                        {{ card.name }}
+                        {{ card.nomeUsuario }}
                     </h3>
                     <h2 class="m-0 fw-medium text-start text-nowrap">
-                        {{ card.seniority }}
+                        {{ card.senioridade }}
                     </h2>
                 </div>
             </div>
 
             <div class="d-flex flex-nowrap ms-2 align-items-center" *ngIf="!isShort">
                 <img src="assets/icons/map.svg" alt="Icone de mapa" width="24px" height="24px">
-                <span class="rounded-5 bg-white px-2 fw-medium ms-2">
-                    {{ card.city }}, {{ card.state }}
+                <span class="rounded-5 bg-white px-2 fw-medium ms-2" [title]="card.estado">
+                    {{ card.estado }}
                 </span>
             </div>
         </div>
@@ -33,30 +33,30 @@
         <div class="d-flex overflow-hidden">
             <div class="d-flex me-2" *ngIf="isShort">
                 <img src="assets/icons/map.svg" alt="Icone de mapa" class="me-2" width="24px" height="24px">
-                <span class="rounded-5 bg-white px-2 fw-medium" [title]="card.city">
-                    {{ card.city }}, {{ card.state }}
+                <span class="rounded-5 bg-white px-2 fw-medium" [title]="card.estado">
+                   {{ card.estado }}
                 </span>
             </div>
 
-            <div class="d-flex flex-nowrap align-items-start">
+            <div *ngIf="card.habilidades.length" class="d-flex flex-nowrap align-items-start">
                 <img src="assets/icons/list.svg" alt="Icone de lista" width="24px" height="24px" class="me-2">
 
                 <ul class="d-flex p-0" *ngIf="!isShort">
-                    <li *ngFor="let skill of card.skills; let i = index">
-                        <span class="me-2 ms-2 rounded-5 bg-white px-3 fw-medium" *ngIf="i<5">{{ card.skills[i]
+                    <li *ngFor="let skill of card.habilidades; let i = index">
+                        <span class="me-2 ms-2 rounded-5 bg-white px-3 fw-medium" *ngIf="i<5">{{ card.habilidades[i]
                             }}</span>
                     </li>
                 </ul>
 
-                <span class="me-2 rounded-5 bg-white px-3 fw-medium" *ngIf="isShort">{{ card.skills[0] }} </span>
+                <span class="me-2 rounded-5 bg-white px-3 fw-medium" *ngIf="isShort">{{ card.habilidades[0] }} </span>
 
                 <span class="rounded-5 bg-white px-2 fw-medium mt-1"
-                    *ngIf="(card.skills.length > 1 && ((card.skills.length - 5) > 0) && !isShort)">
-                    +{{ (card.skills.length -5)}}
+                    *ngIf="card.habilidades && (card.habilidades.length > 1 && ((card.habilidades.length - 5) > 0) && !isShort)">
+                    +{{ (card.habilidades.length -5)}}
                 </span>
 
-                <span class="rounded-5 bg-white px-2 fw-medium" *ngIf="((card.skills.length > 1 && ((card.skills.length - 1) > 0) && isShort))">
-                    +{{ card.skills.length -1}}
+                <span class="rounded-5 bg-white px-2 fw-medium" *ngIf="((card.habilidades.length > 1 && ((card.habilidades.length - 1) > 0) && isShort))">
+                    +{{ card.habilidades.length -1}}
                 </span>
             </div>
         </div>
@@ -67,7 +67,7 @@
                 <h3 class="ms-2 fw-light mb-0">Biografia</h3>
             </div>
 
-            <p class="mt-2 text-start text-start overflow-hidden fw-light">{{ card.about }}</p>
+            <p class="mt-2 text-start text-start overflow-hidden fw-light">{{ card.descricaoPerfil }}</p>
         </div>
 
     </section>

@@ -12,7 +12,7 @@ export class ProfessionalsListComponent {
 
   constructor (private professionalService: ProfessionalService) { }
 
-  protected usersList: Array<ProfessionalInfo> = this.professionalService.listProfessionals();
+  protected usersList: Array<ProfessionalInfo> = this.professionalService.listProfessionalsProvisorio();
   protected filterSelected: string = '';
   protected solicitationError: boolean = false;
 
@@ -36,7 +36,7 @@ export class ProfessionalsListComponent {
   }
 
   filterUsers(){
-    this.usersList = this.professionalService.listProfessionals();
+    this.usersList = this.professionalService.listProfessionalsProvisorio();
     if(this.nameSearch.length > 0){
       this.usersList = this.usersList.filter(user => user.name.toLowerCase().includes(this.nameSearch.toLowerCase()));
     }

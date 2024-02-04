@@ -54,7 +54,6 @@ export class VacancysListComponent {
       console.error('Erro ao filtrar vagas:', error);
     }
   }
-  
 
   protected async initializeVacanciesList(): Promise<void> {
     try {

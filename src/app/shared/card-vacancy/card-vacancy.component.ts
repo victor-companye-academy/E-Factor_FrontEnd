@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { Vacancy } from 'src/app/core/interfaces/vacancy';
-import { formattedDate } from 'src/app/core/utils/formattedDate';
 
 @Component({
   selector: 'card-vacancy',

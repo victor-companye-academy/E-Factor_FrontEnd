@@ -20,7 +20,7 @@ export class DashboardAdmComponent {
               { 
                 this.oneWeekAgo.setDate(this.oneWeekAgo.getDate() - 7); 
 
-                this.recentProfessionals = this.professionalService.listProfessionals()
+                this.recentProfessionals = this.professionalService.listProfessionalsProvisorio()
                   .filter(professional => new Date(professional.creationDate) > this.oneWeekAgo)
                   .length;
 
@@ -30,7 +30,7 @@ export class DashboardAdmComponent {
               }
               
   protected oneWeekAgo = new Date();
-  protected totalProfessionals: number = this.professionalService.listProfessionals().length;
+  protected totalProfessionals: number = this.professionalService.listProfessionalsProvisorio().length;
   protected totalBusiness: number = this.businessService.listBusiness().length;
   protected totalVacancies!: number;
   protected totalSolicitations: number = this.solicitationService.listCoinSolicitations().length;
@@ -43,7 +43,7 @@ export class DashboardAdmComponent {
   protected solicitationError: boolean = false;
 
   onSort(event: SortEvent) {
-    console.log(new Date(this.professionalService.listProfessionals()[25].creationDate) > this.oneWeekAgo)
+    console.log(new Date(this.professionalService.listProfessionalsProvisorio()[25].creationDate) > this.oneWeekAgo)
     event.data?.sort((a: any, b: any) => {
       let result = 0;
       if (new Date(a.creationDate) < new Date(b.creationDate)) {

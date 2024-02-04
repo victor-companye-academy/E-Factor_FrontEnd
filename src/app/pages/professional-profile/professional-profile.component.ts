@@ -18,7 +18,7 @@ export class ProfessionalProfileComponent {
   
   
   protected id:string = this.route.snapshot.paramMap.get('id')?.toString() || '';
-  protected professionalInfo = this.professionalService.listProfessionals().find(professional => professional.id === this.id);
+  protected professionalInfo = this.professionalService.listProfessionalsProvisorio().find(professional => professional.id === this.id);
   protected cardVacancy: Array<Vacancy> = this.vacancyService.listInterestedVacancies(this.id);
   protected isEditInfoModalOpen = false;
   protected isEditAboutModalOpen = false;
