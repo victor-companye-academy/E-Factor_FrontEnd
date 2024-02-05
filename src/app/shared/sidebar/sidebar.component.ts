@@ -36,7 +36,8 @@ export class SidebarComponent {
       this.userName = name;
     });
     this.utilService.profilePicture$.subscribe((picture: string) => {
-      this.profilePicture = `data:image/png;base64,${picture}`
+      // this.profilePicture = `data:image/png;base64,${picture}`
+      this.profilePicture = picture
     })
   }
 
@@ -103,11 +104,11 @@ export class SidebarComponent {
 
   getLinkDestination() {
     if (this.role == 'PROFISSIONAL') {
-      return '/professional-profile/' + this.authService.getId();
+      this.router.navigate(['/professional-profile', this.authService.getId()]);
     } else if (this.role.includes('GESTOR')) {
-      return '/business-profile/' + this.authService.getId();
+      this.router.navigate(['/business-profile', this.authService.getId()]);
     } else {
-      return '/login';
+      this.router.navigate(['/login']);
     }
   }
 }

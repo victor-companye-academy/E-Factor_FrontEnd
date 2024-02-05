@@ -14,6 +14,7 @@ export interface ProfessionalInfo {
     skills: Array<string>,
     languages: Array<{ language: string, level: string}>
     creationDate: string
+    // fotoPerfil: string;
     // nomeCompleto: string;
     // dataNascimento: string;
     // status: boolean;
@@ -32,7 +33,7 @@ export interface ProfessionalInfo {
     //   estado: string;
     //   cep: string;
     // }
-    // habilidades: Array<string>;
+    // habilidades: Array<any>;
     // jornadas: Array<any>;
-    // idiomas: Array<string>;
+    // idiomas: Array<any>;
   }

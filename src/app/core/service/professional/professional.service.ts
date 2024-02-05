@@ -651,4 +651,107 @@ export class ProfessionalService {
         map(response => response)
       );
   }
+
+  public returnProfessional(id: number) {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+  
+    return this.httpClient.get('http://localhost:8085/ms-profissional/v1/detalhe-profissional?id_usuario=' + id, { headers })
+      .pipe(
+        map(response => response)
+      );
+  }
+
+  public salvarDescricao(descricao: string){
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+    const body = {
+      descricao: descricao
+    };
+
+    return this.httpClient.post<any>('http://localhost:8085/ms-profissional/v1/salvar-descricao', body, { headers })
+      .pipe(
+        map(response => response)
+      );
+  }
+
+  public salvarJornada(jornadas: any){
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+    const jornadasMapeadas = jornadas.map((jornada: { nrIdJornada: any, dsTitulo: any, dsInstituicao: any,
+      tpJornada: any, dtInicio: any, dtFim: any, dsResumo: any }) => {
+
+     return { idJornada: jornada.nrIdJornada, cargo: jornada.dsTitulo, instituicao: jornada.dsInstituicao, 
+       tipoExperiencia: jornada.tpJornada, dataInicio: jornada.dtInicio, dataFim: jornada.dtFim, resumo: jornada.dsResumo };
+
+   });
+   const body = {
+     jornadas: jornadasMapeadas
+   }
+
+    return this.httpClient.post<any>('http://localhost:8085/ms-profissional/v1/cadastrar-experiencia', body, { headers })
+      .pipe(
+        map(response => response)
+      );
+  }
+
+  public removerJornada(id: Array<number>){
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+    const body = {
+      identificadorJornadas: id
+    };
+
+    return this.httpClient.delete<any>('http://localhost:8085/ms-profissional/v1/remover-experiencia', { headers, body })
+      .pipe(
+        map(response => response)
+      );
+  }
+
+  public atualizarJornada(jornadas: any){
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+    const jornadasMapeadas = jornadas.map((jornada: { nrIdJornada: any, dsTitulo: any, dsInstituicao: any,
+       tpJornada: any, dtInicio: any, dtFim: any, dsResumo: any }) => {
+
+      return { idJornada: jornada.nrIdJornada, cargo: jornada.dsTitulo, instituicao: jornada.dsInstituicao, 
+        tipoExperiencia: jornada.tpJornada, dataInicio: jornada.dtInicio, dataFim: jornada.dtFim, resumo: jornada.dsResumo };
+
+    });
+    const body = {
+      jornadas: jornadasMapeadas
+    }
+
+    console.log(body);
+
+    return this.httpClient.post<any>('http://localhost:8085/ms-profissional/v1/atualizar-experiencia', body, { headers })
+      .pipe(
+        map(response => response)
+      );
+  }
+
+  public salvarDadosPessoais(objPerfil: any){
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+    const objDadosPessoais = {
+      nome: objPerfil.nomeCompleto,
+      fotoPerfil: objPerfil.fotoPerfil,
+      email: objPerfil.contato.email,
+      telefone: objPerfil.contato.telefone,
+      estado: objPerfil.endereco.estado,
+      cidade: objPerfil.endereco.cidade
+    };
+    const body = objDadosPessoais;
+
+    return this.httpClient.post<any>('http://localhost:8085/ms-profissional/v1/salvar-dados-pessoais', body, { headers })
+      .pipe(
+        map(response => response)
+      )
+  }
 }

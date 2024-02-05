@@ -3,43 +3,43 @@
     [profile]="professionalInfo"
     [showCellphone]="showCellphone"
     (closeModal)="closeEditModal()"
-    (saveChanges)="saveProfileChanges($event)"
+    (saveChanges)="saveProfileChanges()"
     (showCellphoneField)="showCellphone = $event"
 ></app-edit-profile-infos-modal>
 <app-edit-profile-about-modal
     *ngIf="isEditAboutModalOpen"
     [profile]="professionalInfo"
     (closeModal)="closeEditModal()"
-    (saveChanges)="saveProfileChanges($event)"
+    (saveChanges)="saveProfileChanges()"
 ></app-edit-profile-about-modal>
 <app-edit-profile-experience-modal
     *ngIf="isEditExperienceModalOpen"
-    [profile]="professionalInfo"
+    [profile]="experiencias"
     (closeModal)="closeEditModal()"
-    (saveChanges)="saveProfileChanges($event)"
+    (saveChanges)="saveProfileChanges()"
 ></app-edit-profile-experience-modal>
 <app-edit-profile-education-modal
     *ngIf="isEditEducationModalOpen"
-    [profile]="professionalInfo"
+    [profile]="formacoes"
     (closeModal)="closeEditModal()"
-    (saveChanges)="saveProfileChanges($event)"
+    (saveChanges)="saveProfileChanges()"
 ></app-edit-profile-education-modal>
 <app-edit-profile-skills-modal
     *ngIf="isEditSkillsModalOpen"
     [profile]="professionalInfo"
     (closeModal)="closeEditModal()"
-    (saveChanges)="saveProfileChanges($event)"
+    (saveChanges)="saveProfileChanges()"
 ></app-edit-profile-skills-modal>
 <app-edit-profile-language-modal
     *ngIf="isEditLanguagesModalOpen"
     [profile]="professionalInfo"
     (closeModal)="closeEditModal()"
-    (saveChanges)="saveProfileChanges($event)"
+    (saveChanges)="saveProfileChanges()"
 ></app-edit-profile-language-modal>
 <main class="d-flex w-100 main">
     <app-sidebar class="sidebar"></app-sidebar>
     <div class="w-100 fadeIn overflow-hidden">
-        <div class="container py-5 px-3" *ngIf="professionalInfo">
+        <div class="container py-5 px-3" *ngIf="professionalInfo.senioridade != null && !isLoading">
             <!-- dados pessoais -->
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <h5 class="fw-bold">Dados Pessoais</h5>
@@ -47,22 +47,22 @@
             </div>
             <section>
                 <div class="d-flex align-items-center p-4 dados-pessoais">
-                    <img class="profile-photo mx-4" [src]="professionalInfo.photo || 'assets/imgs/default-profile.svg'" alt="Foto do perfil">
+                    <img class="profile-photo mx-4" [src]="professionalInfo.fotoPerfil ? professionalInfo.fotoPerfil : 'assets/imgs/default-profile.svg'" alt="Foto do perfil">
                     <div>
-                        <h5 class="name fw-bold">{{professionalInfo.name}}, {{professionalInfo.age}}</h5>
-                        <p class="info-text fw-light">{{professionalInfo.city}}, {{professionalInfo.state}}</p>
+                        <h5 class="name fw-bold">{{professionalInfo.nomeCompleto}}, {{idade}}</h5>
+                        <p class="info-text fw-light">{{professionalInfo.endereco.cidade}}, {{professionalInfo.endereco.estado}}</p>
                         <div class="info-div d-flex gap-3 mt-3">
                             <div>
                                 <p class="info-text mb-1 fw-light">E-mail</p>
-                                <p class="mb-1">{{professionalInfo.email}}</p>
+                                <p class="mb-1">{{professionalInfo.contato.email}}</p>
                             </div>
                             <div *ngIf="showCellphone">
                                 <p class="info-text mb-1 fw-light">Telefone</p>
-                                <p class="mb-1">{{professionalInfo.cellphone}}</p>
+                                <p class="mb-1">{{professionalInfo.contato.telefone}}</p>
                             </div>
                             <div>
                                 <p class="info-text mb-1 fw-light">Senioridade</p>
-                                <p class="mb-1">{{professionalInfo.seniority}}</p>
+                                <p class="mb-1">{{professionalInfo.senioridade}}</p>
                             </div>
                         </div>
                     </div>
@@ -70,14 +70,14 @@
             </section>
             <!-- sobre -->
             <div class="d-flex gap-3 about-div">
-                <div *ngIf="!isLogged ? (professionalInfo?.about?.trim()?.length ?? 0) > 0 : true" [ngClass]="isLogged && cardVacancy.length > 0 ? 'about w-75' : 'w-100'">
+                <div *ngIf="!isLogged ? (professionalInfo?.descricao?.trim()?.length ?? 0) > 0 : true" [ngClass]="isLogged && cardVacancy.length > 0 ? 'about w-75' : 'w-100'">
                     <div class="d-flex justify-content-between align-items-center mb-2 mt-4">
                         <h5 class="fw-bold">Sobre</h5>
                         <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(1)">Editar<img src="assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
                     </div>
                     <section>
                         <div class="p-4">
-                            <p class="my-1">{{professionalInfo.about.trim() == '' ? 'Nenhuma informação inserida' : professionalInfo.about}}</p>
+                            <p class="my-1">{{professionalInfo.descricao.trim() == '' ? 'Nenhuma informação inserida' : professionalInfo.descricao}}</p>
                         </div>
                     </section>
                 </div>
@@ -94,79 +94,87 @@
                 </div>
             </div>
             <!-- experiencias -->
-            <div *ngIf="!isLogged ? professionalInfo.experience.length > 0 : true">
+            <div *ngIf="!isLogged ? experiencias.length > 0 : true">
                 <div class="d-flex justify-content-between align-items-center mb-2 mt-4">
                     <h5 class="fw-bold">Experiências</h5>
                     <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(2)">Editar<img src="assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
                 </div>
                 <section class="py-4">
-                    <div *ngFor="let experience of professionalInfo?.experience; let i = index" class="px-4 py-2 d-flex gap-3 align-items-start">
+                    <div *ngFor="let experiencia of experiencias; let i = index" class="px-4 py-2 d-flex gap-3 align-items-start">
                         <div class="d-flex flex-column justify-content-center align-items-center">
                             <div class="side-icon d-flex ali justify-content-center">
                                 <img src="assets/icons/briefcase.svg" alt="Experiência">
                             </div>
                         </div>
                         <div>
-                            <p class="fw-bold mb-1">{{experience.institution}}</p>
-                            <p class="fw-light">{{getDate(experience.start)}} - {{experience.end == '' ? 'até o momento' : getDate(experience.end)}}</p>
-                            <p class="fw-bold">{{experience.role}}</p>
-                            <p>{{experience.description}}</p>
+                            <p class="fw-bold mb-1">{{experiencia.dsInstituicao}}</p>
+                            <p class="fw-light">{{getDate(experiencia.dtInicio)}} - {{experiencia.dtFim ? getDate(experiencia.dtFim) : 'até o momento'}}</p>
+                            <p class="fw-bold">{{experiencia.dsTitulo}}</p>
+                            <p>{{experiencia.dsResumo}}</p>
                         </div>
                     </div>
-                    <p class="my-1 px-4" *ngIf="professionalInfo.experience.length == 0">Nenhuma experiência inserida</p>
+                    <p class="my-1 px-4" *ngIf="experiencias.length == 0">Nenhuma experiência inserida</p>
                 </section>
             </div>
             <!-- formação -->
-            <div *ngIf="!isLogged ? professionalInfo.education.length > 0 : true">
+            <div *ngIf="!isLogged ? formacoes.length > 0 : true">
                 <div class="d-flex justify-content-between align-items-center mb-2 mt-4">
                     <h5 class="fw-bold">Formação</h5>
                     <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(3)">Editar<img src="assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
                 </div>
                 <section class="py-4">
-                    <div *ngFor="let education of professionalInfo.education; let i = index" class="px-4 py-2 d-flex gap-3 align-items-start">
+                    <div *ngFor="let formacao of formacoes; let i = index" class="px-4 py-2 d-flex gap-3 align-items-start">
                         <div class="d-flex flex-column justify-content-center align-items-center line-height">
                             <div class="side-icon d-flex ali justify-content-center">
                                 <img src="assets/icons/formation.svg" alt="Experiência">
                             </div>
                         </div>
                         <div>
-                            <p class="fw-bold mb-1">{{education.institution}}</p>
-                            <p class="fw-light">{{getDate(education.start)}} - {{education.end == '' ? 'até o momento' : getDate(education.end)}}</p>
-                            <p class="fw-bold">{{education.title}}</p>
-                            <p>{{education.description}}</p>
+                            <p class="fw-bold mb-1">{{formacao.dsInstituicao}}</p>
+                            <p class="fw-light">{{getDate(formacao.dtInicio)}} - {{formacao.dtFim ? getDate(formacao.dtFim) : 'até o momento'}}</p>
+                            <p class="fw-bold">{{formacao.dsTitulo}}</p>
+                            <p>{{formacao.dsResumo}}</p>
                         </div>
                     </div>
-                    <p class="my-1 px-4" *ngIf="professionalInfo.education.length == 0">Nenhuma formação inserida</p>
+                    <p class="my-1 px-4" *ngIf="formacoes.length == 0">Nenhuma formação inserida</p>
                 </section>
             </div>
             <!-- habilidades -->
-            <div *ngIf="!isLogged ? professionalInfo.skills.length > 0 : true">
+            <div *ngIf="!isLogged ? professionalInfo.habilidades.length > 0 : true">
                 <div class="d-flex justify-content-between align-items-center mb-2 mt-4">
                     <h5 class="fw-bold">Habilidades</h5>
                     <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(4)">Editar<img src="assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
                 </div>
                 <section class="d-flex gap-2 p-4 flex-wrap">
-                    <div *ngFor="let skill of professionalInfo.skills; let i = index">
-                        <p class="skills my-1 py-1 px-3">{{skill}}</p>
+                    <div *ngFor="let habilidade of professionalInfo.habilidades; let i = index">
+                        <p class="skills my-1 py-1 px-3">{{habilidade.habilidade}}</p>
                     </div>
-                    <p class="my-1 px-4" *ngIf="professionalInfo.skills.length == 0">Nenhuma habilidade inserida</p>
+                    <p class="my-1" *ngIf="professionalInfo.habilidades.length == 0">Nenhuma habilidade inserida</p>
                 </section>
             </div>
             <!-- idiomas -->
-            <div *ngIf="!isLogged ? professionalInfo.languages.length > 0 : true">
+            <div *ngIf="!isLogged ? professionalInfo.idiomas.length > 0 : true">
                 <div class="d-flex justify-content-between align-items-center mb-2 mt-4">
                     <h5 class="fw-bold">Idiomas</h5>
                     <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(5)">Editar<img src="assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
                 </div>
                 <section class="p-4">
-                    <div *ngFor="let language of professionalInfo.languages; let i = index" class="my-2">
-                        <p class="my-1 fw-bold">{{language.language}}</p>
-                        <p class="my-1 fw-light">{{language.level}}</p>
+                    <div *ngFor="let idioma of professionalInfo.idiomas; let i = index" class="my-2">
+                        <p class="my-1 fw-bold">{{idioma.idioma}}</p>
+                        <p class="my-1 fw-light">{{idioma.nivel}}</p>
                     </div>
+                    <p class="my-1" *ngIf="professionalInfo.idiomas.length == 0">Nenhuma habilidade inserida</p>
                 </section>
             </div>
         </div>
-        <div class="container py-5 px-3 error-page" *ngIf="!professionalInfo">
+        <div class="container py-5 px-3 error-page" *ngIf="isLoading">
+            <div class="h-100 d-flex flex-column p-5 align-items-center justify-content-center">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+        <div class="container py-5 px-3 error-page" *ngIf="profileNotFound || professionalInfo.senioridade == null">
             <div class="h-100 d-flex flex-column p-5 align-items-center justify-content-center">
                 <img src="assets/imgs/sem-resultado.svg" alt="Não encontramos nada..."
                     title="Não encontramos nada." class="notFound mb-4 fadeIn">
@@ -175,7 +183,8 @@
                 </h2>
     
                 <p class="text-center mt-3 fw-light fadeIn ">
-                    Não foram encontrados resultados para sua pesquisa. Por favor, confira se a url está correta e tente novamente.
+                    Não foram encontrados resultados para sua pesquisa. Por favor, confira se a url está correta e tente novamente.<br>
+                    Caso não esteja logado, considere efetuar o login para poder acessar as informações.
                 </p>
             </div>
         </div>
@@ -184,6 +193,7 @@
                 SAIR
             </button>
         </div>
+        <p-toast></p-toast>
         <app-footer class="footer"></app-footer>
     </div>
 </main>

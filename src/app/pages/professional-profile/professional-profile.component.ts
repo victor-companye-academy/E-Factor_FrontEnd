@@ -4,6 +4,8 @@ import { Vacancy } from 'src/app/core/interfaces/vacancy';
 import { VacancyService } from 'src/app/core/service/vacancy/vacancy.service';
 import { ProfessionalService } from 'src/app/core/service/professional/professional.service';
 import { AuthService } from 'src/app/core/service/auth/auth.service';
+import { UtilService } from 'src/app/core/service/util/util.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-professional-profile',
@@ -12,22 +14,46 @@ import { AuthService } from 'src/app/core/service/auth/auth.service';
 })
 export class ProfessionalProfileComponent {
 
-  protected isLogged: boolean = true;
-  protected showCellphone = true;
-
+  
   constructor (private router: Router, private route: ActivatedRoute, private vacancyService: VacancyService, 
-    private professionalService: ProfessionalService, private authService: AuthService) {
-      // this.professionalInfo = this.professionalService.returnProfessionalFromLoggedUser().subscribe((professional) => {
-      //   this.professionalInfo = professional;
-      // });
-      // console.log(this.professionalInfo);
-    }
+    private professionalService: ProfessionalService, private authService: AuthService, private messageService: MessageService) {
+
+    this.isLoading = true;
+    this.id = parseInt(this.route.snapshot.paramMap.get('id')!);
+
+    this.isLogged = this.authService.isAuthenticated() && this.id == this.authService.getId();
+    
+    this.professionalInfo = this.professionalService.returnProfessional(this.id).subscribe(
+      res => {
+        console.log(res);
+        this.professionalInfo = res;
+        this.idade = new Date().getFullYear() - this.professionalInfo.dataNascimento.split("/")[2];
+        
+        this.experiencias = this.professionalInfo.jornadas.filter((jornada: { tpJornada: string; }) => jornada.tpJornada === 'Trabalho');
+        this.formacoes = this.professionalInfo.jornadas.filter((jornada: { tpJornada: string; }) => jornada.tpJornada === 'FORMAÇÃO');
+        
+        this.isLoading = false;
+      },
+      error => {
+        console.log(error);
+        this.profileNotFound = true;
+        this.isLoading = false;
+      }
+    )
+  }
+      
+  protected profileNotFound: boolean = false;
+  protected isLogged: boolean = false;
+  protected showCellphone = false;
+  isLoading: boolean = false;
   
-  
-  protected id:string = this.route.snapshot.paramMap.get('id')?.toString() || '';
-  protected professionalInfo = this.professionalService.listProfessionals().find(professional => professional.id === this.id);
-  // protected professionalInfo: any;
-  protected cardVacancy: Array<Vacancy> = this.vacancyService.listInterestedVacancies(this.id);
+  protected id: number = 0;
+  protected professionalInfo: any;
+  protected cardVacancy: Array<Vacancy> = this.vacancyService.listInterestedVacancies(this.id.toString());
+
+  protected idade: number = 0;
+  protected experiencias: Array<any> = [];
+  protected formacoes: Array<any> = [];
 
   protected isEditInfoModalOpen = false;
   protected isEditAboutModalOpen = false;
@@ -73,36 +99,39 @@ export class ProfessionalProfileComponent {
     this.isEditEducationModalOpen = false;
     this.isEditSkillsModalOpen = false;
     this.isEditLanguagesModalOpen = false;
+    this.reloadRoute();
   }
 
-  saveProfileChanges(updatedProfile: any) {
+  saveProfileChanges() {
+    let successMessage = '';
     if (this.professionalInfo){
       switch (this.modalIndex) {
         case 0:
-          this.professionalInfo = updatedProfile;
+          successMessage = 'Informações atualizadas com sucesso';
           break;
         case 1:
-          this.professionalInfo.about = updatedProfile;
+          successMessage = 'Sobre atualizado com sucesso';
           break;
         case 2:
-          this.professionalInfo.experience = updatedProfile;
+          successMessage = 'Experiência atualizada com sucesso';
           break;
         case 3:
-          this.professionalInfo.education = updatedProfile;
+          successMessage = 'Formação atualizada com sucesso';
           break;
         case 4:
-          this.professionalInfo.skills = updatedProfile;
+          successMessage = 'Habilidades atualizadas com sucesso';
           break;
         case 5:
-          this.professionalInfo.languages = updatedProfile;
+          successMessage = 'Idiomas atualizados com sucesso';
           break;
       }
     }
-    this.modalIndex = -1;
+            
+    setTimeout(() => {
+      this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: successMessage });
+    }, 1000);
     
-    this.professionalService.updateProfessional(this.professionalInfo);
-    console.log('Perfil Atualizado:', updatedProfile);
-
+    this.modalIndex = -1;
     this.closeEditModal();
   }
 
@@ -116,5 +145,12 @@ export class ProfessionalProfileComponent {
       this.authService.removeToken();
     }
     this.router.navigate(['/login']);
+  }
+
+  reloadRoute() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
   }
 }

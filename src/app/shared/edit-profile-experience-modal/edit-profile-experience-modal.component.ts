@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { ProfessionalService } from 'src/app/core/service/professional/professional.service';
 
 @Component({
   selector: 'app-edit-profile-experience-modal',
@@ -12,80 +14,108 @@ export class EditProfileExperienceModalComponent {
 
   protected editedProfile: any;
   protected isValid: boolean = true;
+  protected isLoading: boolean = false;
+  protected experiencesToDelete: Array<number> = [];
+  protected experiencesToUpdate: Array<number> = [];
+
+  constructor(private professionalService: ProfessionalService, private messageService: MessageService) { }
 
   ngOnInit() {
     this.editedProfile = JSON.parse(JSON.stringify(this.profile));
-    const mainElement = document.querySelector('.main');
-    if (mainElement) {
-      mainElement.classList.add('blur-background');
+    
+    for (let i = 0; i < this.editedProfile.length; i++) {
+      this.experiencesToUpdate.push(this.editedProfile[i]);
     }
+
+    document.querySelector('.main')?.classList.add('blur-background');
   }
 
   onSubmit() {
-    this.closeModal.emit(true);
-    for (let i = 0; i < this.editedProfile.experience.length; i++) {
-      if (this.editedProfile.experience[i].current) {
-        this.editedProfile.experience[i].end = '';
-      }
-      if (this.editedProfile.experience[i].end == '') {
-        this.editedProfile.experience[i].current = true;
+    this.isLoading = true;
+    for (let i = 0; i < this.editedProfile.length; i++) {
+      if (this.editedProfile[i].dtFim == '') {
+        this.editedProfile[i].dtFim = null;
       }
     }
 
     this.organizeExperience();
 
-    this.saveChanges.emit(this.editedProfile.experience);
-    const mainElement = document.querySelector('.main');
-    if (mainElement) {
-      mainElement.classList.remove('blur-background');
-    }
+    let experiencesToAdd = this.editedProfile.filter((experience: { nrIdJornada: any; }) => !experience.nrIdJornada);
+
+    this.professionalService.salvarJornada(experiencesToAdd).subscribe(
+      res => {
+        this.professionalService.removerJornada(this.experiencesToDelete).subscribe(
+          res => {
+            this.professionalService.atualizarJornada(this.experiencesToUpdate).subscribe(
+              res => {                
+                this.isLoading = false;
+                this.saveChanges.emit();
+                document.querySelector('.main')?.classList.remove('blur-background');
+              },
+              error => {
+                this.isLoading = false;
+                this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao atualizar experiência' });
+              }
+            );
+          },
+          error => {
+            this.isLoading = false;
+            this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao remover experiência' });
+          }
+        );
+      },
+      error => {
+        this.isLoading = false;
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao criar experiência' });
+      }
+    );
   }
 
   cancelEdit() {
     this.closeModal.emit(true);
-    const mainElement = document.querySelector('.main');
-    if (mainElement) {
-      mainElement.classList.remove('blur-background');
-    }
+    document.querySelector('.main')?.classList.remove('blur-background');
   }
 
   addExperience() {
-     this.editedProfile.experience.unshift({ institution: '', start: '', end: '', current: false, role: '', description: '' });
-     this.editedProfile = JSON.parse(JSON.stringify(this.editedProfile));
-     this.isValid = false;
+    this.editedProfile.unshift({ dsInstituicao: '', dtInicio: '', dtFim: '', dsTitulo: '', dsResumo: '' , tpJornada: "Trabalho"});
+    this.editedProfile = JSON.parse(JSON.stringify(this.editedProfile));
+    this.isValid = false;
   }
 
   deleteExperience(i: number) {
-    this.editedProfile.experience.splice(i, 1);
+    this.experiencesToDelete.push(this.editedProfile[i].nrIdJornada);
+    this.editedProfile.splice(i, 1);
   }
 
   selectCurrent(i: number){
-    if (this.editedProfile.experience[i].current) {
-      this.editedProfile.experience[i].current = false;
+    if (this.editedProfile[i].dtFim != null) {
+      this.editedProfile[i].dtFim = null;
     } else {
-      this.editedProfile.experience[i].current = true;
-      this.editedProfile.experience[i].end = '';
+      this.editedProfile[i].dtFim = '';
     }
   }
 
   verifyExperience() {
-    for (let i = 0; i < this.editedProfile.experience.length; i++) {
-      const experience = this.editedProfile.experience[i];
-      const { institution, start, role, description, end, current } = experience;
+    for (let i = 0; i < this.editedProfile.length; i++) {
+      const experience = this.editedProfile[i];
+      const { dsInstituicao, dtInicio, dsTitulo, dsResumo, dtFim } = experience;
 
-      if (!institution || !start || !role || !description) {
+      if (!dsInstituicao || !dtInicio || !dsTitulo || !dsResumo) {
         return this.isValid = false;
       }
 
-      if (!current && (!end)) {
+      if (dtFim == '') {
         return this.isValid = false;
+      } else if (dtFim) {
+        if (new Date(dtInicio) > new Date(dtFim)) {
+          return this.isValid = false;
+        }
+        if (new Date(dtFim) > new Date()) {
+          return this.isValid = false;
+        }
       }
       
-      if (new Date(start) > new Date(end)) {
-        return this.isValid = false;
-      }
-
-      if (new Date(start) > new Date() || new Date(end) > new Date()) {
+      if (new Date(dtInicio) > new Date()) {
         return this.isValid = false;
       }
     }
@@ -94,20 +124,20 @@ export class EditProfileExperienceModalComponent {
   }
 
   organizeExperience() {
-    this.editedProfile.experience.sort((a: any, b: any) => {
-      if (a.current && !b.current) {
+    this.editedProfile.sort((a: any, b: any) => {
+      if (a.dtFim == null && !b.dtFim == null) {
         return -1;
-      } else if (!a.current && b.current) {
+      } else if (!a.dtFim == null && b.dtFim == null) {
         return 1;
       } else {
-        if (new Date(a.end) > new Date(b.end)) {
+        if (new Date(a.dtFim) > new Date(b.dtFim)) {
           return -1;
-        } else if (new Date(a.end) < new Date(b.end)) {
+        } else if (new Date(a.dtFim) < new Date(b.dtFim)) {
           return 1;
         } else {
-          if (new Date(a.start) > new Date(b.start)) {
+          if (new Date(a.dtInicio) > new Date(b.dtInicio)) {
             return -1;
-          } else if (new Date(a.start) < new Date(b.start)) {
+          } else if (new Date(a.dtInicio) < new Date(b.dtInicio)) {
             return 1;
           } else {
             return 0;
