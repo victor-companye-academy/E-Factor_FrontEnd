@@ -14,7 +14,7 @@ export class CreateVacancyDetailsComponent {
   protected skillsInput: string = '';
   protected suggestionsSkills!: string[];
 
-  protected habilidades: string[] | undefined;
+  protected habilidades!: string[];
   protected senioridade: string | undefined;
   protected modalidade: string | undefined;
   protected daysOfWeek!: string[] | undefined;
@@ -22,8 +22,6 @@ export class CreateVacancyDetailsComponent {
   protected period: string | undefined;
   protected shift: string | undefined;
   protected vacancyArea: string | undefined;
-
-  protected expirationDate!: string;
 
   protected validation: any;
   protected vacancyData: any;
@@ -39,8 +37,6 @@ export class CreateVacancyDetailsComponent {
     tipoContrato: new FormControl('', [Validators.nullValidator, Validators.required]),
     period: new FormControl('', [Validators.nullValidator, Validators.required]),
     shift: new FormControl('', [Validators.nullValidator, Validators.required]),
-    expirationDate: new FormControl('', [Validators.nullValidator, Validators.required]),
-
   })
 
   protected skillsList: Array<string> = [
@@ -139,62 +135,8 @@ export class CreateVacancyDetailsComponent {
         this.validation.shift = false;
         break;
 
-      case 'expirationDate':
-        if (this.formDetails.controls['expirationDate']?.status === 'INVALID' || this.dateInvalid()) {
-          this.validation.expirationDate = true;
-          break;
-        }
-        this.validation.expirationDate = false;
-        break;
-
       default:
         console.log('erro')
-    }
-  }
-
-  private dateInvalid(): boolean {
-    try {
-      this.mesageError = ''
-
-      const partesData = this.expirationDate.split('-');
-      const year = parseInt(partesData[0], 10);
-      const month = parseInt(partesData[1], 10);
-      const day = parseInt(partesData[2], 10);
-
-      if (year.toString().length !== 4) {
-        this.mesageError = 'Erro ao validar a data';
-        return true;
-      }
-
-      const expirationDate = new Date(year, month - 1, day);
-      const today = new Date();
-
-      expirationDate.setHours(0, 0, 0, 0);
-      today.setHours(0, 0, 0, 0);
-
-      const compare = (expirationDate.getTime() < today.getTime()) && (expirationDate.getTime() !== today.getTime());
-
-      if (compare) {
-        this.mesageError = 'A data inserida é anterior à data de hoje';
-        return true;
-      }
-      else {
-        this.mesageError = '';
-        if (
-          expirationDate.getFullYear() === year &&
-          expirationDate.getMonth() === month - 1 &&
-          expirationDate.getDate() === day
-        ) {
-          return false;
-        }
-        else {
-          this.mesageError = 'Formato de data inválido';
-          return true;
-        }
-      }
-    } catch (error) {
-      this.mesageError = 'Erro ao validar a data';
-      return true;
     }
   }
 
@@ -258,9 +200,8 @@ export class CreateVacancyDetailsComponent {
     this.formDetails.get('tipoContrato')?.setValue(this.tipoContrato as any);
     this.formDetails.get('period')?.setValue(this.period as any);
     this.formDetails.get('shift')?.setValue(this.shift as any);
-    this.formDetails.get('expirationDate')?.setValue(this.expirationDate as any);
 
-    const vacancy: any = this.vacancyService.getVacancy();
+    const vacancy: any = this.vacancyService.getCreateVacancy();
 
     let isInvalid: boolean = false;
 
@@ -302,13 +243,14 @@ export class CreateVacancyDetailsComponent {
   }
 
   ngOnInit() {
-    const vacancy = this.vacancyService.getVacancy()
-
-    if (vacancy.tituloVaga === undefined || '' && vacancy.descricaoVaga === undefined || '') {
+    const vacancy = this.vacancyService.getCreateVacancy();
+  
+    if (vacancy.titulo === undefined || '' && vacancy.descricao === undefined || '') {
+      console.log('voltar')
       this.router.navigateByUrl("/create-vacancy");
     } else {
       this.validation = {};
-
+  
       this.daysOfWeek = [];
       this.habilidades = [];
       this.vacancyArea = '';
@@ -317,7 +259,6 @@ export class CreateVacancyDetailsComponent {
       this.period = '';
       this.senioridade = '';
       this.shift = '';
-
     }
   }
 }

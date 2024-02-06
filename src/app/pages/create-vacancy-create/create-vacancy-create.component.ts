@@ -17,7 +17,7 @@ export class CreateVacancyCreateComponent {
   protected showInterest!: boolean;
 
   onConfirm() {
-    if (this.vacancyService.getVacancy().title) {
+    if (this.vacancyService.getCreateVacancy().title) {
       if (!this.vacancyService.getWasSendVacancy()) {
         this.vacancyService.createVacancy();
 
@@ -36,7 +36,7 @@ export class CreateVacancyCreateComponent {
 
 
   ngOnInit() {
-    this.vacancy = this.vacancyService.getVacancy() as Vacancy;
+    this.vacancy = this.vacancyService.getCreateVacancy() as Vacancy;
     this.showInterest = false;
 
     console.log(this.vacancy)

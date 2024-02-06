@@ -20,24 +20,21 @@ export class VacancyService {
 
   public async listVacancies(): Promise<Array<Vacancy>> {
     let dataStorage: string | null;
-  
+
     dataStorage = sessionStorage.getItem(this.keyVacanciesStorage);
-  
+
     if (dataStorage && JSON.parse(dataStorage).length > 0) {
       try {
-        console.log("Usando sessionStorage");
         return JSON.parse(dataStorage);
       } catch (error) {
         console.error("Erro ao analisar os dados armazenados:", error);
       }
     }
-  
+
     try {
       const res = await lastValueFrom(this.getVacancies());
       this.vacanciesArray = [...res as Vacancy[]];
       sessionStorage.setItem(this.keyVacanciesStorage, JSON.stringify(this.vacanciesArray));
-      console.log("Usando requisição para API");
-      console.log(this.vacanciesArray);
     } catch (error) {
       console.log('Erro ao processar a requisição da listagem de vagas', error);
     }
@@ -52,7 +49,6 @@ export class VacancyService {
 
     if (dataStorage) {
       try {
-        console.log("Usando sessionStorage");
         return JSON.parse(dataStorage);
       } catch (error) {
         console.error("Erro ao analisar os dados armazenados:", error);
@@ -62,8 +58,6 @@ export class VacancyService {
     const companyVacancies = this.filterCompany();
 
     sessionStorage.setItem(this.keyCompanyStorage, JSON.stringify(companyVacancies));
-    console.log("Usando requisição para API");
-
     return companyVacancies;
 
   }
@@ -84,10 +78,10 @@ export class VacancyService {
     try {
       const vacanciesArray: Array<Vacancy> = await this.listVacancies();
       const index = vacanciesArray.findIndex(vacancy => vacancy.idVaga === updatedVacancy.idVaga);
-  
+
       if (index !== -1) {
         vacanciesArray[index] = updatedVacancy;
-        sessionStorage.setItem('vacancies', JSON.stringify(vacanciesArray));
+        sessionStorage.setItem(this.keyVacanciesStorage, JSON.stringify(vacanciesArray));
       }
     } catch (error) {
       console.error('Erro ao atualizar vaga:', error);
@@ -108,7 +102,7 @@ export class VacancyService {
     try {
       const vacanciesArray: Array<Vacancy> = await this.listVacancies();
       const index = vacanciesArray.findIndex(vacancy => vacancy.idVaga === id);
-  
+
       if (index !== -1) {
         vacanciesArray.splice(index, 1);
         sessionStorage.setItem(this.keyVacanciesStorage, JSON.stringify(vacanciesArray));
@@ -117,7 +111,7 @@ export class VacancyService {
       console.error('Erro ao excluir vaga:', error);
     }
   }
-  
+
 
   public insertVacancy(vacancy: Vacancy): number {
     vacancy.idVaga = (this.vacanciesArray.length + 1).toString()
@@ -144,6 +138,6 @@ export class VacancyService {
       return [];
     }
   }
-  
+
 
 }

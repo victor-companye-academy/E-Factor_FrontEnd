@@ -3,6 +3,7 @@ import { Vacancy } from '../../interfaces/vacancy';
 import { VacancyService } from '../vacancy/vacancy.service';
 import { Router } from '@angular/router';
 import { formattedDate } from 'src/app/core/utils/formattedDate';
+import { NewVacancy } from '../../interfaces/new-vacancy';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +12,9 @@ export class CreateVacancyService {
 
   constructor(private vacancyService: VacancyService, private router: Router) {
   }
-
-  //Atributo temporário (seraá inserido pelo backend?)
-  private static id: number = 1;
   private static wasSendVacancy: boolean = false;
 
-  private vacancy: any | Vacancy = {};
+  private vacancy: any = {};
 
   public getWasSendVacancy(): boolean {
     return CreateVacancyService.wasSendVacancy;
@@ -54,7 +52,6 @@ export class CreateVacancyService {
 
   }
 
-
   public insertDescription(tituloVaga: string, descricaoVaga: string) {
     this.vacancy.tituloVaga = tituloVaga;
     this.vacancy.descricaoVaga = descricaoVaga;
@@ -66,33 +63,36 @@ export class CreateVacancyService {
     this.vacancy.senioridade = senioridade;
     this.vacancy.modalidade = modalidade;
     this.vacancy.tipoContrato = tipoContrato;
-    this.vacancy.showedInterest = [];
+    this.vacancy.mostrarInteresse = [];
     this.vacancy.descricaoVaga = moreDetails + this.vacancy.descricaoVaga;
     this.vacancy.horaInclusao = formattedDate(new Date());
+  }
+
+  public getCreateVacancy(): Vacancy | any {
+    if (this.vacancy) {
+
+      const newVacancy: NewVacancy = {
+        titulo: this.vacancy.tituloVaga,
+        descricao: this.vacancy.descricaoVaga,
+        modalidade: this.vacancy.modalidade,
+        tipoContrato: this.vacancy.tipoContrato,
+        senioridade: this.vacancy.senioridade,
+        habilidades: this.vacancy.habilidades
+      }
+      return newVacancy
+    }
   }
 
   public getVacancy(): Vacancy | any {
     if (this.vacancy) {
 
-      const newVacancy: Vacancy = {
-        idVaga: this.setId(),
-        idEmpresa: this.businessInfo.id,
-        tituloVaga: this.vacancy.tituloVaga,
-        ativo: true,
-        senioridade: this.vacancy.senioridade,
-        tipoContrato: this.vacancy.tipoContrato,
+      const newVacancy: any = {
+        titulo: this.vacancy.tituloVaga,
+        descricao: this.vacancy.descricaoVaga,
         modalidade: this.vacancy.modalidade,
-        descricaoVaga: this.vacancy.descricaoVaga,
-        habilidades: this.vacancy.habilidades,
-
-        showedInterest: [],
-        horaInclusao: this.vacancy.horaInclusao,
-        fotoPerfil: this.businessInfo.fotoPerfil,
-        fotoCapa: false,
-        nomeEmpresa: this.businessInfo.nomeFantasia,
-        endereco: this.businessInfo.endereco,
-        email: this.businessInfo.contato.email,
-        telefone: this.businessInfo.contato.telefone
+        tipoContrato: this.vacancy.tipoContrato,
+        senioridade: this.vacancy.senioridade,
+        habilidades: this.vacancy.habilidades
       }
       return newVacancy
     }
@@ -104,15 +104,7 @@ export class CreateVacancyService {
     this.businessInfo.coins -= 1;
 
     this.vacancyService.insertVacancy(this.vacancy)
-    // this.router.navigateByUrl('/create-vacancy')
 
     this.vacancy = {}
-  }
-
-  //método temporário (será inserido pelo backend?)
-  private setId(): string {
-    CreateVacancyService.id++;
-
-    return CreateVacancyService.id.toString()
   }
 }

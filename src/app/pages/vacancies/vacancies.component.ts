@@ -71,7 +71,7 @@ export class VacanciesComponent {
   }
 
   private isEmptylist(list: Array<Vacancy>): boolean {
-    return list.length ? true : false
+    return list && list.length ? true : false && list.length > 0
   }
 
   private applySearch(list: Array<Vacancy>, search: Search): Array<Vacancy> {
@@ -192,6 +192,8 @@ export class VacanciesComponent {
     try {
       this.vacancy = await this.vacancyService.listVacancies();
       this.vacancySearch = await this.vacancyService.listVacancies();
+
+      this.toShow = this.isEmptylist(this.vacancySearch)
     } catch (error) {
       console.error('Erro ao inicializar a lista de vagas:', error);
     }

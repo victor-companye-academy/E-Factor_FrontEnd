@@ -24,7 +24,6 @@ export class ProfessionalService {
 
     if (dataStorage) {
       try {
-        console.log("Usando sessionStorage");
         return JSON.parse(dataStorage);
       } catch (error) {
         console.error("Erro ao analisar os dados armazenados:", error);
@@ -643,7 +642,6 @@ export class ProfessionalService {
 
     if (dataStorage && JSON.parse(dataStorage).length > 0) {
       try {
-        console.log("Usando sessionStorage");
         return JSON.parse(dataStorage);
       } catch (error) {
         console.error("Erro ao analisar os dados armazenados:", error);
@@ -654,8 +652,6 @@ export class ProfessionalService {
       const res = await lastValueFrom(this.getProfessionals());
       this.professionalArray = [...res as ProfessionalCard[]];
       sessionStorage.setItem(this.keyProfessionalStorage, JSON.stringify(this.professionalArray));
-      console.log("Usando requisição para API");
-      console.log(this.professionalArray);
     } catch (error) {
       console.log('Erro ao processar a requisição da listagem de profissionais');
     }

@@ -17,7 +17,7 @@ export class ProfessionalsComponent {
 
 
   protected readonly rows: number = 10;
-  protected toShow: boolean = true;
+  protected toShow: boolean = false;
   protected visible: boolean = false;
 
   protected professional!: Array<ProfessionalCard>;
@@ -74,7 +74,7 @@ export class ProfessionalsComponent {
   }
 
   private isEmptylist(list: Array<ProfessionalCard>): boolean {
-    return list.length ? true : false
+    return list && list.length ? true : false && list.length > 0
   }
 
   private applySearch(list: Array<ProfessionalCard>, search: Search): Array<ProfessionalCard> {
@@ -198,6 +198,8 @@ export class ProfessionalsComponent {
     try {
       this.professional = await this.professionalService.listProfessionals();
       this.professionalSearch = await this.professionalService.listProfessionals();
+
+      this.toShow = this.isEmptylist(this.professionalSearch)
     } catch (error) {
       console.error('Erro ao inicializar a lista de profissionais');
     }
