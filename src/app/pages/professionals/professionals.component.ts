@@ -29,7 +29,9 @@ export class ProfessionalsComponent {
 
   //
 
-  protected setSearch(event: Search) {
+  protected async setSearch(event: Search) {
+    await this.initializeProfessionalsList();
+
     this.first = 0
 
     if (this.validSearch(event)) {
@@ -206,6 +208,5 @@ export class ProfessionalsComponent {
   }
 
   async ngOnInit() {
-    await this.initializeProfessionalsList();
   }
 }

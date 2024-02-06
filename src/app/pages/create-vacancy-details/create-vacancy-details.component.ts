@@ -228,13 +228,15 @@ export class CreateVacancyDetailsComponent {
       <span class="fw-semibold">Área da vaga: </span>${this.vacancyArea}<br> 
       <span class="fw-semibold">Período: </span>${this.period}<br>
       <span class="fw-semibold">Turno: </span>${this.shift}<br>
-      <br>
       `;
 
       if (this.daysOfWeek && this.daysOfWeek?.length > 0) {
         moreDetails += `
       <span class="fw-semibold">Dias da semana:</span>${this.daysOfWeek}<br>
         `;
+      }
+      else {
+        moreDetails += `<br>`
       }
 
       this.vacancyService.insertDetails(this.habilidades as string[], this.senioridade as string, this.modalidade as string, this.tipoContrato as string, moreDetails as string)

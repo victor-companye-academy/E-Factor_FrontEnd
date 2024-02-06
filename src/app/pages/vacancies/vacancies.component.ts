@@ -20,13 +20,15 @@ export class VacanciesComponent {
   protected vacancyCard?: Vacancy;
 
   protected vacancy!: Array<Vacancy>;
-  protected vacancySearch: Array<Vacancy> = this.vacancy;
+  protected vacancySearch!: Array<Vacancy>;
 
   protected first: number = 0;
   protected totalRecords: number = (this.vacancySearch && this.vacancySearch.length) || 0;
   private searchObj: Search | undefined;
 
-  protected setSearch(event: Search) {
+  protected async setSearch(event: Search) {
+    await this.initializeVacanciesList();
+  
     this.first = 0
 
     if (this.validSearch(event)) {
@@ -191,16 +193,12 @@ export class VacanciesComponent {
   protected async initializeVacanciesList(): Promise<void> {
     try {
       this.vacancy = await this.vacancyService.listVacancies();
-      this.vacancySearch = await this.vacancyService.listVacancies();
+      this.vacancySearch = [...this.vacancy];
 
-      this.toShow = this.isEmptylist(this.vacancySearch)
+      this.toShow = this.isEmptylist(this.vacancySearch);
     } catch (error) {
       console.error('Erro ao inicializar a lista de vagas:', error);
     }
-  }
-
-  async ngOnInit() {
-    await this.initializeVacanciesList();
   }
 
 }
