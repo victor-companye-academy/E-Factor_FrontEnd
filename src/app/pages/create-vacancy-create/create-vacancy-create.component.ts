@@ -36,7 +36,7 @@ export class CreateVacancyCreateComponent {
 
 
   ngOnInit() {
-    this.vacancy = this.vacancyService.getCreateVacancy() as Vacancy;
+    this.vacancy = this.vacancyService.getVacancy();
     this.showInterest = false;
 
     console.log(this.vacancy)

@@ -73,15 +73,6 @@
 
                                     </div>
 
-                                    <!-- <div class="p-fluid mt-2">
-                                        <p-autoComplete (searchLocale)="true" id="skilss" [(ngModel)]="skills"
-                                            [suggestions]="filteredItems" (completeMethod)="searchSkills($event)"
-                                            [multiple]="true" [forceSelection]="true" placeholder="Ex: Angular"
-                                            class="m-0 mt-2 rounded-3 px-3 py-3 border-0 w-100 fw-light p-autocomplete"
-                                            name="skills"></p-autoComplete>
-                                    </div> -->
-
-                                    <!--  -->
 
                                     <div *ngIf="validation && validation['habilidades']" class="mt-1 ms-1">
                                         <span class="message-invalid  fw-light">Campo obrigatório</span>
@@ -281,7 +272,7 @@
 
                                     <label for="clt" class="mb-2 d-flex align-items-center">
                                         <input type="radio" [(ngModel)]="tipoContrato" id="clt" name="tipoContrato"
-                                            value="Remoto" class="me-2"
+                                            value="clt" class="me-2"
                                             [ngClass]="{'invalid': validation['tipoContrato']}" />
                                         CLT
                                     </label>

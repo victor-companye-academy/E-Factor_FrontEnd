@@ -83,16 +83,27 @@ export class CreateVacancyService {
     }
   }
 
-  public getVacancy(): Vacancy | any {
+  public getVacancy(): Vacancy | any{
     if (this.vacancy) {
 
-      const newVacancy: any = {
-        titulo: this.vacancy.tituloVaga,
-        descricao: this.vacancy.descricaoVaga,
-        modalidade: this.vacancy.modalidade,
-        tipoContrato: this.vacancy.tipoContrato,
+      const newVacancy: Vacancy = {
+        idEmpresa: this.businessInfo.id,
+        tituloVaga: this.vacancy.tituloVaga,
+        ativo: true,
         senioridade: this.vacancy.senioridade,
-        habilidades: this.vacancy.habilidades
+        tipoContrato: this.vacancy.tipoContrato,
+        modalidade: this.vacancy.modalidade,
+        descricaoVaga: this.vacancy.descricaoVaga,
+        habilidades: this.vacancy.habilidades,
+
+        showedInterest: [],
+        horaInclusao: this.vacancy.horaInclusao,
+        fotoPerfil: this.businessInfo.fotoPerfil,
+        fotoCapa: false,
+        nomeEmpresa: this.businessInfo.nomeFantasia,
+        endereco: this.businessInfo.endereco,
+        email: this.businessInfo.contato.email,
+        telefone: this.businessInfo.contato.telefone
       }
       return newVacancy
     }

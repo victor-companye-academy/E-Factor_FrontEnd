@@ -125,7 +125,7 @@ export class VacancyService {
   }
 
   public listInterestedVacancies(id: string): Array<Vacancy> {
-    return this.listCompanyVacancies().filter(e => e.idVaga.includes(id))
+    return this.listCompanyVacancies().filter(e => e.idVaga?.includes(id))
   }
 
   public async listVacanciesByBusiness(id: string): Promise<Array<Vacancy>> {

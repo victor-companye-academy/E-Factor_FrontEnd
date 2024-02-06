@@ -228,6 +228,7 @@ export class CreateVacancyDetailsComponent {
       <span class="fw-semibold">Área da vaga: </span>${this.vacancyArea}<br> 
       <span class="fw-semibold">Período: </span>${this.period}<br>
       <span class="fw-semibold">Turno: </span>${this.shift}<br>
+      <br>
       `;
 
       if (this.daysOfWeek && this.daysOfWeek?.length > 0) {
@@ -244,13 +245,13 @@ export class CreateVacancyDetailsComponent {
 
   ngOnInit() {
     const vacancy = this.vacancyService.getCreateVacancy();
-  
+
     if (vacancy.titulo === undefined || '' && vacancy.descricao === undefined || '') {
       console.log('voltar')
       this.router.navigateByUrl("/create-vacancy");
     } else {
       this.validation = {};
-  
+
       this.daysOfWeek = [];
       this.habilidades = [];
       this.vacancyArea = '';
