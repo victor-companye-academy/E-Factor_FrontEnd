@@ -25,13 +25,11 @@ export class ProfessionalProfileComponent {
     
     this.professionalInfo = this.professionalService.returnProfessional(this.id).subscribe(
       res => {
-        console.log(res);
         this.professionalInfo = res;
         this.idade = new Date().getFullYear() - this.professionalInfo.dataNascimento.split("/")[2];
         
         this.experiencias = this.professionalInfo.jornadas.filter((jornada: { tpJornada: string; }) => jornada.tpJornada === 'Trabalho');
         this.formacoes = this.professionalInfo.jornadas.filter((jornada: { tpJornada: string; }) => jornada.tpJornada === 'FORMAÇÃO');
-        
         this.isLoading = false;
       },
       error => {

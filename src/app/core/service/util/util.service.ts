@@ -13,10 +13,14 @@ export class UtilService {
 
   private profilePictureSubject = new BehaviorSubject<string>('');
   profilePicture$: Observable<string> = this.profilePictureSubject.asObservable();
+
+  private businessIdSubject = new BehaviorSubject<number>(0);
+  businessId$: Observable<number> = this.businessIdSubject.asObservable();
   
   constructor(private authService: AuthService, private professionalService: ProfessionalService, private businessService: BusinessService) {
     this.updateUserName();
     this.updateProfilePicture();
+    this.updateBusinessId();
   }
 
   private updateUserName(): void{
@@ -40,6 +44,19 @@ export class UtilService {
       }
     );
   }
+
+  private updateBusinessId(): void {
+    if (this.authService.getRole().includes('GESTOR')) {
+      this.getBusinessId().subscribe(
+        id => {
+          this.businessIdSubject.next(id);
+        },
+        error => {
+          console.error('Erro ao obter ID da empresa:', error);
+        }
+      );
+    }
+  }
   
   private getUserName(): Observable<string> {
     const role = this.authService.getRole();
@@ -62,7 +79,7 @@ export class UtilService {
 
     if (role.includes('PROFISSIONAL')) {
       return this.professionalService.returnProfessionalFromLoggedUser().pipe(
-        map((data) => ((data as { fotoPerfil: string })?.fotoPerfil || ''))
+        map((data) => ((data as { ftPerfil: string })?.ftPerfil || ''))
       );
     } else if (role.includes('GESTOR')) {
       return this.businessService.returnBusinessFromLoggedUser().pipe(
@@ -71,6 +88,12 @@ export class UtilService {
     } else {
       return of('');
     }
+  }
+
+  private getBusinessId(): Observable<number> {
+    return this.businessService.returnBusinessFromLoggedUser().pipe(
+        map((data) => ((data as { id: number })?.id || 0))
+    );
   }
 }
         

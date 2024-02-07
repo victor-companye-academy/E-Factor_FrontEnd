@@ -15,6 +15,7 @@ export class SidebarComponent {
   role: string;
   userName: string = '';
   profilePicture: string = '';
+  idEmpresaLogada: number = -1;
 
   constructor(private router: Router, private authService: AuthService, private utilService: UtilService) {
 
@@ -38,6 +39,9 @@ export class SidebarComponent {
     this.utilService.profilePicture$.subscribe((picture: string) => {
       // this.profilePicture = `data:image/png;base64,${picture}`
       this.profilePicture = picture
+    })
+    this.utilService.businessId$.subscribe((id: number) => {
+      this.idEmpresaLogada = id
     })
   }
 
@@ -106,7 +110,11 @@ export class SidebarComponent {
     if (this.role == 'PROFISSIONAL') {
       this.router.navigate(['/professional-profile', this.authService.getId()]);
     } else if (this.role.includes('GESTOR')) {
-      this.router.navigate(['/business-profile', this.authService.getId()]);
+      if(this.idEmpresaLogada == -1) {
+        this.router.navigate(['/']);
+      } else {
+        this.router.navigate(['/business-profile', this.idEmpresaLogada]);
+      }
     } else {
       this.router.navigate(['/login']);
     }

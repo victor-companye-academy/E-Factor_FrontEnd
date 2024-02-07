@@ -101,4 +101,59 @@ export class BusinessService {
         map(response => response)
       );
   }
+
+  public returnBusiness() {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+
+    return this.httpClient.get('http://localhost:8085/ms-empresa/v1/listar-empresas', { headers })
+      .pipe(
+        map(response => response)
+      )
+  }
+
+  public consultarSaldoCoin() {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+    
+    return this.httpClient.get('http://localhost:8085/ms-empresa/v1/consultar-saldo', { headers })
+      .pipe(
+        map(response => response)
+      )
+  }
+
+  public updateBusinessData(objEmpresa: any) {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+
+    const objEmpresaAtualizado = {
+      razaoSocial: objEmpresa.razaoSocial,
+      nomeFantasia: objEmpresa.nomeFantasia,
+      fotoPerfil: objEmpresa.fotoPerfil,
+      sobre: objEmpresa.sobre,
+      contato: {
+        email: objEmpresa.contato.email,
+        telefone: objEmpresa.contato.telefone
+      },
+      endereco: {
+        cep: objEmpresa.endereco.cep,
+        logradouro: objEmpresa.endereco.logradouro,
+        numero: objEmpresa.endereco.numero,
+        complemento: objEmpresa.endereco.complemento,
+        bairro: objEmpresa.endereco.bairro,
+        cidade: objEmpresa.endereco.cidade,
+        estado: objEmpresa.endereco.estado
+      }
+    }
+    
+    const body = objEmpresaAtualizado;
+
+    return this.httpClient.put<any>('http://localhost:8085/ms-empresa/v1/atualizar-empresa', body, { headers })
+      .pipe(
+        map(response => response)
+      )
+  }
 }

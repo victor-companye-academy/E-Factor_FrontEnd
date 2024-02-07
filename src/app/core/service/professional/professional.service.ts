@@ -727,8 +727,6 @@ export class ProfessionalService {
       jornadas: jornadasMapeadas
     }
 
-    console.log(body);
-
     return this.httpClient.post<any>('http://localhost:8085/ms-profissional/v1/atualizar-experiencia', body, { headers })
       .pipe(
         map(response => response)
@@ -741,11 +739,12 @@ export class ProfessionalService {
     };
     const objDadosPessoais = {
       nome: objPerfil.nomeCompleto,
-      fotoPerfil: objPerfil.fotoPerfil,
+      fotoPerfil: objPerfil.ftPerfil,
       email: objPerfil.contato.email,
       telefone: objPerfil.contato.telefone,
       estado: objPerfil.endereco.estado,
-      cidade: objPerfil.endereco.cidade
+      cidade: objPerfil.endereco.cidade,
+      senioridade: objPerfil.senioridade
     };
     const body = objDadosPessoais;
 
