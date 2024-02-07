@@ -1,4 +1,4 @@
-export interface NewVacancy {
+export interface RequestNewVacancy {
 
     titulo: string,
     descricao: string,

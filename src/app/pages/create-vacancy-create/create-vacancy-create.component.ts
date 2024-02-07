@@ -11,23 +11,29 @@ import { CreateVacancyService } from 'src/app/core/service/create-vacancy/create
 })
 export class CreateVacancyCreateComponent {
 
-  constructor(private vacancyService: CreateVacancyService, private router: Router, private messageService: MessageService) { }
+  constructor(private createVacancyService: CreateVacancyService, private router: Router, private messageService: MessageService) { }
 
   protected vacancy!: Vacancy;
   protected showInterest!: boolean;
 
   onConfirm() {
-    if (this.vacancyService.getCreateVacancy().title) {
-      if (!this.vacancyService.getWasSendVacancy()) {
-        this.vacancyService.createVacancy();
 
-        this.messageService.add({ severity: 'success', summary: '', detail: 'Vaga criada com sucesso!' });
-      }
+    this.createVacancyService.createVacancy().subscribe({
+      next: res => res,
+      error: () =>  this.messageService.add({ severity: 'warn', summary: '', detail: 'Erro ao enviar vaga, tente novamente mais tarde.' })
+    })
 
-    } else {
-           this.messageService.add({ severity: 'warn', summary: '', detail: 'Vaga já enviada' });
+    // if (this.vacancyService.getCreateVacancy().title) {
+    //   if (!this.vacancyService.getWasSendVacancy()) {
+    //     this.vacancyService.createVacancy();
 
-    }
+    //     this.messageService.add({ severity: 'success', summary: '', detail: 'Vaga criada com sucesso!' });
+    //   }
+
+    // } else {
+    //        this.messageService.add({ severity: 'warn', summary: '', detail: 'Vaga já enviada' });
+
+    // }
   }
 
   onClose() {
@@ -36,10 +42,8 @@ export class CreateVacancyCreateComponent {
 
 
   ngOnInit() {
-    this.vacancy = this.vacancyService.getVacancy();
+    this.vacancy = this.createVacancyService.getVacancy();
     this.showInterest = false;
-
-    console.log(this.vacancy)
 
     if (this.vacancy.tituloVaga === undefined || '' && this.vacancy.descricaoVaga === undefined || '') {
       this.router.navigateByUrl("/create-vacancy");

@@ -201,6 +201,8 @@ export class CreateVacancyDetailsComponent {
     this.formDetails.get('period')?.setValue(this.period as any);
     this.formDetails.get('shift')?.setValue(this.shift as any);
 
+    let moreDetails;
+
     const vacancy: any = this.vacancyService.getCreateVacancy();
 
     let isInvalid: boolean = false;
@@ -223,8 +225,8 @@ export class CreateVacancyDetailsComponent {
     }
 
     if (this.formDetails.valid && vacancy && !isInvalid) {
-
-      let moreDetails = `
+      
+      moreDetails = `
       <span class="fw-semibold">Área da vaga: </span>${this.vacancyArea}<br> 
       <span class="fw-semibold">Período: </span>${this.period}<br>
       <span class="fw-semibold">Turno: </span>${this.shift}<br>
@@ -235,9 +237,8 @@ export class CreateVacancyDetailsComponent {
       <span class="fw-semibold">Dias da semana:</span>${this.daysOfWeek}<br>
         `;
       }
-      else {
-        moreDetails += `<br>`
-      }
+
+      moreDetails += `<br>`
 
       this.vacancyService.insertDetails(this.habilidades as string[], this.senioridade as string, this.modalidade as string, this.tipoContrato as string, moreDetails as string)
 

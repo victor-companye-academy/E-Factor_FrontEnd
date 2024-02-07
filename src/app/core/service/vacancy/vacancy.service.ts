@@ -88,10 +88,9 @@ export class VacancyService {
     }
   }
 
-  public async addNewVacancy(newVacancy: any) {
+  public async addNewVacancy() {
     try {
       const vacanciesArray: Array<Vacancy> = await this.listVacancies();
-      vacanciesArray.push(newVacancy);
       sessionStorage.setItem(this.keyVacanciesStorage, JSON.stringify(vacanciesArray));
     } catch (error) {
       console.error('Erro ao adicionar nova vaga:', error);

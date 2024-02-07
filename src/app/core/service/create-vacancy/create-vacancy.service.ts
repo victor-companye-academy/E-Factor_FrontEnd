@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Vacancy } from '../../interfaces/vacancy';
-import { VacancyService } from '../vacancy/vacancy.service';
-import { Router } from '@angular/router';
 import { formattedDate } from 'src/app/core/utils/formattedDate';
-import { NewVacancy } from '../../interfaces/new-vacancy';
+import { RequestNewVacancy } from '../../interfaces/request-new-vacancy';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { ResponseNewVacancy } from '../../interfaces/response-new-vacancy';
+import { VacancyService } from '../vacancy/vacancy.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CreateVacancyService {
 
-  constructor(private vacancyService: VacancyService, private router: Router) {
+  private url: string = 'http://localhost:8085/ms-empresa/v1/cadastrar-vaga';
+
+  constructor(private http: HttpClient, private vacancyService: VacancyService) {
   }
   private static wasSendVacancy: boolean = false;
 
@@ -53,9 +57,12 @@ export class CreateVacancyService {
   }
 
   public insertDescription(tituloVaga: string, descricaoVaga: string) {
-    this.vacancy.tituloVaga = tituloVaga;
-    this.vacancy.descricaoVaga = descricaoVaga;
-
+    if (tituloVaga) {
+      this.vacancy.tituloVaga = tituloVaga;
+    }
+    if (descricaoVaga) {
+      this.vacancy.descricaoVaga = descricaoVaga;
+    }
   }
 
   public insertDetails(habilidades: string[], senioridade: string, modalidade: string, tipoContrato: string, moreDetails: string) {
@@ -68,10 +75,10 @@ export class CreateVacancyService {
     this.vacancy.horaInclusao = formattedDate(new Date());
   }
 
-  public getCreateVacancy(): Vacancy | any {
+  public getCreateVacancy(): RequestNewVacancy | any {
     if (this.vacancy) {
 
-      const newVacancy: NewVacancy = {
+      const newVacancy: RequestNewVacancy = {
         titulo: this.vacancy.tituloVaga,
         descricao: this.vacancy.descricaoVaga,
         modalidade: this.vacancy.modalidade,
@@ -83,7 +90,7 @@ export class CreateVacancyService {
     }
   }
 
-  public getVacancy(): Vacancy | any{
+  public getVacancy(): Vacancy | any {
     if (this.vacancy) {
 
       const newVacancy: Vacancy = {
@@ -109,13 +116,23 @@ export class CreateVacancyService {
     }
   }
 
-  public createVacancy() {
-    CreateVacancyService.wasSendVacancy = true;
+  public createVacancy(): Observable<ResponseNewVacancy> {
+    const requestBody = this.getCreateVacancy;
+    const token = ''
 
-    this.businessInfo.coins -= 1;
+    // Configuração dos cabeçalhos com o token de autorização
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}` 
+    });
 
-    this.vacancyService.insertVacancy(this.vacancy)
-
-    this.vacancy = {}
+    return this.http.post<ResponseNewVacancy>(this.url, requestBody, { headers })
+      .pipe(
+        res => {
+          this.vacancyService.addNewVacancy()
+          return res
+        },
+        error => error
+      );
   }
 }
