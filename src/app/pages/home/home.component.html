@@ -1,3 +1,7 @@
+<app-block-nonlogged-modal 
+*ngIf="isBlockNonloggedModalOpen"
+(closeModal)="closeNonLoggedModal()"
+></app-block-nonlogged-modal>
 <main class="d-flex w-100 main">
     <div class="sidebar">
         <app-sidebar></app-sidebar>
@@ -37,10 +41,12 @@
                         </button>
                     </div>
 
-                    <card-professional *ngIf="cardProfessional[1]" [short]="true" [card]="cardProfessional[1]"
+                    <card-professional *ngIf="cardProfessional[1]" [isLogged]="isLogged" [short]="true" [card]="cardProfessional[1]"
+                        (click)="isLogged ? '' : openNonLoggedModal()"
                         class="mt-4 col-lg-6 col-xl-6 col-xxl-4 fadeIn"></card-professional>
 
-                    <card-professional *ngIf="cardProfessional[0]" [short]="true" [card]="cardProfessional[0]"
+                    <card-professional *ngIf="cardProfessional[0]" [isLogged]="isLogged" [short]="true" [card]="cardProfessional[0]"
+                        (click)="isLogged ? '' : openNonLoggedModal()"
                         class="mt-4 col-lg-6 col-xl-6 col-xxl-4 fadeIn"></card-professional>
 
                 </div>
@@ -50,10 +56,10 @@
                 <div *ngIf="cardVacancy && cardVacancy.length >= 2 && cardVacancy[1]"
                     class="div-vacancy row justify-content-center fadeIn">
 
-                    <card-vacancy [short]="true" [card]="cardVacancy[1]" class="mt-4 col-lg-6 col-xl-6 col-xxl-4"
-                        [routerLink]="['/search-vacancies']"></card-vacancy>
-                    <card-vacancy [short]="true" [card]="cardVacancy[0]" class="mt-4 col-lg-6 col-xl-6 col-xxl-4"
-                        [routerLink]="['/search-vacancies']"></card-vacancy>
+                    <card-vacancy [short]="true" [isLogged]="isLogged" [card]="cardVacancy[1]" class="mt-4 col-lg-6 col-xl-6 col-xxl-4"
+                        (click)="isLogged ? '' : openNonLoggedModal()"></card-vacancy>
+                    <card-vacancy [short]="true" [isLogged]="isLogged" [card]="cardVacancy[0]" class="mt-4 col-lg-6 col-xl-6 col-xxl-4"
+                        (click)="isLogged ? '' : openNonLoggedModal()"></card-vacancy>
 
                     <div class="see-more d-flex flex-column align-items-end mt-4 col-lg-12 col-xl-12 col-xxl-4 fadeIn">
                         <h3 class="fw-bold fs-6 text-end pt-2 fadeIn">

@@ -10,37 +10,43 @@
             <button type="button" class="btn save" (click)="addExperience()">Adicionar</button>
         </div>
         <p class="fw-light">* Campos obrigatórios</p>
-        <div *ngFor="let experience of editedProfile.experience; let i = index" class="mt-5">
+        <div *ngFor="let experiencia of editedProfile; let i = index" class="mt-5">
             <div class="d-flex justify-content-between align-items-center">
-                <h6 for="experience" class="fw-bold">Experiência {{editedProfile.experience.length - i}}</h6>
+                <h6 for="experience" class="fw-bold">Experiência {{editedProfile.length - i}}</h6>
                 <button type="button" class="btn cancel" (click)="deleteExperience(i); verifyExperience()">Excluir<img src="assets/icons/trash.svg" alt="Excluir" class="ms-2 trash-icon"></button>
             </div>
             <ng-container [ngModelGroup]="i.toString()">
                 <label for="experience">Instituição *</label>
-                <input type="text" class="form-control mt-1" placeholder="Instituição" [(ngModel)]="experience.institution" name="institution" (input)="verifyExperience()">
+                <input type="text" class="form-control mt-1" placeholder="Instituição" [(ngModel)]="experiencia.dsInstituicao" name="institution" (input)="verifyExperience()">
                 <div class="d-flex gap-3 mt-3">
                     <div class="w-50">
                         <label for="startDate">Data Inicial *</label>
-                        <input type="date" class="form-control mt-1" [(ngModel)]="experience.start" name="startDate" title="Data inicial" (input)="verifyExperience()">
+                        <input type="date" class="form-control mt-1" [(ngModel)]="experiencia.dtInicio" name="startDate" title="Data inicial" (input)="verifyExperience()">
                     </div>
                     <div class="w-50">
                         <label for="endDate">Data final</label>
-                        <input type="date" class="form-control mt-1" [(ngModel)]="experience.end" name="endDate" title="Data final" (input)="verifyExperience()" [disabled]="experience.current">
+                        <input type="date" class="form-control mt-1" [(ngModel)]="experiencia.dtFim" name="endDate" title="Data final" (input)="verifyExperience()" [disabled]="experiencia.dtFim == null">
                     </div>
                 </div>
                 <div class="mt-3">
-                    <input type="checkbox" class="form-check-input" id="btncheck" autocomplete="off" (change)="selectCurrent(i); verifyExperience()" [checked]="experience.current">
+                    <input type="checkbox" class="form-check-input" id="btncheck" autocomplete="off" (change)="selectCurrent(i); verifyExperience()" [checked]="experiencia.dtFim == null">
                     <label class="ms-2" for="btncheck">Emprego atual?</label>
                 </div>
                 <label for="role" class="mt-3">Cargo *</label>
-                <input type="text" class="form-control mt-1" placeholder="Cargo" [(ngModel)]="experience.role" name="role" (input)="verifyExperience()">
+                <input type="text" class="form-control mt-1" placeholder="Cargo" [(ngModel)]="experiencia.dsTitulo" name="role" (input)="verifyExperience()">
                 <label for="description" class="mt-3">Descrição *</label>
-                <textarea id="experience" [(ngModel)]="experience.description" name="description" class="form-control mt-1" (input)="verifyExperience()"></textarea>
+                <textarea id="experience" [(ngModel)]="experiencia.dsResumo" name="description" class="form-control mt-1" (input)="verifyExperience()"></textarea>
             </ng-container>
         </div>
         <div class="d-flex justify-content-end gap-2 mt-3">
             <button type="button" class="btn cancel" (click)="cancelEdit()">Cancelar</button>
-            <button type="submit" class="btn save" [disabled]="!isValid">Salvar</button>
+            <button type="submit" class="btn save" [disabled]="!isValid">
+                <p class="m-0" *ngIf="!isLoading">Salvar</p>
+                <div class="spinner-border" role="status" style="width: 1.3rem; height: 1.3rem;"*ngIf="isLoading">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </button>
         </div>
     </form>
 </div>
+<p-toast></p-toast>

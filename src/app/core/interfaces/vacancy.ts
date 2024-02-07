@@ -1,8 +1,8 @@
 import { AddressCompany } from "./address-company";
 
 export interface Vacancy {
-    idVaga?: string,
-    idEmpresa: string,
+    idVaga?: number,
+    idEmpresa: number,
     
     ativo:boolean;
     endereco: AddressCompany,

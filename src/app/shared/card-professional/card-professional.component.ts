@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { ProfessionalCard } from 'src/app/core/interfaces/professional-card';
-import { ProfessionalInfo } from 'src/app/core/interfaces/professional-info';
 
 @Component({
   selector: 'card-professional',
@@ -10,4 +9,5 @@ import { ProfessionalInfo } from 'src/app/core/interfaces/professional-info';
 export class CardProfessionalComponent {
   @Input({ alias: 'short' }) public isShort?: boolean;
   @Input({ alias: 'card' }) public card?:ProfessionalCard;
+  @Input({ alias: 'isLogged' }) public isLogged?: boolean;
 }

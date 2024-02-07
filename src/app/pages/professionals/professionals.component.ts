@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { PaginatorState } from 'primeng/paginator';
 import { ProfessionalCard } from 'src/app/core/interfaces/professional-card';
 import { Search } from 'src/app/core/interfaces/search';
+import { AuthService } from 'src/app/core/service/auth/auth.service';
 import { ProfessionalService } from 'src/app/core/service/professional/professional.service';
 import { formatText } from 'src/app/core/utils/formatText';
 
@@ -13,7 +14,11 @@ import { formatText } from 'src/app/core/utils/formatText';
 })
 export class ProfessionalsComponent {
 
-  constructor(private professionalService: ProfessionalService) { }
+  constructor(private professionalService: ProfessionalService, private authService: AuthService) {
+    if (this.authService.isAuthenticated()) {
+      this.isLogged = true;
+    }
+  }
 
 
   protected readonly rows: number = 10;
@@ -27,11 +32,21 @@ export class ProfessionalsComponent {
   protected totalRecords: number = (this.professionalSearch && this.professionalSearch.length) || 0;
   private searchObj: Search | undefined;
 
+  protected isLogged: boolean = false;
+  protected isBlockNonloggedModalOpen: boolean = false;
+
   //
+
+  openNonLoggedModal() {
+    this.isBlockNonloggedModalOpen = true;
+  }
+
+  closeNonLoggedModal() {
+    this.isBlockNonloggedModalOpen = false;
+  }
 
   protected async setSearch(event: Search) {
     await this.initializeProfessionalsList();
-
     this.first = 0
 
     if (this.validSearch(event)) {
@@ -179,6 +194,17 @@ export class ProfessionalsComponent {
     return newList;
   }
 
+  protected showDialog() {
+    this.visible = true;
+  }
+
+  // protected modal(id: string):void{
+  //   if(!this.isLogged){
+  //     return this.openNonLoggedModal();
+  //   }
+  //   const element = document.querySelector('[about-vacancy]');
+  // }
+
   protected onPageChange(event: PaginatorState) {
     window.scrollTo(0, 120);
 
@@ -186,10 +212,6 @@ export class ProfessionalsComponent {
       this.first = event.first;
     }
     this.setList()
-  }
-
-  protected showDialog() {
-    this.visible = true;
   }
 
   protected modal(id: number): void {

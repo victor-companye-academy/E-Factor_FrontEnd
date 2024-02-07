@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { ProfessionalService } from 'src/app/core/service/professional/professional.service';
 
 @Component({
   selector: 'app-edit-profile-about-modal',
@@ -12,6 +14,9 @@ export class EditProfileAboutModalComponent {
 
   protected editedProfile: any;
   protected isValid: boolean = false;
+  protected isLoading: boolean = false;
+
+  constructor(private professionalService: ProfessionalService, private messageService: MessageService) { }
 
   ngOnInit() {
     this.editedProfile = JSON.parse(JSON.stringify(this.profile));
@@ -22,12 +27,18 @@ export class EditProfileAboutModalComponent {
   }
 
   onSubmit() {
-    this.closeModal.emit(true);
-    this.saveChanges.emit(this.editedProfile.about);
-    const mainElement = document.querySelector('.main');
-    if (mainElement) {
-      mainElement.classList.remove('blur-background');
-    }
+    this.isLoading = true;
+    this.professionalService.salvarDescricao(this.editedProfile.descricao).subscribe(
+      res => {
+        this.isLoading = false;
+        this.saveChanges.emit();
+        document.querySelector('.main')?.classList.remove('blur-background');
+      },
+      error => {
+        this.isLoading = false;
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao atualizar descricão' });
+      }
+    );
   }
 
   cancelEdit() {

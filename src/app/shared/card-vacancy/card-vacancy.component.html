@@ -1,5 +1,6 @@
-<article *ngIf="card && card.idEmpresa" class="card d-flex border-0 rounded-4 container overflow-hidden py-4 w-100 m-0"
-    [ngClass]="{'flex-row': !isShort}" [ngStyle]="{'padding': isShort?'1rem': '1.56rem 0 1.5rem 5.5rem'}">
+<article *ngIf="card && card.idEmpresa"
+    class="card d-flex border-0 rounded-4 container overflow-hidden py-4 w-100 m-0" [ngClass]="{'flex-row': !isShort}"
+    [ngStyle]="{'padding': isShort?'1rem': '1.56rem 0 1.5rem 5.5rem'}" [routerLink]="isLogged ? ['/search-vacancies'] : null">
 
     <section class="content section-description position-relative px-0" [ngClass]="{'w-100': isShort}">
         <img src="data:image;base64,{{card.fotoPerfil }}" (error)="onImageError()"  alt=" "

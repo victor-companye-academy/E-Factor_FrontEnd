@@ -1,10 +1,11 @@
 <div class="modal-container centralizeOnScreen fadeInFromCenter">
     <form (ngSubmit)="onSubmit()">
         <label for="about" class="fw-bold fs-5">Sobre:</label>
-        <textarea id="about" [(ngModel)]="editedProfile.about" name="about" class="form-control mt-2" (input)="verifyAbout()"></textarea>
+        <textarea id="about" [(ngModel)]="editedProfile.descricao" name="about" class="form-control mt-2" (input)="verifyAbout()"></textarea>
         <div class="d-flex justify-content-end gap-2 mt-3">
             <button type="button" class="btn cancel" (click)="cancelEdit()">Cancelar</button>
             <button type="submit" class="btn save" [disabled]="!isValid">Salvar</button>
         </div>
     </form>
 </div>
+<p-toast></p-toast>

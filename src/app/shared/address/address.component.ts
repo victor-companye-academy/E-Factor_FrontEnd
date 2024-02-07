@@ -11,6 +11,7 @@ import { AddressArray } from 'src/app/core/interfaces/address-array';
 export class AddressComponent {
 
   @Output() inputsFilled = new EventEmitter<boolean>();
+  @Output() addressComponentsEmitter = new EventEmitter<Array<AddressArray>>();
 
   errorMsg: string = '';
   isCepGeneric: boolean = false;
@@ -39,6 +40,10 @@ export class AddressComponent {
       title: "numero",
       value: ''
     },
+    {
+      title: "complemento",
+      value: ''
+    }
   ]
 
   constructor (private findCepService: FindCepService) {}
@@ -46,10 +51,11 @@ export class AddressComponent {
   checkInputs() {
     const paginaAtiva = this.addressComponents;
 
-    const todosPreenchidos = paginaAtiva.every((input) => input.value !== '');
+    const todosPreenchidos = paginaAtiva.slice(0, paginaAtiva.length - 1).every((input) => input.value !== '');
     
     if (todosPreenchidos) {
       this.inputsFilled.emit(true);
+      this.addressComponentsEmitter.emit(this.addressComponents);
     } else {
       this.inputsFilled.emit(false);
     }

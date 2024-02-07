@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PersonalDataInputs } from 'src/app/core/interfaces/personal-data-inputs';
+import { RegisterBusinessService } from 'src/app/core/service/register-business/register-business.service';
+import { RegisterProfessionalService } from 'src/app/core/service/register-professional/register-professional.service';
 
 @Component({
   selector: 'app-personal-data',
@@ -16,7 +18,7 @@ export class PersonalDataComponent {
   protected isInputPasswordValid = false;
   protected elementoComErro: Array<number> = [-1, -1, -1, -1, -1];
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private router: Router, private route: ActivatedRoute, private registerBusinessService: RegisterBusinessService, private registerProfessionalService: RegisterProfessionalService) {
     this.path = this.route.snapshot.url[0].path;
     
     if (this.path === 'criar-conta-profissional') {
@@ -85,17 +87,17 @@ export class PersonalDataComponent {
 
   public getLinkDestinationContinue() {
     if (this.pageType == 0){
-      return '/informacoes-profissional';
+      this.router.navigate(['/informacoes-profissional']);
     } else {
-      return '/create-business-user';
+      this.router.navigate(['/create-business-user']);
     }
   }
 
   public getLinkDestinationBack() {
     if (this.pageType == 0){
-      return '/selecionar-usuario';
+      this.router.navigate(['/selecionar-usuario']);
     } else {
-      return '/biografia-empresa';
+      this.router.navigate(['/biografia-empresa']);
     }
   }
 
@@ -174,5 +176,28 @@ export class PersonalDataComponent {
   clearErrorMessage(i: number) {
     this.arrayPersonalDataInputs[this.pageType][i].label = '';
     this.elementoComErro[i] = -1;
+  }
+
+  populateUserInformations() {
+    if (this.pageType == 0) {
+      this.populateProfessionalInformations();
+    } else {
+      this.populateManagerInformations();
+    }
+  }
+  
+  populateProfessionalInformations() {
+    this.registerProfessionalService.professionalInformations.login = this.input[0];
+    this.registerProfessionalService.professionalInformations.contato.email = this.input[0];
+    this.registerProfessionalService.professionalInformations.senha = this.input[2];
+
+    this.getLinkDestinationContinue();
+  }
+
+  populateManagerInformations() {
+    this.registerBusinessService.managerInformations.email = this.input[0];
+    this.registerBusinessService.managerInformations.senha = this.input[2];
+
+    this.getLinkDestinationContinue();
   }
 }

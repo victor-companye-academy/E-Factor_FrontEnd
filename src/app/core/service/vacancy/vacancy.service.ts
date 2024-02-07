@@ -14,7 +14,7 @@ export class VacancyService {
   private keyVacanciesStorage: string = 'vacancies';
   private keyCompanyStorage: string = 'companyVacancy';
 
-  private businessId = '1';
+  private businessId = 1;
 
   private vacanciesArray: Array<Vacancy> = []
 
@@ -51,7 +51,7 @@ export class VacancyService {
       try {
         return JSON.parse(dataStorage);
       } catch (error) {
-        console.error("Erro ao analisar os dados armazenados:", error);
+        console.error("Erro ao analisar os dados armazenados");
       }
     }
 
@@ -84,7 +84,7 @@ export class VacancyService {
         sessionStorage.setItem(this.keyVacanciesStorage, JSON.stringify(vacanciesArray));
       }
     } catch (error) {
-      console.error('Erro ao atualizar vaga:', error);
+      console.error('Erro ao atualizar vaga.');
     }
   }
 
@@ -93,11 +93,11 @@ export class VacancyService {
       const vacanciesArray: Array<Vacancy> = await this.listVacancies();
       sessionStorage.setItem(this.keyVacanciesStorage, JSON.stringify(vacanciesArray));
     } catch (error) {
-      console.error('Erro ao adicionar nova vaga:', error);
+      console.error('Erro ao adicionar nova vaga.');
     }
   }
 
-  public async deleteVacancy(id: string) {
+  public async deleteVacancy(id: number) {
     try {
       const vacanciesArray: Array<Vacancy> = await this.listVacancies();
       const index = vacanciesArray.findIndex(vacancy => vacancy.idVaga === id);
@@ -107,13 +107,13 @@ export class VacancyService {
         sessionStorage.setItem(this.keyVacanciesStorage, JSON.stringify(vacanciesArray));
       }
     } catch (error) {
-      console.error('Erro ao excluir vaga:', error);
+      console.error('Erro ao excluir vaga.');
     }
   }
 
 
   public insertVacancy(vacancy: Vacancy): number {
-    vacancy.idVaga = (this.vacanciesArray.length + 1).toString()
+    vacancy.idVaga = (this.vacanciesArray.length + 1)
     console.log(this.listVacancies())
 
     const lastposition = this.vacanciesArray.push(vacancy);
@@ -123,11 +123,11 @@ export class VacancyService {
     return lastposition;
   }
 
-  public listInterestedVacancies(id: string): Array<Vacancy> {
-    return this.listCompanyVacancies().filter(e => e.idVaga?.includes(id))
+  public listInterestedVacancies(id: number): Array<Vacancy> {
+    return this.listCompanyVacancies().filter(e => e.idVaga === id)
   }
 
-  public async listVacanciesByBusiness(id: string): Promise<Array<Vacancy>> {
+  public async listVacanciesByBusiness(id: number): Promise<Array<Vacancy>> {
     try {
       const allVacancies: Array<Vacancy> = await this.listVacancies();
       const vacanciesByBusiness: Array<Vacancy> = allVacancies.filter(vacancy => vacancy.idEmpresa === id);

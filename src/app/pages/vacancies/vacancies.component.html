@@ -1,3 +1,7 @@
+<app-block-nonlogged-modal 
+*ngIf="isBlockNonloggedModalOpen"
+(closeModal)="closeNonLoggedModal()"
+></app-block-nonlogged-modal>
 <main class="d-flex w-100 main">
     <div class="sidebar">
         <app-sidebar></app-sidebar>
@@ -23,8 +27,8 @@
 
                 <Section class="col-9 position-relative pb-5 section-main">
                     <span *ngFor="let card of vacancySearch" class="mx-1 fadeIn">
-                        <card-vacancy (click)="showDialog(card)" [short]="false" [card]="card"
-                            class="mt-4 cursor-pointer"></card-vacancy>
+                        <card-vacancy (click)="isLogged ? showDialog(card) : openNonLoggedModal()" 
+                            [isLogged]="isLogged" [short]="false" [card]="card" class="mt-4 cursor-pointer"></card-vacancy>
                     </span>
 
                     <!--  -->

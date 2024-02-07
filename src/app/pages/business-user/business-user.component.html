@@ -6,7 +6,7 @@
             <p class="info">* Campos obrigatórios</p>
             <div *ngFor="let input of arrayInputsBussinesUser; let i = index" class="mt-3">
                 <label>{{input.title}}</label>
-                <input type="{{input.parameters[0]}}" placeholder="{{input.parameters[1]}}" class="form-control ps-3 pe-3 mt-1" value="{{input.value}}" (input)="verifyInputs($event, i)" (blur)="validateCpf(i)" [attr.maxlength]="i === 0 ? '14' : null">
+                <input type="{{input.parameters[0]}}" placeholder="{{input.parameters[1]}}" class="form-control ps-3 pe-3 mt-1" [(ngModel)]="input.value" (input)="verifyInputs($event, i)" (blur)="validateCpf(i)" [attr.maxlength]="i === 0 ? '14' : null">
             </div>
             <p class="errMsg mt-3">{{errMsg}}</p>
         </div>
@@ -17,7 +17,14 @@
             <p class="mt-3">VOLTAR</p>
         </div>
         <div class="mt-2">
-            <button class="btn fw-bold btn-continue w-100" [routerLink]="['/login']" [disabled]="!isContinueBtnActive">CONTINUAR</button>
+            <button class="btn fw-bold btn-continue" (click)="populateManagerInformations()" [disabled]="!isContinueBtnActive">
+                <div class="spinner-border" role="status" style="width: 1.3rem; height: 1.3rem;"
+                    *ngIf="isLoading">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p *ngIf="!isLoading" class="m-0">CONTINUAR</p>
+            </button>
         </div>
     </div>
+    <p-toast></p-toast>
 </body>

@@ -3,6 +3,7 @@ import { CardDetails } from 'src/app/core/interfaces/card-details';
 import { ProfessionalCard } from 'src/app/core/interfaces/professional-card';
 import { ProfessionalInfo } from 'src/app/core/interfaces/professional-info';
 import { Vacancy } from 'src/app/core/interfaces/vacancy';
+import { AuthService } from 'src/app/core/service/auth/auth.service';
 import { CardDetailsService } from 'src/app/core/service/cardDetails/card-details.service';
 import { ProfessionalService } from 'src/app/core/service/professional/professional.service';
 import { VacancyService } from 'src/app/core/service/vacancy/vacancy.service';
@@ -14,10 +15,14 @@ import { VacancyService } from 'src/app/core/service/vacancy/vacancy.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private cardDetailsService: CardDetailsService, private professionalService: ProfessionalService, private vacancyService: VacancyService) { }
+  constructor(private cardDetailsService: CardDetailsService, private professionalService: ProfessionalService, private vacancyService: VacancyService,  private authService: AuthService) {
+    if (this.authService.isAuthenticated()) {
+      this.isLogged = true;
+    }
+  }
 
+  protected isLogged: boolean = false;
   protected about: Array<CardDetails> = this.cardDetailsService.listAbout();
-
   protected testimonials: Array<CardDetails> = this.cardDetailsService.listTestimonials();
 
   protected cardVacancy!: Array<Vacancy>;
@@ -25,6 +30,7 @@ export class HomeComponent implements OnInit {
   protected cardProfessional!: Array<ProfessionalCard>;
 
   public responsiveOptions: any[] | undefined;
+  protected isBlockNonloggedModalOpen: boolean = false;
 
   protected async initializeVacanciesList(): Promise<void> {
     try {
@@ -59,5 +65,13 @@ export class HomeComponent implements OnInit {
         numScroll: 1
       }
     ];
+  }
+
+  openNonLoggedModal() {
+    this.isBlockNonloggedModalOpen = true;
+  }
+
+  closeNonLoggedModal() {
+    this.isBlockNonloggedModalOpen = false;
   }
 }

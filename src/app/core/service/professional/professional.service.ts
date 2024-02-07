@@ -3,6 +3,8 @@ import { ProfessionalInfo } from '../../interfaces/professional-info';
 import { ProfessionalCard } from '../../interfaces/professional-card';
 import { Observable, lastValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 export class ProfessionalService {
   private url: string = 'http://localhost:8085/ms-profissional/v1/filtro';
 
-  constructor(private http: HttpClient) { }
+  constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
   private keyProfessionalStorage: string = 'professionals';
   private professionalArray: Array<ProfessionalCard> = []
@@ -675,10 +677,122 @@ export class ProfessionalService {
       "habilidades": []
     }
 
-    return this.http.post<ProfessionalCard[]>(this.url, requestBody)
+    return this.httpClient.post<ProfessionalCard[]>(this.url, requestBody)
       .pipe(
         res => res,
         error => error
       );
+  }
+  public returnProfessionalFromLoggedUser() {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+  
+    return this.httpClient.get('http://localhost:8085/ms-profissional/v1/detalhe-profissional?id_usuario=' + this.authService.getId(), { headers })
+      .pipe(
+        map(response => response)
+      );
+  }
+
+  public returnProfessional(id: number) {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+  
+    return this.httpClient.get('http://localhost:8085/ms-profissional/v1/detalhe-profissional?id_usuario=' + id, { headers })
+      .pipe(
+        map(response => response)
+      );
+  }
+
+  public salvarDescricao(descricao: string){
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+    const body = {
+      descricao: descricao
+    };
+
+    return this.httpClient.post<any>('http://localhost:8085/ms-profissional/v1/salvar-descricao', body, { headers })
+      .pipe(
+        map(response => response)
+      );
+  }
+
+  public salvarJornada(jornadas: any){
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+    const jornadasMapeadas = jornadas.map((jornada: { nrIdJornada: any, dsTitulo: any, dsInstituicao: any,
+      tpJornada: any, dtInicio: any, dtFim: any, dsResumo: any }) => {
+
+     return { idJornada: jornada.nrIdJornada, cargo: jornada.dsTitulo, instituicao: jornada.dsInstituicao, 
+       tipoExperiencia: jornada.tpJornada, dataInicio: jornada.dtInicio, dataFim: jornada.dtFim, resumo: jornada.dsResumo };
+
+   });
+   const body = {
+     jornadas: jornadasMapeadas
+   }
+
+    return this.httpClient.post<any>('http://localhost:8085/ms-profissional/v1/cadastrar-experiencia', body, { headers })
+      .pipe(
+        map(response => response)
+      );
+  }
+
+  public removerJornada(id: Array<number>){
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+    const body = {
+      identificadorJornadas: id
+    };
+
+    return this.httpClient.delete<any>('http://localhost:8085/ms-profissional/v1/remover-experiencia', { headers, body })
+      .pipe(
+        map(response => response)
+      );
+  }
+
+  public atualizarJornada(jornadas: any){
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+    const jornadasMapeadas = jornadas.map((jornada: { nrIdJornada: any, dsTitulo: any, dsInstituicao: any,
+       tpJornada: any, dtInicio: any, dtFim: any, dsResumo: any }) => {
+
+      return { idJornada: jornada.nrIdJornada, cargo: jornada.dsTitulo, instituicao: jornada.dsInstituicao, 
+        tipoExperiencia: jornada.tpJornada, dataInicio: jornada.dtInicio, dataFim: jornada.dtFim, resumo: jornada.dsResumo };
+
+    });
+    const body = {
+      jornadas: jornadasMapeadas
+    }
+
+    return this.httpClient.post<any>('http://localhost:8085/ms-profissional/v1/atualizar-experiencia', body, { headers })
+      .pipe(
+        map(response => response)
+      );
+  }
+
+  public salvarDadosPessoais(objPerfil: any){
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+    const objDadosPessoais = {
+      nome: objPerfil.nomeCompleto,
+      fotoPerfil: objPerfil.ftPerfil,
+      email: objPerfil.contato.email,
+      telefone: objPerfil.contato.telefone,
+      estado: objPerfil.endereco.estado,
+      cidade: objPerfil.endereco.cidade,
+      senioridade: objPerfil.senioridade
+    };
+    const body = objDadosPessoais;
+
+    return this.httpClient.post<any>('http://localhost:8085/ms-profissional/v1/salvar-dados-pessoais', body, { headers })
+      .pipe(
+        map(response => response)
+      )
   }
 }
