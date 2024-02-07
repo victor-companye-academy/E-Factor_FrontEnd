@@ -15,7 +15,7 @@
 <main class="d-flex w-100 main">
     <app-sidebar class="sidebar"></app-sidebar>
     <div class="w-100 fadeIn overflow-hidden">
-        <div class="container py-5 px-3" *ngIf="!isLoading && businessInfo.cnpj">
+        <div class="container py-5 px-3 main-page" *ngIf="!isLoading && !profileNotFound">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <h5 class="fw-bold">Dados Jurídicos</h5>
                 <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(0)">Editar<img src="assets/icons/edit.svg" alt="Editar" class="ms-2"></button>

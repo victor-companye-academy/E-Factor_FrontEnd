@@ -24,8 +24,8 @@
             <a class="fw-bold text-decoration-none" *ngIf="!isCollapsed">Sair</a>
         </div>
         <div class="p-0 mt-2 mb-1 d-flex" *ngIf="role != 'ADMINISTRADOR' && role != 'undefined'">
-            <div class="bg-white rounded-circle px-1 mb-1">
-                <img [src]="profilePicture ? profilePicture : 'assets/icons/user.svg'" alt="Entrar" class="nav-icons mb-1" [ngClass]="{'profilePicture': profilePicture.length > 22}">
+            <div class="bg-white rounded-circle photo-circle mb-1">
+                <img [src]="profilePicture ? profilePicture : 'assets/icons/user.svg'" alt="" class="nav-icons mb-1" [ngClass]="{'profilePicture': profilePicture}">
             </div>
             <a class="fw-bold text-decoration-none ms-2" *ngIf="!isCollapsed">{{ userName.substring(0, 10) + (userName.length > 10 ? '...' : '') }}</a>
         </div>

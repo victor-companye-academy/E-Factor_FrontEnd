@@ -102,6 +102,17 @@ export class BusinessService {
       );
   }
 
+  public returnBusinessById(id: number) {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+    
+    return this.httpClient.get('http://localhost:8085/ms-empresa/v1/detalhe-empresa?id_empresa=' + id, { headers })
+      .pipe(
+        map(response => response)
+      );
+  }
+
   public returnBusiness() {
     const headers = {
       Authorization: `Bearer ${this.authService.getToken()}`
@@ -110,7 +121,7 @@ export class BusinessService {
     return this.httpClient.get('http://localhost:8085/ms-empresa/v1/listar-empresas', { headers })
       .pipe(
         map(response => response)
-      )
+      );
   }
 
   public consultarSaldoCoin() {
@@ -121,7 +132,7 @@ export class BusinessService {
     return this.httpClient.get('http://localhost:8085/ms-empresa/v1/consultar-saldo', { headers })
       .pipe(
         map(response => response)
-      )
+      );
   }
 
   public updateBusinessData(objEmpresa: any) {
@@ -154,6 +165,6 @@ export class BusinessService {
     return this.httpClient.put<any>('http://localhost:8085/ms-empresa/v1/atualizar-empresa', body, { headers })
       .pipe(
         map(response => response)
-      )
+      );
   }
 }
