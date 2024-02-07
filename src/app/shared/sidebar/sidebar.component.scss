@@ -92,9 +92,15 @@
             }
         }
 
+        .photo-circle{
+            width: 1.5rem;
+            height: 1.5rem;
+        }
         .profilePicture{
-            width: 1rem !important;
-            height: 1rem !important;
+            width: 1.5rem;
+            height: 1.5rem;
+            object-fit: cover;
+            border-radius: 50%;
         }
 
         @media screen and (max-width: 990px) {

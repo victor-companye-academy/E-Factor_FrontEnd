@@ -30,30 +30,34 @@ export class BusinessProfileComponent {
     this.utilService.businessId$.subscribe((id: number) => {
       this.loggedId = id
     })
+
     this.isLogged = this.authService.isAuthenticated() && this.id == this.loggedId;
 
-    this.businessService.returnBusiness().subscribe(
-      (res: any) => {
-        this.businessInfo = res.find((business: { id: number; }) => business.id === this.id);
-        
-        this.businessService.consultarSaldoCoin().subscribe(
-          (res: any) => {
-            this.isLoading = false;
-            this.coins = res.saldoCoins;
-          },
-          error => {
-            this.profileNotFound = true;
-            this.isLoading = false;
-            console.log(error);
-          }
-        )
-      },
-      error => {
-        this.profileNotFound = true;
-        this.isLoading = false;
-        console.log(error);
-      }
-    )
+    if (this.isLogged){
+      this.businessService.returnBusinessFromLoggedUser().subscribe(
+        (res: any) => {
+          this.businessInfo = res;
+          this.coins = res.saldoCoins;
+          this.isLoading = false;
+        },
+        error => {
+          this.profileNotFound = true;
+          this.isLoading = false;
+        }
+      )
+    } else if (!this.isLogged) {      
+      this.businessService.returnBusinessById(this.id).subscribe(
+        (res: any) => {
+          this.businessInfo = res;
+          this.isLoading = false;
+        },
+        error => {
+          this.profileNotFound = true;
+          this.isLoading = false;
+          console.log(error);
+        }
+      );
+    }
   }
   
   protected profileNotFound: boolean = false;
