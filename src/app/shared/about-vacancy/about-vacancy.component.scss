@@ -7,6 +7,15 @@
     .primary-color {
         color: var(--primary);
     }
+
+    .logo{
+        min-width: 13rem;
+        min-height: 13rem;
+
+        max-width: 13rem;
+        max-height: 13rem;
+    }
+
     .section-main {
         .about {
             span.status {

@@ -27,16 +27,18 @@ export class VacancyService {
       try {
         return JSON.parse(dataStorage);
       } catch (error) {
-        console.error("Erro ao analisar os dados armazenados:", error);
+        console.error("Erro ao analisar os dados armazenados.");
       }
     }
 
     try {
       const res = await lastValueFrom(this.getVacancies());
       this.vacanciesArray = [...res as Vacancy[]];
+      console.log(this.vacanciesArray)
+      
       sessionStorage.setItem(this.keyVacanciesStorage, JSON.stringify(this.vacanciesArray));
     } catch (error) {
-      console.log('Erro ao processar a requisição da listagem de vagas', error);
+      console.log('Erro ao processar a requisição da listagem de vagas');
     }
 
     return this.vacanciesArray;
@@ -111,7 +113,7 @@ export class VacancyService {
     }
   }
 
-
+  //modificar
   public insertVacancy(vacancy: Vacancy): number {
     vacancy.idVaga = (this.vacanciesArray.length + 1)
     console.log(this.listVacancies())

@@ -16,12 +16,9 @@ export class AboutVacancyComponent {
   @Input() public showInterest!: boolean;
 
   constructor(private messageService: MessageService, private vacancyService: VacancyService) { }
-
-  onImageError() {
-    // Se ocorrer um erro ao carregar a imagem, define o src para a imagem padrão
-    if (this.card) {
-      this.card.fotoPerfil = 'assets/imgs/default-profile.svg';
-    }
+  
+  onImageError(event: any) {
+    event.target.src = 'assets/imgs/default-profile.svg'; // Define o src para a imagem padrão
   }
 
   // show() {

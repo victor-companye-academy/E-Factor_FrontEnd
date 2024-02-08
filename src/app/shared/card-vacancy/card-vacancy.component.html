@@ -3,13 +3,13 @@
     [ngStyle]="{'padding': isShort?'1rem': '1.56rem 0 1.5rem 5.5rem'}" [routerLink]="isLogged ? ['/search-vacancies'] : null">
 
     <section class="content section-description position-relative px-0" [ngClass]="{'w-100': isShort}">
-        <img src="data:image;base64,{{card.fotoPerfil }}" (error)="onImageError()"  alt=" "
+        <img [src]="card.fotoPerfil" (error)="onImageError($event)"  alt=" "
             class="rounded-circle logo position-absolute bg-white img-fluid"
-            [ngClass]="card.fotoPerfil ? 'object-fit-cover': 'object-fit-scale'" width="40px" height="40px"
+            [ngClass]="card.fotoPerfil ? 'object-fit-cover': 'object-fit-scale'"
             [ngStyle]="{'left': isShort?'0': '-65px'}">
 
         <div class="d-flex align-items-start flex-wrap w-100" [ngClass]="{'flex-column': isShort}">
-            <div class="title-company me-4 w-100" [ngClass]="{'ms-5':isShort}">
+            <div class="title-company me-4 w-100" [ngClass]="{'ms-5':isShort}" [ngStyle]="{'padding-left': isShort? '12px': '0'}">
                 <h3 class="me-0 fw-light mb-0 text-start text-capitalize overflow-hidden">{{card.nomeEmpresa}}</h3>
                 <h2 class="m-0 fw-medium w-100 text-capitalize pt-1">{{card.tituloVaga}}</h2>
             </div>

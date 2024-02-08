@@ -3,9 +3,10 @@ import { Vacancy } from '../../interfaces/vacancy';
 import { formattedDate } from 'src/app/core/utils/formattedDate';
 import { RequestNewVacancy } from '../../interfaces/request-new-vacancy';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { ResponseNewVacancy } from '../../interfaces/response-new-vacancy';
 import { VacancyService } from '../vacancy/vacancy.service';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class CreateVacancyService {
 
   private url: string = 'http://localhost:8085/ms-empresa/v1/cadastrar-vaga';
 
-  constructor(private http: HttpClient, private vacancyService: VacancyService) {
+  constructor(private http: HttpClient, private vacancyService: VacancyService, private auth: AuthService) {
   }
   private static wasSendVacancy: boolean = false;
 
@@ -118,12 +119,12 @@ export class CreateVacancyService {
 
   public createVacancy(): Observable<ResponseNewVacancy> {
     const requestBody = this.getCreateVacancy;
-    const token = ''
 
-    // Configuração dos cabeçalhos com o token de autorização
+    const token = this.auth.getToken;
+
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}` 
+      'Authorization': `Bearer ${token}`
     });
 
     return this.http.post<ResponseNewVacancy>(this.url, requestBody, { headers })
