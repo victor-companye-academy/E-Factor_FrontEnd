@@ -31,13 +31,13 @@ export class CardVacancyComponent {
     else if (differenceInDays === 1) {
       return 'Ontem';
     }
-    else if (differenceInDays === 7) {
-      return 'Há Uma semana atrás';
+    else if (differenceInDays > 1 &&  differenceInDays <= 7 ) {
+      return 'Dias atrás';
     }
-    else if (differenceInDays > 7) {
+    else if (differenceInDays >= 7) {
       const weeks = Math.floor(differenceInDays / 7);
 
-      if (weeks < 2) {
+      if (weeks <= 2) {
         return 'Há Uma semana atrás';
       } 
       else {

@@ -19,7 +19,7 @@ export class CreateVacancyCreateComponent {
   onConfirm() {
 
     this.createVacancyService.createVacancy().subscribe({
-      next: res => res,
+      next: res => {console.log(res)},
       error: error => {
         this.messageService.add({ severity: 'warn', summary: '', detail: 'Erro ao enviar vaga, tente novamente mais tarde.' })
         console.log(error)

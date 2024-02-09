@@ -34,7 +34,6 @@ export class VacancyService {
     try {
       const res = await lastValueFrom(this.getVacancies());
       this.vacanciesArray = [...res as Vacancy[]];
-      console.log(this.vacanciesArray)
       
       sessionStorage.setItem(this.keyVacanciesStorage, JSON.stringify(this.vacanciesArray));
     } catch (error) {
