@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { lastValueFrom } from 'rxjs';
+import { Skill } from 'src/app/core/interfaces/skill';
 import { CreateVacancyService } from 'src/app/core/service/create-vacancy/create-vacancy.service';
+import { SkillsService } from 'src/app/core/service/skills/skills.service';
 
 @Component({
   selector: 'app-create-vacancy-details',
@@ -9,7 +12,7 @@ import { CreateVacancyService } from 'src/app/core/service/create-vacancy/create
   styleUrls: ['./create-vacancy-details.component.scss']
 })
 export class CreateVacancyDetailsComponent {
-  constructor(private router: Router, private vacancyService: CreateVacancyService) { }
+  constructor(private router: Router, private vacancyService: CreateVacancyService, private skillService: SkillsService) { }
 
   protected skillsInput: string = '';
   protected suggestionsSkills!: string[];
@@ -39,35 +42,9 @@ export class CreateVacancyDetailsComponent {
     shift: new FormControl('', [Validators.nullValidator, Validators.required]),
   })
 
-  protected skillsList: Array<string> = [
-    'HTML', 'CSS', 'JavaScript', 'TypeScript', 'Angular', 'React', 'Vue.js',
-    'Node.js', 'Express.js', 'Deno', 'Python', 'Django', 'Flask', 'FastAPI',
-    'Ruby', 'Ruby on Rails', 'C#', 'ASP.NET', 'Swift', 'iOS Development',
-    'Java', 'Spring Boot', 'Kotlin', 'Android Development',
-    'PHP', 'Laravel', 'Symfony', 'CodeIgniter',
-    'MySQL', 'PostgreSQL', 'MongoDB', 'Firebase', 'SQLite', 'DynamoDB',
-    'RESTful APIs', 'GraphQL', 'Apollo Server', 'Apollo Client', 'Prisma',
-    'Git', 'GitHub', 'GitLab', 'Bitbucket', 'SourceTree', 'GitKraken',
-    'Visual Studio Code', 'Sublime Text', 'Atom', 'Eclipse', 'IntelliJ IDEA',
-    'Docker', 'Kubernetes', 'Vagrant', 'Heroku', 'AWS', 'Azure', 'Google Cloud Platform',
-    'CI/CD', 'Jenkins', 'Travis CI', 'CircleCI', 'GitHub Actions',
-    'Agile', 'Scrum', 'Kanban', 'JIRA', 'Confluence', 'Trello',
-    'Responsive Design', 'SASS', 'LESS', 'Bootstrap', 'Tailwind CSS', 'Materialize',
-    'WebSockets', 'WebRTC', 'RxJS', 'Redux', 'Vuex', 'MobX', 'Ngrx',
-    'Jest', 'Mocha', 'Chai', 'Cypress', 'Testing Library', 'Enzyme', 'Storybook',
-    'Webpack', 'Rollup', 'Parcel', 'Babel', 'ESLint', 'Prettier', 'Husky',
-    'OAuth', 'JWT', 'OpenID Connect', 'Authentication', 'Authorization',
-    'Microservices', 'Serverless', 'Distributed Systems', 'Service Mesh',
-    'Design Patterns', 'Clean Code', 'Code Review', 'Continuous Learning',
-    'Problem Solving', 'Debugging', 'Agile Development', 'Pair Programming',
-    'Version Control', 'Git Flow', 'GitHub Flow', 'Linux', 'Bash', 'Shell Scripting',
-    'Machine Learning', 'Data Science', 'NLP', 'Computer Vision', 'TensorFlow', 'PyTorch',
-    'Big Data', 'Hadoop', 'Spark', 'Apache Flink', 'Blockchain', 'Smart Contracts',
-    'Cryptocurrency', 'Solidity', 'AR/VR', 'Unity', 'Unreal Engine', 'Blender',
-    'UI/UX Design', 'Figma', 'Sketch', 'Adobe XD', 'InVision',
-    'Technical Writing', 'Blogging', 'Content Creation', 'Public Speaking',
-    'Open Source Contribution', 'Community Building'
-  ];
+  // skilss service get
+  protected skillsList: Array<string> = ['dsf']
+
 
   private inValidate(formName: string): void {
     switch (formName) {
@@ -225,7 +202,7 @@ export class CreateVacancyDetailsComponent {
     }
 
     if (this.formDetails.valid && vacancy && !isInvalid) {
-      
+
       moreDetails = `
       <span class="fw-semibold">Área da vaga: </span>${this.vacancyArea}<br> 
       <span class="fw-semibold">Período: </span>${this.period}<br>
@@ -246,11 +223,19 @@ export class CreateVacancyDetailsComponent {
     }
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     const vacancy = this.vacancyService.getCreateVacancy();
 
+    try {
+      const res = await lastValueFrom(this.skillService.getSkills());
+      this.skillsList = res.map(skill => skill.habilidade);
+
+    } catch (error) {
+      console.log('Erro ao processar a requisição da listagem de skills', error);
+    }
+
+
     if (vacancy.titulo === undefined || '' && vacancy.descricao === undefined || '') {
-      console.log('voltar')
       this.router.navigateByUrl("/create-vacancy");
     } else {
       this.validation = {};

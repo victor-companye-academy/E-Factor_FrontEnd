@@ -37,6 +37,7 @@ export class VacancyService {
       
       sessionStorage.setItem(this.keyVacanciesStorage, JSON.stringify(this.vacanciesArray));
     } catch (error) {
+      this.vacanciesArray = []
       console.log('Erro ao processar a requisição da listagem de vagas');
     }
 
