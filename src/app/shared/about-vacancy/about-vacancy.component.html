@@ -2,10 +2,12 @@
     <div class="col-5 col-xl-3 profile me-4">
         <section class="profile mb-5 rounded-4 p-5 d-flex flex-column align-items-center overflow-hidden">
 
-            <img [src]="card.fotoPerfil" (error)="onImageError($event)"  alt=""
-                title="Logo da empresa" width="150px" height="150px"
-                class="cursor-pointer border-0 rounded-circle img-fluid logo" style="background-color: #f2f4f7;"
-                [routerLink]="['/business-profile', card.idEmpresa]">
+            <div class="div-img-logo">
+                <img [src]="card.fotoPerfil" (error)="onImageError($event)" alt="" title="Logo da empresa"
+                    class="cursor-pointer border-0 rounded-circle img-fluid logo" style="background-color: #f2f4f7;"
+                    [routerLink]="['/business-profile', card.idEmpresa]">
+            </div>
+
 
             <h2 class="cursor-pointer fw-light fs-5 mt-4 text-center text-capitalize"
                 [routerLink]="['/business-profile', card.idEmpresa]">
@@ -15,6 +17,8 @@
             <h3 class="fw-bold fs-5 mt-4 primary-color text-center text-capitalize d-flex flex-wrap">
                 {{card.tituloVaga}}
             </h3>
+
+
         </section>
 
         <section class="details mb-5 rounded-4 py-5 px-4 overflow-hidden">
