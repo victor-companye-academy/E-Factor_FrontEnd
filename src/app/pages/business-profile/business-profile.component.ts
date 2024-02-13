@@ -6,6 +6,7 @@ import { VacancyService } from 'src/app/core/service/vacancy/vacancy.service';
 import { AuthService } from 'src/app/core/service/auth/auth.service';
 import { MessageService } from 'primeng/api';
 import { UtilService } from 'src/app/core/service/util/util.service';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-business-profile',
@@ -21,43 +22,37 @@ export class BusinessProfileComponent {
   protected isEditAboutModalOpen = false;
   protected modalIndex: number = -1;
 
-  constructor (private router: Router, private vacancyService: VacancyService, private route: ActivatedRoute, private utilService: UtilService, 
+  constructor(private router: Router, private vacancyService: VacancyService, private route: ActivatedRoute, private utilService: UtilService, 
     private businessService: BusinessService, private authService: AuthService, private messageService: MessageService) { 
     
     this.isLoading = true;
     this.id = parseInt(this.route.snapshot.paramMap.get('id')!);
 
-    this.utilService.businessId$.subscribe((id: number) => {
-      this.loggedId = id
-    })
+    this.utilService.businessId$.pipe(
+      switchMap((id: number) => {
+        this.loggedId = id;
+        this.isLogged = this.authService.isAuthenticated() && this.id == this.loggedId;
 
-    this.isLogged = this.authService.isAuthenticated() && this.id == this.loggedId;
+        if (this.isLogged){
+          return this.businessService.returnBusinessFromLoggedUser();
+        } else {
+          return this.businessService.returnBusinessById(this.id);
+        }
+      })
+    ).subscribe(
+      (res: any) => {
+        this.businessInfo = res;
+        this.coins = res.saldoCoins;
+        this.isLoading = false;
+      },
+      error => {
+        this.profileNotFound = true;
+        this.isLoading = false;
+        console.log(error);
+      }
+    );
 
-    if (this.isLogged){
-      this.businessService.returnBusinessFromLoggedUser().subscribe(
-        (res: any) => {
-          this.businessInfo = res;
-          this.coins = res.saldoCoins;
-          this.isLoading = false;
-        },
-        error => {
-          this.profileNotFound = true;
-          this.isLoading = false;
-        }
-      )
-    } else if (!this.isLogged) {      
-      this.businessService.returnBusinessById(this.id).subscribe(
-        (res: any) => {
-          this.businessInfo = res;
-          this.isLoading = false;
-        },
-        error => {
-          this.profileNotFound = true;
-          this.isLoading = false;
-          console.log(error);
-        }
-      );
-    }
+    this.isGestorEmpresa = this.authService.getRole() == 'GESTOR_EMPRESA';
   }
   
   protected profileNotFound: boolean = false;
@@ -67,6 +62,7 @@ export class BusinessProfileComponent {
   protected cardVacancy: Array<Vacancy> = this.vacancyService.listVacanciesByBusiness(this.id.toString()); //TODO
   protected coins: number = 0;
   protected loggedId: number = -1;
+  protected isGestorEmpresa: boolean = false;
 
   @HostListener('window:resize', ['$event'])
   onWindowResize(event: Event) {

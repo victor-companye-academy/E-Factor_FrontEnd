@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { BusinessUser } from '../../interfaces/business-user';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CreateBusinessUserService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
   public listBusinessUsers(): Array<BusinessUser> {
 
@@ -131,5 +134,26 @@ export class CreateBusinessUserService {
   getUsersByBusinessId(businessId: string) {
     const businessUsersArray: Array<BusinessUser> = this.listBusinessUsers();
     return businessUsersArray.filter(businessUser => businessUser.businessId === businessId);
+  }
+
+  userInformations = {
+    email: "",
+    cpf: "",
+    senha: "",
+    nome: "",
+    dataNascimento: "",
+    idEmpresa: 0
+  }
+  
+  registerBusinessUser() {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    }
+    const body = this.userInformations;
+
+    return this.httpClient.post<any>('http://localhost:8085/ms-empresa/v1/cadastrar-usuario/gestor', body, { headers })
+      .pipe(
+        map(response => response)
+      )
   }
 }

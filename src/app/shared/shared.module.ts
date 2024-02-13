@@ -25,6 +25,8 @@ import { EditBusinessUserModalComponent } from './edit-business-user-modal/edit-
 import { DeleteBusinessUserModalComponent } from './delete-business-user-modal/delete-business-user-modal.component';
 import { ApproveSolicitationModalComponent } from './approve-solicitation-modal/approve-solicitation-modal.component';
 import { BlockNonloggedModalComponent } from './block-nonlogged-modal/block-nonlogged-modal.component';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { BadgeModule } from 'primeng/badge';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import { BlockNonloggedModalComponent } from './block-nonlogged-modal/block-nonl
     HttpClientModule,
     RouterModule,
     ReactiveFormsModule,
-    ToastModule
+    ToastModule,
+    OverlayPanelModule,
+    BadgeModule
   ],
   exports: [
     AddressComponent,

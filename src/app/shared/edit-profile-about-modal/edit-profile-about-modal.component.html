@@ -1,10 +1,18 @@
 <div class="modal-container centralizeOnScreen fadeInFromCenter">
     <form (ngSubmit)="onSubmit()">
         <label for="about" class="fw-bold fs-5">Sobre:</label>
-        <textarea id="about" [(ngModel)]="editedProfile.descricao" name="about" class="form-control mt-2" (input)="verifyAbout()"></textarea>
+        <textarea id="about" [(ngModel)]="editedProfile.descricao" 
+            name="about" class="form-control mt-2" (input)="verifyAbout()" *ngIf="editedProfile.descricao != undefined"></textarea>
+        <textarea id="about" [(ngModel)]="editedProfile.sobre" 
+            name="about" class="form-control mt-2" (input)="verifyAbout()" *ngIf="editedProfile.sobre != undefined"></textarea>
         <div class="d-flex justify-content-end gap-2 mt-3">
             <button type="button" class="btn cancel" (click)="cancelEdit()">Cancelar</button>
-            <button type="submit" class="btn save" [disabled]="!isValid">Salvar</button>
+            <button type="submit" class="btn save" [disabled]="!isValid">
+                <p class="m-0" *ngIf="!isLoading">Salvar</p>
+                <div class="spinner-border" role="status" style="width: 1.3rem; height: 1.3rem;"*ngIf="isLoading">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </button> 
         </div>
     </form>
 </div>

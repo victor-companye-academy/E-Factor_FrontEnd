@@ -39,6 +39,9 @@
 <main class="d-flex w-100 main">
     <app-sidebar class="sidebar"></app-sidebar>
     <div class="w-100 fadeIn overflow-hidden">
+        <div class="container">
+            <app-header></app-header>
+        </div>
         <div class="container py-5 px-3 main-page" *ngIf="professionalInfo.senioridade != null && !isLoading">
             <!-- dados pessoais -->
             <div class="d-flex justify-content-between align-items-center mb-2">
@@ -189,7 +192,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-center align-items-center mb-5">
-            <button class="btn btn-danger rounded-3" *ngIf="isLogged" (click)="logout()">
+            <button class="btn btn-danger logout" *ngIf="isLogged" (click)="logout()">
                 SAIR
             </button>
         </div>

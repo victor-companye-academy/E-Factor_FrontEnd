@@ -29,27 +29,6 @@ export class EditProfileInfosModalComponent {
     this.pageType = this.route.snapshot.url[0].path;
   }
 
-  // onPhotoChange(event: any) {
-  //   this.selectedPhoto = event.target.files[0];
-  //   this.convertImageToBase64();
-  // }
-  
-  // convertImageToBase64() {
-  //   console.log(this.selectedPhoto);
-  //   const reader = new FileReader();
-  
-  //   reader.onload = (event) => {
-  //     const base64String = event.target?.result as string;
-  //     if (this.pageType == 'professional-profile') {
-  //       this.editedProfile.ftPerfil = base64String;
-  //     } else {
-  //       this.editedProfile.fotoPerfil = base64String;
-  //     }
-  //   };
-  
-  //   reader.readAsDataURL(this.selectedPhoto as Blob);
-  // }
-
   onPhotoChange(event: any) {
     this.selectedPhoto = event.target.files[0];
     this.resizeImage();
@@ -64,31 +43,25 @@ export class EditProfileInfosModalComponent {
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d')!;
         
-        // Defina a largura e altura máximas desejadas para a imagem
-        const maxWidth = 300;
-        const maxHeight = 300;
+        const maxWidth = 1080;
+        const maxHeight = 1080;
   
         let width = img.width;
         let height = img.height;
   
-        // Redimensiona proporcionalmente se necessário
         if (width > maxWidth || height > maxHeight) {
           const ratio = Math.min(maxWidth / width, maxHeight / height);
           width *= ratio;
           height *= ratio;
         }
-  
-        // Configura o tamanho do canvas com as dimensões redimensionadas
+
         canvas.width = width;
         canvas.height = height;
-  
-        // Desenha a imagem no canvas
+
         context.drawImage(img, 0, 0, width, height);
-  
-        // Obtém a representação base64 da imagem redimensionada
+
         const base64String = canvas.toDataURL(this.selectedPhoto!.type); // ou 'image/png' se preferir PNG
   
-        // Continue com a lógica para salvar a imagem no banco de dados
         if (this.pageType == 'professional-profile') {
           this.editedProfile.ftPerfil = base64String;
         } else {

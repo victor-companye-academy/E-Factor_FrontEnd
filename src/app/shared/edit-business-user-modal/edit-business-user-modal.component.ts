@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+import { BusinessUserService } from 'src/app/core/service/business-user/business-user.service';
 
 @Component({
   selector: 'app-edit-business-user-modal',
@@ -11,41 +13,46 @@ export class EditBusinessUserModalComponent {
   @Output() closeModal = new EventEmitter<boolean>();
   @Output() saveChanges = new EventEmitter<any>();
 
+  protected isLoading: boolean = false;
   protected editedUser: any;
   protected isValid: boolean = false;
   protected emailConfirm: string = '';
   protected passwordConfirm: string = '';
 
+  constructor(private businessUserService: BusinessUserService, private messageService: MessageService) { }
+
   ngOnInit() {
-    console.log(this.user)
     this.editedUser = JSON.parse(JSON.stringify(this.user));
     this.emailConfirm = this.editedUser.email;
-    this.passwordConfirm = this.editedUser.password;
-    const mainElement = document.querySelector('.main');
-    if (mainElement) {
-      mainElement.classList.add('blur-background');
-    }
+    document.querySelector('.main')?.classList.add('blur-background');
   }
 
   onSubmit() {
+    this.isLoading = true;
     this.validateFields();
     
     if (this.allFieldsValid()) {
-      this.closeModal.emit(true);
-      this.saveChanges.emit(this.editedUser);
-      const mainElement = document.querySelector('.main');
-      mainElement?.classList.remove('blur-background');
+      this.businessUserService.updateBusinessUser(this.editedUser.id, this.editedUser).subscribe(
+        res => {
+          this.isLoading = false;
+          this.closeModal.emit(true);
+          this.saveChanges.emit();
+          document.querySelector('.main')?.classList.remove('blur-background');
+        },
+        error => {
+          this.isLoading = false;
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao editar usuário' });
+        }
+      );
     } else {
-      console.log('Formulário inválido');
+      this.isLoading = false;
+      this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Preencha todos os campos corretamente' });
     }
   }
 
   cancelEdit() {
     this.closeModal.emit(true);
-    const mainElement = document.querySelector('.main');
-    if (mainElement) {
-      mainElement.classList.remove('blur-background');
-    }
+    document.querySelector('.main')?.classList.remove('blur-background');
   }
 
   verifyUser() {
@@ -55,20 +62,20 @@ export class EditBusinessUserModalComponent {
 
   applyPhoneMask(event: any): void {
     const input = this.numberMask(event);
-
-    let numericInput = input.replace(/[^0-9]/g, '');
+  
+    let numericInput = input.replace(/\D/g, '');
   
     if (numericInput.length <= 10) {
       numericInput = numericInput.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
     } else {
       numericInput = numericInput.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
     }
-
-    this.editedUser.phone = numericInput;
+  
+    this.editedUser.telefone = numericInput;
   }
-
-  numberMask(event: any){
-    event.target.value = event.target.value.replace(/[^0-9-]/g, '');
+  
+  numberMask(event: any): string {
+    event.target.value = event.target.value.replace(/\D/g, '');
     return event.target.value;
   }
 
@@ -134,7 +141,7 @@ export class EditBusinessUserModalComponent {
   }
   
   validatePasswordEmpty(): void {
-    const password: string | null = this.editedUser.password;
+    const password: string | null = this.editedUser.senha;
   
     if (password?.trim() === '' || !password || (password?.length ?? 0) < 8) {
       this.passwordEmpty = true;
@@ -154,7 +161,7 @@ export class EditBusinessUserModalComponent {
   }
 
   validatePasswordMatchValid(): void {
-    const password = this.editedUser.password;
+    const password = this.editedUser.senha;
     const passwordConfirmation = this.passwordConfirm;
 
     if((password?.length ?? 0) > 0 && (passwordConfirmation?.length ?? 0) > 0){
@@ -163,7 +170,7 @@ export class EditBusinessUserModalComponent {
   }
   
   validateNameEmpty(): void {
-    const name: string | null = this.editedUser.name;
+    const name: string | null = this.editedUser.nome;
   
     if (name?.trim() === '' || !name) {
       this.nameEmpty = true;
@@ -173,7 +180,7 @@ export class EditBusinessUserModalComponent {
   }
   
   validatePhoneEmpty(): void {
-    const phone: string | null = this.editedUser.phone;
+    const phone: string | null = this.editedUser.telefone;
   
     if (phone?.trim() === '' || !phone) {
       this.phoneEmpty = true;
@@ -183,7 +190,7 @@ export class EditBusinessUserModalComponent {
   }
 
   validatePhoneValid(): void {
-    const phoneLength = (this.editedUser.phone?.length ?? 0);
+    const phoneLength = (this.editedUser.telefone?.length ?? 0);
     if(phoneLength > 0){
       this.phoneInvalid = (phoneLength < 14);
     }

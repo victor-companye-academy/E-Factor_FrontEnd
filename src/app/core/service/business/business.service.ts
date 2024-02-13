@@ -167,4 +167,27 @@ export class BusinessService {
         map(response => response)
       );
   }
+
+  public returnNotifications() {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+    
+    return this.httpClient.get('http://localhost:8085/ms-empresa/v1/notificacao-vaga', { headers })
+      .pipe(
+        map(response => response)
+      );
+  }
+
+  public confirmNotification(vancancyVisualized: number) {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+    
+
+    return this.httpClient.post<any>('http://localhost:8085/ms-empresa/v1/confirmar-notificacao?id_vaga=' + vancancyVisualized, {}, { headers })
+      .pipe(
+        map(response => response)
+      );
+  }
 }

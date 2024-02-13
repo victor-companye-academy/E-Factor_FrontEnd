@@ -4,7 +4,7 @@
     </div>
 
     <div class="w-100 fadeIn overflow-hidden">
-        <div class="w-100 container div-main fadeIn">
+        <div class="w-100 container div-main fadeIn" *ngIf="!isPageLoading">
 
             <div class="row px-4">
                 <div class="d-flex align-items-end">
@@ -272,13 +272,25 @@
                             </div>
     
                             <button type="submit" class="button border-0 py-2 rounded-3 mt-3 mb-2">
-                                CRIAR
+                                <div class="spinner-border" role="status" style="width: 1.3rem; height: 1.3rem;"
+                                    *ngIf="isLoading">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <p *ngIf="!isLoading" class="m-0">CRIAR</p>
                             </button>
                         </form>
                     </section>
                 </div>
             </div>
         </div>
+        <div class="container py-5 px-3 error-page" *ngIf="isPageLoading">
+            <div class="h-100 d-flex flex-column p-5 align-items-center justify-content-center">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+        <p-toast></p-toast>
         <app-footer></app-footer>
     </div>
 </main>

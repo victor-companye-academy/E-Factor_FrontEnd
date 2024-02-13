@@ -15,6 +15,9 @@
 <main class="d-flex w-100 main">
     <app-sidebar class="sidebar"></app-sidebar>
     <div class="w-100 fadeIn overflow-hidden">
+        <div class="container">
+            <app-header></app-header>
+        </div>
         <div class="container py-5 px-3 main-page" *ngIf="!isLoading && !profileNotFound">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <h5 class="fw-bold">Dados Jurídicos</h5>
@@ -65,7 +68,7 @@
                 </div>
             </div>
             <div class="vacancys-div d-flex gap-3">
-                <div *ngIf="!isLogged && !(cardVacancy.length > 0) ? false : true" [ngClass]="isLogged ? 'about w-75' : 'w-100'">
+                <div *ngIf="!isLogged && !(cardVacancy.length > 0) ? false : true" [ngClass]="isLogged && isGestorEmpresa ? 'about w-75' : 'w-100'">
                     <h5 class="fw-bold mt-4">Vagas recentes</h5>
                     <div class="d-flex flex-column align-items-center gap-3" *ngIf="(cardVacancy.length > 0)">
                         <span *ngFor="let card of cardVacancy; let i = index" class="mx-1">
@@ -78,14 +81,14 @@
                         <button class="w-25 btn btn-view-all fw-bold mt-3" [routerLink]="['{{businessInfo.id}}-all-vacancies']">Publicar vaga</button>
                     </div>
                 </div>
-                <div *ngIf="isLogged && true" class="w-25">
+                <div *ngIf="isLogged && isGestorEmpresa" class="w-25">
                     <div class="d-flex justify-content-between align-items-center">
                         <h5 class="fw-bold mt-4 mb-2">Usuários</h5>
                     </div>
                     <div class="d-flex flex-column gap-3">
                         <section class="d-flex flex-column align-items-center gap-3 p-4">
                             <img src="assets/icons/sidebar/profissionais.svg" alt="Coin Factor" class="user-img">
-                            <p class="user-text">Você tem a opção de cadastrar moderadores que estarão lá para auxiliá-lo na publicação de vagas, análise de candidatos e muito mais. Porém, é importante lembrar que cada moderador custará <span class="text-green">10 Coin Factor.</span> Os moderadores utilizarão os Coin Factor disponíveis em sua conta, e estamos aqui para responder a quaisquer dúvidas. Sinta-se à vontade para entrar em contato conosco pelo e-mail efactor@ajuda.com, estamos aqui para ajudar!</p>
+                            <p class="user-text">Você tem a opção de cadastrar moderadores que estarão lá para auxiliá-lo na publicação de vagas, análise de candidatos e muito mais. Porém, é importante lembrar que cada moderador custará <span class="text-green">1 Coin Factor.</span> Os moderadores utilizarão os Coin Factor disponíveis em sua conta, e estamos aqui para responder a quaisquer dúvidas. Sinta-se à vontade para entrar em contato conosco pelo e-mail efactor@ajuda.com, estamos aqui para ajudar!</p>
                             <button class="btn btn-view-all" [routerLink]="['/new-business-user']">Criar moderador</button>
                         </section>
                         <section class="d-flex flex-column align-items-center gap-3 p-4">
@@ -117,7 +120,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-center align-items-center mb-5">
-            <button class="btn btn-danger rounded-3" *ngIf="isLogged" (click)="logout()">
+            <button class="btn btn-danger logout" *ngIf="isLogged" (click)="logout()">
                 SAIR
             </button>
         </div>

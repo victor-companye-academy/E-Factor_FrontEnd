@@ -63,6 +63,10 @@
         .error-page{
             height: 100vh;
         }
+        .logout{
+            border-radius: 0.75rem;
+            width: 15rem;
+        }
         @media (max-width: 992px){
             .dados-juridicos{
                 flex-direction: column;

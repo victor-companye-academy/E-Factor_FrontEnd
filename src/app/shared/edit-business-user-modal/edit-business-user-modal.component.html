@@ -48,7 +48,7 @@
 
         <div class="mb-3">
             <label for="name">Nome</label>
-            <input id="name" [(ngModel)]="editedUser.name" name="name" type="text" class="fs-6 form-control" 
+            <input id="name" [(ngModel)]="editedUser.nome" name="name" type="text" class="fs-6 form-control" 
                     placeholder="João Silva" (input)="validateNameEmpty()" (blur)="verifyUser()"
                     [ngClass]="{'invalid': nameEmpty}">
 
@@ -61,7 +61,7 @@
 
         <div class="mb-3">
             <label for="phone">Celular</label>
-            <input id="phone" [(ngModel)]="editedUser.phone" name="phone" type="text" class="fs-6 form-control" 
+            <input id="phone" [(ngModel)]="editedUser.telefone" name="phone" type="text" class="fs-6 form-control" 
                     placeholder="(00) 00000-0000" (input)="validatePhoneEmpty(); applyPhoneMask($event)" (blur)="validatePhoneValid(); verifyUser()" [maxlength]="15"
                     [ngClass]="{'invalid': phoneEmpty || phoneInvalid}">
             
@@ -81,7 +81,7 @@
         <div class="mb-3">
             <label for="password">Senha</label>
             <div class="d-flex">
-                <input id="password" [(ngModel)]="editedUser.password" name="password" [type]="showPassword ? 'text' : 'password'" class="fs-6 form-control" 
+                <input id="password" [(ngModel)]="editedUser.senha" name="password" [type]="showPassword ? 'text' : 'password'" class="fs-6 form-control" 
                         placeholder="Senha" (input)="validatePasswordEmpty()" (blur)="validatePasswordMatchValid(); verifyUser()"
                         [ngClass]="{'invalid': passwordEmpty || passwordDontMatch}">
                 <img [src]="showPassword ? 'assets/icons/change-password/password-show.svg' : 'assets/icons/change-password/password.svg'"
@@ -120,7 +120,14 @@
 
         <div class="d-flex justify-content-end gap-2 mt-3">
             <button type="button" class="btn cancel" (click)="cancelEdit()">Cancelar</button>
-            <button type="submit" class="btn save" [disabled]="!isValid">Salvar</button>
+            <button type="submit" class="btn save" [disabled]="!isValid">
+                <div class="spinner-border" role="status" style="width: 1.3rem; height: 1.3rem;"
+                    *ngIf="isLoading">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p *ngIf="!isLoading" class="m-0">Salvar</p>
+            </button>
         </div>
     </form>
 </div>
+<p-toast></p-toast>

@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { catchError, combineLatest, forkJoin } from 'rxjs';
 import { BusinessUser } from 'src/app/core/interfaces/business-user';
+import { AuthService } from 'src/app/core/service/auth/auth.service';
+import { BusinessService } from 'src/app/core/service/business/business.service';
 import { CreateBusinessUserService } from 'src/app/core/service/create-business-user/create-business-user.service';
+import { UtilService } from 'src/app/core/service/util/util.service';
 
 @Component({
   selector: 'app-create-bussines-user',
@@ -11,11 +16,38 @@ import { CreateBusinessUserService } from 'src/app/core/service/create-business-
 })
 export class CreateBussinesUserComponent {
 
-  constructor(private router:Router, private createBusinessUserService: CreateBusinessUserService) { }
+  constructor(private router: Router, private createBusinessUserService: CreateBusinessUserService, private authService: AuthService,
+    private businessService: BusinessService, private utilService: UtilService, private messageService: MessageService) {
 
+      this.isPageLoading = true;
+      
+      if (this.authService.isAuthenticated() && this.authService.getRole() == 'GESTOR_EMPRESA') {
+        combineLatest([
+          this.utilService.businessId$,
+          this.businessService.consultarSaldoCoin()
+        ]).subscribe(
+          ([id, saldoRes]) => {
+            if (id !== undefined && saldoRes !== undefined) {
+              this.businessId = id;
+              this.coin = (saldoRes as any).saldoCoins;
+            }
+            this.isPageLoading = false;
+          },
+          error => {
+            console.error(error);
+            this.isPageLoading = false;
+          }
+        );
+      } else {
+        this.isPageLoading = false;
+        this.router.navigate(['/']);
+      }
+  }
+
+  protected isPageLoading: boolean = false;
+  protected isLoading: boolean = false;
   protected coin!: number;
-  protected id: string = '6';
-  protected businessId: string = '1';
+  protected businessId: number = 0;
 
   protected emailEmpty: boolean = false;
   protected emailConfirmationEmpty: boolean = false;
@@ -217,26 +249,34 @@ export class CreateBussinesUserComponent {
   }
 
   public onSubmit(): void {
+    this.isLoading = true;
     this.validateFields();
     
     if (this.form.valid && this.allFieldsValid()) {
-      const newUser: BusinessUser = {
-        id: this.id || '',
-        businessId: this.businessId || '',
-        name: this.form.get('name')?.value || '',
-        email: this.form.get('email')?.value || '',
-        password: this.form.get('password')?.value || '',
-        cpf: this.form.get('cpf')?.value || '',
-        phone: this.form.get('phone')?.value || '',
-        birthDate: this.form.get('birthDate')?.value || '',
-        creationDate: new Date().toISOString(),
-        isActive: true
-      };
   
-      this.createBusinessUserService.createNewBusinessUser(newUser);
-      this.router.navigateByUrl("/manage-business-users/" + this.businessId);
+      this.createBusinessUserService.userInformations = {
+        email: this.form.get('email')!.value!,
+        senha: this.form.get('password')!.value!,
+        nome: this.form.get('name')!.value!,
+        cpf: this.form.get('cpf')!.value!,
+        dataNascimento: this.form.get('birthDate')!.value!,
+        idEmpresa: this.businessId
+      }
+
+      this.createBusinessUserService.registerBusinessUser().subscribe(
+        res => {
+          this.isLoading = false;
+          this.router.navigate(['/manage-business-users/' + this.businessId]);
+        },
+        err => {
+          this.isLoading = false;
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao criar usuário' });
+        }
+      );
+
     } else {
-      console.log('Formulário inválido');
+      this.isLoading = false;
+      this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Informações inválidas' });
     }
   }
   
@@ -262,10 +302,6 @@ export class CreateBussinesUserComponent {
     return !this.emailEmpty && !this.emailInvalid && !this.emailConfirmationEmpty && !this.emailConfirmationInvalid && !this.emailsDontMatch &&
         !this.passwordEmpty && !this.passwordConfirmationEmpty && !this.passwordDontMatch && !this.cpfEmpty && !this.cpfInvalid && !this.nameEmpty &&
         !this.phoneEmpty && !this.phoneInvalid && !this.birthDateEmpty && !this.birthDateInvalid;
-  }
-
-  ngOnInit(): void {
-    this.coin = 50;
   }
 
   isCpfValid(): boolean {
