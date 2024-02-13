@@ -8,7 +8,7 @@
     *ngIf="isDeleteUserModalOpen"
     [user]="user"
     (closeModal)="closeEditModal()"
-    (confirmDelete)="disableUser($event)"
+    (confirmDelete)="disableUser()"
 ></app-delete-business-user-modal>
 <main class="d-flex w-100 main">
     <div class="sidebar">
@@ -49,7 +49,7 @@
                         </div>
                     </section>
                 </div>
-                <div class="container py-5 px-3 error-page" *ngIf="!(usersList.length > 0) && !solicitationError">
+                <div class="container py-5 px-3 error-page" *ngIf="!(usersList.length > 1) && !solicitationError">
                     <div class="h-100 d-flex flex-column p-5 align-items-center justify-content-center">
                         <img src="assets/imgs/sem-resultado.svg" alt="Não encontramos nada..."
                             title="Não encontramos nada." class="notFound mb-4 fadeIn">
@@ -84,7 +84,7 @@
                     [rowsPerPageOptions]="[5, 10, 20]"
                     (sortFunction)="onSort($event)"
                     [customSort]="true"
-                    *ngIf="usersList.length > 0 && !solicitationError"
+                    *ngIf="usersList.length > 1 && !solicitationError"
                 >
                     <ng-template pTemplate="header">
                         <tr>
@@ -96,19 +96,19 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-usersList let-i="rowIndex">
                         
-                        <tr>
+                        <tr *ngIf="i != 0">
                             <td class="px-0">
-                                <span class="indicator py-3 me-4 {{usersList.isActive ? 'bg-success' : 'bg-danger'}}"></span>
+                                <!-- <span class="indicator py-3 me-4 {{usersList.isActive ? 'bg-success' : 'bg-danger'}}"></span> -->
+                                <span class="indicator py-3 me-4 bg-success"></span>
                                 {{ usersList.dataRegistro }}
                             </td>
                             <td>{{ usersList.nome }}</td>
                             <td>{{ usersList.email }}</td>
                             <td class="d-flex gap-3">
                                 <button class="edit py-1 px-2" (click)="openEditModal(i)">Editar<img src="assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
-                                <button class="delete py-1 px-2 d-flex align-items-center justify-content-between" (click)="openDeleteModal(i)" *ngIf="usersList.isActive">Desativar<img src="assets/icons/x.svg" alt="Excluir" class="ms-2"></button>
-                                <button class="ativate py-1 px-2 d-flex align-items-center justify-content-between" (click)="ativateUser(usersList)" *ngIf="!(usersList.isActive)">Ativar<img src="assets/icons/check.svg" alt="Excluir" class="ms-2"></button>
-                            </td>
-                            
+                                <button class="delete py-1 px-2 d-flex align-items-center justify-content-between" (click)="openDeleteModal(i)">Desativar<img src="assets/icons/x.svg" alt="Excluir" class="ms-2"></button>
+                                <!-- <button class="ativate py-1 px-2 d-flex align-items-center justify-content-between" (click)="ativateUser(usersList)" *ngIf="!(usersList.isActive)">Ativar<img src="assets/icons/check.svg" alt="Excluir" class="ms-2"></button> -->
+                            </td>    
                         </tr>
                     </ng-template>
                 </p-table>

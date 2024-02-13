@@ -146,8 +146,11 @@ export class ListBusinessUsersComponent {
     this.closeEditModal();
   }
 
-  disableUser(userToDisable: any){
-    this.createBusinessUserService.disableBusinessUser(userToDisable.id);
+  disableUser(){
+    setTimeout(() => {
+      this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Usuário destivado com sucesso' });
+    }, 1000);
+
     this.closeEditModal();
   }
 

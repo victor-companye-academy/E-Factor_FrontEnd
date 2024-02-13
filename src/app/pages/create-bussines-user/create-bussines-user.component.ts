@@ -270,7 +270,16 @@ export class CreateBussinesUserComponent {
         },
         err => {
           this.isLoading = false;
-          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao criar usuário' });
+          const errMessage = err.error[0].message
+          if (errMessage == "Saldo insuficiente"){
+            this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Saldo insuficiente' });
+          } else if (errMessage == "Cpf já cadastrado"){
+            this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'O CPF informado já foi cadastrado' });
+          } else if (errMessage == "Email já cadastrado"){
+            this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'O email informado já foi cadastrado' });
+          } else {
+            this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao criar usuário' });
+          }
         }
       );
 

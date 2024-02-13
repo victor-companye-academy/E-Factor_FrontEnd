@@ -32,4 +32,15 @@ export class BusinessUserService {
         map(response => response)
       );
   }
+
+  public desativateBusinessUser(id: number) {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    }
+    
+    return this.httpClient.delete('http://localhost:8085/ms-empresa/v1/desativar-gestor?id_gestor=' + id, { headers })
+      .pipe(
+        map(response => response)
+      );
+  }
 }
