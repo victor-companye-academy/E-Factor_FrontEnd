@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Vacancy } from '../../interfaces/vacancy';
-import { BusinessService } from '../business/business.service';
-import { BusinessInfo } from '../../interfaces/business-info';
+import { AuthService } from '../auth/auth.service';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VacancyService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
   private keyVacanciesStorage: string = 'vacancies';
   private keyCompanyStorage: string = 'companyVacancy';
@@ -255,7 +256,18 @@ export class VacancyService {
     return this.listVacancies().filter(e => e.showedInterest.includes(id));
   }
 
-  public listVacanciesByBusiness(id: string): Array<Vacancy> {
-    return this.listVacancies().filter(e => e.businessId === id);
+  // public listVacanciesByBusiness(id: string): Array<Vacancy> {
+  //   return this.listVacancies().filter(e => e.businessId === id);
+  // }
+
+  public listVacanciesByBusiness() {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+
+    return this.httpClient.get('http://localhost:8085/ms-empresa/v1/listar-vagas/usuario-empresa', { headers })
+      .pipe(
+        map(response => response)
+      )
   }
 }

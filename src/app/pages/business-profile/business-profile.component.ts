@@ -43,7 +43,17 @@ export class BusinessProfileComponent {
       (res: any) => {
         this.businessInfo = res;
         this.coins = res.saldoCoins;
-        this.isLoading = false;
+        
+        this.vacancyService.listVacanciesByBusiness().subscribe(
+          (res: any) => {
+            this.isLoading = false;
+            this.cardVacancy = res;
+          },
+          error => {
+            this.isLoading = false;
+            console.log(error);
+          }
+        )
       },
       error => {
         this.profileNotFound = true;
@@ -52,6 +62,7 @@ export class BusinessProfileComponent {
       }
     );
 
+
     this.isGestorEmpresa = this.authService.getRole() == 'GESTOR_EMPRESA';
   }
   
@@ -59,7 +70,7 @@ export class BusinessProfileComponent {
   protected isLoading: boolean = false;
   protected id = 0;
   protected businessInfo: any;
-  protected cardVacancy: Array<Vacancy> = this.vacancyService.listVacanciesByBusiness(this.id.toString()); //TODO
+  protected cardVacancy: Array<any> = [];
   protected coins: number = 0;
   protected loggedId: number = -1;
   protected isGestorEmpresa: boolean = false;
