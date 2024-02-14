@@ -4,7 +4,6 @@ import { Vacancy } from 'src/app/core/interfaces/vacancy';
 import { VacancyService } from 'src/app/core/service/vacancy/vacancy.service';
 import { ProfessionalService } from 'src/app/core/service/professional/professional.service';
 import { AuthService } from 'src/app/core/service/auth/auth.service';
-import { UtilService } from 'src/app/core/service/util/util.service';
 import { MessageService } from 'primeng/api';
 
 @Component({
@@ -30,7 +29,17 @@ export class ProfessionalProfileComponent {
         
         this.experiencias = this.professionalInfo.jornadas.filter((jornada: { tpJornada: string; }) => jornada.tpJornada === 'Trabalho');
         this.formacoes = this.professionalInfo.jornadas.filter((jornada: { tpJornada: string; }) => jornada.tpJornada === 'FORMAÇÃO');
-        this.isLoading = false;
+
+        this.professionalService.listInterestedVacancies().subscribe(
+          res => {
+            this.cardVacancy = res;
+            this.isLoading = false;
+          },
+          error => {
+            console.log(error);
+            this.isLoading = false;
+          }
+        )
       },
       error => {
         console.log(error);
@@ -38,6 +47,7 @@ export class ProfessionalProfileComponent {
         this.isLoading = false;
       }
     )
+
   }
       
   protected profileNotFound: boolean = false;
@@ -47,7 +57,7 @@ export class ProfessionalProfileComponent {
   
   protected id: number = 0;
   protected professionalInfo: any;
-  protected cardVacancy: Array<Vacancy> = this.vacancyService.listInterestedVacancies(this.id.toString());
+  protected cardVacancy: Array<Vacancy> = [];
 
   protected idade: number = 0;
   protected experiencias: Array<any> = [];
@@ -150,5 +160,9 @@ export class ProfessionalProfileComponent {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([currentUrl]);
     });
+  }
+
+  onImageError(event: any) {
+    event.target.src = 'assets/imgs/default-profile.svg'; // Define o src para a imagem padrão
   }
 }

@@ -25,7 +25,8 @@
             </div>
             <section>
                 <div class="d-flex align-items-center p-4 dados-juridicos">
-                    <img class="profile-photo ms-3" [src]="businessInfo.fotoPerfil ? businessInfo.fotoPerfil : 'assets/imgs/default-profile.svg'" alt="Foto do perfil">
+                    <img class="profile-photo ms-3" [src]="businessInfo.fotoPerfil ? businessInfo.fotoPerfil : 'assets/imgs/default-profile.svg'" 
+                        (error)="onImageError($event)" alt="Foto do perfil">
                     <div class="ms-5">
                         <h5 class="name fw-bold">{{businessInfo.nomeFantasia}}</h5>
                         <p class="info-text fw-light">{{businessInfo.endereco.cidade}}, {{businessInfo.endereco.estado}}</p>
@@ -67,16 +68,20 @@
                     </section>
                 </div>
             </div>
-            <div class="vacancys-div d-flex gap-3">
+            <div class="vacancys-div d-flex gap-3 mb-5">
                 <div *ngIf="!isLogged && !(cardVacancy.length > 0) ? false : true" [ngClass]="isLogged && isGestorEmpresa ? 'about w-75' : 'w-100'">
                     <h5 class="fw-bold mt-4">Vagas recentes</h5>
-                    <div class="d-flex flex-column align-items-center gap-3" *ngIf="(cardVacancy.length > 0)">
-                        <span *ngFor="let card of cardVacancy; let i = index" class="mx-1">
-                            <card-vacancy [short]="isCollapsed ? true : false" [card]="card" class="mt-4" *ngIf="i < 3"></card-vacancy>
-                        </span>
-                        <button class=" w-25 btn btn-view-all fw-bold mt-3" [routerLink]="['{{businessInfo.id}}-all-vacancies']">Ver tudo</button>
+                    <div class="d-flex flex-column gap-3">
+                        <ng-container *ngFor="let card of cardVacancy; let i = index">
+                          <span *ngIf="i < 3" class="mx-1">
+                            <card-vacancy [short]="isCollapsed ? true : false" [card]="card" class="mt-4"></card-vacancy>
+                          </span>
+                        </ng-container>
+                        <div class="d-flex justify-content-center">
+                            <button class="w-25 btn btn-view-all fw-bold mt-3" [routerLink]="['{{businessInfo.id}}-all-vacancies']">Ver tudo</button>
+                        </div>
                     </div>
-                    <div class="d-flex flex-column align-items-center gap-3 py-4" *ngIf="!(cardVacancy.length > 0)">
+                    <div class="d-flex flex-column align-items-center gap-3 py-4" *ngIf="cardVacancy.length == 0">
                         <p>Parece que você ainda não possui nenhuma vaga cadastrada, sinta-se a vontade para publicar uma agora mesmo.</p>
                         <button class="w-25 btn btn-view-all fw-bold mt-3" [routerLink]="['{{businessInfo.id}}-all-vacancies']">Publicar vaga</button>
                     </div>

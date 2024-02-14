@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CardDetails } from 'src/app/core/interfaces/card-details';
+import { ProfessionalCard } from 'src/app/core/interfaces/professional-card';
 import { ProfessionalInfo } from 'src/app/core/interfaces/professional-info';
 import { Vacancy } from 'src/app/core/interfaces/vacancy';
 import { AuthService } from 'src/app/core/service/auth/auth.service';
@@ -23,12 +24,35 @@ export class HomeComponent implements OnInit {
   protected isLogged: boolean = false;
   protected about: Array<CardDetails> = this.cardDetailsService.listAbout();
   protected testimonials: Array<CardDetails> = this.cardDetailsService.listTestimonials();
-  protected cardVacancy: Array<Vacancy> = this.vacancyService.listVacancies();
-  protected cardProfessional: Array<ProfessionalInfo> = this.professionalService.listProfessionals();
+
+  protected cardVacancy!: Array<Vacancy>;
+
+  protected cardProfessional!: Array<ProfessionalCard>;
+
   public responsiveOptions: any[] | undefined;
   protected isBlockNonloggedModalOpen: boolean = false;
 
-  ngOnInit() {
+  protected async initializeVacanciesList(): Promise<void> {
+    try {
+      this.cardVacancy = await this.vacancyService.listVacancies();
+    } catch (error) {
+      console.error('Erro ao inicializar a lista de vagas:', error);
+    }
+  }
+
+  protected async initializeProfessionalsList(): Promise<void> {
+    try {
+      this.cardProfessional = await this.professionalService.listProfessionals();
+    } catch (error) {
+      console.error('Erro ao inicializar a lista de vagas:', error);
+    }
+  }
+
+  async ngOnInit() {
+
+    await this.initializeVacanciesList();
+    await this.initializeProfessionalsList();
+
     this.responsiveOptions = [
       {
         breakpoint: '1199px',

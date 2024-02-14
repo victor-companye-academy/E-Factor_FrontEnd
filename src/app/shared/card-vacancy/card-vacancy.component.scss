@@ -3,6 +3,11 @@
         background-color: var(--background);
         color: var(--text);
 
+        .logo{
+            height: 3rem;
+            width: 3rem;
+        }
+
         .bg-var-primary {
             background-color: var(--primary);
             color: var(--text-white);
@@ -19,6 +24,10 @@
             font-size: 0.85rem;
             background: none;
             max-height: 100px;
+        }
+
+        .skill{
+            max-width: 6rem;
         }
 
         .section-description {

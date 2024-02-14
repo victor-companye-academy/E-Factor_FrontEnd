@@ -9,7 +9,7 @@ export class CardProfessionalService {
 
   constructor(private professionalService: ProfessionalService) { }
 
-  public listProfessionals():Array<ProfessionalInfo>{
-    return this.professionalService.listProfessionals();
-  }
+  // public listProfessionals():Array<ProfessionalInfo>{
+  //   return this.professionalService.getProfessionals();
+  // }
 }

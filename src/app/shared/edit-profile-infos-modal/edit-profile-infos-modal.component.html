@@ -4,7 +4,8 @@
         <div class="d-flex flex-column align-items-center justify-content-center">
             <img class="profile-photo mx-4 mt-3" [src]="pageType == 'professional-profile' ? (editedProfile.ftPerfil ? 
                 editedProfile.ftPerfil : 'assets/imgs/default-profile.svg') : (editedProfile.fotoPerfil ? 
-                editedProfile.fotoPerfil : 'assets/imgs/default-profile.svg')" alt="Foto do perfil">
+                editedProfile.fotoPerfil : 'assets/imgs/default-profile.svg')" 
+                (error)="onImageError($event)" alt="Foto do perfil">
             <label for="photo" class="btn cancel mt-3">Selecione um arquivo<img src="assets/icons/edit.svg" alt="Editar" class="ms-2"></label>
             <input type="file" id="photo" title="photo" name="photo" accept="image/*" (change)="onPhotoChange($event)" class="p-1">
         </div>

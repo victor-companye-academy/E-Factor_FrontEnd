@@ -571,4 +571,8 @@ export class EditProfileInfosModalComponent {
   formatSelectValue(input: string): string {
     return input.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
   }
+
+  onImageError(event: any) {
+    event.target.src = 'assets/imgs/default-profile.svg'; // Define o src para a imagem padrão
+  }
 }

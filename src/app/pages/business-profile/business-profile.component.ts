@@ -44,16 +44,29 @@ export class BusinessProfileComponent {
         this.businessInfo = res;
         this.coins = res.saldoCoins;
         
-        this.vacancyService.listVacanciesByBusiness().subscribe(
-          (res: any) => {
+        if (this.isLogged){
+          this.vacancyService.listVacanciesByLoggedBusiness().subscribe(
+            (res: any) => {
+              this.isLoading = false;
+              this.cardVacancy = res;
+            },
+            error => {
+              this.isLoading = false;
+              console.log(error);
+            }
+          )
+        } else {
+          this.vacancyService.listVacanciesByBusiness(this.id)
+          .then((res: any) => {
             this.isLoading = false;
             this.cardVacancy = res;
-          },
-          error => {
+          })
+          .catch(error => {
             this.isLoading = false;
             console.log(error);
-          }
-        )
+          });
+        }
+          
       },
       error => {
         this.profileNotFound = true;
@@ -62,15 +75,14 @@ export class BusinessProfileComponent {
       }
     );
 
-
     this.isGestorEmpresa = this.authService.getRole() == 'GESTOR_EMPRESA';
   }
-  
+
   protected profileNotFound: boolean = false;
   protected isLoading: boolean = false;
   protected id = 0;
   protected businessInfo: any;
-  protected cardVacancy: Array<any> = [];
+  protected cardVacancy!: Array<Vacancy>;
   protected coins: number = 0;
   protected loggedId: number = -1;
   protected isGestorEmpresa: boolean = false;
@@ -101,7 +113,7 @@ export class BusinessProfileComponent {
 
   saveProfileChanges(updatedProfile: any) {
     let successMessage = '';
-    if (this.businessInfo){
+    if (this.businessInfo) {
       switch (this.modalIndex) {
         case 0:
           successMessage = 'Informações atualizadas com sucesso';
@@ -111,13 +123,21 @@ export class BusinessProfileComponent {
           break;
       }
     }
-            
+
     setTimeout(() => {
       this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: successMessage });
     }, 1000);
-    
+
     this.modalIndex = -1;
     this.closeEditModal();
+  }
+
+  async initializeCardVacancy() {
+    try {
+      this.cardVacancy = await this.vacancyService.listVacanciesByBusiness(this.id);
+    } catch (error) {
+      console.error('Erro ao inicializar a lista de vagas por empresa:', error);
+    }
   }
 
   logout() {
@@ -132,5 +152,13 @@ export class BusinessProfileComponent {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([currentUrl]);
     });
+  }
+
+  async ngOnInit() {
+    await this.initializeCardVacancy();
+  }
+
+  onImageError(event: any) {
+    event.target.src = 'assets/imgs/default-profile.svg'; // Define o src para a imagem padrão
   }
 }
