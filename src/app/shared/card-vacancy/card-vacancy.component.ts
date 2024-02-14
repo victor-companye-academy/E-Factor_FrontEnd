@@ -11,7 +11,7 @@ export class CardVacancyComponent {
   @Input({ alias: 'card' }) public card?: Vacancy;
   @Input({ alias: 'isLogged' }) public isLogged?: boolean;
 
-  protected differenceInDays!: string;;
+  protected differenceInDays!: string;
 
   onDays(): string {
     const date = this.card?.horaInclusao;
@@ -62,7 +62,7 @@ export class CardVacancyComponent {
 
   ngOnInit() {
     
-    if (!this.card!.idEmpresa){
+    if (!this.card!.nomeEmpresa){
 
       this.card!.status = this.card?.ativo;
       
@@ -70,9 +70,10 @@ export class CardVacancyComponent {
       this.card!.tituloVaga = this.card!.titulo || 'Título da vaga';
       this.card!.descricaoVaga = this.card!.descricao || 'Descricão da vaga';
       
-      // this.card!.horaInclusao = this.card!.horaInclusao || 'Data de inclusão'; - CAMPO NAO EXISTE
-      if (this.card!.dataInteresse) {
-        const dataInteresse = new Date(this.card!.dataInteresse);
+      this.card!.horaInclusao = this.card!.dataInclusaoVaga || 'Data de inclusão';
+
+      if (this.card!.dataInclusaoVaga) {
+        const dataInteresse = new Date(this.card!.dataInclusaoVaga!);
         const dia = String(dataInteresse.getDate()).padStart(2, '0');
         const mes = String(dataInteresse.getMonth() + 1).padStart(2, '0');
         const ano = dataInteresse.getFullYear();

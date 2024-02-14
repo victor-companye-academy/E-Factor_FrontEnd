@@ -28,4 +28,5 @@ export interface Vacancy {
     estado?: string,
     titulo?: string,
     descricao?: string,
+    dataInclusaoVaga?: string,
 }

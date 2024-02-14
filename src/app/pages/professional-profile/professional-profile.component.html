@@ -89,10 +89,6 @@
                     <div class="d-flex mb-2 mt-4">
                         <h5 class="fw-bold my-1">Minhas vagas</h5>
                     </div>
-                    <!-- <div *ngFor="let card of cardVacancy; let i = index" class="mt-2">
-                        <p>{{card}}</p>
-                        <card-vacancy [short]="true" [card]="card" class="card-vacancy" *ngIf="i < 2"></card-vacancy>
-                    </div> -->
                     <ng-container *ngFor="let card of cardVacancy; let i = index">
                         <span *ngIf="i < 2" class="mx-1">
                             <card-vacancy [short]="true" [card]="card" class="mt-4"></card-vacancy>
