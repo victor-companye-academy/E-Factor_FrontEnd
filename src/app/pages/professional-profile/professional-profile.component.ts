@@ -71,6 +71,9 @@ export class ProfessionalProfileComponent {
   protected isEditLanguagesModalOpen = false;
   protected modalIndex: number = -1;
 
+  protected visible: boolean = false;
+  protected card: Vacancy = {} as Vacancy;
+
   openEditModal(index: number) {
     switch (index) {
       case 0:
@@ -164,5 +167,10 @@ export class ProfessionalProfileComponent {
 
   onImageError(event: any) {
     event.target.src = 'assets/imgs/default-profile.svg'; // Define o src para a imagem padrão
+  }
+
+  protected showDialog(card: Vacancy) {
+    this.card = card
+    this.visible = true;
   }
 }

@@ -76,6 +76,22 @@
             background: var(--primary);
         }
     }
+
+    @media (max-width: 991px) {
+        .section-main{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section-create-vacancy{
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            width: 93%;
+            margin-bottom: 3rem;
+        }
+    }
 }
 
 :host ::ng-deep {

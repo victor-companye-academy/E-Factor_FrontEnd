@@ -4,6 +4,10 @@ import { PaginatorState } from 'primeng/paginator';
 import { Vacancy } from 'src/app/core/interfaces/vacancy';
 import { VacancyService } from 'src/app/core/service/vacancy/vacancy.service';
 import { formatText } from 'src/app/core/utils/formatText';
+import { AuthService } from 'src/app/core/service/auth/auth.service';
+import { MessageService } from 'primeng/api';
+import { ProfessionalService } from 'src/app/core/service/professional/professional.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-vacancies-created',
@@ -11,18 +15,78 @@ import { formatText } from 'src/app/core/utils/formatText';
   styleUrls: ['./vacancies-created.component.scss']
 })
 export class VacanciesCreatedComponent {
-  constructor(private vacancyService: VacancyService) { }
+  constructor(private vacancyService: VacancyService, private professionalService: ProfessionalService,
+     private authService: AuthService, private messageService: MessageService, private router: Router, private route: ActivatedRoute) {
+    
+    this.isLoading = true;
+    this.id = parseInt(this.route.snapshot.paramMap.get('id')!);
+    
+    if (this.id && this.authService.isAuthenticated() && this.authService.getRole().includes('PROFISSIONAL')) {
+      this.vacancyService.listVacanciesByBusiness(this.id).then(
+        (res: any) => {
+          this.isLoading = false;
+          this.vacancy = res;
+          this.vacancySearch = this.pagination(this.vacancy);
+          this.totalRecords = this.vacancySearch.length;
+          this.toShow = true;
+          this.onPageChange({page: 0, first: 0, rows: 5, pageCount: 1});
+        })
+        .catch(          
+          error => {
+            this.isLoading = false;
+            this.toShow = false;
+            this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível carregar as vagas' });
+        });
+    } else if (this.authService.isAuthenticated() && this.authService.getRole().includes('GESTOR')){
+      this.isBusiness = true;
+      this.vacancyService.listVacanciesByLoggedBusiness().subscribe(
+        (res: any) => {
+          this.isLoading = false;
+          this.vacancy = res;
+          this.vacancySearch = this.pagination(this.vacancy);
+          this.totalRecords = this.vacancySearch.length;
+          this.toShow = true;
+          this.onPageChange({page: 0, first: 0, rows: 5, pageCount: 1});
+        },
+        error => {
+          this.isLoading = false;
+          this.toShow = false;
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível carregar as vagas' });
+        });
+    } else if (this.authService.isAuthenticated() && this.authService.getRole().includes('PROFISSIONAL')) {
+      this.professionalService.listInterestedVacancies().subscribe(
+        (res: any) => {
+          this.isLoading = false;
+          this.vacancy = res;
+          this.vacancySearch = this.pagination(this.vacancy);
+          this.totalRecords = this.vacancySearch.length;
+          this.toShow = true;
+          this.onPageChange({page: 0, first: 0, rows: 5, pageCount: 1});
+        },
+        error => {
+          this.isLoading = false;
+          this.toShow = false;
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível carregar as vagas' });
+        }
+      )
+    } else {
+      this.router.navigate(['/']);
+    }
+  } 
 
-  protected readonly rows: number = 10;
+  protected id: number = 0;
+  protected isBusiness: boolean = false;
+  protected isLoading: boolean = false;
+  protected readonly rows: number = 5;
   protected toShow: boolean = true;
   protected visible: boolean = false;
   protected card?: Vacancy;
 
-  protected vacancy: Array<Vacancy> = this.vacancyService.listCompanyVacancies()
-  protected vacancySearch: Array<Vacancy> = this.vacancy;
+  protected vacancy: Array<Vacancy> = [];
+  protected vacancySearch: Array<Vacancy> = [];
 
   protected first: number = 0;
-  protected totalRecords: number = this.vacancySearch.length || 0
+  protected totalRecords: number = 0;
   private searchObj: Search | undefined;
 
   protected setSearch(event: Search) {
@@ -33,7 +97,7 @@ export class VacanciesCreatedComponent {
       this.vacancySearch = this.applySearch(this.vacancy, event);
       this.totalRecords = this.vacancySearch.length;
 
-      this.vacancySearch = this.pagination(this.vacancySearch)
+      this.vacancySearch = this.pagination(this.vacancySearch);
 
     } else {
       this.searchObj = undefined

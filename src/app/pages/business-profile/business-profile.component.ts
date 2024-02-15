@@ -87,6 +87,9 @@ export class BusinessProfileComponent {
   protected loggedId: number = -1;
   protected isGestorEmpresa: boolean = false;
 
+  protected visible: boolean = false;
+  protected card: Vacancy = {} as Vacancy;
+
   @HostListener('window:resize', ['$event'])
   onWindowResize(event: Event) {
     this.isCollapsed = window.innerWidth < 991;
@@ -160,5 +163,10 @@ export class BusinessProfileComponent {
 
   onImageError(event: any) {
     event.target.src = 'assets/imgs/default-profile.svg'; // Define o src para a imagem padrão
+  }
+
+  protected showDialog(card: Vacancy) {
+    this.card = card
+    this.visible = true;
   }
 }

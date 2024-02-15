@@ -58,6 +58,8 @@ const routes: Routes = [
       { path: 'create', component: CreateVacancyCreateComponent }
     ]
   },
+  { path: 'view-interested-vacancies', component: VacanciesCreatedComponent },
+  { path: 'view-vacancy/:id', component: VacanciesCreatedComponent },
   {
     path: 'request-coin-factor',
     children: [

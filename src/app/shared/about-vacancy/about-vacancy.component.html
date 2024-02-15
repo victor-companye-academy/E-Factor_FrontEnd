@@ -54,7 +54,7 @@
                     Endereço
                 </h4>
                 <span class="fw-semibold fs-6">
-                    {{card.endereco.cidade}} - {{card.endereco.estado}}
+                    {{card.endereco ? card.endereco.cidade : card.cidade}} - {{card.endereco ? card.endereco.estado : card.estado}}
                 </span>
             </div>
         </section>
