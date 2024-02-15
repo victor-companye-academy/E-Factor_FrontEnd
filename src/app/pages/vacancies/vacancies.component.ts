@@ -215,7 +215,7 @@ export class VacanciesComponent {
 
       this.toShow = this.isEmptylist(this.vacancySearch);
     } catch (error) {
-      console.error('Erro ao inicializar a lista de vagas:', error);
+      console.error('Erro ao inicializar a lista de vagas');
     }
   }
 

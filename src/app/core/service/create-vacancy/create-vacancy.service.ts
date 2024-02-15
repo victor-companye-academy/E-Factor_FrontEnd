@@ -7,6 +7,7 @@ import { Observable, map, throwError } from 'rxjs';
 import { ResponseNewVacancy } from '../../interfaces/response-new-vacancy';
 import { VacancyService } from '../vacancy/vacancy.service';
 import { AuthService } from '../auth/auth.service';
+import { SkillsService } from '../skills/skills.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,14 @@ import { AuthService } from '../auth/auth.service';
 export class CreateVacancyService {
 
   private url: string = 'http://localhost:8085/ms-empresa/v1/cadastrar-vaga';
+  private skills: number[] = [];
 
-  constructor(private http: HttpClient, private vacancyService: VacancyService, private authService: AuthService) {
+  constructor(private http: HttpClient, private vacancyService: VacancyService, private authService: AuthService, private skillsService: SkillsService) {
   }
   private static wasSendVacancy: boolean = false;
 
   private vacancy: any = {};
+  private skillIds: number[] = [];
 
   public getWasSendVacancy(): boolean {
     return CreateVacancyService.wasSendVacancy;
@@ -85,7 +88,7 @@ export class CreateVacancyService {
         modalidade: this.vacancy.modalidade,
         tipoContrato: this.vacancy.tipoContrato,
         senioridade: this.vacancy.senioridade,
-        habilidades: this.vacancy.habilidades
+        habilidades: this.skillIds
       }
       return newVacancy
     }
@@ -128,6 +131,12 @@ export class CreateVacancyService {
       .pipe(
         map(response => response)
       );
+  }
 
+  async ngOnInit() {
+    await this.skillsService.getIdByName(this.vacancy.habilidades as string[]).subscribe({
+      next: res => this.skillIds = [...res],
+      error: () => console.log('Erro ao obter id das habilidades')
+    })
   }
 }
