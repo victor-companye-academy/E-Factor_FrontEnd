@@ -84,7 +84,7 @@
                             <p-dialog [(visible)]="visible" [modal]="true" [style]="{ width: '90vw'}"
                                 [draggable]="false" [resizable]="true" [maximizable]="true" styleClass="modal">
     
-                                <about-vacancy [card]="card" [showInterest]="false"></about-vacancy>
+                                <about-vacancy [card]="card" [showInterest]="isLogged ? false : true"></about-vacancy>
                             </p-dialog>
                         </div>
                         <div class="d-flex justify-content-center">

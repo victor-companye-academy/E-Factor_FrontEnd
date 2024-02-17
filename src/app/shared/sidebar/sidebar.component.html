@@ -1,4 +1,4 @@
-<div id="sidebar" class="h-100 justify-content-between flex-column py-5 px-4 position-relative">
+<div id="sidebar" class="h-100 justify-content-between flex-column py-5 px-4 position-relative" *ngIf="!isCollapsed">
     <img [src]="isCollapsed ? (isAdm ? 'assets/favicon-adm.svg' : 'assets/favicon.svg') : (isAdm ? 'assets/logo-efactor-adm.svg' : 'assets/logo-efactor.svg')" alt="logo e-factor" title="e-factor" id="logo" class="mb-5 position-fixed" [ngClass]="{'ms-4': !isCollapsed}">
     <nav class="position-fixed menu flex-column justify-content-between position-fixed mt-5" [ngClass]="{'px-2 ': isCollapsed}">
         <div id="nav-links" *ngFor="let link of (isAdm ? arrayLinksAdminSidebar : arrayLinksSidebar); let i = index" class="p-2">
@@ -25,10 +25,19 @@
         </div>
         <div class="p-0 mt-2 mb-1 d-flex" *ngIf="role != 'ADMINISTRADOR' && role != 'undefined'">
             <div class="bg-white rounded-circle photo-circle mb-1">
-                <img [src]="profilePicture ? profilePicture : 'assets/icons/user.svg'" alt="" class="nav-icons mb-1" [ngClass]="{'profilePicture': profilePicture}">
+                <img [src]="profilePicture" (error)="onImageError($event)" alt="" class="nav-icons mb-1" [ngClass]="{'profilePicture': profilePicture}">
             </div>
             <a class="fw-bold text-decoration-none ms-2" *ngIf="!isCollapsed">{{ userName.substring(0, 10) + (userName.length > 10 ? '...' : '') }}</a>
         </div>
         <img src="assets/icons/sidebar/arrow.svg" alt="Entrar" class="nav-icons" *ngIf="!isCollapsed">
     </button>
+</div>
+<div *ngIf="isCollapsed">
+    <div class="card" [ngStyle]="{'height': authService.getRole() == 'ADMINISTRADOR' ? '406px' : authService.getRole().includes('GESTOR') ? '518px' : authService.getRole() == 'PROFISSIONAL' ? '406px' : '406px'}">
+        <div class="speeddial-tooltip-demo">
+            <p-toast></p-toast>
+            <p-speedDial [model]="tooltipItems" className="speeddial-left" direction="up" type="linear" (onVisibleChange)="changePhotoSpeedDial()"></p-speedDial>
+        </div>
+    </div>
+    <img [src]="profilePicture" (error)="onImageError($event)" alt="" class="img-speedDial rounded-circle" id="img-speedDial">
 </div>

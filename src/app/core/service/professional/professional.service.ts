@@ -793,7 +793,7 @@ export class ProfessionalService {
     return this.httpClient.post<any>('http://localhost:8085/ms-profissional/v1/salvar-dados-pessoais', body, { headers })
       .pipe(
         map(response => response)
-      )
+      );
   }
 
   public listInterestedVacancies() {
@@ -802,6 +802,74 @@ export class ProfessionalService {
     };
     
     return this.httpClient.get<any>('http://localhost:8085/ms-profissional/v1/listar-vagas-interesse', { headers })
+      .pipe(
+        map(response => response)
+      );
+  }
+
+  public getSkillsList() {
+    return this.httpClient.get<any>('http://localhost:8085/ms-profissional/v1/habilidades')
+      .pipe(
+        map(response => response)
+      );
+  }
+
+  public saveSkills(skills: Array<any>) {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+  
+    const habilidadesFormatadas = skills.map((skill: { id: number; habilidade: string }) => {
+      return {
+        habilidade: skill.id,
+        nivel: null // Nível não utilizado, mantido por compatibilidade
+      };
+    });
+  
+    const body = {
+      habilidades: habilidadesFormatadas
+    };
+  
+    return this.httpClient.post<any>('http://localhost:8085/ms-profissional/v1/cadastrar-habilidades', body, { headers })
+      .pipe(
+        map(response => response)
+      );
+  }
+  
+  public deleteSkills(skillsToDelete: Array<number>) {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+
+    if (skillsToDelete.length == 0) {
+      skillsToDelete.push(0);
+    }
+
+    const body = {
+      habilidades: skillsToDelete
+    }
+
+    return this.httpClient.delete<any>('http://localhost:8085/ms-profissional/v1/remover-habilidades', { headers, body })
+      .pipe(
+        map(response => response)
+      );
+  }
+
+  getLanguagesList() {
+    return this.httpClient.get<any>('http://localhost:8085/ms-profissional/v1/idiomas')
+      .pipe(
+        map(response => response)
+      );
+  }
+
+  public saveLanguages(languages: Array<any>) {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+
+    const body = languages;
+    
+    return this.httpClient.post<any>('http://localhost:8085/ms-profissional/v1/salvar-idioma', body, { headers })
       .pipe(
         map(response => response)
       );

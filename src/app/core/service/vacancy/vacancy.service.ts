@@ -151,4 +151,26 @@ export class VacancyService {
         map(response => response)
       )
   }
+
+  public assignInterest(id: number) {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+
+    return this.http.post<any>('http://localhost:8085/ms-profissional/v1/mostrar-interesse?id_vaga=' + id, { }, { headers })
+      .pipe(
+        map(response => response)
+      )
+  }
+
+  public returnInterestedsByVacancy(id: number) {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+
+    return this.http.get('http://localhost:8085/ms-empresa/v1/interessados-vaga?id_vaga=' + id, { headers })
+      .pipe(
+        map(response => response)
+      )
+  }
 }

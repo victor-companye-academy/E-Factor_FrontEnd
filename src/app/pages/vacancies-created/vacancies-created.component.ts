@@ -24,6 +24,7 @@ export class VacanciesCreatedComponent {
     if (this.id && this.authService.isAuthenticated() && this.authService.getRole().includes('PROFISSIONAL')) {
       this.vacancyService.listVacanciesByBusiness(this.id).then(
         (res: any) => {
+          this.showInterestBtn = true;
           this.isLoading = false;
           this.vacancy = res;
           this.vacancySearch = this.pagination(this.vacancy);
@@ -88,6 +89,7 @@ export class VacanciesCreatedComponent {
   protected first: number = 0;
   protected totalRecords: number = 0;
   private searchObj: Search | undefined;
+  protected showInterestBtn: boolean = false;
 
   protected setSearch(event: Search) {
     this.first = 0

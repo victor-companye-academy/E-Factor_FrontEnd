@@ -2,40 +2,46 @@
     <form (ngSubmit)="onSubmit()">
         <label for="language" class="fw-bold fs-5">Idiomas:</label>
         <div class="mb-3">
-            <div class="d-flex justify-content-between align-items-end gap-3">
-                <input type="text" id="language" [(ngModel)]="searchText" (input)="filterLanguage(); changeIsValid()" name="language" class="form-control my-2" placeholder="Digite o idioma desejado aqui...">
+            <div class="d-flex justify-content-between align-items-end gap-3 inputs">
+                <input type="text" id="language" [(ngModel)]="search" (input)="filterLanguage(); changeIsValid()" name="language" class="form-control my-2" placeholder="Digite o idioma desejado aqui...">
                 <div>
                     <label for="level">Proficiência</label>
                     <select name="level" id="level" class="form-select mb-2" [(ngModel)]="languageLevel" (change)="changeIsValid()">
                         <option value="Básico">Básico</option>
                         <option value="Intermediário">Intermediário</option>
                         <option value="Avançado">Avançado</option>
-                        <option value="Nativo">Fluente</option>
+                        <option value="Fluente">Fluente</option>
                     </select>
                 </div>
-                <button type="button" class="btn save mb-2" (click)="addLanguage(searchText, languageLevel)" [disabled]="!isValid">Adicionar</button>
+                <button type="button" class="btn save mb-2" (click)="addLanguage(searchObj, languageLevel)" [disabled]="!isValid">Adicionar</button>
             </div>
             <div *ngFor="let language of filteredLanguages; let i = index" class="mx-3 fadeIn">
                 <div *ngIf="i < 5">
-                    <p (click)="addLanguageToInput(language)" class="languageList my-1" [innerHTML]="getHighlightedText(language)"></p>
+                    <p (click)="addLanguageToInput(language)" class="languageList my-1" [innerHTML]="getHighlightedText(language.idioma)"></p>
                     <hr class="my-1">
                 </div>
             </div>
         </div>
         <p class="errMsg">{{errMsg}}</p>
         <div class="d-flex flex-wrap">
-            <div *ngFor="let language of editedProfile.languages; let i = index" class="mx-1">
+            <div *ngFor="let language of editedProfile.idiomas; let i = index" class="mx-1 my-2">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="languages">
-                        <p class="my-1 py-1 px-3 fadeIn">{{language.language}}<img (click)="deleteLanguage(i)" src="assets/icons/x2.svg" alt="Excluir" class="x-icon ms-2"></p>
-                        <p class="my-1 py-1 px-3 fadeIn">{{language.level}}</p>
+                        <p class="my-1 py-1 px-3 fadeIn">{{language.idioma}}<img (click)="deleteLanguage(language)" src="assets/icons/x2.svg" alt="Excluir" class="x-icon ms-2"></p>
+                        <p class="my-1 py-1 px-3 fadeIn">{{language.nivel}}</p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="d-flex justify-content-end gap-2 mt-3">
             <button type="button" class="btn cancel" (click)="cancelEdit()">Cancelar</button>
-            <button type="submit" class="btn save">Salvar</button>
+            <button type="submit" class="btn save">
+                <p class="m-0" *ngIf="!isLoading">Salvar</p>
+                <div class="spinner-border" role="status" style="width: 1.3rem; height: 1.3rem;"*ngIf="isLoading">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </button>
         </div>
     </form>
 </div>
+<p-toast></p-toast>

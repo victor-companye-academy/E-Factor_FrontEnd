@@ -1,5 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { MenuItem } from 'primeng/api';
 import { SidebarLinks } from 'src/app/core/interfaces/sidebar-links';
 import { AuthService } from 'src/app/core/service/auth/auth.service';
 import { UtilService } from 'src/app/core/service/util/util.service';
@@ -16,8 +17,9 @@ export class SidebarComponent {
   userName: string = '';
   profilePicture: string = '';
   idEmpresaLogada: number = -1;
+  tooltipItems!: MenuItem[];
 
-  constructor(private router: Router, private authService: AuthService, private utilService: UtilService) {
+  constructor(private router: Router, protected authService: AuthService, private utilService: UtilService) {
 
     const url = window.location.href;
     this.role = this.authService.getRole();
@@ -37,7 +39,6 @@ export class SidebarComponent {
       this.userName = name;
     });
     this.utilService.profilePicture$.subscribe((picture: string) => {
-      // this.profilePicture = `data:image/png;base64,${picture}`
       this.profilePicture = picture
     })
     this.utilService.businessId$.subscribe((id: number) => {
@@ -118,5 +119,265 @@ export class SidebarComponent {
     } else {
       this.router.navigate(['/login']);
     }
+  }
+
+  ngOnInit() {
+    this.role = this.authService.getRole();
+
+    if (this.role == 'PROFISSIONAL') {
+      this.tooltipItems = [
+        {
+          tooltipOptions: {
+              tooltipLabel: 'Perfil'
+          },
+          icon: 'pi pi-user',
+          command: () => {
+              this.router.navigate(['/professional-profile', this.authService.getId()]);
+          }
+        },
+        {
+            tooltipOptions: {
+                tooltipLabel: 'Página inicial'
+            },
+            icon: 'pi pi-home',
+            command: () => {
+                this.router.navigate(['/']);
+            }
+        },
+        {
+          tooltipOptions: {
+              tooltipLabel: 'Profissionais'
+          },
+          icon: 'pi pi-users',
+          command: () => {
+              this.router.navigate(['/search-professionals']);
+          }
+        },
+        {
+          tooltipOptions: {
+              tooltipLabel: 'Vagas'
+          },
+          icon: 'pi pi-briefcase',
+          command: () => {
+              this.router.navigate(['/search-vacancies']);
+          }
+        },
+        {
+          tooltipOptions: {
+              tooltipLabel: 'Novidades'
+          },
+          icon: 'pi pi-paperclip',
+          command: () => {
+              this.router.navigate(['/newsletter']);
+          }
+        },
+        {
+          tooltipOptions: {
+              tooltipLabel: 'Sobre'
+          },
+          icon: 'pi pi-comment',
+          command: () => {
+              this.router.navigate(['/about']);
+          }
+        },
+      ]
+    } else if (this.role.includes('GESTOR')) {
+      this.tooltipItems = [
+        {
+          tooltipOptions: {
+              tooltipLabel: 'Perfil'
+          },
+          icon: 'pi pi-user',
+          command: () => {
+              this.router.navigate(['/business-profile', this.idEmpresaLogada]);
+          }
+        },
+        {
+            tooltipOptions: {
+                tooltipLabel: 'Página inicial'
+            },
+            icon: 'pi pi-home',
+            command: () => {
+                this.router.navigate(['/']);
+            }
+        },
+        {
+          tooltipOptions: {
+              tooltipLabel: 'Profissionais'
+          },
+          icon: 'pi pi-users',
+          command: () => {
+              this.router.navigate(['/search-professionals']);
+          }
+        },
+        {
+          tooltipOptions: {
+            tooltipLabel: 'Vagas'
+          },
+          icon: 'pi pi-briefcase',
+          command: () => {
+              this.router.navigate(['/search-vacancies']);
+          }
+        },
+        {
+          tooltipOptions: {
+              tooltipLabel: 'Novidades'
+          },
+          icon: 'pi pi-paperclip',
+          command: () => {
+              this.router.navigate(['/newsletter']);
+          }
+        },
+        {
+          tooltipOptions: {
+              tooltipLabel: 'Sobre'
+          },
+          icon: 'pi pi-comment',
+          command: () => {
+              this.router.navigate(['/about']);
+          }
+        },
+        {
+          tooltipOptions: {
+              tooltipLabel: 'Criar vaga'
+          },
+          icon: 'pi pi-plus',
+          command: () => {
+              this.router.navigate(['/create-vacancy']);
+          }
+        },
+        {
+          tooltipOptions: {
+              tooltipLabel: 'Extrato'
+          },
+          icon: 'pi pi-dollar',
+          command: () => {
+              this.router.navigate(['/extract']);
+          }
+        },
+      ]
+    } else if (this.role == 'ADMINISTRADOR') {
+      this.tooltipItems = [
+        {
+          tooltipOptions: {
+              tooltipLabel: 'Página inicial'
+          },
+          icon: 'pi pi-home',
+          command: () => {
+              this.router.navigate(['/admin/']);
+          }
+        },
+        {
+          tooltipOptions: {
+              tooltipLabel: 'Profissionais'
+          },
+          icon: 'pi pi-users',
+          command: () => {
+              this.router.navigate(['/admin/professionals-list']);
+          }
+        },
+        {
+          tooltipOptions: {
+              tooltipLabel: 'Empresas'
+          },
+          icon: 'pi pi-building',
+          command: () => {
+              this.router.navigate(['/admin/business-list']);
+          }
+        },
+        {
+          tooltipOptions: {
+              tooltipLabel: 'Vagas'
+          },
+          icon: 'pi pi-briefcase',
+          command: () => {
+              this.router.navigate(['/admin/vacancys-list']);
+          }
+        },
+        {
+          tooltipOptions: {
+              tooltipLabel: 'Solicitações'
+          },
+          icon: 'pi pi-bell',
+          command: () => {
+              this.router.navigate(['/admin/solicitations-list']);
+          }
+        },
+        {
+          tooltipOptions: {
+              tooltipLabel: 'Sair'
+          },
+          icon: 'pi pi-sign-out',
+          command: () => {
+              this.router.navigate(['/login']);
+          }
+        },
+      ]
+    } else {
+      this.tooltipItems = [
+        {
+          tooltipOptions: {
+              tooltipLabel: 'Entrar'
+          },
+          icon: 'pi pi-sign-in',
+          command: () => {
+              this.router.navigate(['/login']);
+          }
+        },
+        {
+            tooltipOptions: {
+                tooltipLabel: 'Página inicial'
+            },
+            icon: 'pi pi-home',
+            command: () => {
+                this.router.navigate(['/']);
+            }
+        },
+        {
+          tooltipOptions: {
+              tooltipLabel: 'Profissionais'
+          },
+          icon: 'pi pi-users',
+          command: () => {
+              this.router.navigate(['/search-professionals']);
+          }
+        },
+        {
+          tooltipOptions: {
+              tooltipLabel: 'Vagas'
+          },
+          icon: 'pi pi-briefcase',
+          command: () => {
+              this.router.navigate(['/search-vacancies']);
+          }
+        },
+        {
+          tooltipOptions: {
+              tooltipLabel: 'Novidades'
+          },
+          icon: 'pi pi-paperclip',
+          command: () => {
+              this.router.navigate(['/newsletter']);
+          }
+        },
+        {
+          tooltipOptions: {
+              tooltipLabel: 'Sobre'
+          },
+          icon: 'pi pi-comment',
+          command: () => {
+              this.router.navigate(['/about']);
+          }
+        },
+      ]
+    }
+  }
+
+  onImageError(event: any) {
+    event.target.src = 'assets/imgs/default-profile.svg'; // Define o src para a imagem padrão
+  }
+
+  changePhotoSpeedDial() {
+    document.querySelector('#img-speedDial')?.classList.toggle('focus-img');
   }
 }

@@ -1,6 +1,7 @@
 <div class="d-flex justify-content-end mt-5">
     <button type="button" class="fadeIn border-0 mb-1 tobble align-items-center bg-transparent" *ngIf="false">
         <img src="assets/icons/tobble.svg" alt="Icone seta" title="Mudar modo">
+        <!-- <p-inputSwitch [(ngModel)]="isOnDarkMode"></p-inputSwitch> -->
     </button>
 
     <button type="button" class="d-flex align-items-center border-0 bg-transparent mx-4" *ngIf="isBusinessLogged">
@@ -21,7 +22,7 @@
             <div class="notifications">
                 <h5 class="fw-bold title">Notificações</h5>
                 <div class="d-flex flex-column align-items-center gap-3 my-3">
-                    <div *ngFor="let notification of notifications; let i = index" class="d-flex cursor-pointer" (click)="openVacancy(notification.idVaga)">
+                    <div *ngFor="let notification of notifications; let i = index" class="d-flex cursor-pointer" (click)="openVacancys()">
                         <div class="bg-img rounded-circle bg-white p-2 d-flex align-items-center justify-content-center me-3" style="width: 45px; height: 45px;">
                             <img src="assets/icons/briefcase.svg" alt="Atualização de vaga">
                         </div>

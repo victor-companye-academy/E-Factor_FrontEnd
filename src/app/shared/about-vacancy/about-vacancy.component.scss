@@ -45,6 +45,8 @@
 
             section {
                 background: var(--white);
+                border-radius: 1rem;
+                padding: 1.5rem;
 
                 img {
                     border: none;
@@ -61,6 +63,20 @@
                     transition: 0.5s;
                 }
             }
+        }
+    }
+
+    .interestedList{
+        width: 100%;
+        background-color: var(--background);
+    }
+
+    @media (max-width: 991px) {
+        .profile{
+            width: 90vw !important;
+        }
+        .vacancy-data{
+            width: 90vw !important;
         }
     }
 }

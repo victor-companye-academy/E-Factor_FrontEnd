@@ -1,6 +1,6 @@
 <section *ngIf="card" class="row section-main p-4">
     <div class="col-5 col-xl-3 profile me-4">
-        <section class="profile mb-5 rounded-4 p-5 d-flex flex-column align-items-center overflow-hidden">
+        <section class=" mb-5 rounded-4 p-5 d-flex flex-column align-items-center overflow-hidden">
 
             <div class="div-img-logo">
                 <img [src]="card.fotoPerfil" (error)="onImageError($event)" alt="" title="Logo da empresa"
@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <div>
+            <div *ngIf="card.email">
                 <h4 class="fw-light fs-6 mt-4 mb-2">
                     E-mail
                 </h4>
@@ -59,16 +59,42 @@
             </div>
         </section>
 
-        <div [ngStyle]="{'display': showInterest?'block':'none'}">
-            <button type="button" class="w-100 border-0 rounded-4 py-2 fs-5 fw-semibold button mb-5">
-                <!-- (click)="show()" -->
-                Demonstrar interesse
+        <div [ngStyle]="{'display': showInterest?'block':'none'}" *ngIf="isProfessional">
+            <button type="button" class="w-100 border-0 rounded-4 py-2 fs-5 fw-semibold button mb-5" (click)="assignInterest()" >
+                <p class="m-0" *ngIf="!isLoading">Demonstrar interesse</p>
+                <div class="spinner-border" role="status" style="width: 1.3rem; height: 1.3rem;"*ngIf="isLoading">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </button>
+        </div>
+        <div *ngIf="isBusiness">
+            <button type="button" class="w-100 border-0 rounded-4 py-2 fs-5 fw-semibold button mb-5" (click)="toggleShowInterested()">
+                <p class="m-0" *ngIf="!isLoading">{{showInterested ? 'Ocultar interessados' : 'Mostrar interessados'}}</p>
             </button>
         </div>
 
+        <section class="interestedList fadeIn" *ngIf="showInterested" class="mt-4">
+            <h5 class="fw-light">Interessados na vaga: {{interestedList.length}}</h5>
+            <p-scroller #sc [items]="interestedList" [itemSize]="50" scrollHeight="500px" styleClass="border-1 surface-border fadeIn" [style]="{'width': '100%', 'height': '400px'}">
+                <ng-template pTemplate="item" let-interestedList let-options="options">
+                    <div>
+                        <p class="fw-light m-0 mt-3">Nome</p>
+                        <div class="flex align-items-center" [ngClass]="{ 'surface-ground': options.odd }" class="fw-semibold">{{ interestedList.nome }}</div>
+                        <div class="flex align-items-center" [ngClass]="{ 'surface-ground': options.odd }">{{ interestedList.descricao.substring(0, 50) + '...' }}</div>
+                    </div>
+                    <div class="d-flex gap-2 my-1">
+                        <ng-container *ngFor="let item of interestedList.habilidades; let i = index">
+                          <p-chip label="{{item}}" *ngIf="i < 4"></p-chip>
+                        </ng-container>
+                        <p-chip *ngIf="interestedList.habilidades.length > 4" label="+{{interestedList.habilidades.length - 4}}"></p-chip>
+                    </div>                          
+                </ng-template>
+            </p-scroller>
+        </section>
+
     </div>
 
-    <div class="col about d-flex flex-column justify-content-between">
+    <div class="col about d-flex flex-column justify-content-between mt-3">
         <div>
             <div class="d-flex align-items-center mb-4">
                 <h2 class="fw-semibold fs-4 primary-color text-center">
@@ -84,14 +110,14 @@
         </div>
 
         <div class="row mb-5 pb-5">
-            <section class="container col-6">
+            <section class="container col-6 vacancy-data">
                 <h2 class="fw-semibold fs-4 primary-color text-start mt-4">
                     Dados da vaga
                 </h2>
 
                 <div class="mt-4  mb-3">
                     <div class="row">
-                        <div class="col-12 col-xl-6 py-2">
+                        <div class="col-12 col-xl-6 py-2" *ngIf="card.senioridade">
                             <div class="py-3 px-3 card border-0 rounded-4">
                                 <h4 class="fw-light fs-6">
                                     Senioridade

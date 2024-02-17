@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { ProfessionalService } from 'src/app/core/service/professional/professional.service';
 
 @Component({
   selector: 'app-edit-profile-language-modal',
@@ -10,105 +12,106 @@ export class EditProfileLanguageModalComponent {
   @Output() closeModal = new EventEmitter<boolean>();
   @Output() saveChanges = new EventEmitter<any>();
 
+  constructor(private messageService: MessageService, private professionalService: ProfessionalService) { 
+    
+    this.professionalService.getLanguagesList().subscribe(
+      (res: any[]) => {
+        this.languagesList = res;
+      }
+    )
+  }
+
+  protected isLoading: boolean = false;
   protected editedProfile: any;
-  protected searchText: string = '';
-  protected filteredLanguages: Array<string> = [];
+  protected search: string = '';
+  protected searchObj: any = { idioma: '', id: 0 };
+  protected filteredLanguages: Array<any> = [];
   protected languageLevel: string = '';
   protected isValid: boolean = false;
   protected errMsg: string = '';
-
-  protected languagesList: Array<string> = [
-    'Inglês', 'Espanhol', 'Francês', 'Alemão', 'Chinês (Mandarim)', 'Japonês', 'Coreano',
-    'Russo', 'Árabe', 'Português - BR', 'Português - PT', 'Italiano', 'Holandês', 'Sueco', 'Norueguês', 'Dinamarquês',
-    'Finlandês', 'Grego', 'Turco', 'Hindi', 'Urdu', 'Bengali', 'Punjabi', 'Indonésio', 'Malaio',
-    'Vietnamita', 'Tailandês', 'Tagalo', 'Malgaxe', 'Suaíli', 'Amárico', 'Hauçá', 'Iorubá',
-    'Zulu', 'Somali', 'Oromo', 'Tâmil', 'Telugu', 'Marata', 'Birmanês', 'Khmer', 'Laosiano',
-    'Hmong', 'Cingalês', 'Filipino', 'Maori', 'Fijiano', 'Tonganês', 'Samoano', 'Havaiano',
-    'Inuktitut', 'Cherokee', 'Navajo', 'Quechua', 'Guarani', 'Mapudungun', 'Iídiche',
-    'Curdo', 'Pashto', 'Dari', 'Tajique', 'Turcomeno', 'Uzbeque', 'Quirguiz', 'Cazaque', 'Mongol',
-    'Tibetano', 'Uigur', 'Bislama', 'Pidgin de Papua Nova Guiné', 'Pijin das Ilhas Salomão',
-    'Tok Pisin', 'Marshalês', 'Palauano', 'Chamorro', 'Kosraean', 'Chuukese', 'Yapese',
-    'Māori', 'Samoano', 'Taitiano', 'Rapa Nui', 'Fijiano', 'Havaiano', 'Rotumano', 'Gilbertês',
-    'Marshalês', 'Nauruano', 'Palauano', 'Samoano', 'Tokelauano', 'Tonganês', 'Tuvaluano'
-  ];
+  protected languagesList: Array<any> = [];
+  protected languagesToSave: Array<any> = [];
 
   ngOnInit() {
     this.editedProfile = JSON.parse(JSON.stringify(this.profile));
-    const mainElement = document.querySelector('.main');
-    if (mainElement) {
-      mainElement.classList.add('blur-background');
-    }
+    document.querySelector('.main')?.classList.add('blur-background');
   }
 
   onSubmit() {
-    this.closeModal.emit(true);
-    this.saveChanges.emit(this.editedProfile.languages);
-    const mainElement = document.querySelector('.main');
-    if (mainElement) {
-      mainElement.classList.remove('blur-background');
-    }
+    this.isLoading = true;
+    this.professionalService.saveLanguages(this.languagesToSave).subscribe(
+      res => {
+        this.isLoading = false;
+        this.saveChanges.emit();
+        document.querySelector('.main')?.classList.remove('blur-background');
+      },
+      error => {
+        this.isLoading = false;
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível salvar o idioma' });
+      }
+    )
   }
 
   cancelEdit() {
     this.closeModal.emit(true);
-    const mainElement = document.querySelector('.main');
-    if (mainElement) {
-      mainElement.classList.remove('blur-background');
-    }
+    document.querySelector('.main')?.classList.remove('blur-background');
   }
 
   filterLanguage() {
-    if (!this.searchText) {
+    if (!this.search) {
       this.filteredLanguages = [];
       return;
     }
 
-    this.filteredLanguages = this.languagesList.filter(language =>
-      language.toLowerCase().startsWith(this.searchText.toLowerCase())
+    this.filteredLanguages = this.languagesList.filter(idiomas =>
+      idiomas.idioma.toLowerCase().startsWith(this.search.toLowerCase())
     );
   }
 
   getHighlightedText(language: string): string {
-    const index = language.toLowerCase().indexOf(this.searchText.toLowerCase());
+    const index = language.toLowerCase().indexOf(this.search.toLowerCase());
     if (index >= 0) {
       const prefix = language.substring(0, index);
-      const highlighted = language.substring(index, index + this.searchText.length);
-      const suffix = language.substring(index + this.searchText.length);
+      const highlighted = language.substring(index, index + this.search.length);
+      const suffix = language.substring(index + this.search.length);
       return `${prefix}<strong>${highlighted}</strong>${suffix}`;
     } else {
       return language;
     }
   }
 
-  addLanguage(language: string, level: string) {
-    for (let i = 0; i < this.editedProfile.languages.length; i++) {
-      if (this.editedProfile.languages[i].language === language) {
+  addLanguage(language: any, level: string) {
+    for (let i = 0; i < this.editedProfile.idiomas.length; i++) {
+      if (this.editedProfile.idiomas[i].idioma === language.idioma) {
         this.errMsg = "O idioma escolhido já existe em sua lista de idiomas.";
         return;
       }
     }
     if(this.languagesList.includes(language)) {
-      this.editedProfile.languages.push({ language: language, level: level });
+      this.editedProfile.idiomas.push({ idioma: language.idioma, nivel: level.toUpperCase() });
+      this.languagesToSave.push({ idioma: language.id, nivel: level.toUpperCase() });
       this.errMsg = '';
     } else {
       this.errMsg = 'Idioma não encontrado.';
     }
 
-    this.searchText = '';
+    this.searchObj = { idioma: '', id: 0 };
+    this.search = '';
     this.filteredLanguages = [];
   }
 
-  addLanguageToInput(language: string) {
-    this.searchText = language;
+  addLanguageToInput(language: any) {
+    this.searchObj = language;
+    this.search = language.idioma;
     this.filteredLanguages = [];
   }
 
-  deleteLanguage(i: number) {
-    this.editedProfile.languages.splice(i, 1);
+  deleteLanguage(language: any) {
+    this.messageService.add({ severity: 'info', summary: 'Aviso', detail: 'Não é possível deletar o idioma no momento.' }); // TODO: remover idioma da lista
   }
 
   changeIsValid(){
-    if(this.searchText && this.languageLevel){
+    if(this.searchObj && this.languageLevel){
       this.isValid = true;
     } else {
       this.isValid = false;
