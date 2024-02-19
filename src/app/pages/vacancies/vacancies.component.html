@@ -19,16 +19,16 @@
 
             <search (sendData)="setSearch($event)" id="search"></search>
 
-            <div class="row mt-4">
+            <div class="d-flex gap-3 mt-4 div-content">
 
-                <div class="col-3 mt-4 mb-5">
+                <div class="col-3 mt-4 mb-5" id="filter">
                     <filter (sendData)="setSearch($event)" class="div-filter"></filter>
                 </div>
 
                 <Section class="col-9 position-relative pb-5 section-main">
                     <span *ngFor="let card of vacancySearch" class="mx-1 fadeIn">
                         <card-vacancy (click)="isLogged ? showDialog(card) : openNonLoggedModal()" 
-                            [isLogged]="isLogged" [short]="false" [card]="card" class="mt-4 cursor-pointer"></card-vacancy>
+                            [isLogged]="isLogged" [short]="showShortVacancy" [card]="card" class="mt-4 cursor-pointer"></card-vacancy>
                     </span>
 
                     <!--  -->
@@ -67,6 +67,8 @@
                         </div>
                     </ng-template>
                 </Section>
+
+                <button class="btn btn-view-all fw-bold mt-3" *ngIf="showBtnFilter" (click)="scrollToFilter()">Filtrar</button>
             </div>
         </div>
         <app-footer class="footer"></app-footer>

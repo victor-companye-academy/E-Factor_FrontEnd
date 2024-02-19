@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { PaginatorState } from 'primeng/paginator';
 import { ProfessionalCard } from 'src/app/core/interfaces/professional-card';
 import { Search } from 'src/app/core/interfaces/search';
@@ -18,6 +18,10 @@ export class ProfessionalsComponent {
     if (this.authService.isAuthenticated()) {
       this.isLogged = true;
     }
+
+    if (window.innerWidth <= 767){
+      this.showBtnFilter = true;
+    }
   }
 
 
@@ -34,6 +38,8 @@ export class ProfessionalsComponent {
 
   protected isLogged: boolean = false;
   protected isBlockNonloggedModalOpen: boolean = false;
+
+  protected showBtnFilter: boolean = false;
 
   //
 
@@ -230,5 +236,18 @@ export class ProfessionalsComponent {
   }
 
   async ngOnInit() {
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.showBtnFilter = window.innerWidth <= 767;
+  }
+
+  scrollToFilter() {
+    const filterElement = document.getElementById('filter');
+  
+    if (filterElement) {
+      filterElement.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 }

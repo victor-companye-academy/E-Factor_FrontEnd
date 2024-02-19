@@ -15,7 +15,7 @@
         color: var(--primary);
         background-color: transparent;
         border-radius: 0.75rem;
-        width: 6rem;
+        width: 7rem;
     }
 
     .btn-search{
@@ -59,7 +59,7 @@
 }
 
 @media (max-width: 767px) {
-    body{
+    main{
         min-height: 31.25rem;
     }
     .content{

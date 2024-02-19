@@ -19,9 +19,9 @@
 
             <search (sendData)="setSearch($event)" id="search"></search>
 
-            <div class="row mt-4">
+            <div class="d-flex gap-3 mt-4 div-content">
 
-                <div class="col-3 mt-4 mb-5">
+                <div class="col-3 mt-4 mb-5" id="filter">
                     <filter (sendData)="setSearch($event)" class="div-filter"></filter>
                 </div>
 
@@ -67,6 +67,8 @@
                         </div>
                     </ng-template>
                 </Section>
+
+                <button class="btn btn-view-all fw-bold mt-3" *ngIf="showBtnFilter" (click)="scrollToFilter()">Filtrar</button>
             </div>
         </div>
         <app-footer class="footer"></app-footer>

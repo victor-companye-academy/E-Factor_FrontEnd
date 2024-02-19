@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { PaginatorState } from 'primeng/paginator';
 import { Vacancy } from 'src/app/core/interfaces/vacancy';
 import { Search } from 'src/app/core/interfaces/search';
@@ -17,6 +17,11 @@ export class VacanciesComponent {
     if (this.authService.isAuthenticated()) {
       this.isLogged = true;
     }
+
+    if (window.innerWidth <= 767){
+      this.showBtnFilter = true;
+      this.showShortVacancy = true;
+    }
   }
 
   protected readonly rows: number = 10;
@@ -34,6 +39,9 @@ export class VacanciesComponent {
 
   protected isLogged: boolean = false;
   protected isBlockNonloggedModalOpen: boolean = false;
+
+  protected showBtnFilter: boolean = false;
+  protected showShortVacancy: boolean = false;
 
   //
 
@@ -219,4 +227,17 @@ export class VacanciesComponent {
     }
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.showBtnFilter = window.innerWidth <= 767;
+    this.showShortVacancy = window.innerWidth <= 767;
+  }
+
+  scrollToFilter() {
+    const filterElement = document.getElementById('filter');
+  
+    if (filterElement) {
+      filterElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 }

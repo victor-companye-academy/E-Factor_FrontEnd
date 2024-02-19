@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CardDetails } from 'src/app/core/interfaces/card-details';
 import { ProfessionalCard } from 'src/app/core/interfaces/professional-card';
-import { ProfessionalInfo } from 'src/app/core/interfaces/professional-info';
 import { Vacancy } from 'src/app/core/interfaces/vacancy';
 import { AuthService } from 'src/app/core/service/auth/auth.service';
 import { CardDetailsService } from 'src/app/core/service/cardDetails/card-details.service';
@@ -15,9 +14,18 @@ import { VacancyService } from 'src/app/core/service/vacancy/vacancy.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private cardDetailsService: CardDetailsService, private professionalService: ProfessionalService, private vacancyService: VacancyService,  private authService: AuthService) {
+  constructor(private cardDetailsService: CardDetailsService, private professionalService: ProfessionalService,
+    private vacancyService: VacancyService,  private authService: AuthService) {
     if (this.authService.isAuthenticated()) {
       this.isLogged = true;
+    }
+    
+    if (window.innerWidth > 1500) {
+      this.numOfCards = 3;
+    } else if (window.innerWidth < 1500 && window.innerWidth > 991) {
+      this.numOfCards = 2;
+    } else {
+      this.numOfCards = 1;
     }
   }
 
@@ -30,7 +38,10 @@ export class HomeComponent implements OnInit {
   protected cardProfessional!: Array<ProfessionalCard>;
 
   public responsiveOptions: any[] | undefined;
+  protected numOfCards: number;
   protected isBlockNonloggedModalOpen: boolean = false;
+
+  protected banners: Array<CardDetails> = this.cardDetailsService.listBanners();
 
   protected async initializeVacanciesList(): Promise<void> {
     try {
@@ -52,19 +63,6 @@ export class HomeComponent implements OnInit {
 
     await this.initializeVacanciesList();
     await this.initializeProfessionalsList();
-
-    this.responsiveOptions = [
-      {
-        breakpoint: '1199px',
-        numVisible: 2,
-        numScroll: 1
-      },
-      {
-        breakpoint: '992px',
-        numVisible: 1,
-        numScroll: 1
-      }
-    ];
   }
 
   openNonLoggedModal() {
@@ -73,5 +71,16 @@ export class HomeComponent implements OnInit {
 
   closeNonLoggedModal() {
     this.isBlockNonloggedModalOpen = false;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize(event: Event) {
+    if (window.innerWidth > 1500) {
+      this.numOfCards = 3;
+    } else if (window.innerWidth < 1500 && window.innerWidth > 991) {
+      this.numOfCards = 2;
+    } else if (window.innerWidth < 991) {
+      this.numOfCards = 1;
+    }
   }
 }

@@ -6,9 +6,11 @@
         color: var(--text-white);
         min-height: 13rem;
 
+
         background-color: rgb(140, 140, 140);
         background-repeat: no-repeat;
         background-size: cover;
+        background-position: top right;
 
         img {
             width: 60px;
@@ -35,6 +37,13 @@
                 outline: var(--b) solid var(--c);
                 outline-offset: var(--g);
             }
+        }
+
+    }
+
+    @media(max-width: 767px) {
+        .card {
+            background-blend-mode: multiply;
         }
     }
 

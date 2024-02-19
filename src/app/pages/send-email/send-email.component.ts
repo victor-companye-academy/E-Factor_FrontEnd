@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { EmailService } from 'src/app/core/service/email/email.service';
 
 @Component({
   selector: 'app-send-email',
@@ -8,16 +10,16 @@ import { Component } from '@angular/core';
 export class SendEmailComponent {
 
   protected email: string = '';
-  protected btnSearch: string = 'Pesquisar';
   protected msgError: string = '';
   protected isSearchBtnActive: boolean = false;
-  protected text: string = 'Insira seu email para procurar sua conta.';
-  protected confirmEmail: boolean = false;
+  protected isLoading: boolean = false;
+
+  constructor(private emailService: EmailService, private router: Router) { }
 
   inputEmail(event: any){
     this.email = event.target.value;
-
-    if(this.email != '' && this.email.includes('@')){
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if(this.email != '' && regex.test(this.email)) {
       this.isSearchBtnActive = true;
     } else {
       this.isSearchBtnActive = false;
@@ -25,14 +27,21 @@ export class SendEmailComponent {
   }
 
   searchEmail(){
-    //logica de busca de email
-    if (true){
-      this.text = 'Enviaremos um código para o e-mail:';
-      this.msgError = '';
-      this.confirmEmail = true;
-      this.btnSearch = 'Enviar';
-    } else {
-      this.msgError = 'Não conseguimos encontrar uma conta com esse e-mail.';
-    }
+    this.isLoading = true;
+    this.emailService.recoverPassword(this.email).subscribe(
+      res => {
+        this.isLoading = false;
+        this.msgError = '';
+        this.redirect();
+      },
+      error => {
+        this.isLoading = false;
+        this.msgError = 'Não conseguimos encontrar uma conta com esse e-mail.';
+      }
+    )
+  }
+
+  redirect(){
+    this.router.navigate(['/confirm-code', this.email]);
   }
 }

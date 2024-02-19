@@ -25,7 +25,8 @@
         </div>
         <div class="p-0 mt-2 mb-1 d-flex" *ngIf="role != 'ADMINISTRADOR' && role != 'undefined'">
             <div class="bg-white rounded-circle photo-circle mb-1">
-                <img [src]="profilePicture" (error)="onImageError($event)" alt="" class="nav-icons mb-1" [ngClass]="{'profilePicture': profilePicture}">
+                <img [src]="profilePicture" (error)="onImageError($event)" alt="" class="nav-icons mb-1" 
+                    [ngClass]="{'profilePicture': profilePicture}" style="height: 1.5rem; width: 1.5rem">
             </div>
             <a class="fw-bold text-decoration-none ms-2" *ngIf="!isCollapsed">{{ userName.substring(0, 10) + (userName.length > 10 ? '...' : '') }}</a>
         </div>

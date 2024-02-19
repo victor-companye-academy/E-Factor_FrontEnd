@@ -4,7 +4,8 @@
         <h1 class="fw-bold mb-5">Insira o código de segurança</h1>
         <p>Verifique se você recebeu um email contendo seu código. Seu código tem 6 números.</p>
         <div class="input-section d-flex gap-3 align-items-center">
-            <input title="email" type="email" class="form-control w-50" placeholder="Ex: 123456" *ngIf="true" (input)="codeInput($event)">
+            <input title="email" type="email" class="form-control w-50" placeholder="Ex: 123456" *ngIf="true" 
+                (input)="codeInput($event)" maxlength="6" (keyup.enter)="isContinueBtnActive ? confirmCode() : ''">
             <div>
                 <p class="mb-1">Enviamos seu código para:</p>
                 <p class="email mb-1">{{email}}</p>
@@ -14,7 +15,13 @@
         <br>
         <div class="d-flex gap-3 justify-content-end">
             <button class="btn btn-cancel fw-bold" [routerLink]="['/login']">Cancelar</button>
-            <button class="btn btn-search fw-bold" (click)="confirmCode()" [disabled]="!isContinueBtnActive">Continuar</button>
+            <button class="btn btn-search fw-bold" (click)="confirmCode()" [disabled]="!isContinueBtnActive">
+                <div class="spinner-border" role="status" style="width: 1.3rem; height: 1.3rem;"
+                    *ngIf="isLoading">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p *ngIf="!isLoading" class="m-0">Continuar</p>
+            </button>
         </div>
     </div>
 </body>
