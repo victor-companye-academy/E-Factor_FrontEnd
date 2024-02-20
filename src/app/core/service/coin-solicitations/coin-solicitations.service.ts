@@ -16,7 +16,6 @@ export class CoinSolicitationsService {
     dataStorage = sessionStorage.getItem(this.keyRequestCoin);
 
     if (dataStorage) {
-      console.log("Usando sessionStorage");
 
       return JSON.parse(dataStorage);
     }
@@ -121,7 +120,6 @@ export class CoinSolicitationsService {
     ]
 
     sessionStorage.setItem(this.keyRequestCoin, JSON.stringify(solicitationsArray));
-    console.log("Usando requisição para API");
 
     return solicitationsArray;
   }

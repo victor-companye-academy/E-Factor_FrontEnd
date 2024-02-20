@@ -81,7 +81,6 @@ export class CreateVacancyService {
 
   public getCreateVacancy(): RequestNewVacancy | any {
     if (this.vacancy) {
-
       const newVacancy: RequestNewVacancy = {
         titulo: this.vacancy.tituloVaga,
         descricao: this.vacancy.descricaoVaga,
@@ -120,23 +119,51 @@ export class CreateVacancyService {
     }
   }
 
-  public createVacancy(): Observable<ResponseNewVacancy> {
-    const requestBody = this.getCreateVacancy();
+
+  public async createVacancy(): Promise<Observable<ResponseNewVacancy>> {
+    await this.getSkillIds();
+
+    let requestBody:RequestNewVacancy | undefined;
+
+    if (this.skillIds && this.skillIds.length > 0) {
+      requestBody = {
+        titulo: this.vacancy.tituloVaga,
+        descricao: this.vacancy.descricaoVaga,
+        modalidade: this.vacancy.modalidade,
+        tipoContrato: this.vacancy.tipoContrato,
+        senioridade: this.vacancy.senioridade,
+        habilidades: this.skillIds
+      }
+    }
 
     const headers = {
       Authorization: `Bearer ${this.authService.getToken()}`
     };
 
-    return this.http.post<ResponseNewVacancy>(this.url, requestBody, { headers })
-      .pipe(
-        map(response => response)
-      );
+    return new Observable(observer => {
+      this.http.post<ResponseNewVacancy>(this.url, requestBody, { headers })
+        .subscribe({
+          next: (response: ResponseNewVacancy) => {
+            observer.next(response);
+            observer.complete();
+          },
+          error: (error: any) => {
+            observer.error(error);
+          }
+        });
+    });
   }
 
-  async ngOnInit() {
-    await this.skillsService.getIdByName(this.vacancy.habilidades as string[]).subscribe({
-      next: res => this.skillIds = [...res],
-      error: () => console.log('Erro ao obter id das habilidades')
-    })
+  async getSkillIds() {
+    try {
+      const res = await this.skillsService.getIdByName(this.vacancy.habilidades as string[]).toPromise();
+      if (res) {
+        this.skillIds = [...res];
+      } else {
+        console.log('Resposta vazia.');
+      }
+    } catch (error) {
+      console.log('Erro ao obter id das habilidades', error);
+    }
   }
 }
