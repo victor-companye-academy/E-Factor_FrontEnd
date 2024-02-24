@@ -4,7 +4,7 @@
         <!-- <p-inputSwitch [(ngModel)]="isOnDarkMode"></p-inputSwitch> -->
     </button>
 
-    <button type="button" class="d-flex align-items-center border-0 bg-transparent mx-4" *ngIf="isBusinessLogged">
+    <button type="button" class="d-flex align-items-center border-0 bg-transparent mx-4" *ngIf="isBusinessLogged" [routerLink]="['/request-coin-factor']">
         <img src="assets/icons/coin-factor.svg" width="20px" alt="Ícone da coin factor" title="Coin Factor">
         <span class="fw-medium ms-2 ">
             {{coins}}

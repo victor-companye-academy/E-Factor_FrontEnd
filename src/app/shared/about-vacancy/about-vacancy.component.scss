@@ -80,3 +80,11 @@
         }
     }
 }
+:host ::ng-deep {
+    .p-dialog .p-dialog-footer {
+        background: var(--background);
+    }
+    .p-dialog .p-dialog-header {
+        padding: 1rem !important;
+    }
+}

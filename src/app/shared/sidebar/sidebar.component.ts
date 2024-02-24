@@ -109,12 +109,16 @@ export class SidebarComponent {
 
   getLinkDestination() {
     if (this.role == 'PROFISSIONAL') {
-      this.router.navigate(['/professional-profile', this.authService.getId()]);
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/professional-profile', this.authService.getId()]);
+      });
     } else if (this.role.includes('GESTOR')) {
       if(this.idEmpresaLogada == -1) {
         this.router.navigate(['/']);
       } else {
-        this.router.navigate(['/business-profile', this.idEmpresaLogada]);
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['/business-profile', this.idEmpresaLogada]);
+        });
       }
     } else {
       this.router.navigate(['/login']);

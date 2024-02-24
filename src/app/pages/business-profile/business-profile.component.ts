@@ -147,7 +147,7 @@ export class BusinessProfileComponent {
     if (this.authService.isAuthenticated()) {
       this.authService.removeToken();
     }
-    this.router.navigate(['/login']);
+    window.location.href = '/login';
   }
 
   reloadRoute() {

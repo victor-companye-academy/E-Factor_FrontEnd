@@ -1,6 +1,7 @@
 import { _isNumberValue } from '@angular/cdk/coercion';
 import { Component, Input } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { Vacancy } from 'src/app/core/interfaces/vacancy';
 import { AuthService } from 'src/app/core/service/auth/auth.service';
 import { UtilService } from 'src/app/core/service/util/util.service';
@@ -9,6 +10,7 @@ import { VacancyService } from 'src/app/core/service/vacancy/vacancy.service';
 @Component({
   selector: 'about-vacancy',
   templateUrl: './about-vacancy.component.html',
+  providers: [ConfirmationService, MessageService],
   styleUrls: ['./about-vacancy.component.scss']
 })
 export class AboutVacancyComponent {
@@ -21,9 +23,16 @@ export class AboutVacancyComponent {
   protected isLoading: boolean = false;
   protected showInterested: boolean = false;
   protected interestedList: Array<any> = [];
+  protected accepted: boolean = false;
  
   constructor(private messageService: MessageService, private vacancyService: VacancyService, 
-    private authService: AuthService, private utilService: UtilService) { }
+    private authService: AuthService, private utilService: UtilService, private confirmationService: ConfirmationService,
+    private router: Router) {
+
+    if (sessionStorage.getItem('accepted') === 'true') {
+      this.accepted = true;
+    }
+  }
 
   ngOnChanges() {
     this.isProfessional = this.authService.isAuthenticated() && this.authService.getRole().includes('PROFISSIONAL');
@@ -66,5 +75,27 @@ export class AboutVacancyComponent {
 
   toggleShowInterested() {
     this.showInterested = !this.showInterested;
+  }
+
+  navigateToProfessional(id: number) {
+    this.router.navigate(['/professional-profile/', id]);
+  }
+
+  confirm() {
+    if (this.accepted) {
+      return;
+    }
+
+    this.confirmationService.confirm({
+        header: 'Confirmação',
+        message: 'Ao acessar o perfil de um profissional, você utilizará 1 Coin Factor. Deseja continuar?',
+        accept: () => {
+          this.accepted = true;
+          sessionStorage.setItem('accepted', 'true');
+        },
+        reject: () => {
+          this.accepted = false;
+        }
+    });
   }
 }

@@ -10,7 +10,7 @@
             <div class="d-flex align-items-start flex-wrap" [ngClass]="{'flex-column': isShort}">
                 <div class="title-professional ms-2 overflow-hidden">
                     <h3 class="me-0 fw-light mb-0 text-start">
-                        {{ card.nomeUsuario }}
+                        {{ card.nomeUsuario.length > 25 ? card.nomeUsuario.substring(0, 25) + '...' : card.nomeUsuario }}
                     </h3>
                     <h2 class="m-0 fw-medium text-start text-nowrap">
                         {{ card.senioridade }}

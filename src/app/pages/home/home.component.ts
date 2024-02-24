@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { CardDetails } from 'src/app/core/interfaces/card-details';
 import { ProfessionalCard } from 'src/app/core/interfaces/professional-card';
 import { Vacancy } from 'src/app/core/interfaces/vacancy';
@@ -10,12 +11,13 @@ import { VacancyService } from 'src/app/core/service/vacancy/vacancy.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
+  providers: [ConfirmationService, MessageService],
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
 
   constructor(private cardDetailsService: CardDetailsService, private professionalService: ProfessionalService,
-    private vacancyService: VacancyService,  private authService: AuthService) {
+    private vacancyService: VacancyService,  private authService: AuthService, private confirmationService: ConfirmationService) {
     if (this.authService.isAuthenticated()) {
       this.isLogged = true;
     }
@@ -26,6 +28,10 @@ export class HomeComponent implements OnInit {
       this.numOfCards = 2;
     } else {
       this.numOfCards = 1;
+    }
+
+    if (sessionStorage.getItem('accepted') === 'true') {
+      this.accepted = true;
     }
   }
 
@@ -42,6 +48,7 @@ export class HomeComponent implements OnInit {
   protected isBlockNonloggedModalOpen: boolean = false;
 
   protected banners: Array<CardDetails> = this.cardDetailsService.listBanners();
+  protected accepted: boolean = false;
 
   protected async initializeVacanciesList(): Promise<void> {
     try {
@@ -82,5 +89,23 @@ export class HomeComponent implements OnInit {
     } else if (window.innerWidth < 991) {
       this.numOfCards = 1;
     }
+  }
+
+  confirm() {
+    if (this.accepted) {
+      return;
+    }
+
+    this.confirmationService.confirm({
+        header: 'Confirmação',
+        message: 'Ao acessar o perfil de um profissional, você utilizará 1 Coin Factor. Deseja continuar?',
+        accept: () => {
+          this.accepted = true;
+          sessionStorage.setItem('accepted', 'true');
+        },
+        reject: () => {
+          this.accepted = false;
+        }
+    });
   }
 }

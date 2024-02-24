@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
 import { CoinSolicitations } from '../../interfaces/coin-solicitations';
+import { map } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoinSolicitationsService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
   private keyRequestCoin: string = 'coin-solicitations';
 
-  listCoinSolicitations(): Array<CoinSolicitations> {
+  listCoinSolicitations(): Array<any> {
     let dataStorage: string | null;
 
     dataStorage = sessionStorage.getItem(this.keyRequestCoin);
@@ -21,7 +24,7 @@ export class CoinSolicitationsService {
       return JSON.parse(dataStorage);
     }
 
-    const solicitationsArray: Array<CoinSolicitations> = [
+    const solicitationsArray: Array<any> = [
       {
         id: '1',
         businessId: '1',
@@ -138,5 +141,16 @@ export class CoinSolicitationsService {
       console.log(coinSolicitations)
       sessionStorage.setItem('coin-solicitations', JSON.stringify(coinSolicitations));
     }
+  }
+
+  public listCoinsByLoggedUser() {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+
+    return this.httpClient.get<Array<CoinSolicitations>>('http://localhost:8085/ms-empresa/v1/listar-vouchers', { headers })
+      .pipe(
+        map(response => response)
+      )
   }
 }

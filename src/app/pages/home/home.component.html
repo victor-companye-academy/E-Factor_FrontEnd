@@ -46,12 +46,12 @@
                         </button>
                     </div>
 
-                    <card-professional *ngIf="cardProfessional[1]" [isLogged]="isLogged" [short]="true" [card]="cardProfessional[1]"
-                        (click)="isLogged ? '' : openNonLoggedModal()"
+                    <card-professional *ngIf="cardProfessional[1]" [isLogged]="isLogged && accepted" [short]="true" [card]="cardProfessional[1]"
+                        (click)="isLogged ? confirm() : openNonLoggedModal()"
                         class="mt-4 col-lg-6 col-xl-6 col-xxl-4 fadeIn"></card-professional>
 
-                    <card-professional *ngIf="cardProfessional[0]" [isLogged]="isLogged" [short]="true" [card]="cardProfessional[0]"
-                        (click)="isLogged ? '' : openNonLoggedModal()"
+                    <card-professional *ngIf="cardProfessional[0]" [isLogged]="isLogged && accepted" [short]="true" [card]="cardProfessional[0]"
+                        (click)="isLogged ? confirm() : openNonLoggedModal()"
                         class="mt-4 col-lg-6 col-xl-6 col-xxl-4 fadeIn"></card-professional>
 
                 </div>
@@ -120,3 +120,7 @@
         <app-footer></app-footer>
     </div>
 </main>
+<p-toast></p-toast>
+<p-confirmDialog acceptLabel="Ok" rejectLabel="Cancelar">
+    <ng-template let-message></ng-template>
+</p-confirmDialog>

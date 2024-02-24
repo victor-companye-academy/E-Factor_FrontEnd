@@ -31,6 +31,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { SpeedDialModule } from 'primeng/speeddial';
 import { ScrollerModule } from 'primeng/scroller';
 import { ChipModule } from 'primeng/chip';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { ChipModule } from 'primeng/chip';
     InputSwitchModule,
     SpeedDialModule,
     ScrollerModule,
-    ChipModule
+    ChipModule,
+    ConfirmDialogModule
   ],
   exports: [
     AddressComponent,

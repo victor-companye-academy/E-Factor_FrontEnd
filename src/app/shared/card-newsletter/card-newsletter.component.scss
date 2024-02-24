@@ -41,9 +41,32 @@
 
     }
 
+    .home{
+        color: #0E7A97;
+        font-size: medium !important;
+
+        h2{
+            font-size: x-large !important;
+            color: var(--primary);
+        }
+
+        @media(min-width: 767px){
+            font-size: large !important;
+            p{
+                width: 85%;
+            }
+    
+            h2{
+                font-size: xx-large !important;
+                color: var(--primary);
+            }
+        }
+    }
+
     @media(max-width: 767px) {
         .card {
-            background-blend-mode: multiply;
+            // background-blend-mode: multiply;
+            background-blend-mode: screen;
         }
     }
 
