@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Search } from 'src/app/core/interfaces/search';
 import { PaginatorState } from 'primeng/paginator';
 import { Vacancy } from 'src/app/core/interfaces/vacancy';
@@ -20,15 +20,20 @@ export class VacanciesCreatedComponent {
     
     this.isLoading = true;
     this.id = parseInt(this.route.snapshot.paramMap.get('id')!);
+
+    this.showBtnCreate = window.innerWidth <= 1057;
+    this.showShortVacancy = window.innerWidth <= 767;
     
     if (this.id && this.authService.isAuthenticated() && this.authService.getRole().includes('PROFISSIONAL')) {
       this.vacancyService.listVacanciesByBusiness(this.id).then(
         (res: any) => {
+          this.showInterestBtn = true;
           this.isLoading = false;
+          this.title = 'Vagas da empresa';
           this.vacancy = res;
           this.vacancySearch = this.pagination(this.vacancy);
           this.totalRecords = this.vacancySearch.length;
-          this.toShow = true;
+          this.toShow = this.isEmptylist(this.vacancy);
           this.onPageChange({page: 0, first: 0, rows: 5, pageCount: 1});
         })
         .catch(          
@@ -42,10 +47,11 @@ export class VacanciesCreatedComponent {
       this.vacancyService.listVacanciesByLoggedBusiness().subscribe(
         (res: any) => {
           this.isLoading = false;
+          this.title = 'Vagas criadas';
           this.vacancy = res;
           this.vacancySearch = this.pagination(this.vacancy);
           this.totalRecords = this.vacancySearch.length;
-          this.toShow = true;
+          this.toShow = this.isEmptylist(this.vacancy);
           this.onPageChange({page: 0, first: 0, rows: 5, pageCount: 1});
         },
         error => {
@@ -57,10 +63,11 @@ export class VacanciesCreatedComponent {
       this.professionalService.listInterestedVacancies().subscribe(
         (res: any) => {
           this.isLoading = false;
+          this.title = 'Vagas que mostrou interesse';
           this.vacancy = res;
           this.vacancySearch = this.pagination(this.vacancy);
           this.totalRecords = this.vacancySearch.length;
-          this.toShow = true;
+          this.toShow = this.isEmptylist(this.vacancy);
           this.onPageChange({page: 0, first: 0, rows: 5, pageCount: 1});
         },
         error => {
@@ -74,10 +81,11 @@ export class VacanciesCreatedComponent {
     }
   } 
 
+  protected title: string = '';
   protected id: number = 0;
   protected isBusiness: boolean = false;
   protected isLoading: boolean = false;
-  protected readonly rows: number = 5;
+  protected readonly rows: number = 10;
   protected toShow: boolean = true;
   protected visible: boolean = false;
   protected card?: Vacancy;
@@ -88,6 +96,10 @@ export class VacanciesCreatedComponent {
   protected first: number = 0;
   protected totalRecords: number = 0;
   private searchObj: Search | undefined;
+  protected showInterestBtn: boolean = false;
+
+  protected showBtnCreate: boolean = false;
+  protected showShortVacancy: boolean = false;
 
   protected setSearch(event: Search) {
     this.first = 0
@@ -210,5 +222,19 @@ export class VacanciesCreatedComponent {
   protected showDialog(card: Vacancy) {
     this.card = card
     this.visible = true;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.showBtnCreate = window.innerWidth <= 1057;
+    this.showShortVacancy = window.innerWidth <= 767;
+  }
+
+  scrollToFilter() {
+    const filterElement = document.getElementById('create');
+  
+    if (filterElement) {
+      filterElement.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 }

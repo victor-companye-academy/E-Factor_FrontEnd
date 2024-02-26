@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { AuthService } from 'src/app/core/service/auth/auth.service';
 import { RegisterBusinessService } from 'src/app/core/service/register-business/register-business.service';
 import { RegisterProfessionalService } from 'src/app/core/service/register-professional/register-professional.service';
 
@@ -19,7 +20,7 @@ export class BiographyComponent {
   protected isLoading: boolean = false;
 
   constructor(private router: Router, private route: ActivatedRoute, private registerBusinessService: RegisterBusinessService,
-    private messageService: MessageService, private registerProfessionalService: RegisterProfessionalService) {
+    private messageService: MessageService, private registerProfessionalService: RegisterProfessionalService, private authService: AuthService) {
 
     this.path = this.route.snapshot.url[0].path;
     
@@ -44,7 +45,7 @@ export class BiographyComponent {
 
   getLinkDestinationContinue() {
     if (this.pageType == 0){
-      this.router.navigate(['/login']);
+      this.router.navigate(['/']);
     } else {
       this.router.navigate(['/criar-conta-empresa']);
     }
@@ -69,24 +70,23 @@ export class BiographyComponent {
   registerUser(){
     this.isLoading = true;
     if(this.pageType == 0){  
-      this.populateProfessionalBiography();  
-      this.registerProfessionalService.registerProfessional().subscribe(
-        response => {
+      this.populateProfessionalBiography();
+      this.registerProfessionalService.executeRegister().subscribe(
+        token => {
           this.isLoading = false;
-          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Profissional cadastrado com sucesso' });
+          this.authService.setToken(token);
           this.getLinkDestinationContinue();
         },
         error => {
           this.isLoading = false;
           this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu um erro ao cadastrar o profissional, por favor, verifique os dados e tente novamente' });
         }
-      )
+      );
     } else {  
       this.populateBusinessBiography();    
       this.registerBusinessService.registerBusiness().subscribe(
         response => {
           this.isLoading = false;
-          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Empresa cadastrada com sucesso' });
           this.registerBusinessService.response = response;
           this.getLinkDestinationContinue();
         },

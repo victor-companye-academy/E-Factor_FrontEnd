@@ -1,5 +1,6 @@
 
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { PaginatorState } from 'primeng/paginator';
 import { ProfessionalCard } from 'src/app/core/interfaces/professional-card';
 import { Search } from 'src/app/core/interfaces/search';
@@ -10,13 +11,27 @@ import { formatText } from 'src/app/core/utils/formatText';
 @Component({
   selector: 'app-professionals',
   templateUrl: './professionals.component.html',
+  providers: [ConfirmationService, MessageService],
   styleUrls: ['./professionals.component.scss']
 })
 export class ProfessionalsComponent {
 
-  constructor(private professionalService: ProfessionalService, private authService: AuthService) {
+  constructor(private professionalService: ProfessionalService, private authService: AuthService,
+    private confirmationService: ConfirmationService) {
     if (this.authService.isAuthenticated()) {
       this.isLogged = true;
+    }
+
+    if (window.innerWidth <= 767){
+      this.showBtnFilter = true;
+    }
+
+    if (sessionStorage.getItem('accepted') === 'true') {
+      this.accepted = true;
+    }
+
+    if (this.authService.getRole() === 'PROFISSIONAL') {
+      this.accepted = true;
     }
   }
 
@@ -34,6 +49,9 @@ export class ProfessionalsComponent {
 
   protected isLogged: boolean = false;
   protected isBlockNonloggedModalOpen: boolean = false;
+
+  protected showBtnFilter: boolean = false;
+  protected accepted: boolean = false;
 
   //
 
@@ -230,5 +248,36 @@ export class ProfessionalsComponent {
   }
 
   async ngOnInit() {
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.showBtnFilter = window.innerWidth <= 767;
+  }
+
+  scrollToFilter() {
+    const filterElement = document.getElementById('filter');
+  
+    if (filterElement) {
+      filterElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  confirm() {
+    if (this.accepted) {
+      return;
+    }
+
+    this.confirmationService.confirm({
+        header: 'Confirmação',
+        message: 'Ao acessar o perfil de um profissional, você utilizará 1 Coin Factor. Deseja continuar?',
+        accept: () => {
+          this.accepted = true;
+          sessionStorage.setItem('accepted', 'true');
+        },
+        reject: () => {
+          this.accepted = false;
+        }
+    });
   }
 }

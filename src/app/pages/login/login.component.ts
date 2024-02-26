@@ -20,6 +20,7 @@ export class LoginComponent {
   ngOnInit(): void {
     if (this.authService.isAuthenticated()) {
       this.authService.removeToken();
+      window.location.reload();
     }
   }
 

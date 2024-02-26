@@ -9,11 +9,13 @@
                 <app-header></app-header>
 
                 <h1 class="fw-bold fs-5 mt-1 w-100 p-4">
-                    {{isBusiness ? 'Vagas criadas' : 'Vagas que mostrou interesse'}}
+                    {{title}}
                 </h1>
             </div>
 
             <search (sendData)="setSearch($event)" id="search"></search>
+
+            <button class="btn w-100 fw-bold mt-3 rounded-3" *ngIf="showBtnCreate" (click)="scrollToFilter()">Nova vaga</button>
 
             <div class="d-flex justify-content-center align-items-center mt-4 m-0">
 
@@ -22,7 +24,7 @@
                     <section class="col">
                         <span *ngFor="let card of vacancySearch" class="mx-1 fadeIn">
                             <!--  -->
-                            <card-vacancy (click)="showDialog(card)" [short]="false" [card]="card"
+                            <card-vacancy (click)="showDialog(card)" [short]="showShortVacancy" [card]="card"
                                 class="mt-4 cursor-pointer"></card-vacancy>
                         </span>
                         
@@ -32,12 +34,12 @@
                             <p-dialog [(visible)]="visible" [modal]="true" [style]="{ width: '90vw'}"
                                 [draggable]="false" [resizable]="true" [maximizable]="true" styleClass="modal">
 
-                                <about-vacancy [card]="card" [showInterest]="false"></about-vacancy>
+                                <about-vacancy [card]="card" [showInterest]="showInterestBtn"></about-vacancy>
                             </p-dialog>
                         </div>
 
 
-                        <div class="position-absolute bottom-0 d-flex w-100 justify-content-center">
+                        <div class="d-flex w-100 justify-content-center">
                             <ng-template [ngIf]="toShow">
                                 <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"
                                     [totalRecords]="totalRecords" [showFirstLastIcon]="false"
@@ -64,7 +66,7 @@
                         </ng-template>
                     </section>
 
-                    <section class="col-3  section-create-vacancy p-0 mx-4" *ngIf="isBusiness">
+                    <section class="col-3 section-create-vacancy p-0 mx-4" *ngIf="isBusiness" id="create">
                         
                         <h3 class="fw-bold fs-5 text-color-primary mb-3">
                             Criar vaga

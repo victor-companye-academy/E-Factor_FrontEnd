@@ -46,31 +46,23 @@ export class NewsletterService {
   public listCourses(): Array<CardDetailsLink> {
     return [
       {
-        src: 'assets/imgs/curso-bg-1.svg',
-        title: "Test Card1",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elemeccccccccccccsssssd ssntum curabitur vit...",
-        link: ''
+        src: 'assets/banner/courses/CDB-CodingBootcamp.svg',
+        title: "Coding Bootcamp",
+        description: "",
+        link: 'https://companye.academy/'
       },
       {
-        src: 'assets/imgs/curso-bg-2.svg',
-        title: "Test Card2",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elemeccccccccccccsssssd ssntum curabitur vit...",
-        link: ''
+        src: 'assets/banner/courses/CDB-DADOS+AI.svg',
+        title: "Dados + AI",
+        description: "",
+        link: 'https://companye.academy/'
       },
       {
-        src: 'assets/imgs/curso-bg-1.svg',
-        title: "Test Card3",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elemeccccccccccccsssssd ssntum curabitur vit...",
-        link: ''
+        src: 'assets/banner/courses/CDB-DT+AI.svg',
+        title: "Design Thinking + AI",
+        description: "",
+        link: 'https://companye.academy/'
       },
-      {
-        src: 'assets/imgs/curso-bg-2.svg',
-        title: "Test Card4",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae elemeccccccccccccsssssd ssntum curabitur vit...",
-        link: ''
-      }
     ]
   }
-
-
 }

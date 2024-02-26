@@ -27,6 +27,11 @@ import { ApproveSolicitationModalComponent } from './approve-solicitation-modal/
 import { BlockNonloggedModalComponent } from './block-nonlogged-modal/block-nonlogged-modal.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { BadgeModule } from 'primeng/badge';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { SpeedDialModule } from 'primeng/speeddial';
+import { ScrollerModule } from 'primeng/scroller';
+import { ChipModule } from 'primeng/chip';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [
@@ -63,7 +68,12 @@ import { BadgeModule } from 'primeng/badge';
     ReactiveFormsModule,
     ToastModule,
     OverlayPanelModule,
-    BadgeModule
+    BadgeModule,
+    InputSwitchModule,
+    SpeedDialModule,
+    ScrollerModule,
+    ChipModule,
+    ConfirmDialogModule
   ],
   exports: [
     AddressComponent,

@@ -8,17 +8,22 @@
     </div>
 
     <div class="w-100 fadeIn overflow-hidden">
-        <div class="w-100 container div-main px-4">
+        <div class="w-100 container div-main">
             <app-header></app-header>
 
             <section class="mb-0 w-100 py-4 fadeInLeft">
-                <div
-                    class="fadeIn d-flex flex-column justify-content-center align-items-start background-students rounded-4 px-5 overflow-hidden">
-                    <img src="assets/icons/logo-site.svg" width="270px" alt="Logo e-factor" title="e-factor"
-                        class="fadeIn">
-                    <h1 class="fw-bold fs-6 mt-1 fadeIn">O seu profissional ou sua vaga na palma da sua mão de um jeito
-                        diferente.
-                    </h1>
+                <div class="text-start mt-5">
+                    <div class="row">
+                        <p-carousel [value]="banners" [numVisible]="1" [numScroll]="1" [showIndicators]="true"
+                            [circular]="true" [autoplayInterval]="4000"
+                            [showNavigators]="false" class="col-12">
+
+                            <ng-template let-card pTemplate="courses">
+                                <card-newsletter [card]="card" class="mx-0 card-home"></card-newsletter>
+                            </ng-template>
+
+                        </p-carousel>
+                    </div>
                 </div>
             </section>
 
@@ -41,12 +46,12 @@
                         </button>
                     </div>
 
-                    <card-professional *ngIf="cardProfessional[1]" [isLogged]="isLogged" [short]="true" [card]="cardProfessional[1]"
-                        (click)="isLogged ? '' : openNonLoggedModal()"
+                    <card-professional *ngIf="cardProfessional[1]" [isLogged]="isLogged && accepted" [short]="true" [card]="cardProfessional[1]"
+                        (click)="isLogged ? confirm() : openNonLoggedModal()"
                         class="mt-4 col-lg-6 col-xl-6 col-xxl-4 fadeIn"></card-professional>
 
-                    <card-professional *ngIf="cardProfessional[0]" [isLogged]="isLogged" [short]="true" [card]="cardProfessional[0]"
-                        (click)="isLogged ? '' : openNonLoggedModal()"
+                    <card-professional *ngIf="cardProfessional[0]" [isLogged]="isLogged && accepted" [short]="true" [card]="cardProfessional[0]"
+                        (click)="isLogged ? confirm() : openNonLoggedModal()"
                         class="mt-4 col-lg-6 col-xl-6 col-xxl-4 fadeIn"></card-professional>
 
                 </div>
@@ -79,16 +84,14 @@
             </section>
 
             <section class="mt-5 w-100 py-4">
-                <div class="div-aboult">
+                <div class="div-howitworks">
                     <h2 class="fw-bold fs-5 text-center">
                         Como funciona a E-factor
                     </h2>
 
-                    <div class="row mt-4">
-                        <span *ngFor="let card of about" class="col-lg-6 col-xl-4">
-                            <card-details [card]="card" class="mt-4"></card-details>
-                        </span>
-                    </div>
+                    <div class="banner1 fadeInLeft"></div>
+                    <div class="banner2 fadeInRight"></div>
+                    <div class="banner3 fadeInLeft"></div>
                 </div>
             </section>
 
@@ -99,10 +102,10 @@
                     </h2>
 
                     <div class="text-start mt-5">
-                        <div class="row m-0">
-                            <p-carousel [value]="testimonials" [numVisible]="3" [numScroll]="1"
+                        <div class="row">
+                            <p-carousel [value]="testimonials" [numVisible]="numOfCards" [numScroll]="1"
                                 [responsiveOptions]="responsiveOptions" [circular]="true" [autoplayInterval]="4000"
-                                class="col-12">
+                                class="col-12" [showNavigators]="false">
 
                                 <ng-template let-card pTemplate="item">
                                     <card-details [card]="card" class="mx-2"></card-details>
@@ -117,3 +120,7 @@
         <app-footer></app-footer>
     </div>
 </main>
+<p-toast></p-toast>
+<p-confirmDialog acceptLabel="Ok" rejectLabel="Cancelar">
+    <ng-template let-message></ng-template>
+</p-confirmDialog>

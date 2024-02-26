@@ -21,9 +21,65 @@
         }
     }
 
+    .div-howitworks {
+        min-height: 100vh;
+        div{
+            height: 600px;
+        }
+        .banner1{
+            background-image: url("/assets/banner/howitworks/Banner1.svg");
+        }
+        .banner2{
+            background-image: url("/assets/banner/howitworks/Banner2.svg");
+        }
+        .banner3{
+            background-image: url("/assets/banner/howitworks/Banner3.svg");
+        }
+        .banner1, .banner2, .banner3{
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-size: contain;
+        }
+        @media(max-width: 1220px){
+            div{
+                height: 400px;
+            }
+            .banner1, .banner2, .banner3{
+                background-size: cover;
+                background-position: center right;
+            }
+        }
+        @media(max-width: 767px){
+            div{
+                height: 300px;
+            }
+            .banner3{
+                height: 270px;
+            }
+        }
+        @media(max-width: 576px){
+            div{
+                margin-left: -1.5rem;
+            }
+        }
+    }
+    
     @media (max-width: 992px) {
         .section-professional {
             flex-direction: column-reverse;
+        }
+    }
+    @media (max-width: 767px) {
+        .div-main{
+            padding: 0 0.5rem !important;
+        }
+    }
+
+    .card-margin{
+        margin: 0 0.5rem;
+        @media(max-width: 992px){
+            margin: 0;
         }
     }
 }

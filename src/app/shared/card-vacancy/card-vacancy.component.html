@@ -11,7 +11,7 @@
         <div class="d-flex align-items-start flex-wrap w-100" [ngClass]="{'flex-column': isShort}">
             <div class="title-company me-4 w-100" [ngClass]="{'ms-5':isShort}" [ngStyle]="{'padding-left': isShort? '12px': '0'}">
                 <h3 class="me-0 fw-light mb-0 text-start text-capitalize overflow-hidden">{{card.nomeEmpresa}}</h3>
-                <h2 class="m-0 fw-medium w-100 text-capitalize pt-1">{{card.tituloVaga}}</h2>
+                <h2 class="m-0 fw-medium w-100 text-capitalize pt-1">{{card.tituloVaga.length > 25 ? card.tituloVaga.substring(0, 25) + '...' : card.tituloVaga}}</h2>
             </div>
 
             <!--  -->

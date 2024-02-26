@@ -24,6 +24,15 @@
     @media (max-width: 991px){
         width: 90%;
     }
+    @media (max-width: 767px){
+       .inputs{
+           align-items: center !important;
+           flex-direction: column;
+           select, input{
+            width: 80vw;
+           }
+       } 
+    }
 }
 button{
     border-radius: 0.75rem;
@@ -35,6 +44,7 @@ button{
 .save{
     background-color: var(--primary);
     color: var(--text-white);
+    width: 5.8rem;
 }
 .languages{
     background-color: var(--background);

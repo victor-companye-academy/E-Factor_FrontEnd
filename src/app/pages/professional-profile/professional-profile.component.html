@@ -42,7 +42,7 @@
         <div class="container">
             <app-header></app-header>
         </div>
-        <div class="container py-5 px-3 main-page" *ngIf="professionalInfo.senioridade != null && !isLoading">
+        <div class="container py-5 px-3 main-page fadeIn" *ngIf="professionalInfo.senioridade != null && !isLoading">
             <!-- dados pessoais -->
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <h5 class="fw-bold">Dados Pessoais</h5>
@@ -189,7 +189,7 @@
                 </div>
             </div>
         </div>
-        <div class="container py-5 px-3 error-page" *ngIf="profileNotFound || professionalInfo.senioridade == null">
+        <div class="container py-5 px-3 error-page" *ngIf="profileNotFound || professionalInfo.senioridade == null && !solicitationError">
             <div class="h-100 d-flex flex-column p-5 align-items-center justify-content-center">
                 <img src="assets/imgs/sem-resultado.svg" alt="Não encontramos nada..."
                     title="Não encontramos nada." class="notFound mb-4 fadeIn">
@@ -200,6 +200,19 @@
                 <p class="text-center mt-3 fw-light fadeIn ">
                     Não foram encontrados resultados para sua pesquisa. Por favor, confira se a url está correta e tente novamente.<br>
                     Caso não esteja logado, considere efetuar o login para poder acessar as informações.
+                </p>
+            </div>
+        </div>
+        <div class="container py-5 px-3 error-page" *ngIf="solicitationError">
+            <div class="h-100 d-flex flex-column p-5 align-items-center justify-content-center">
+                <img src="assets/imgs/erro-resultado.svg" alt="Não encontramos nada..."
+                    title="Não encontramos nada." class="notFound mb-4 fadeIn">
+                <h2 class="fadeIn text-danger">
+                    Desculpe, não foi possível realizar esta solicitação.
+                </h2>
+    
+                <p class="text-center mt-3 fw-light fadeIn ">
+                    Verifique o saldo e tente novamente.
                 </p>
             </div>
         </div>

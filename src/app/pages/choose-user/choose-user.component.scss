@@ -2,6 +2,10 @@
     color: var(--text);
 }
 
+.div-main{
+    min-height: 830px;
+}
+
 .text-primary-color{
     color: var(--primary);
 }
@@ -27,7 +31,7 @@
 }
 
 .btn-continue{
-    width: 15.9375rem;
+    width: 50%;
     height: 2.5rem;
     border-radius: 0.75rem;
     background-color: var(--text);
@@ -43,7 +47,7 @@
 }
 
 .bottom-text{
-    width: 23.5625rem;
+    width: 70%;
     font-size: 0.75rem;
 }
 
@@ -51,4 +55,13 @@
     left: 1.5rem;
     bottom: 2rem;
     cursor: pointer;
+}
+
+@media (max-width: 767px) {
+    .choose{
+        flex-direction: column;
+    }
+    .user-option{
+        width: 80vw;
+    }
 }

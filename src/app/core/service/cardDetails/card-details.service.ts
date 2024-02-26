@@ -61,4 +61,24 @@ export class CardDetailsService {
     }
   ]
   }
+
+  public listBanners(): Array<CardDetails> {
+    return [
+      {
+        src: 'assets/banner/Banner1.svg',
+        title: "E-Factor",
+        description: "Apoiando jovens desenvolvedores no mercado de tecnologia.",
+      },
+      {
+        src: 'assets/banner/Banner2.svg',
+        title: "E-Factor",
+        description: "Conexão com oportunidades de emprego.",
+      },
+      {
+        src: 'assets/banner/Banner3.svg',
+        title: "E-Factor",
+        description: "Sua oportunidade na palma da sua mão de um jeito diferente.",
+      },
+    ]
+  }
 }

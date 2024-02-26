@@ -18,13 +18,13 @@
                     </h2>
 
                     <div class="text-start mt-5">
-                        <div class="row m-0">
+                        <div class="row">
                             <p-carousel [value]="novelties" [numVisible]="2" [numScroll]="1" [showIndicators]="true"
                                 [responsiveOptions]="responsiveOptions" [circular]="true" [autoplayInterval]="4000"
-                                class="col-12">
+                                class="col-12" [showNavigators]="false">
 
                                 <ng-template let-card pTemplate="novelties">
-                                    <card-newsletter [card]="card" class="mx-2"></card-newsletter>
+                                    <card-newsletter [card]="card" class="card-margin"></card-newsletter>
                                 </ng-template>
 
                             </p-carousel>
@@ -40,13 +40,13 @@
                     </h2>
 
                     <div class="text-start mt-5">
-                        <div class="row m-0">
-                            <p-carousel [value]="courses" [numVisible]="2" [numScroll]="1" [showIndicators]="true"
+                        <div class="row">
+                            <p-carousel [value]="courses" [numVisible]="1" [numScroll]="1" [showIndicators]="true"
                                 [responsiveOptions]="responsiveOptions" [circular]="true" [autoplayInterval]="4000"
-                                class="col-12">
+                                class="col-12" [showNavigators]="false">
 
                                 <ng-template let-card pTemplate="courses">
-                                    <card-newsletter [card]="card" class="mx-2"></card-newsletter>
+                                    <card-newsletter [card]="card" class=""></card-newsletter>
                                 </ng-template>
 
                             </p-carousel>

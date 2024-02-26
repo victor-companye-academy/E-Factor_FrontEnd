@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/service/auth/auth.service';
 import { BusinessService } from 'src/app/core/service/business/business.service';
 
@@ -9,13 +10,14 @@ import { BusinessService } from 'src/app/core/service/business/business.service'
 })
 export class HeaderComponent {
   
+  protected isOnDarkMode: boolean = false;
   protected isBusinessLogged: boolean = false;
   protected coins: number = 0;
   protected notifications: any[] = [];
   protected hasNewNotifications: boolean = false;
   protected notificationsResponse: any[] = [];
 
-  constructor (private authService: AuthService, private businessService: BusinessService) {
+  constructor (private authService: AuthService, private businessService: BusinessService, private router: Router) {
 
     if (this.authService.getRole().includes('GESTOR')) {
       this.isBusinessLogged = true;
@@ -60,13 +62,12 @@ export class HeaderComponent {
     this.notificationsResponse.forEach((notification: any) => {
       this.businessService.confirmNotification(notification.idVaga).subscribe(
         (res: any) => {
-          console.log("sucesso");
         }
       );
     });
   }
 
-  openVacancy(idVaga: number){
-    console.log(idVaga)
+  openVacancys(){
+    this.router.navigate(['/create-vacancy']);
   }
 }

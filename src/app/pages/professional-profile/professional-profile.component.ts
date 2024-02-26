@@ -42,9 +42,14 @@ export class ProfessionalProfileComponent {
         )
       },
       error => {
-        console.log(error);
-        this.profileNotFound = true;
-        this.isLoading = false;
+        if(error.error[0].message === 'Saldo insuficiente'){
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Saldo insuficiente para realizar esta operação, faça uma nova solicitação.' });
+          this.solicitationError = true;
+          this.isLoading = false;
+        } else {
+          this.profileNotFound = true;
+          this.isLoading = false;
+        }
       }
     )
 
@@ -58,11 +63,11 @@ export class ProfessionalProfileComponent {
   protected id: number = 0;
   protected professionalInfo: any;
   protected cardVacancy: Array<Vacancy> = [];
-
+  
   protected idade: number = 0;
   protected experiencias: Array<any> = [];
   protected formacoes: Array<any> = [];
-
+  
   protected isEditInfoModalOpen = false;
   protected isEditAboutModalOpen = false;
   protected isEditExperienceModalOpen = false;
@@ -70,21 +75,22 @@ export class ProfessionalProfileComponent {
   protected isEditSkillsModalOpen = false;
   protected isEditLanguagesModalOpen = false;
   protected modalIndex: number = -1;
-
+  
   protected visible: boolean = false;
   protected card: Vacancy = {} as Vacancy;
-
+  protected solicitationError: boolean = false;
+  
   openEditModal(index: number) {
     switch (index) {
       case 0:
         this.modalIndex = 0;
         this.isEditInfoModalOpen = true;
         break;
-      case 1:
-        this.modalIndex = 1;
-        this.isEditAboutModalOpen = true;
-        break;
-      case 2:
+        case 1:
+          this.modalIndex = 1;
+          this.isEditAboutModalOpen = true;
+          break;
+          case 2:
         this.modalIndex = 2;
         this.isEditExperienceModalOpen = true;
         break;
@@ -155,7 +161,7 @@ export class ProfessionalProfileComponent {
     if (this.authService.isAuthenticated()) {
       this.authService.removeToken();
     }
-    this.router.navigate(['/login']);
+    window.location.href = '/login';
   }
 
   reloadRoute() {
