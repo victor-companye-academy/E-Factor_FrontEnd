@@ -29,6 +29,10 @@ export class ProfessionalsComponent {
     if (sessionStorage.getItem('accepted') === 'true') {
       this.accepted = true;
     }
+
+    if (this.authService.getRole() === 'PROFISSIONAL') {
+      this.accepted = true;
+    }
   }
 
 

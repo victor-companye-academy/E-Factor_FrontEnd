@@ -63,9 +63,8 @@
         }
     }
 
-    @media(max-width: 767px) {
-        .card {
-            // background-blend-mode: multiply;
+    .blendmode{
+        @media (max-width: 767px){
             background-blend-mode: screen;
         }
     }

@@ -33,6 +33,10 @@ export class HomeComponent implements OnInit {
     if (sessionStorage.getItem('accepted') === 'true') {
       this.accepted = true;
     }
+
+    if (this.authService.getRole() === 'PROFISSIONAL') {
+      this.accepted = true;
+    }
   }
 
   protected isLogged: boolean = false;

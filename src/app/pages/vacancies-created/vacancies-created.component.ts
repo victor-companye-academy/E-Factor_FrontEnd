@@ -29,6 +29,7 @@ export class VacanciesCreatedComponent {
         (res: any) => {
           this.showInterestBtn = true;
           this.isLoading = false;
+          this.title = 'Vagas da empresa';
           this.vacancy = res;
           this.vacancySearch = this.pagination(this.vacancy);
           this.totalRecords = this.vacancySearch.length;
@@ -46,6 +47,7 @@ export class VacanciesCreatedComponent {
       this.vacancyService.listVacanciesByLoggedBusiness().subscribe(
         (res: any) => {
           this.isLoading = false;
+          this.title = 'Vagas criadas';
           this.vacancy = res;
           this.vacancySearch = this.pagination(this.vacancy);
           this.totalRecords = this.vacancySearch.length;
@@ -61,6 +63,7 @@ export class VacanciesCreatedComponent {
       this.professionalService.listInterestedVacancies().subscribe(
         (res: any) => {
           this.isLoading = false;
+          this.title = 'Vagas que mostrou interesse';
           this.vacancy = res;
           this.vacancySearch = this.pagination(this.vacancy);
           this.totalRecords = this.vacancySearch.length;
@@ -78,6 +81,7 @@ export class VacanciesCreatedComponent {
     }
   } 
 
+  protected title: string = '';
   protected id: number = 0;
   protected isBusiness: boolean = false;
   protected isLoading: boolean = false;
