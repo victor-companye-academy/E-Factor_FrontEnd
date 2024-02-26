@@ -683,6 +683,7 @@ export class ProfessionalService {
         error => error
       );
   }
+  
   public returnProfessionalFromLoggedUser() {
     const headers = {
       Authorization: `Bearer ${this.authService.getToken()}`

@@ -23,7 +23,7 @@ export class CreateVacancyCreateComponent {
     this.wasClicked = true;
 
     (await this.createVacancyService.createVacancy()).subscribe({
-      next: res => {
+      next: () => {
 
         setTimeout(() => {
           this.messageService.add({ severity: 'success', summary: '', detail: 'Vaga criada com sucesso!' })
