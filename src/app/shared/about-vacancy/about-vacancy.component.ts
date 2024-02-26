@@ -17,15 +17,15 @@ export class AboutVacancyComponent {
 
   @Input({ alias: 'card' }) public card?: Vacancy;
   @Input() public showInterest!: boolean;
-  
+
   protected isBusiness: boolean = false;
   protected isProfessional: boolean = false;
   protected isLoading: boolean = false;
   protected showInterested: boolean = false;
   protected interestedList: Array<any> = [];
   protected accepted: boolean = false;
- 
-  constructor(private messageService: MessageService, private vacancyService: VacancyService, 
+
+  constructor(private messageService: MessageService, private vacancyService: VacancyService,
     private authService: AuthService, private utilService: UtilService, private confirmationService: ConfirmationService,
     private router: Router) {
 
@@ -37,17 +37,16 @@ export class AboutVacancyComponent {
   ngOnChanges() {
     this.isProfessional = this.authService.isAuthenticated() && this.authService.getRole().includes('PROFISSIONAL');
     this.isBusiness = this.authService.isAuthenticated() && this.authService.getRole().includes('GESTOR');
-    
+
     if (this.isBusiness && this.card) {
       this.utilService.businessId$.subscribe((id: number) => {
         this.isBusiness = id === this.card!.idEmpresa;
         this.vacancyService.returnInterestedsByVacancy(this.card!.idVaga!).subscribe(
-            (res: any) => {
-              this.interestedList = res;
-            },
-            error => {
-              console.log(error);
-            }
+          (res: any) => {
+            this.interestedList = res;
+          },
+          error => {
+          }
         )
       });
     }
@@ -57,9 +56,9 @@ export class AboutVacancyComponent {
     event.target.src = 'assets/imgs/default-profile.svg'; // Define o src para a imagem padrão
   }
 
-  assignInterest(){
+  assignInterest() {
     this.isLoading = true;
-    if (this.authService.isAuthenticated() && this.authService.getRole().includes('PROFISSIONAL')){
+    if (this.authService.isAuthenticated() && this.authService.getRole().includes('PROFISSIONAL')) {
       this.vacancyService.assignInterest(this.card!.idVaga!).subscribe(
         res => {
           this.isLoading = false;
@@ -87,15 +86,15 @@ export class AboutVacancyComponent {
     }
 
     this.confirmationService.confirm({
-        header: 'Confirmação',
-        message: 'Ao acessar o perfil de um profissional, você utilizará 1 Coin Factor. Deseja continuar?',
-        accept: () => {
-          this.accepted = true;
-          sessionStorage.setItem('accepted', 'true');
-        },
-        reject: () => {
-          this.accepted = false;
-        }
+      header: 'Confirmação',
+      message: 'Ao acessar o perfil de um profissional, você utilizará 1 Coin Factor. Deseja continuar?',
+      accept: () => {
+        this.accepted = true;
+        sessionStorage.setItem('accepted', 'true');
+      },
+      reject: () => {
+        this.accepted = false;
+      }
     });
   }
 }

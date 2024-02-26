@@ -136,14 +136,12 @@ export class BusinessUserComponent {
     this.isLoading = true;
     this.registerBusinessService.registerManager().subscribe(
       response => {
-        console.log(response);
         this.messageService.add({severity:'success', summary: 'Sucesso', detail: 'Usuário cadastrado com sucesso!'});
         this.isLoading = false;
         this.getLinkDestinationContinue();
       },
       error => {
         this.messageService.add({severity:'error', summary: 'Erro', detail: 'Ocorreu um erro ao cadastrar o usuário. Por favor, verifique os dados e tente novamente.'});
-        console.log(error);
         this.isLoading = false;
       }
     )

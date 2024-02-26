@@ -163,7 +163,7 @@ export class CreateVacancyService {
         console.log('Resposta vazia.');
       }
     } catch (error) {
-      console.log('Erro ao obter id das habilidades', error);
+      console.log('Erro ao obter id das habilidades');
     }
   }
 }

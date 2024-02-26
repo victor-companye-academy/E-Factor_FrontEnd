@@ -52,7 +52,6 @@ export class BusinessProfileComponent {
             },
             error => {
               this.isLoading = false;
-              console.log(error);
             }
           )
         } else {
@@ -61,9 +60,8 @@ export class BusinessProfileComponent {
             this.isLoading = false;
             this.cardVacancy = res;
           })
-          .catch(error => {
+          .catch(() => {
             this.isLoading = false;
-            console.log(error);
           });
         }
           
@@ -71,7 +69,6 @@ export class BusinessProfileComponent {
       error => {
         this.profileNotFound = true;
         this.isLoading = false;
-        console.log(error);
       }
     );
 

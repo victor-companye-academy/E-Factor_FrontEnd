@@ -26,7 +26,6 @@ export class SendRequestComponent {
       this.businessService.requestVoucher(100).subscribe({
         next: res => {
           this.wasClicked = true;
-          console.log(res)
 
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Solicitação enviada' });
           this.isValid = false

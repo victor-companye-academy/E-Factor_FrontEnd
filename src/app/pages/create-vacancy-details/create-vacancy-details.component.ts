@@ -231,7 +231,7 @@ export class CreateVacancyDetailsComponent {
       this.skillsList = res.map(skill => skill.habilidade);
 
     } catch (error) {
-      console.log('Erro ao processar a requisição da listagem de skills', error);
+      console.log('Erro ao processar a requisição da listagem de skills');
     }
 
 
