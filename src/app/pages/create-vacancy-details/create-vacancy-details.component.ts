@@ -211,7 +211,7 @@ export class CreateVacancyDetailsComponent {
 
       if (this.daysOfWeek && this.daysOfWeek?.length > 0) {
         moreDetails += `
-      <span class="fw-semibold">Dias da semana:</span>${this.daysOfWeek}<br>
+      <span class="fw-semibold">Dias da semana: </span>${this.daysOfWeek}<br>
         `;
       }
 

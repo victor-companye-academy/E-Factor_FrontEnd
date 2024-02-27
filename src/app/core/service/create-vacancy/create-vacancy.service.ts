@@ -15,7 +15,6 @@ import { SkillsService } from '../skills/skills.service';
 export class CreateVacancyService {
 
   private url: string = 'http://localhost:8085/ms-empresa/v1/cadastrar-vaga';
-  private skills: number[] = [];
 
   constructor(private http: HttpClient, private vacancyService: VacancyService, private authService: AuthService, private skillsService: SkillsService) {
   }
