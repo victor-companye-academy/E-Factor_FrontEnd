@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BusinessInfo } from '../../interfaces/business-info';
-import { map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth/auth.service';
 
@@ -11,7 +11,7 @@ export class BusinessService {
 
   constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
-  public listBusiness():Array<BusinessInfo> {
+  public listBusiness(): Array<BusinessInfo> {
 
     console.log("entrei no serviço");
 
@@ -84,7 +84,7 @@ export class BusinessService {
   public updateBusiness(updatedBusiness: any) {
     const businessArray: Array<BusinessInfo> = this.listBusiness();
     const index = businessArray.findIndex(business => business.id === updatedBusiness.id);
-  
+
     if (index !== -1) {
       businessArray[index] = updatedBusiness;
       sessionStorage.setItem('businesses', JSON.stringify(businessArray));
@@ -95,7 +95,7 @@ export class BusinessService {
     const headers = {
       Authorization: `Bearer ${this.authService.getToken()}`
     };
-  
+
     return this.httpClient.get('http://localhost:8085/ms-empresa/v1/empresa-logado', { headers })
       .pipe(
         map(response => response)
@@ -106,7 +106,7 @@ export class BusinessService {
     const headers = {
       Authorization: `Bearer ${this.authService.getToken()}`
     };
-    
+
     return this.httpClient.get('http://localhost:8085/ms-empresa/v1/detalhe-empresa?id_empresa=' + id, { headers })
       .pipe(
         map(response => response)
@@ -128,10 +128,27 @@ export class BusinessService {
     const headers = {
       Authorization: `Bearer ${this.authService.getToken()}`
     };
-    
+
     return this.httpClient.get('http://localhost:8085/ms-empresa/v1/consultar-saldo', { headers })
       .pipe(
         map(response => response)
+      );
+  }
+
+  public requestVoucher(quantity: number): Observable<any> {
+    const url = 'http://localhost:8085/ms-empresa/v1/solicitar-voucher';
+
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+    const requestBody = {
+      "qtdCoin": quantity
+    }
+
+    return this.httpClient.post<any>(url, requestBody, { headers })
+      .pipe(
+        res => res,
+        error => error
       );
   }
 
@@ -159,7 +176,7 @@ export class BusinessService {
         estado: objEmpresa.endereco.estado
       }
     }
-    
+
     const body = objEmpresaAtualizado;
 
     return this.httpClient.put<any>('http://localhost:8085/ms-empresa/v1/atualizar-empresa', body, { headers })
@@ -172,7 +189,7 @@ export class BusinessService {
     const headers = {
       Authorization: `Bearer ${this.authService.getToken()}`
     };
-    
+
     return this.httpClient.get('http://localhost:8085/ms-empresa/v1/notificacao-vaga', { headers })
       .pipe(
         map(response => response)
@@ -183,7 +200,7 @@ export class BusinessService {
     const headers = {
       Authorization: `Bearer ${this.authService.getToken()}`
     };
-    
+
 
     return this.httpClient.post<any>('http://localhost:8085/ms-empresa/v1/confirmar-notificacao?id_vaga=' + vancancyVisualized, {}, { headers })
       .pipe(

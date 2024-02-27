@@ -15,27 +15,26 @@ export class CreateVacancyCreateComponent {
 
   protected vacancy!: Vacancy;
   protected showInterest!: boolean;
+  protected wasClicked: boolean = false;
 
-  onConfirm() {
+  async onConfirm() {
+    sessionStorage.removeItem('vacancies');
 
-    this.createVacancyService.createVacancy().subscribe({
-      next: res => {console.log(res)},
+    this.wasClicked = true;
+
+    (await this.createVacancyService.createVacancy()).subscribe({
+      next: () => {
+
+        setTimeout(() => {
+          this.messageService.add({ severity: 'success', summary: '', detail: 'Vaga criada com sucesso!' })
+        }, 500)
+        this.router.navigateByUrl("/create-vacancy");
+      },
       error: () => {
         this.messageService.add({ severity: 'warn', summary: '', detail: 'Erro ao enviar vaga, tente novamente mais tarde.' })
       }
     })
 
-    // if (this.vacancyService.getCreateVacancy().title) {
-    //   if (!this.vacancyService.getWasSendVacancy()) {
-    //     this.vacancyService.createVacancy();
-
-    //     this.messageService.add({ severity: 'success', summary: '', detail: 'Vaga criada com sucesso!' });
-    //   }
-
-    // } else {
-    //        this.messageService.add({ severity: 'warn', summary: '', detail: 'Vaga já enviada' });
-
-    // }
   }
 
   onClose() {

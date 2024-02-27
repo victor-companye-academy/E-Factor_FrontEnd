@@ -13,22 +13,21 @@ import { VacancyService } from 'src/app/core/service/vacancy/vacancy.service';
 })
 export class DashboardAdmComponent {
 
-  constructor(private businessService: BusinessService, 
-              private vacancyService: VacancyService, 
-              private solicitationService: CoinSolicitationsService, 
-              private professionalService: ProfessionalService) 
-              { 
-                this.oneWeekAgo.setDate(this.oneWeekAgo.getDate() - 7); 
+  constructor(private businessService: BusinessService,
+    private vacancyService: VacancyService,
+    private solicitationService: CoinSolicitationsService,
+    private professionalService: ProfessionalService) {
+    this.oneWeekAgo.setDate(this.oneWeekAgo.getDate() - 7);
 
-                this.recentProfessionals = this.professionalService.listProfessionalsProvisorio()
-                  .filter(professional => new Date(professional.creationDate) > this.oneWeekAgo)
-                  .length;
+    this.recentProfessionals = this.professionalService.listProfessionalsProvisorio()
+      .filter(professional => new Date(professional.creationDate) > this.oneWeekAgo)
+      .length;
 
-                this.recentBusiness = this.businessService.listBusiness()
-                  .filter(business => new Date(business.creationDate) > this.oneWeekAgo)
-                  .length;
-              }
-              
+    this.recentBusiness = this.businessService.listBusiness()
+      .filter(business => new Date(business.creationDate) > this.oneWeekAgo)
+      .length;
+  }
+
   protected oneWeekAgo = new Date();
   protected totalProfessionals: number = this.professionalService.listProfessionalsProvisorio().length;
   protected totalBusiness: number = this.businessService.listBusiness().length;
@@ -43,7 +42,7 @@ export class DashboardAdmComponent {
   protected solicitationError: boolean = false;
 
   onSort(event: SortEvent) {
-    console.log(new Date(this.professionalService.listProfessionalsProvisorio()[25].creationDate) > this.oneWeekAgo)
+    new Date(this.professionalService.listProfessionalsProvisorio()[25].creationDate) > this.oneWeekAgo
     event.data?.sort((a: any, b: any) => {
       let result = 0;
       if (new Date(a.creationDate) < new Date(b.creationDate)) {
@@ -73,7 +72,7 @@ export class DashboardAdmComponent {
     }
   }
 
-  async ngOnInit(){
+  async ngOnInit() {
     await this.updateTotalVacancies();
   }
 }

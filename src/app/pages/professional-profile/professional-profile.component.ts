@@ -36,7 +36,6 @@ export class ProfessionalProfileComponent {
             this.isLoading = false;
           },
           error => {
-            console.log(error);
             this.isLoading = false;
           }
         )

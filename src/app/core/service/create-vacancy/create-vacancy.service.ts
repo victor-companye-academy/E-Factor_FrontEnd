@@ -7,6 +7,7 @@ import { Observable, map, throwError } from 'rxjs';
 import { ResponseNewVacancy } from '../../interfaces/response-new-vacancy';
 import { VacancyService } from '../vacancy/vacancy.service';
 import { AuthService } from '../auth/auth.service';
+import { SkillsService } from '../skills/skills.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,12 @@ export class CreateVacancyService {
 
   private url: string = 'http://localhost:8085/ms-empresa/v1/cadastrar-vaga';
 
-  constructor(private http: HttpClient, private vacancyService: VacancyService, private authService: AuthService) {
+  constructor(private http: HttpClient, private vacancyService: VacancyService, private authService: AuthService, private skillsService: SkillsService) {
   }
   private static wasSendVacancy: boolean = false;
 
   private vacancy: any = {};
+  private skillIds: number[] = [];
 
   public getWasSendVacancy(): boolean {
     return CreateVacancyService.wasSendVacancy;
@@ -78,14 +80,13 @@ export class CreateVacancyService {
 
   public getCreateVacancy(): RequestNewVacancy | any {
     if (this.vacancy) {
-
       const newVacancy: RequestNewVacancy = {
         titulo: this.vacancy.tituloVaga,
         descricao: this.vacancy.descricaoVaga,
         modalidade: this.vacancy.modalidade,
         tipoContrato: this.vacancy.tipoContrato,
         senioridade: this.vacancy.senioridade,
-        habilidades: this.vacancy.habilidades
+        habilidades: this.skillIds
       }
       return newVacancy
     }
@@ -117,17 +118,51 @@ export class CreateVacancyService {
     }
   }
 
-  public createVacancy(): Observable<ResponseNewVacancy> {
-    const requestBody = this.getCreateVacancy();
+
+  public async createVacancy(): Promise<Observable<ResponseNewVacancy>> {
+    await this.getSkillIds();
+
+    let requestBody:RequestNewVacancy | undefined;
+
+    if (this.skillIds && this.skillIds.length > 0) {
+      requestBody = {
+        titulo: this.vacancy.tituloVaga,
+        descricao: this.vacancy.descricaoVaga,
+        modalidade: this.vacancy.modalidade,
+        tipoContrato: this.vacancy.tipoContrato,
+        senioridade: this.vacancy.senioridade,
+        habilidades: this.skillIds
+      }
+    }
 
     const headers = {
       Authorization: `Bearer ${this.authService.getToken()}`
     };
 
-    return this.http.post<ResponseNewVacancy>(this.url, requestBody, { headers })
-      .pipe(
-        map(response => response)
-      );
+    return new Observable(observer => {
+      this.http.post<ResponseNewVacancy>(this.url, requestBody, { headers })
+        .subscribe({
+          next: (response: ResponseNewVacancy) => {
+            observer.next(response);
+            observer.complete();
+          },
+          error: (error: any) => {
+            observer.error(error);
+          }
+        });
+    });
+  }
 
+  async getSkillIds() {
+    try {
+      const res = await this.skillsService.getIdByName(this.vacancy.habilidades as string[]).toPromise();
+      if (res) {
+        this.skillIds = [...res];
+      } else {
+        console.log('Resposta vazia.');
+      }
+    } catch (error) {
+      console.log('Erro ao obter id das habilidades');
+    }
   }
 }

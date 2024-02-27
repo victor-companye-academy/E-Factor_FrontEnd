@@ -211,7 +211,7 @@ export class CreateVacancyDetailsComponent {
 
       if (this.daysOfWeek && this.daysOfWeek?.length > 0) {
         moreDetails += `
-      <span class="fw-semibold">Dias da semana:</span>${this.daysOfWeek}<br>
+      <span class="fw-semibold">Dias da semana: </span>${this.daysOfWeek}<br>
         `;
       }
 
@@ -231,7 +231,7 @@ export class CreateVacancyDetailsComponent {
       this.skillsList = res.map(skill => skill.habilidade);
 
     } catch (error) {
-      console.log('Erro ao processar a requisição da listagem de skills', error);
+      console.log('Erro ao processar a requisição da listagem de skills');
     }
 
 
