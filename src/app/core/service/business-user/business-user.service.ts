@@ -15,7 +15,7 @@ export class BusinessUserService {
       Authorization: `Bearer ${this.authService.getToken()}`
     }
     
-    return this.httpClient.get('http://localhost:8085/ms-empresa/v1/listar-gestores', { headers })
+    return this.httpClient.get('https://internal-gateway.efactor.digital/ms-empresa/v1/listar-gestores', { headers })
       .pipe(
         map(response => response)
       );
@@ -27,7 +27,7 @@ export class BusinessUserService {
     }
     const body = userObj;
 
-    return this.httpClient.put<any>('http://localhost:8085/ms-empresa/v1/atualizar-gestor?id_gestor=' + id, body, { headers })
+    return this.httpClient.put<any>('https://internal-gateway.efactor.digital/ms-empresa/v1/atualizar-gestor?id_gestor=' + id, body, { headers })
       .pipe(
         map(response => response)
       );
@@ -38,7 +38,7 @@ export class BusinessUserService {
       Authorization: `Bearer ${this.authService.getToken()}`
     }
     
-    return this.httpClient.delete('http://localhost:8085/ms-empresa/v1/desativar-gestor?id_gestor=' + id, { headers })
+    return this.httpClient.delete('https://internal-gateway.efactor.digital/ms-empresa/v1/desativar-gestor?id_gestor=' + id, { headers })
       .pipe(
         map(response => response)
       );

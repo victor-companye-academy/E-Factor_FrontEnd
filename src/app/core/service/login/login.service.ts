@@ -16,7 +16,7 @@ export class LoginService {
       senha: password
     };
   
-    return this.httpClient.post<any>('http://localhost:8085/auth/get-token', body)
+    return this.httpClient.post<any>('https://internal-gateway.efactor.digital/auth/get-token', body)
       .pipe(
         map(response => response.token),
         catchError(error => {

@@ -146,7 +146,7 @@ export class CoinSolicitationsService {
       Authorization: `Bearer ${this.authService.getToken()}`
     };
 
-    return this.httpClient.get<Array<CoinSolicitations>>('http://localhost:8085/ms-empresa/v1/listar-vouchers', { headers })
+    return this.httpClient.get<Array<CoinSolicitations>>('https://internal-gateway.efactor.digital/ms-empresa/v1/listar-vouchers', { headers })
       .pipe(
         map(response => response)
       )

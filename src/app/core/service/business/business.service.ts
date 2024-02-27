@@ -96,7 +96,7 @@ export class BusinessService {
       Authorization: `Bearer ${this.authService.getToken()}`
     };
 
-    return this.httpClient.get('http://localhost:8085/ms-empresa/v1/empresa-logado', { headers })
+    return this.httpClient.get('https://internal-gateway.efactor.digital/ms-empresa/v1/empresa-logado', { headers })
       .pipe(
         map(response => response)
       );
@@ -107,7 +107,7 @@ export class BusinessService {
       Authorization: `Bearer ${this.authService.getToken()}`
     };
 
-    return this.httpClient.get('http://localhost:8085/ms-empresa/v1/detalhe-empresa?id_empresa=' + id, { headers })
+    return this.httpClient.get('https://internal-gateway.efactor.digital/ms-empresa/v1/detalhe-empresa?id_empresa=' + id, { headers })
       .pipe(
         map(response => response)
       );
@@ -118,7 +118,7 @@ export class BusinessService {
       Authorization: `Bearer ${this.authService.getToken()}`
     };
 
-    return this.httpClient.get('http://localhost:8085/ms-empresa/v1/listar-empresas', { headers })
+    return this.httpClient.get('https://internal-gateway.efactor.digital/ms-empresa/v1/listar-empresas', { headers })
       .pipe(
         map(response => response)
       );
@@ -129,14 +129,14 @@ export class BusinessService {
       Authorization: `Bearer ${this.authService.getToken()}`
     };
 
-    return this.httpClient.get('http://localhost:8085/ms-empresa/v1/consultar-saldo', { headers })
+    return this.httpClient.get('https://internal-gateway.efactor.digital/ms-empresa/v1/consultar-saldo', { headers })
       .pipe(
         map(response => response)
       );
   }
 
   public requestVoucher(quantity: number): Observable<any> {
-    const url = 'http://localhost:8085/ms-empresa/v1/solicitar-voucher';
+    const url = 'https://internal-gateway.efactor.digital/ms-empresa/v1/solicitar-voucher';
 
     const headers = {
       Authorization: `Bearer ${this.authService.getToken()}`
@@ -179,7 +179,7 @@ export class BusinessService {
 
     const body = objEmpresaAtualizado;
 
-    return this.httpClient.put<any>('http://localhost:8085/ms-empresa/v1/atualizar-empresa', body, { headers })
+    return this.httpClient.put<any>('https://internal-gateway.efactor.digital/ms-empresa/v1/atualizar-empresa', body, { headers })
       .pipe(
         map(response => response)
       );
@@ -190,7 +190,7 @@ export class BusinessService {
       Authorization: `Bearer ${this.authService.getToken()}`
     };
 
-    return this.httpClient.get('http://localhost:8085/ms-empresa/v1/notificacao-vaga', { headers })
+    return this.httpClient.get('https://internal-gateway.efactor.digital/ms-empresa/v1/notificacao-vaga', { headers })
       .pipe(
         map(response => response)
       );
@@ -202,7 +202,7 @@ export class BusinessService {
     };
 
 
-    return this.httpClient.post<any>('http://localhost:8085/ms-empresa/v1/confirmar-notificacao?id_vaga=' + vancancyVisualized, {}, { headers })
+    return this.httpClient.post<any>('https://internal-gateway.efactor.digital/ms-empresa/v1/confirmar-notificacao?id_vaga=' + vancancyVisualized, {}, { headers })
       .pipe(
         map(response => response)
       );

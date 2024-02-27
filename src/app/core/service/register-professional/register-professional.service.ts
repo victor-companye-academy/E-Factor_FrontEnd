@@ -47,7 +47,7 @@ export class RegisterProfessionalService {
   public registerProfessional(): Observable<any> {
     const body = this.professionalInformations;
   
-    return this.httpClient.post<any>('http://localhost:8085/ms-profissional/v1/cadastrar-profissional', body)
+    return this.httpClient.post<any>('https://internal-gateway.efactor.digital/ms-profissional/v1/cadastrar-profissional', body)
       .pipe(
         map(response => response),
         catchError(error => {
@@ -65,7 +65,7 @@ export class RegisterProfessionalService {
       id: id
     }
 
-    return this.httpClient.post<any>('http://localhost:8085/ms-profissional/v1/curriculos', body, { headers })
+    return this.httpClient.post<any>('https://internal-gateway.efactor.digital/ms-profissional/v1/curriculos', body, { headers })
       .pipe(
         map(response => response)
       )

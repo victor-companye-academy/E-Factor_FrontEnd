@@ -15,7 +15,7 @@ import { BusinessService } from '../business/business.service';
 })
 export class CreateVacancyService {
 
-  private url: string = 'http://localhost:8085/ms-empresa/v1/cadastrar-vaga';
+  private url: string = 'https://internal-gateway.efactor.digital/ms-empresa/v1/cadastrar-vaga';
 
   constructor(private http: HttpClient, private vacancyService: VacancyService, private authService: AuthService, 
     private skillsService: SkillsService, businessService: BusinessService) {

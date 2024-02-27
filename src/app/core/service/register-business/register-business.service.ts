@@ -42,7 +42,7 @@ export class RegisterBusinessService {
   registerBusiness() {
     const body = this.businessInformations;
 
-    return this.httpClient.post<any>('http://localhost:8085/ms-empresa/v1/cadastrar-empresa', body)
+    return this.httpClient.post<any>('https://internal-gateway.efactor.digital/ms-empresa/v1/cadastrar-empresa', body)
       .pipe(
         map(response => response)
       )
@@ -60,7 +60,7 @@ export class RegisterBusinessService {
 
     const body = this.managerInformations;
 
-    return this.httpClient.post<any>('http://localhost:8085/ms-empresa/v1/cadastrar-usuario/gestor-empresa', body)
+    return this.httpClient.post<any>('https://internal-gateway.efactor.digital/ms-empresa/v1/cadastrar-usuario/gestor-empresa', body)
       .pipe(
         map(response => response)
       )

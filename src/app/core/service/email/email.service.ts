@@ -14,7 +14,7 @@ export class EmailService {
       emailTo: email
     }
 
-    return this.httpClient.post<any>('http://localhost:8085/ms-email/v1/recuperar-senha', body)
+    return this.httpClient.post<any>('https://internal-gateway.efactor.digital/ms-email/v1/recuperar-senha', body)
       .pipe(
         map((res: any) => res)
       )
@@ -26,7 +26,7 @@ export class EmailService {
       codigo: code
     }
 
-    return this.httpClient.post<any>('http://localhost:8085/ms-email/v1/verificar-codigo', body)
+    return this.httpClient.post<any>('https://internal-gateway.efactor.digital/ms-email/v1/verificar-codigo', body)
       .pipe(
         map((res: any) => res)
       )
@@ -40,7 +40,7 @@ export class EmailService {
   public changePassword() {
     const body = this.infoChangePassword
 
-    return this.httpClient.post<any>('http://localhost:8085/ms-email/v1/trocar-senha', body)
+    return this.httpClient.post<any>('https://internal-gateway.efactor.digital/ms-email/v1/trocar-senha', body)
       .pipe(
         map((res: any) => res)
       )

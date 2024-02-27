@@ -8,7 +8,7 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root'
 })
 export class VacancyService {
-  private url: string = 'http://localhost:8085/ms-empresa/v1/listar-vagas';
+  private url: string = 'https://internal-gateway.efactor.digital/ms-empresa/v1/listar-vagas';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -146,7 +146,7 @@ export class VacancyService {
       Authorization: `Bearer ${this.authService.getToken()}`
     };
 
-    return this.http.get('http://localhost:8085/ms-empresa/v1/listar-vagas/usuario-empresa', { headers })
+    return this.http.get('https://internal-gateway.efactor.digital/ms-empresa/v1/listar-vagas/usuario-empresa', { headers })
       .pipe(
         map(response => response)
       )
@@ -157,7 +157,7 @@ export class VacancyService {
       Authorization: `Bearer ${this.authService.getToken()}`
     };
 
-    return this.http.post<any>('http://localhost:8085/ms-profissional/v1/mostrar-interesse?id_vaga=' + id, { }, { headers })
+    return this.http.post<any>('https://internal-gateway.efactor.digital/ms-profissional/v1/mostrar-interesse?id_vaga=' + id, { }, { headers })
       .pipe(
         map(response => response)
       )
@@ -168,7 +168,7 @@ export class VacancyService {
       Authorization: `Bearer ${this.authService.getToken()}`
     };
 
-    return this.http.get('http://localhost:8085/ms-empresa/v1/interessados-vaga?id_vaga=' + id, { headers })
+    return this.http.get('https://internal-gateway.efactor.digital/ms-empresa/v1/interessados-vaga?id_vaga=' + id, { headers })
       .pipe(
         map(response => response)
       )
@@ -179,7 +179,7 @@ export class VacancyService {
       Authorization: `Bearer ${this.authService.getToken()}`
     };
 
-    return this.http.delete<any>('http://localhost:8085/ms-empresa/v1/desativar-vaga?id_vaga=' + id, { headers })
+    return this.http.delete<any>('https://internal-gateway.efactor.digital/ms-empresa/v1/desativar-vaga?id_vaga=' + id, { headers })
       .pipe(
         map(response => response)
       )

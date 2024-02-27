@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SkillsService {
 
-  private url: string = 'http://localhost:8085/ms-profissional/v1/habilidades'
+  private url: string = 'https://internal-gateway.efactor.digital/ms-profissional/v1/habilidades'
 
   constructor(private http: HttpClient) { }
 

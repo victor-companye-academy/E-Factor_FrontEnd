@@ -151,7 +151,7 @@ export class CreateBusinessUserService {
     }
     const body = this.userInformations;
 
-    return this.httpClient.post<any>('http://localhost:8085/ms-empresa/v1/cadastrar-usuario/gestor', body, { headers })
+    return this.httpClient.post<any>('https://internal-gateway.efactor.digital/ms-empresa/v1/cadastrar-usuario/gestor', body, { headers })
       .pipe(
         map(response => response)
       )

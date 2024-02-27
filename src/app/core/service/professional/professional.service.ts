@@ -10,7 +10,7 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root'
 })
 export class ProfessionalService {
-  private url: string = 'http://localhost:8085/ms-profissional/v1/filtro';
+  private url: string = 'https://internal-gateway.efactor.digital/ms-profissional/v1/filtro';
 
   constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
@@ -689,7 +689,7 @@ export class ProfessionalService {
       Authorization: `Bearer ${this.authService.getToken()}`
     };
   
-    return this.httpClient.get('http://localhost:8085/ms-profissional/v1/detalhe-profissional?id_usuario=' + this.authService.getId(), { headers })
+    return this.httpClient.get('https://internal-gateway.efactor.digital/ms-profissional/v1/detalhe-profissional?id_usuario=' + this.authService.getId(), { headers })
       .pipe(
         map(response => response)
       );
@@ -700,7 +700,7 @@ export class ProfessionalService {
       Authorization: `Bearer ${this.authService.getToken()}`
     };
   
-    return this.httpClient.get('http://localhost:8085/ms-profissional/v1/detalhe-profissional?id_usuario=' + id, { headers })
+    return this.httpClient.get('https://internal-gateway.efactor.digital/ms-profissional/v1/detalhe-profissional?id_usuario=' + id, { headers })
       .pipe(
         map(response => response)
       );
@@ -714,7 +714,7 @@ export class ProfessionalService {
       descricao: descricao
     };
 
-    return this.httpClient.post<any>('http://localhost:8085/ms-profissional/v1/salvar-descricao', body, { headers })
+    return this.httpClient.post<any>('https://internal-gateway.efactor.digital/ms-profissional/v1/salvar-descricao', body, { headers })
       .pipe(
         map(response => response)
       );
@@ -735,7 +735,7 @@ export class ProfessionalService {
      jornadas: jornadasMapeadas
    }
 
-    return this.httpClient.post<any>('http://localhost:8085/ms-profissional/v1/cadastrar-experiencia', body, { headers })
+    return this.httpClient.post<any>('https://internal-gateway.efactor.digital/ms-profissional/v1/cadastrar-experiencia', body, { headers })
       .pipe(
         map(response => response)
       );
@@ -749,7 +749,7 @@ export class ProfessionalService {
       identificadorJornadas: id
     };
 
-    return this.httpClient.delete<any>('http://localhost:8085/ms-profissional/v1/remover-experiencia', { headers, body })
+    return this.httpClient.delete<any>('https://internal-gateway.efactor.digital/ms-profissional/v1/remover-experiencia', { headers, body })
       .pipe(
         map(response => response)
       );
@@ -770,7 +770,7 @@ export class ProfessionalService {
       jornadas: jornadasMapeadas
     }
 
-    return this.httpClient.post<any>('http://localhost:8085/ms-profissional/v1/atualizar-experiencia', body, { headers })
+    return this.httpClient.post<any>('https://internal-gateway.efactor.digital/ms-profissional/v1/atualizar-experiencia', body, { headers })
       .pipe(
         map(response => response)
       );
@@ -791,7 +791,7 @@ export class ProfessionalService {
     };
     const body = objDadosPessoais;
 
-    return this.httpClient.post<any>('http://localhost:8085/ms-profissional/v1/salvar-dados-pessoais', body, { headers })
+    return this.httpClient.post<any>('https://internal-gateway.efactor.digital/ms-profissional/v1/salvar-dados-pessoais', body, { headers })
       .pipe(
         map(response => response)
       );
@@ -802,14 +802,14 @@ export class ProfessionalService {
       Authorization: `Bearer ${this.authService.getToken()}`
     };
     
-    return this.httpClient.get<any>('http://localhost:8085/ms-profissional/v1/listar-vagas-interesse', { headers })
+    return this.httpClient.get<any>('https://internal-gateway.efactor.digital/ms-profissional/v1/listar-vagas-interesse', { headers })
       .pipe(
         map(response => response)
       );
   }
 
   public getSkillsList() {
-    return this.httpClient.get<any>('http://localhost:8085/ms-profissional/v1/habilidades')
+    return this.httpClient.get<any>('https://internal-gateway.efactor.digital/ms-profissional/v1/habilidades')
       .pipe(
         map(response => response)
       );
@@ -831,7 +831,7 @@ export class ProfessionalService {
       habilidades: habilidadesFormatadas
     };
   
-    return this.httpClient.post<any>('http://localhost:8085/ms-profissional/v1/cadastrar-habilidades', body, { headers })
+    return this.httpClient.post<any>('https://internal-gateway.efactor.digital/ms-profissional/v1/cadastrar-habilidades', body, { headers })
       .pipe(
         map(response => response)
       );
@@ -850,14 +850,14 @@ export class ProfessionalService {
       habilidades: skillsToDelete
     }
 
-    return this.httpClient.delete<any>('http://localhost:8085/ms-profissional/v1/remover-habilidades', { headers, body })
+    return this.httpClient.delete<any>('https://internal-gateway.efactor.digital/ms-profissional/v1/remover-habilidades', { headers, body })
       .pipe(
         map(response => response)
       );
   }
 
   getLanguagesList() {
-    return this.httpClient.get<any>('http://localhost:8085/ms-profissional/v1/idiomas')
+    return this.httpClient.get<any>('https://internal-gateway.efactor.digital/ms-profissional/v1/idiomas')
       .pipe(
         map(response => response)
       );
@@ -870,7 +870,7 @@ export class ProfessionalService {
 
     const body = languages;
     
-    return this.httpClient.post<any>('http://localhost:8085/ms-profissional/v1/salvar-idioma', body, { headers })
+    return this.httpClient.post<any>('https://internal-gateway.efactor.digital/ms-profissional/v1/salvar-idioma', body, { headers })
       .pipe(
         map(response => response)
       );
