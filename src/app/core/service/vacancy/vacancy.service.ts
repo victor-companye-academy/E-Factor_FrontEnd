@@ -184,4 +184,9 @@ export class VacancyService {
         map(response => response)
       )
   }
+
+  resetVacancys() {
+    sessionStorage.removeItem(this.keyVacanciesStorage);
+    sessionStorage.removeItem(this.keyCompanyStorage);
+  }
 }

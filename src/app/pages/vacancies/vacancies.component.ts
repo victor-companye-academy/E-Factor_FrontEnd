@@ -219,6 +219,7 @@ export class VacanciesComponent {
   protected async initializeVacanciesList(): Promise<void> {
     try {
       this.vacancy = await this.vacancyService.listVacancies();
+      this.vacancy = this.vacancy.filter(vacancy => vacancy.ativo);
       this.vacancySearch = [...this.vacancy];
 
       this.toShow = this.isEmptylist(this.vacancySearch);

@@ -1,6 +1,6 @@
 import { _isNumberValue } from '@angular/cdk/coercion';
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Vacancy } from 'src/app/core/interfaces/vacancy';
 import { AuthService } from 'src/app/core/service/auth/auth.service';
@@ -24,14 +24,23 @@ export class AboutVacancyComponent {
   protected showInterested: boolean = false;
   protected interestedList: Array<any> = [];
   protected accepted: boolean = false;
+  protected isOnVacancyCreation: boolean = false;
 
   constructor(private messageService: MessageService, private vacancyService: VacancyService,
     private authService: AuthService, private utilService: UtilService, private confirmationService: ConfirmationService,
-    private router: Router) {
+    private router: Router, private activatedRoute: ActivatedRoute) {
 
     if (sessionStorage.getItem('accepted') === 'true') {
       this.accepted = true;
     }
+    
+    this.activatedRoute.url.subscribe(urlSegments => {
+      if (urlSegments.length > 0 && urlSegments[0].path.includes('create')) {
+        this.isOnVacancyCreation = true;
+      } else {
+        this.isOnVacancyCreation = false;
+      }
+    });
   }
 
   ngOnChanges() {
@@ -109,6 +118,7 @@ export class AboutVacancyComponent {
         res => {
           this.isLoading = false;
           this.messageService.add({ severity: 'info', summary: 'Informação', detail: 'Sua vaga foi desativada!' });
+          this.vacancyService.resetVacancys();
         },
         error => {
           this.isLoading = false;

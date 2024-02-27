@@ -81,7 +81,7 @@ export class UserInformationComponent {
       },
       {
         title: "Inscrição Estadual *",
-        parameters: ['123456789', 'text', 'double-input-row'],
+        parameters: ['Sem pontuação', 'text', 'double-input-row'],
         value: '',
         select: []
       },      

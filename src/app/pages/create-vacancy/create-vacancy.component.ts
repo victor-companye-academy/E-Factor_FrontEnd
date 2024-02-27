@@ -107,7 +107,7 @@ export class CreateVacancyComponent {
 
     if (this.form.valid) {
       const title = this.form.get('title')?.value
-      const description = this.form.get('description')?.value
+      const description = this.form.get('description')?.value?.replace(/\n/g, '<br>');
 
       this.createVacancyService.insertDescription(title || '', description || '');
 

@@ -87,7 +87,7 @@
                                 <about-vacancy [card]="card" [showInterest]="isLogged ? false : true"></about-vacancy>
                             </p-dialog>
                         </div>
-                        <div class="d-flex justify-content-center" *ngIf="cardVacancy.length">
+                        <div class="d-flex justify-content-center" *ngIf="cardVacancy.length && (isProfessional || isLogged)">
                             <button class="w-25 btn btn-view-all fw-bold mt-3" [routerLink]="[isLogged ? '/create-vacancy' : ('/view-vacancy/' + id)]">Ver tudo</button>
                         </div>
                     </div>

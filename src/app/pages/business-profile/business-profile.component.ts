@@ -15,7 +15,7 @@ import { switchMap } from 'rxjs';
 })
 export class BusinessProfileComponent {
 
-  protected isLogged: boolean = true;
+  protected isLogged: boolean = false;
   protected isCollapsed = window.innerWidth < 991;
   protected showCellphone = true;
   protected isEditInfoModalOpen = false;
@@ -72,6 +72,7 @@ export class BusinessProfileComponent {
       }
     );
 
+    this.isProfessional = this.authService.getRole() == 'PROFISSIONAL';
     this.isGestorEmpresa = this.authService.getRole() == 'GESTOR_EMPRESA';
   }
 
@@ -83,6 +84,7 @@ export class BusinessProfileComponent {
   protected coins: number = 0;
   protected loggedId: number = -1;
   protected isGestorEmpresa: boolean = false;
+  protected isProfessional: boolean = false;
 
   protected visible: boolean = false;
   protected card: Vacancy = {} as Vacancy;
