@@ -51,6 +51,10 @@ export class AboutVacancyComponent {
         )
       });
     }
+
+    if (!this.card?.ativo) {
+      this.messageService.add({ severity: 'warn', summary: 'Atenção', detail: 'Esta vaga foi encerrada' });
+    }
   }
 
   onImageError(event: any) {
@@ -97,5 +101,21 @@ export class AboutVacancyComponent {
           this.accepted = false;
         }
     });
+  }
+
+  desactivateVacancy() {
+    this.isLoading = true;
+    if (this.authService.isAuthenticated() && this.authService.getRole().includes('GESTOR')){
+      this.vacancyService.desactivateVacancy(this.card!.idVaga!).subscribe(
+        res => {
+          this.isLoading = false;
+          this.messageService.add({ severity: 'info', summary: 'Informação', detail: 'Sua vaga foi desativada!' });
+        },
+        error => {
+          this.isLoading = false;
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível desativar sua vaga no momento' });
+        }
+      )
+    }
   }
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { map, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +8,6 @@ import { map } from 'rxjs';
 export class RegisterBusinessService {
 
   constructor(private httpClient: HttpClient) { }
-
-  response: any = {};
 
   businessInformations = {
     razaoSocial: "",
@@ -51,7 +49,15 @@ export class RegisterBusinessService {
   }
 
   registerManager() {
-    this.managerInformations.idEmpresa = this.response.idEmpresa;
+    const storedResponseString = sessionStorage.getItem('businessRegistrationResponse');
+    const storedResponse = JSON.parse(storedResponseString || '{}');
+
+    this.managerInformations.idEmpresa = storedResponse.id;
+
+    if (!this.managerInformations.idEmpresa) {
+      return throwError('idEmpresa não pode ser 0 ou nulo.');
+    }
+
     const body = this.managerInformations;
 
     return this.httpClient.post<any>('http://localhost:8085/ms-empresa/v1/cadastrar-usuario/gestor-empresa', body)

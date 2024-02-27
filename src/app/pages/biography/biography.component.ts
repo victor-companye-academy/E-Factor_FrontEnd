@@ -87,7 +87,7 @@ export class BiographyComponent {
       this.registerBusinessService.registerBusiness().subscribe(
         response => {
           this.isLoading = false;
-          this.registerBusinessService.response = response;
+          sessionStorage.setItem('businessRegistrationResponse', JSON.stringify(response));
           this.getLinkDestinationContinue();
         },
         error => {

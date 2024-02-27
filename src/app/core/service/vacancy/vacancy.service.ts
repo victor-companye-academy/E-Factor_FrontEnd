@@ -173,4 +173,15 @@ export class VacancyService {
         map(response => response)
       )
   }
+
+  desactivateVacancy(id: number) {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+
+    return this.http.delete<any>('http://localhost:8085/ms-empresa/v1/desativar-vaga?id_vaga=' + id, { headers })
+      .pipe(
+        map(response => response)
+      )
+  }
 }
