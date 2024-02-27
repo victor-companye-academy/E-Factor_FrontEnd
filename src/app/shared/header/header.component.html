@@ -1,16 +1,40 @@
-<div class="d-flex align-items-end">
-    <button type="button" class="fadeIn border-0 mt-5 tobble w-100 d-flex justify-content-end bg-transparent">
+<div class="d-flex justify-content-end mt-5">
+    <button type="button" class="fadeIn border-0 mb-1 tobble align-items-center bg-transparent" *ngIf="false">
         <img src="assets/icons/tobble.svg" alt="Icone seta" title="Mudar modo">
+        <!-- <p-inputSwitch [(ngModel)]="isOnDarkMode"></p-inputSwitch> -->
     </button>
 
-    <button type="button" class="d-flex align-items-center border-0 bg-transparent mx-4">
+    <button type="button" class="d-flex align-items-center border-0 bg-transparent mx-4" *ngIf="isBusinessLogged" [routerLink]="['/request-coin-factor']">
         <img src="assets/icons/coin-factor.svg" width="20px" alt="Ícone da coin factor" title="Coin Factor">
         <span class="fw-medium ms-2 ">
-            105
+            {{coins}}
         </span>
     </button>
 
-    <button type="button" class="d-flex align-items-center border-0 bg-transparent">
+    <button type="button" class="d-flex align-items-center border-0 bg-transparent" (click)="op.toggle($event); confirmNotification()" *ngIf="isBusinessLogged">
         <img src="assets/icons/bell.svg" alt="Ícone de notificação">
+        <span class="badge rounded-circle" *ngIf="hasNewNotifications">
+            <p class="mb-0">{{notificationsResponse.length}}</p>
+        </span>
     </button>
+    <p-overlayPanel #op>
+        <ng-template pTemplate="content">
+            <div class="notifications">
+                <h5 class="fw-bold title">Notificações</h5>
+                <div class="d-flex flex-column align-items-center gap-3 my-3">
+                    <div *ngFor="let notification of notifications; let i = index" class="d-flex cursor-pointer" (click)="openVacancys()">
+                        <div class="bg-img rounded-circle bg-white p-2 d-flex align-items-center justify-content-center me-3" style="width: 45px; height: 45px;">
+                            <img src="assets/icons/briefcase.svg" alt="Atualização de vaga">
+                        </div>
+                        <div>
+                            <p class="title fw-bold mb-0">{{notification.titulo}}</p>
+                            <p class="mb-0">Sua vaga teve {{notification.qtdNovosInteressados}} novo(s) interessado(s).</p>
+                        </div>
+                        <img src="assets/icons/arrow-right.svg" alt="Acessar vaga" width="20px" height="25px" class="mx-3 mt-2">
+                    </div>
+                    <p class="my-1" *ngIf="notifications.length == 0">Nenhuma nova notificação, suas atualizações aparecem aqui</p>
+                </div>
+            </div>
+        </ng-template>
+    </p-overlayPanel>
 </div>

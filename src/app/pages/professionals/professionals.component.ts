@@ -1,35 +1,70 @@
 
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { PaginatorState } from 'primeng/paginator';
-import { ProfessionalInfo } from 'src/app/core/interfaces/professional-info';
+import { ProfessionalCard } from 'src/app/core/interfaces/professional-card';
 import { Search } from 'src/app/core/interfaces/search';
+import { AuthService } from 'src/app/core/service/auth/auth.service';
 import { ProfessionalService } from 'src/app/core/service/professional/professional.service';
 import { formatText } from 'src/app/core/utils/formatText';
 
 @Component({
   selector: 'app-professionals',
   templateUrl: './professionals.component.html',
+  providers: [ConfirmationService, MessageService],
   styleUrls: ['./professionals.component.scss']
 })
 export class ProfessionalsComponent {
 
-  constructor(private professionalService: ProfessionalService) { }
+  constructor(private professionalService: ProfessionalService, private authService: AuthService,
+    private confirmationService: ConfirmationService) {
+    if (this.authService.isAuthenticated()) {
+      this.isLogged = true;
+    }
+
+    if (window.innerWidth <= 767){
+      this.showBtnFilter = true;
+    }
+
+    if (sessionStorage.getItem('accepted') === 'true') {
+      this.accepted = true;
+    }
+
+    if (this.authService.getRole() === 'PROFISSIONAL') {
+      this.accepted = true;
+    }
+  }
 
 
   protected readonly rows: number = 10;
-  protected toShow: boolean = true;
+  protected toShow: boolean = false;
   protected visible: boolean = false;
 
-  protected professional: Array<ProfessionalInfo> = this.professionalService.listProfessionals()
-  protected professionalSearch: Array<ProfessionalInfo> = this.professional;
+  protected professional!: Array<ProfessionalCard>;
+  protected professionalSearch: Array<ProfessionalCard> = this.professional;
 
   protected first: number = 0;
-  protected totalRecords: number = this.professionalSearch.length || 0
+  protected totalRecords: number = (this.professionalSearch && this.professionalSearch.length) || 0;
   private searchObj: Search | undefined;
+
+  protected isLogged: boolean = false;
+  protected isBlockNonloggedModalOpen: boolean = false;
+
+  protected showBtnFilter: boolean = false;
+  protected accepted: boolean = false;
 
   //
 
-  protected setSearch(event: Search) {
+  openNonLoggedModal() {
+    this.isBlockNonloggedModalOpen = true;
+  }
+
+  closeNonLoggedModal() {
+    this.isBlockNonloggedModalOpen = false;
+  }
+
+  protected async setSearch(event: Search) {
+    await this.initializeProfessionalsList();
     this.first = 0
 
     if (this.validSearch(event)) {
@@ -46,7 +81,7 @@ export class ProfessionalsComponent {
     this.toShow = this.isEmptylist(this.professionalSearch)
   }
 
-  private setList(event?: Search): Array<ProfessionalInfo> {
+  private setList(event?: Search): Array<ProfessionalCard> {
 
     if (!event) {
       if (this.validSearch(this.searchObj)) {
@@ -59,7 +94,11 @@ export class ProfessionalsComponent {
       else {
         this.professionalSearch = this.pagination(this.professional);
 
-        this.totalRecords = this.professional.length;
+        if (this.professional) {
+          this.totalRecords = this.professional.length;
+        } else {
+          this.totalRecords = 0;
+        }
 
         return this.professionalSearch;
       }
@@ -69,12 +108,12 @@ export class ProfessionalsComponent {
     return this.professionalSearch;
   }
 
-  private isEmptylist(list: Array<ProfessionalInfo>): boolean {
-    return list.length ? true : false
+  private isEmptylist(list: Array<ProfessionalCard>): boolean {
+    return list && list.length ? true : false && list.length > 0
   }
 
-  private applySearch(list: Array<ProfessionalInfo>, search: Search): Array<ProfessionalInfo> {
-    let newArray: Array<ProfessionalInfo> = this.professional;
+  private applySearch(list: Array<ProfessionalCard>, search: Search): Array<ProfessionalCard> {
+    let newArray: Array<ProfessionalCard> = this.professional;
     if (search) {
       for (const key in search) {
         if (search.hasOwnProperty(key)) {
@@ -155,21 +194,21 @@ export class ProfessionalsComponent {
     return isTrue;
   }
 
-  private searchBySkill(list: Array<ProfessionalInfo>, search: string): Array<ProfessionalInfo> {
+  private searchBySkill(list: Array<ProfessionalCard>, search: string): Array<ProfessionalCard> {
     const newList = list
-      .filter(card => card.skills
-        .map(skill => skill.toLowerCase())
+      .filter(card => card.habilidades
+        .map(habilidades => habilidades.toLowerCase())
         .includes(formatText(search.toLowerCase())));
     return newList;
   }
 
-  private searchByPosition(list: Array<ProfessionalInfo>, search: string): Array<ProfessionalInfo> {
-    const newList: Array<ProfessionalInfo> = list.filter(card => formatText(card.seniority.toLowerCase()) === formatText(search.toLowerCase()))
+  private searchByPosition(list: Array<ProfessionalCard>, search: string): Array<ProfessionalCard> {
+    const newList: Array<ProfessionalCard> = list.filter(card => formatText(card.senioridade.toLowerCase()) === formatText(search.toLowerCase()))
     return newList
   }
 
-  private pagination(list: Array<ProfessionalInfo>): Array<ProfessionalInfo> {
-    const newList = list.slice(this.first, (this.rows + this.first))
+  private pagination(list: Array<ProfessionalCard>): Array<ProfessionalCard> {
+    const newList = list ? list.slice(this.first, (this.rows + this.first)) : [];
     return newList;
   }
 
@@ -177,9 +216,12 @@ export class ProfessionalsComponent {
     this.visible = true;
   }
 
-  protected modal(id: string):void{
-    const element = document.querySelector('[about-vacancy]');
-  }
+  // protected modal(id: string):void{
+  //   if(!this.isLogged){
+  //     return this.openNonLoggedModal();
+  //   }
+  //   const element = document.querySelector('[about-vacancy]');
+  // }
 
   protected onPageChange(event: PaginatorState) {
     window.scrollTo(0, 120);
@@ -188,5 +230,54 @@ export class ProfessionalsComponent {
       this.first = event.first;
     }
     this.setList()
+  }
+
+  protected modal(id: number): void {
+    const element = document.querySelector('[about-vacancy]');
+  }
+
+  protected async initializeProfessionalsList(): Promise<void> {
+    try {
+      this.professional = await this.professionalService.listProfessionals();
+      this.professionalSearch = await this.professionalService.listProfessionals();
+
+      this.toShow = this.isEmptylist(this.professionalSearch)
+    } catch (error) {
+      console.error('Erro ao inicializar a lista de profissionais');
+    }
+  }
+
+  async ngOnInit() {
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.showBtnFilter = window.innerWidth <= 767;
+  }
+
+  scrollToFilter() {
+    const filterElement = document.getElementById('filter');
+  
+    if (filterElement) {
+      filterElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  confirm() {
+    if (this.accepted) {
+      return;
+    }
+
+    this.confirmationService.confirm({
+        header: 'Confirmação',
+        message: 'Ao acessar o perfil de um profissional, você utilizará 1 Coin Factor. Deseja continuar?',
+        accept: () => {
+          this.accepted = true;
+          sessionStorage.setItem('accepted', 'true');
+        },
+        reject: () => {
+          this.accepted = false;
+        }
+    });
   }
 }

@@ -4,6 +4,10 @@
     .main{
         min-height: 50rem;
 
+        .main-page{
+            min-height: 100vh;
+        }
+
         .profile-photo{
             width: 9.6875rem;
             height: 9.6875rem;
@@ -59,6 +63,10 @@
         .error-page{
             height: 100vh;
         }
+        .logout{
+            border-radius: 0.75rem;
+            width: 15rem;
+        }
         @media (max-width: 992px){
             .dados-juridicos{
                 flex-direction: column;
@@ -87,6 +95,27 @@
             }
             .btn-view-all{
                 width: 100% !important;
+            }
+        }
+    }
+}
+
+:host ::ng-deep {
+    .modal {
+        .p-dialog-content,
+        .p-dialog-title,
+        .p-dialog-header {
+            background: var(--background);
+        }
+        .p-dialog-header {
+            padding: 0.8rem 2rem 0.2rem 0;
+            .p-ripple {
+                &:hover {
+                    background: var(--primary);
+                    svg {
+                        color: white;
+                    }
+                }
             }
         }
     }

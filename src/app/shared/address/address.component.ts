@@ -11,6 +11,7 @@ import { AddressArray } from 'src/app/core/interfaces/address-array';
 export class AddressComponent {
 
   @Output() inputsFilled = new EventEmitter<boolean>();
+  @Output() addressComponentsEmitter = new EventEmitter<Array<AddressArray>>();
 
   errorMsg: string = '';
   isCepGeneric: boolean = false;
@@ -39,6 +40,10 @@ export class AddressComponent {
       title: "numero",
       value: ''
     },
+    {
+      title: "complemento",
+      value: ''
+    }
   ]
 
   constructor (private findCepService: FindCepService) {}
@@ -46,10 +51,11 @@ export class AddressComponent {
   checkInputs() {
     const paginaAtiva = this.addressComponents;
 
-    const todosPreenchidos = paginaAtiva.every((input) => input.value !== '');
+    const todosPreenchidos = paginaAtiva.slice(0, paginaAtiva.length - 1).every((input) => input.value !== '');
     
     if (todosPreenchidos) {
       this.inputsFilled.emit(true);
+      this.addressComponentsEmitter.emit(this.addressComponents);
     } else {
       this.inputsFilled.emit(false);
     }
@@ -90,20 +96,37 @@ export class AddressComponent {
     this.addressComponents[3].value = addressData.bairro;
     this.addressComponents[4].value = addressData.logradouro;
 
-    for (let i = 0; i < this.addressComponents.length - 1; i++){
-      if(this.addressComponents[i].value == null || this.addressComponents[i].value == ''){
-        if (i != 3 && i != 4){
-          this.errorMsg = "CEP inválido, por favor tente novamente";
-          this.isCepGeneric = false;
-          for(let i = 0; i < this.addressComponents.length - 1; i++){
-            this.addressComponents[i].value = '';
-          }
-        } else {
-          this.isCepGeneric = true;
+    // for (let i = 0; i < this.addressComponents.length - 1; i++){
+    //   if(this.addressComponents[i].value == null || this.addressComponents[i].value == ''){
+    //     if (i != 3 && i != 4){
+    //       this.errorMsg = "CEP inválido, por favor tente novamente";
+    //       this.isCepGeneric = false;
+    //       for(let i = 0; i < this.addressComponents.length - 1; i++){
+    //         this.addressComponents[i].value = '';
+    //       }
+    //     } else {
+    //       this.isCepGeneric = true;
+    //     }
+    //   } else {
+    //       this.isCepGeneric = false;
+    //   }
+    // }
+
+    if (!this.addressComponents[3].value && !this.addressComponents[4].value){
+      
+      if (!this.addressComponents[1].value || !this.addressComponents[2].value){
+        this.errorMsg = "CEP inválido, por favor tente novamente";
+        for(let i = 0; i < this.addressComponents.length - 1; i++){
+          this.addressComponents[i].value = '';
         }
-      } else {
-          this.isCepGeneric = false;
+        return;
       }
+
+      this.errorMsg = '';
+      this.isCepGeneric = true;
+    } else {
+      this.errorMsg = '';
+      this.isCepGeneric = false;
     }
 
     this.checkInputs();

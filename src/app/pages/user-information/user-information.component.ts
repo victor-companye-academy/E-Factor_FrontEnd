@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserInformationInputs } from 'src/app/core/interfaces/user-information-inputs';
+import { RegisterBusinessService } from 'src/app/core/service/register-business/register-business.service';
+import { RegisterProfessionalService } from 'src/app/core/service/register-professional/register-professional.service';
 
 @Component({
   selector: 'app-user-information',
@@ -19,7 +21,7 @@ export class UserInformationComponent {
   protected cnpjValid: boolean = false;
   protected emailValid: boolean = false;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private router: Router, private route: ActivatedRoute, private registerBusinessService: RegisterBusinessService, private registerProfessionalService: RegisterProfessionalService) {
     this.path = this.route.snapshot.url[0].path;
     
     if (this.path === 'informacoes-profissional') {
@@ -67,7 +69,7 @@ export class UserInformationComponent {
           title: "Senioridade *",
           parameters: ['Selecione', 'text', 'select'],
           value: '',
-          select: ['Estagiário', 'Trainee', 'Júnior', 'Plano', 'Sênior']
+          select: ['Estágio', 'Trainee', 'Júnior', 'Pleno', 'Sênior', "Especialista"]
         }
     ],
     [
@@ -79,7 +81,7 @@ export class UserInformationComponent {
       },
       {
         title: "Inscrição Estadual *",
-        parameters: ['123456789', 'text', 'double-input-row'],
+        parameters: ['Sem pontuação', 'text', 'double-input-row'],
         value: '',
         select: []
       },      
@@ -110,21 +112,73 @@ export class UserInformationComponent {
     ],
   ];
 
-  inputMasks(event: any, index: number){
-    if(this.pageType === 0){
-      if (index === 1){
-        this.applyCpfMask(event, index);
-      }
-    } else {
-      if (index === 0){
-        this.applyCnpjMask(event, index);
-      }
-    }
+  protected userAdressComponents: Array<any> = []
 
-    if(this.arrayUserInformationInputs[this.pageType][index].title === ('Telefone *') || this.arrayUserInformationInputs[this.pageType][index].title === ('Celular *')){
+  populateUserInformations(){
+    if (this.pageType == 0) {
+      this.populatePersonalInformations();
+    } else {
+      this.populateBusinessInformations();
+    }
+    this.populateAdressComponents(this.userAdressComponents);
+    this.getLinkDestinationContinue();
+  }
+
+  populatePersonalInformations(){
+    this.registerProfessionalService.professionalInformations.nomeCompleto = this.arrayUserInformationInputs[this.pageType][0].value;
+    this.registerProfessionalService.professionalInformations.cpf = this.arrayUserInformationInputs[this.pageType][1].value;
+    this.registerProfessionalService.professionalInformations.contato.telefone = this.arrayUserInformationInputs[this.pageType][2].value;
+    this.registerProfessionalService.professionalInformations.dataNascimento = this.arrayUserInformationInputs[this.pageType][3].value;
+    this.registerProfessionalService.professionalInformations.nivel = this.arrayUserInformationInputs[this.pageType][5].value;
+  }
+
+  populateBusinessInformations(){
+    this.registerBusinessService.businessInformations.cnpj = this.arrayUserInformationInputs[this.pageType][0].value;
+    this.registerBusinessService.businessInformations.inscricaoEstadual = this.arrayUserInformationInputs[this.pageType][1].value;
+    this.registerBusinessService.businessInformations.contato.telefone = this.arrayUserInformationInputs[this.pageType][2].value;
+    this.registerBusinessService.businessInformations.razaoSocial = this.arrayUserInformationInputs[this.pageType][3].value;
+    this.registerBusinessService.businessInformations.nomeFantasia = this.arrayUserInformationInputs[this.pageType][4].value;
+    this.registerBusinessService.businessInformations.contato.email = this.arrayUserInformationInputs[this.pageType][5].value;
+  }
+
+  populateAdressComponents(adressComponents: any){
+    this.userAdressComponents = adressComponents;
+
+    if (this.pageType === 0) {
+      this.registerProfessionalService.professionalInformations.endereco.cep = this.userAdressComponents[0].value;
+      this.registerProfessionalService.professionalInformations.endereco.cidade = this.userAdressComponents[1].value;
+      this.registerProfessionalService.professionalInformations.endereco.estado = this.userAdressComponents[2].value;
+      this.registerProfessionalService.professionalInformations.endereco.bairro = this.userAdressComponents[3].value;
+      this.registerProfessionalService.professionalInformations.endereco.logradouro = this.userAdressComponents[4].value;
+      this.registerProfessionalService.professionalInformations.endereco.numero = parseInt(this.userAdressComponents[5].value);
+      this.registerProfessionalService.professionalInformations.endereco.complemento = this.userAdressComponents[6].value;
+    } else {
+      this.registerBusinessService.businessInformations.endereco.cep = this.userAdressComponents[0].value;
+      this.registerBusinessService.businessInformations.endereco.cidade = this.userAdressComponents[1].value;
+      this.registerBusinessService.businessInformations.endereco.estado = this.userAdressComponents[2].value;
+      this.registerBusinessService.businessInformations.endereco.bairro = this.userAdressComponents[3].value;
+      this.registerBusinessService.businessInformations.endereco.logradouro = this.userAdressComponents[4].value;
+      this.registerBusinessService.businessInformations.endereco.numero = parseInt(this.userAdressComponents[5].value);
+      this.registerBusinessService.businessInformations.endereco.complemento = this.userAdressComponents[6].value;
+    }
+  }
+
+  inputMasks(event: any, index: number) {
+    const isPageTypeZero = this.pageType === 0;
+    const isIndexOne = index === 1;
+    const isIndexZero = index === 0;
+    const isTelefoneOrCelular = this.arrayUserInformationInputs[this.pageType][index].title === 'Telefone *' || this.arrayUserInformationInputs[this.pageType][index].title === 'Celular *';
+    
+    if (isPageTypeZero && isIndexOne) {
+      this.applyCpfMask(event, index);
+    } else if (!isPageTypeZero && isIndexZero) {
+      this.applyCnpjMask(event, index);
+    }
+    
+    if (isTelefoneOrCelular) {
       this.applyPhoneMask(event, index);
     }
-
+    
     this.verifyInputs(event, index);
   }
 
@@ -342,17 +396,21 @@ export class UserInformationComponent {
 
   getLinkDestinationContinue() {
     if (this.pageType == 0){
-      return '/biografia-profissional';
+      this.router.navigate(['/biografia-profissional']);
     } else {
-      return '/biografia-empresa';
+      this.router.navigate(['/biografia-empresa']);
     }
   }
 
   getLinkDestinationBack(){
     if (this.pageType == 0){
-      return '/criar-conta-profissional';
+      this.router.navigate(['/criar-conta-profissional']);
     } else {
-      return '/selecionar-usuario';
+      this.router.navigate(['/selecionar-usuario']);
     }
+  }
+
+  formatSelectValue(input: string): string {
+    return input.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
   }
 }

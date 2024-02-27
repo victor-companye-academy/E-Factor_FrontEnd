@@ -50,6 +50,15 @@
             background: var(--primary);
         }
     }
+
+    @media(max-width: 767px) {
+        .div-content {
+            flex-direction: column-reverse;
+            .col-3, .col-9 {
+                width: 100%;
+            }
+        }
+    }
 }
 :host ::ng-deep {
     .modal {

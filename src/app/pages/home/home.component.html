@@ -1,31 +1,42 @@
+<app-block-nonlogged-modal 
+*ngIf="isBlockNonloggedModalOpen"
+(closeModal)="closeNonLoggedModal()"
+></app-block-nonlogged-modal>
 <main class="d-flex w-100 main">
     <div class="sidebar">
         <app-sidebar></app-sidebar>
     </div>
 
     <div class="w-100 fadeIn overflow-hidden">
-        <div class="w-100 container div-main px-4">
+        <div class="w-100 container div-main">
             <app-header></app-header>
 
-            <section class="mb-0 w-100 py-4">
-                <div
-                    class="fadeInDown d-flex flex-column justify-content-center align-items-start background-students rounded-4 px-5 overflow-hidden">
-                    <img src="assets/icons/logo-site.svg" width="270px" alt="Logo e-factor" title="e-factor">
-                    <h1 class="fw-bold fs-6 mt-1">O seu profissional ou sua vaga na palma da sua mão de um jeito
-                        diferente.
-                    </h1>
+            <section class="mb-0 w-100 py-4 fadeInLeft">
+                <div class="text-start mt-5">
+                    <div class="row">
+                        <p-carousel [value]="banners" [numVisible]="1" [numScroll]="1" [showIndicators]="true"
+                            [circular]="true" [autoplayInterval]="4000"
+                            [showNavigators]="false" class="col-12">
+
+                            <ng-template let-card pTemplate="courses">
+                                <card-newsletter [card]="card" class="mx-0 card-home"></card-newsletter>
+                            </ng-template>
+
+                        </p-carousel>
+                    </div>
                 </div>
             </section>
 
             <!--   -->
 
-            <section class="mt-0 w-100  py-1">
-                <div *ngIf="cardProfessional[1]" class="section-professional d-flex justify-content-center row">
-                    <div class="see-more pt-2 col-lg-12 col-xl-12 col-xxl-4">
-                        <h3 class="fw-bold fs-6 mt-4">
+            <section class="mt-0 w-100  py-1 fadeInDown">
+                <div *ngIf="cardProfessional && cardProfessional[1]"
+                    class="section-professional d-flex justify-content-center row fadeIn">
+                    <div class="see-more pt-2 col-lg-12 col-xl-12 col-xxl-4 fadeIn">
+                        <h3 class="fw-bold fs-6 mt-4 fadeIn">
                             Um mundo de profissionais ao seu alcance.
                         </h3>
-                        <p class="fw-light mt-3">
+                        <p class="fw-light mt-3 fadeIn">
                             Encontre profissionais capacitados com a categoria de sua preferência.
                         </p>
 
@@ -35,28 +46,33 @@
                         </button>
                     </div>
 
-                    <card-professional *ngIf="cardProfessional[1]" [short]="true" [card]="cardProfessional[1]"
-                        class="mt-4 col-lg-6 col-xl-6 col-xxl-4"></card-professional>
+                    <card-professional *ngIf="cardProfessional[1]" [isLogged]="isLogged && accepted" [short]="true" [card]="cardProfessional[1]"
+                        (click)="isLogged ? confirm() : openNonLoggedModal()"
+                        class="mt-4 col-lg-6 col-xl-6 col-xxl-4 fadeIn"></card-professional>
 
-                    <card-professional *ngIf="cardProfessional[0]" [short]="true" [card]="cardProfessional[0]"
-                        class="mt-4 col-lg-6 col-xl-6 col-xxl-4"></card-professional>
+                    <card-professional *ngIf="cardProfessional[0]" [isLogged]="isLogged && accepted" [short]="true" [card]="cardProfessional[0]"
+                        (click)="isLogged ? confirm() : openNonLoggedModal()"
+                        class="mt-4 col-lg-6 col-xl-6 col-xxl-4 fadeIn"></card-professional>
 
                 </div>
             </section>
 
-            <section class="w-100 py-1">
-                <div *ngIf="cardVacancy[1]" class="div-vacancy row justify-content-center">
+            <section class="w-100 py-1 fadeInDown">
+                <div *ngIf="cardVacancy && cardVacancy.length >= 2 && cardVacancy[1]"
+                    class="div-vacancy row justify-content-center fadeIn">
 
-                    <card-vacancy [short]="true" [card]="cardVacancy[1]" class="mt-4 col-lg-6 col-xl-6 col-xxl-4" [routerLink]="['/search-vacancies']"></card-vacancy>
-                    <card-vacancy [short]="true" [card]="cardVacancy[0]" class="mt-4 col-lg-6 col-xl-6 col-xxl-4" [routerLink]="['/search-vacancies']"></card-vacancy>
+                    <card-vacancy [short]="true" [isLogged]="isLogged" [card]="cardVacancy[1]" class="mt-4 col-lg-6 col-xl-6 col-xxl-4"
+                        (click)="isLogged ? '' : openNonLoggedModal()"></card-vacancy>
+                    <card-vacancy [short]="true" [isLogged]="isLogged" [card]="cardVacancy[0]" class="mt-4 col-lg-6 col-xl-6 col-xxl-4"
+                        (click)="isLogged ? '' : openNonLoggedModal()"></card-vacancy>
 
-                    <div class="see-more d-flex flex-column align-items-end mt-4 col-lg-12 col-xl-12 col-xxl-4">
-                        <h3 class="fw-bold fs-6 text-end pt-2">
+                    <div class="see-more d-flex flex-column align-items-end mt-4 col-lg-12 col-xl-12 col-xxl-4 fadeIn">
+                        <h3 class="fw-bold fs-6 text-end pt-2 fadeIn">
                             Um mundo de vagas ao seu alcance.
                         </h3>
                         <p class="fw-light mt-2 text-end">
-                            Encontre vagas da forma onde você se enquada com a categoria de sua
-                            preferência..
+                            Encontre vagas onde você se enquada com a categoria de sua
+                            preferência.
                         </p>
 
                         <button type="button" class="mt-4 border-0 fw-medium py-2 rounded-3 me-0"
@@ -68,16 +84,14 @@
             </section>
 
             <section class="mt-5 w-100 py-4">
-                <div class="div-aboult">
+                <div class="div-howitworks">
                     <h2 class="fw-bold fs-5 text-center">
                         Como funciona a E-factor
                     </h2>
 
-                    <div class="row mt-4">
-                        <span *ngFor="let card of about" class="col-lg-6 col-xl-4">
-                            <card-details [card]="card" class="mt-4"></card-details>
-                        </span>
-                    </div>
+                    <div class="banner1 fadeInLeft"></div>
+                    <div class="banner2 fadeInRight"></div>
+                    <div class="banner3 fadeInLeft"></div>
                 </div>
             </section>
 
@@ -88,10 +102,10 @@
                     </h2>
 
                     <div class="text-start mt-5">
-                        <div class="row m-0">
-                            <p-carousel [value]="testimonials" [numVisible]="3" [numScroll]="1"
+                        <div class="row">
+                            <p-carousel [value]="testimonials" [numVisible]="numOfCards" [numScroll]="1"
                                 [responsiveOptions]="responsiveOptions" [circular]="true" [autoplayInterval]="4000"
-                                class="col-12">
+                                class="col-12" [showNavigators]="false">
 
                                 <ng-template let-card pTemplate="item">
                                     <card-details [card]="card" class="mx-2"></card-details>
@@ -106,3 +120,7 @@
         <app-footer></app-footer>
     </div>
 </main>
+<p-toast></p-toast>
+<p-confirmDialog acceptLabel="Ok" rejectLabel="Cancelar">
+    <ng-template let-message></ng-template>
+</p-confirmDialog>

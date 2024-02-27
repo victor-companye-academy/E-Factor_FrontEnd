@@ -30,6 +30,10 @@ import { BusinessListComponent } from './business-list/business-list.component';
 import { VacancysListComponent } from './vacancys-list/vacancys-list.component';
 import { SolicitationsListComponent } from './solicitations-list/solicitations-list.component';
 import { DashboardAdmComponent } from './dashboard-adm/dashboard-adm.component';
+import { ProfessionalGuardService } from '../core/guards/professional-guard.service';
+import { BusinessGuardService } from '../core/guards/business-guard.service';
+import { LoggedGuardService } from '../core/guards/logged-guard.service';
+import { AdminGuardService } from '../core/guards/admin-guard.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -48,9 +52,10 @@ const routes: Routes = [
   { path: 'confirm-code/:email', component: CodeConfirmationComponent },
   { path: 'change-password', component: ChangePasswordComponent },
   { path: 'create-business-user', component: BusinessUserComponent },
-  { path: 'vacancies-created', component: VacanciesCreatedComponent },
+  { path: 'vacancies-created', component: VacanciesCreatedComponent, canActivate: [BusinessGuardService], },
   {
     path: 'create-vacancy',
+    canActivate: [BusinessGuardService],
     children: [
       { path: '', component: VacanciesCreatedComponent },
       { path: 'vacancy', component: CreateVacancyComponent },
@@ -58,20 +63,24 @@ const routes: Routes = [
       { path: 'create', component: CreateVacancyCreateComponent }
     ]
   },
+  { path: 'view-interested-vacancies', component: VacanciesCreatedComponent, canActivate: [ProfessionalGuardService], },
+  { path: 'view-vacancy/:id', component: VacanciesCreatedComponent },
   {
     path: 'request-coin-factor',
+    canActivate: [BusinessGuardService],
     children: [
       { path: '', component: RequestCoinFactorComponent },
       { path: 'send', component: SendRequestComponent }]
   },
-  { path: 'business-profile/:id', component: BusinessProfileComponent },
-  { path: 'professional-profile/:id', component: ProfessionalProfileComponent },
+  { path: 'business-profile/:id', component: BusinessProfileComponent, canActivate: [LoggedGuardService] },
+  { path: 'professional-profile/:id', component: ProfessionalProfileComponent, canActivate: [LoggedGuardService] },
   { path: 'newsletter', component: NewsletterComponent },
-  { path: 'extract', component: ExtractComponent },
-  { path: 'new-business-user', component: CreateBussinesUserComponent },
-  { path: 'manage-business-users/:id', component: ListBusinessUsersComponent },
+  { path: 'extract', component: ExtractComponent, canActivate: [BusinessGuardService], },
+  { path: 'new-business-user', component: CreateBussinesUserComponent, canActivate: [BusinessGuardService], },
+  { path: 'manage-business-users/:id', component: ListBusinessUsersComponent, canActivate: [BusinessGuardService], },
   {
     path: 'admin',
+    canActivate: [AdminGuardService],
     children: [
       { path: '', component: DashboardAdmComponent },
       { path: 'professionals-list', component: ProfessionalsListComponent },

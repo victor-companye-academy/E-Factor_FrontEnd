@@ -11,6 +11,8 @@
 
             <div class="row px-4 div-content">
                 <section>
+
+
                     <h1 class="fw-bold fs-5 mt-1 w-100 py-4 pb-0">
                         Coin Factor solicitado
                     </h1>
@@ -23,7 +25,16 @@
                 </section>
 
                 <section>
-                    <div class="rounded-3 card border-0 align-items-center">
+                    <div class="rounded-3 card border-0 align-items-center overflow-hidden">
+                        <div class="p-4 d-flex justify-content-end w-100">
+                            <button type="button" class="m-0 p-0 bg-transparent button-close border-0 roudned-circle"
+                                (click)="onClose()">
+                                <img src="assets/icons/create-vacancy/close-circle.svg" alt="Ícone de fechar"
+                                    title="Fechar">
+                            </button>
+                        </div>
+
+
                         <img src="assets/logo-efactor.svg" alt="Ícone grande do ecoin" title="Coin Factor"
                             class="my-5 logo pt-3">
 
@@ -44,12 +55,13 @@
                         <p class="w-100 text-center">
                             Agradecemos pela sua paciência enquanto trabalhamos para garantir que tudo ocorra da melhor
                             forma possível. Se você tiver alguma dúvida ou precisar de mais informações, não hesite em
-                            entrar em contato conosco atráves do e-mail <span class="email">efactor@ajuda.com</span>.
+                            entrar em contato conosco atráves do e-mail <span class="email">suporteefactor@gmail.com</span>.
                             Estamos aqui para ajudar.
                         </p>
                         <p-toast></p-toast>
 
-                        <button type="button" class="my-5 rounded-3 py-1 border-0 button-ok" (click)="showSuccess()">
+                        <button type="button" class="my-5 rounded-3 py-1 border-0 button-ok"
+                            [ngClass]="{'button-disabled': wasClicked}" (click)="showSuccess()">
                             Entendido
                         </button>
 

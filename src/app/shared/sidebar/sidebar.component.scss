@@ -92,6 +92,15 @@
             }
         }
 
+        .photo-circle{
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+        .profilePicture{
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
         @media screen and (max-width: 990px) {
             width: 2rem;
             #logo {
@@ -165,5 +174,37 @@
                 display: none;
             }
         }
+    }
+    .card{
+        z-index: 1000;
+        position: fixed;
+        left: 1rem;
+        bottom: 1rem;
+        border: none;
+    }
+    .img-speedDial{
+        object-fit: cover;
+        z-index: 999;
+        width: 4.2rem;
+        height: 4.2rem;
+        position: fixed;
+        left: 0.95rem;
+        bottom: 1.05rem;
+        border: 1px solid var(--primary);
+        transition: 0.2s;
+    }
+    .focus-img{
+        transition: 0.2s;
+        transform: scale(110%);
+        border: 2px solid var(--primary);
+    }
+}
+
+:host ::ng-deep {
+    .p-speeddial-button.p-button.p-button-icon-only {
+        opacity: 0;
+    }
+    .p-speeddial-action{
+        text-decoration: none;
     }
 }

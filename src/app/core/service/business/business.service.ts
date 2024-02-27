@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import { BusinessInfo } from '../../interfaces/business-info';
+import { Observable, map } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BusinessService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
-  public listBusiness():Array<BusinessInfo> {
+  public listBusiness(): Array<BusinessInfo> {
 
     console.log("entrei no serviço");
 
@@ -81,10 +84,127 @@ export class BusinessService {
   public updateBusiness(updatedBusiness: any) {
     const businessArray: Array<BusinessInfo> = this.listBusiness();
     const index = businessArray.findIndex(business => business.id === updatedBusiness.id);
-  
+
     if (index !== -1) {
       businessArray[index] = updatedBusiness;
       sessionStorage.setItem('businesses', JSON.stringify(businessArray));
     }
+  }
+
+  public returnBusinessFromLoggedUser() {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+
+    return this.httpClient.get('https://internal-gateway.efactor.digital/ms-empresa/v1/empresa-logado', { headers })
+      .pipe(
+        map(response => response)
+      );
+  }
+
+  public returnBusinessById(id: number) {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+
+    return this.httpClient.get('https://internal-gateway.efactor.digital/ms-empresa/v1/detalhe-empresa?id_empresa=' + id, { headers })
+      .pipe(
+        map(response => response)
+      );
+  }
+
+  public returnBusiness() {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+
+    return this.httpClient.get('https://internal-gateway.efactor.digital/ms-empresa/v1/listar-empresas', { headers })
+      .pipe(
+        map(response => response)
+      );
+  }
+
+  public consultarSaldoCoin() {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+
+    return this.httpClient.get('https://internal-gateway.efactor.digital/ms-empresa/v1/consultar-saldo', { headers })
+      .pipe(
+        map(response => response)
+      );
+  }
+
+  public requestVoucher(quantity: number): Observable<any> {
+    const url = 'https://internal-gateway.efactor.digital/ms-empresa/v1/solicitar-voucher';
+
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+    const requestBody = {
+      "qtdCoin": quantity
+    }
+
+    return this.httpClient.post<any>(url, requestBody, { headers })
+      .pipe(
+        res => res,
+        error => error
+      );
+  }
+
+  public updateBusinessData(objEmpresa: any) {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+
+    const objEmpresaAtualizado = {
+      razaoSocial: objEmpresa.razaoSocial,
+      nomeFantasia: objEmpresa.nomeFantasia,
+      fotoPerfil: objEmpresa.fotoPerfil,
+      sobre: objEmpresa.sobre,
+      contato: {
+        email: objEmpresa.contato.email,
+        telefone: objEmpresa.contato.telefone
+      },
+      endereco: {
+        cep: objEmpresa.endereco.cep,
+        logradouro: objEmpresa.endereco.logradouro,
+        numero: objEmpresa.endereco.numero,
+        complemento: objEmpresa.endereco.complemento,
+        bairro: objEmpresa.endereco.bairro,
+        cidade: objEmpresa.endereco.cidade,
+        estado: objEmpresa.endereco.estado
+      }
+    }
+
+    const body = objEmpresaAtualizado;
+
+    return this.httpClient.put<any>('https://internal-gateway.efactor.digital/ms-empresa/v1/atualizar-empresa', body, { headers })
+      .pipe(
+        map(response => response)
+      );
+  }
+
+  public returnNotifications() {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+
+    return this.httpClient.get('https://internal-gateway.efactor.digital/ms-empresa/v1/notificacao-vaga', { headers })
+      .pipe(
+        map(response => response)
+      );
+  }
+
+  public confirmNotification(vancancyVisualized: number) {
+    const headers = {
+      Authorization: `Bearer ${this.authService.getToken()}`
+    };
+
+
+    return this.httpClient.post<any>('https://internal-gateway.efactor.digital/ms-empresa/v1/confirmar-notificacao?id_vaga=' + vancancyVisualized, {}, { headers })
+      .pipe(
+        map(response => response)
+      );
   }
 }

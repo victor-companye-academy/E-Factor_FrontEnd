@@ -37,7 +37,7 @@
         </div>
         <div>
           <label for="inputComplement">Complemento</label>
-          <input type="text" class="form-control mt-1" id="inputComplement" placeholder="Complemento">
+          <input type="text" class="form-control mt-1" name="complemento" id="inputComplement" placeholder="Complemento" [(ngModel)]="addressComponents[6].value" (input)="checkInputs()">
         </div>
       </div>
 

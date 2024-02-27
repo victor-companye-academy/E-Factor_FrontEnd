@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { PaginatorState } from 'primeng/paginator';
 import { Vacancy } from 'src/app/core/interfaces/vacancy';
 import { Search } from 'src/app/core/interfaces/search';
 import { VacancyService } from 'src/app/core/service/vacancy/vacancy.service';
 import { formatText } from 'src/app/core/utils/formatText';
+import { AuthService } from 'src/app/core/service/auth/auth.service';
 
 @Component({
   selector: 'app-vacancies',
@@ -12,21 +13,48 @@ import { formatText } from 'src/app/core/utils/formatText';
 })
 export class VacanciesComponent {
 
-  constructor(private vacancyService: VacancyService) { }
+  constructor(private vacancyService: VacancyService, private authService: AuthService) {
+    if (this.authService.isAuthenticated()) {
+      this.isLogged = true;
+    }
+
+    if (window.innerWidth <= 767){
+      this.showBtnFilter = true;
+      this.showShortVacancy = true;
+    }
+  }
 
   protected readonly rows: number = 10;
   protected toShow: boolean = true;
   protected visible: boolean = false;
-  protected card?: Vacancy;
+  protected vacancyCard?: Vacancy;
 
-  protected vacancy: Array<Vacancy> = this.vacancyService.listVacancies()
-  protected vacancySearch: Array<Vacancy> = this.vacancy;
+  protected vacancy!: Array<Vacancy>;
+  protected vacancySearch!: Array<Vacancy>;
 
   protected first: number = 0;
-  protected totalRecords: number = this.vacancySearch.length || 0
+  protected totalRecords: number = (this.vacancySearch && this.vacancySearch.length) || 0;
   private searchObj: Search | undefined;
 
-  protected setSearch(event: Search) {
+
+  protected isLogged: boolean = false;
+  protected isBlockNonloggedModalOpen: boolean = false;
+
+  protected showBtnFilter: boolean = false;
+  protected showShortVacancy: boolean = false;
+
+  //
+
+  openNonLoggedModal() {
+    this.isBlockNonloggedModalOpen = true;
+  }
+
+  closeNonLoggedModal() {
+    this.isBlockNonloggedModalOpen = false;
+  }
+
+  protected async setSearch(event: Search) {
+    await this.initializeVacanciesList();
     this.first = 0
 
     if (this.validSearch(event)) {
@@ -56,7 +84,11 @@ export class VacanciesComponent {
       else {
         this.vacancySearch = this.pagination(this.vacancy);
 
-        this.totalRecords = this.vacancy.length;
+        if (this.vacancy) {
+          this.totalRecords = this.vacancy.length;
+        } else {
+          this.totalRecords = 0;
+        }
 
         return this.vacancySearch;
       }
@@ -67,7 +99,7 @@ export class VacanciesComponent {
   }
 
   private isEmptylist(list: Array<Vacancy>): boolean {
-    return list.length ? true : false
+    return list && list.length ? true : false && list.length > 0
   }
 
   private applySearch(list: Array<Vacancy>, search: Search): Array<Vacancy> {
@@ -153,20 +185,21 @@ export class VacanciesComponent {
   }
 
   private searchBySkill(list: Array<Vacancy>, search: string): Array<Vacancy> {
-    const newList = list
-      .filter(card => card.skills
-        .map(skill => skill.toLowerCase())
-        .includes(formatText(search.toLowerCase())));
+    const newList: Array<Vacancy> = list.filter(card => {
+      const lowerSearch = formatText(search.toLowerCase());
+      return card.habilidades.some(skill => formatText(skill.toLowerCase()).startsWith(lowerSearch));
+    });
+
     return newList;
   }
 
   private searchByPosition(list: Array<Vacancy>, search: string): Array<Vacancy> {
-    const newList: Array<Vacancy> = list.filter(card => formatText(card.serniority.toLowerCase()) === formatText(search.toLowerCase()))
+    const newList: Array<Vacancy> = list.filter(card => formatText(card.senioridade.toLowerCase()).includes(formatText(search.toLowerCase())))
     return newList
   }
 
   private pagination(list: Array<Vacancy>): Array<Vacancy> {
-    const newList = list.slice(this.first, (this.rows + this.first))
+    const newList = list ? list.slice(this.first, (this.rows + this.first)) : [];
     return newList;
   }
 
@@ -179,7 +212,33 @@ export class VacanciesComponent {
   }
 
   protected showDialog(card: Vacancy) {
-    this.card = card
+    this.vacancyCard = card
     this.visible = true;
+  }
+
+  protected async initializeVacanciesList(): Promise<void> {
+    try {
+      this.vacancy = await this.vacancyService.listVacancies();
+      this.vacancy = this.vacancy.filter(vacancy => vacancy.ativo);
+      this.vacancySearch = [...this.vacancy];
+
+      this.toShow = this.isEmptylist(this.vacancySearch);
+    } catch (error) {
+      console.error('Erro ao inicializar a lista de vagas');
+    }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.showBtnFilter = window.innerWidth <= 767;
+    this.showShortVacancy = window.innerWidth <= 767;
+  }
+
+  scrollToFilter() {
+    const filterElement = document.getElementById('filter');
+  
+    if (filterElement) {
+      filterElement.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 }

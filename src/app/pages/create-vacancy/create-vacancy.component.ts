@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/service/auth/auth.service';
+import { BusinessService } from 'src/app/core/service/business/business.service';
 import { CreateVacancyService } from 'src/app/core/service/create-vacancy/create-vacancy.service';
 
 @Component({
@@ -9,8 +11,6 @@ import { CreateVacancyService } from 'src/app/core/service/create-vacancy/create
   styleUrls: ['./create-vacancy.component.scss']
 })
 export class CreateVacancyComponent {
-
-  constructor(private createVacancyService: CreateVacancyService, private router:Router) { }
 
   protected titleMaxLength!: number;
   protected titleMinLength!: number;
@@ -24,7 +24,7 @@ export class CreateVacancyComponent {
   protected isInvalidTitleLength: boolean = false;
   protected titleLength!: number;
 
-  protected coin!: number;
+  protected coins: number = 0;
 
 
   protected form = new FormGroup({
@@ -40,6 +40,16 @@ export class CreateVacancyComponent {
         Validators.required
       ])
   })
+
+  constructor(private createVacancyService: CreateVacancyService, private router: Router, private authService: AuthService, private businessService: BusinessService) {
+    if (this.authService.getRole().includes('GESTOR')) {
+      this.businessService.consultarSaldoCoin().subscribe(
+        (res: any) => {
+          this.coins = res.saldoCoins;
+        }
+      )
+    }
+  }
 
 
   //início dos métodos
@@ -97,7 +107,7 @@ export class CreateVacancyComponent {
 
     if (this.form.valid) {
       const title = this.form.get('title')?.value
-      const description = this.form.get('description')?.value
+      const description = this.form.get('description')?.value?.replace(/\n/g, '<br>');
 
       this.createVacancyService.insertDescription(title || '', description || '');
 
@@ -107,8 +117,6 @@ export class CreateVacancyComponent {
 
   ngOnInit(): void {
     this.createVacancyService.setWasSendVacancy(false)
-    this.coin = 50;
-
     this.titleMaxLength = 50;
     this.titleMinLength = 10;
 

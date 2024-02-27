@@ -24,6 +24,14 @@ import { AboutVacancyComponent } from './about-vacancy/about-vacancy.component';
 import { EditBusinessUserModalComponent } from './edit-business-user-modal/edit-business-user-modal.component';
 import { DeleteBusinessUserModalComponent } from './delete-business-user-modal/delete-business-user-modal.component';
 import { ApproveSolicitationModalComponent } from './approve-solicitation-modal/approve-solicitation-modal.component';
+import { BlockNonloggedModalComponent } from './block-nonlogged-modal/block-nonlogged-modal.component';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { BadgeModule } from 'primeng/badge';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { SpeedDialModule } from 'primeng/speeddial';
+import { ScrollerModule } from 'primeng/scroller';
+import { ChipModule } from 'primeng/chip';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [
@@ -49,7 +57,8 @@ import { ApproveSolicitationModalComponent } from './approve-solicitation-modal/
     HeaderComponent,
     EditBusinessUserModalComponent,
     DeleteBusinessUserModalComponent,
-    ApproveSolicitationModalComponent
+    ApproveSolicitationModalComponent,
+    BlockNonloggedModalComponent
   ],
   imports: [
     CommonModule,
@@ -57,7 +66,14 @@ import { ApproveSolicitationModalComponent } from './approve-solicitation-modal/
     HttpClientModule,
     RouterModule,
     ReactiveFormsModule,
-    ToastModule
+    ToastModule,
+    OverlayPanelModule,
+    BadgeModule,
+    InputSwitchModule,
+    SpeedDialModule,
+    ScrollerModule,
+    ChipModule,
+    ConfirmDialogModule
   ],
   exports: [
     AddressComponent,
@@ -80,7 +96,8 @@ import { ApproveSolicitationModalComponent } from './approve-solicitation-modal/
     HeaderComponent,
     EditBusinessUserModalComponent,
     DeleteBusinessUserModalComponent,
-    ApproveSolicitationModalComponent
+    ApproveSolicitationModalComponent,
+    BlockNonloggedModalComponent
   ]
 })
 export class SharedModule { }

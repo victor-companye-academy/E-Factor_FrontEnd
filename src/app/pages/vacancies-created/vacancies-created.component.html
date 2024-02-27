@@ -9,20 +9,22 @@
                 <app-header></app-header>
 
                 <h1 class="fw-bold fs-5 mt-1 w-100 p-4">
-                    Vagas criadas
+                    {{title}}
                 </h1>
             </div>
 
             <search (sendData)="setSearch($event)" id="search"></search>
 
-            <div class=" mt-4 m-0 ">
+            <button class="btn w-100 fw-bold mt-3 rounded-3" *ngIf="showBtnCreate" (click)="scrollToFilter()">Nova vaga</button>
 
-                <div class="row position-relative pb-5 section-main col-12">
+            <div class="d-flex justify-content-center align-items-center mt-4 m-0">
+
+                <div class="row position-relative pb-5 section-main col-12" *ngIf="!isLoading">
 
                     <section class="col">
                         <span *ngFor="let card of vacancySearch" class="mx-1 fadeIn">
                             <!--  -->
-                            <card-vacancy (click)="showDialog(card)" [short]="false" [card]="card"
+                            <card-vacancy (click)="showDialog(card)" [short]="showShortVacancy" [card]="card"
                                 class="mt-4 cursor-pointer"></card-vacancy>
                         </span>
                         
@@ -32,12 +34,12 @@
                             <p-dialog [(visible)]="visible" [modal]="true" [style]="{ width: '90vw'}"
                                 [draggable]="false" [resizable]="true" [maximizable]="true" styleClass="modal">
 
-                                <about-vacancy [card]="card" [showInterest]="false"></about-vacancy>
+                                <about-vacancy [card]="card" [showInterest]="showInterestBtn"></about-vacancy>
                             </p-dialog>
                         </div>
 
 
-                        <div class="position-absolute bottom-0 d-flex w-100 justify-content-center">
+                        <div class="d-flex w-100 justify-content-center">
                             <ng-template [ngIf]="toShow">
                                 <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"
                                     [totalRecords]="totalRecords" [showFirstLastIcon]="false"
@@ -64,8 +66,8 @@
                         </ng-template>
                     </section>
 
-                    <section class="col-3  section-create-vacancy p-0 ms-4">
-
+                    <section class="col-3 section-create-vacancy p-0 mx-4" *ngIf="isBusiness" id="create">
+                        
                         <h3 class="fw-bold fs-5 text-color-primary mb-3">
                             Criar vaga
                         </h3>
@@ -77,13 +79,13 @@
                             <p class="p-3">
                                 No botão abaixo, você tem a oportunidade de cadastrar uma vaga adicional em nossa
                                 plataforma. No entanto, por gentileza, lembre-se de que isso implicará um custo de
-                                <span class="fw-medium">10
+                                <span class="fw-medium">1
                                     Coin Factor</span>. É importante verificar se você possui a quantidade de Coins
                                 necessária
                                 antes de prosseguir. Se necessário, você pode solicitar mais Coin Factor no seu
                                 perfil.
                                 Não hesite em entrar em contato conosco pelo e-mail <span
-                                    class="email">efactor@ajuda.com</span> caso tenha
+                                    class="email">suporteefactor@gmail.com</span> caso tenha
                                 alguma
                                 dúvida. Estamos aqui para ajudar!
                             </p>
@@ -96,8 +98,17 @@
                     </section>
 
                 </div>
+
+                <div class="container py-5 px-3 error-page" *ngIf="isLoading">
+                    <div class="h-100 d-flex flex-column p-5 align-items-center justify-content-center">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <p-toast></p-toast>
         <app-footer class="footer"></app-footer>
     </div>
 </main>

@@ -6,9 +6,11 @@
         color: var(--text-white);
         min-height: 13rem;
 
+
         background-color: rgb(140, 140, 140);
         background-repeat: no-repeat;
         background-size: cover;
+        background-position: top right;
 
         img {
             width: 60px;
@@ -35,6 +37,35 @@
                 outline: var(--b) solid var(--c);
                 outline-offset: var(--g);
             }
+        }
+
+    }
+
+    .home{
+        color: #0E7A97;
+        font-size: medium !important;
+
+        h2{
+            font-size: x-large !important;
+            color: var(--primary);
+        }
+
+        @media(min-width: 767px){
+            font-size: large !important;
+            p{
+                width: 85%;
+            }
+    
+            h2{
+                font-size: xx-large !important;
+                color: var(--primary);
+            }
+        }
+    }
+
+    .blendmode{
+        @media (max-width: 767px){
+            background-blend-mode: screen;
         }
     }
 

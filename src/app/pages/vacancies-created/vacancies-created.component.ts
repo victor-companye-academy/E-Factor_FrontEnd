@@ -1,9 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Search } from 'src/app/core/interfaces/search';
 import { PaginatorState } from 'primeng/paginator';
 import { Vacancy } from 'src/app/core/interfaces/vacancy';
 import { VacancyService } from 'src/app/core/service/vacancy/vacancy.service';
 import { formatText } from 'src/app/core/utils/formatText';
+import { AuthService } from 'src/app/core/service/auth/auth.service';
+import { MessageService } from 'primeng/api';
+import { ProfessionalService } from 'src/app/core/service/professional/professional.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-vacancies-created',
@@ -11,19 +15,91 @@ import { formatText } from 'src/app/core/utils/formatText';
   styleUrls: ['./vacancies-created.component.scss']
 })
 export class VacanciesCreatedComponent {
-  constructor(private vacancyService: VacancyService) { }
+  constructor(private vacancyService: VacancyService, private professionalService: ProfessionalService,
+     private authService: AuthService, private messageService: MessageService, private router: Router, private route: ActivatedRoute) {
+    
+    this.isLoading = true;
+    this.id = parseInt(this.route.snapshot.paramMap.get('id')!);
 
+    this.showBtnCreate = window.innerWidth <= 1057;
+    this.showShortVacancy = window.innerWidth <= 767;
+    
+    if (this.id && this.authService.isAuthenticated() && this.authService.getRole().includes('PROFISSIONAL')) {
+      this.vacancyService.listVacanciesByBusiness(this.id).then(
+        (res: any) => {
+          this.showInterestBtn = true;
+          this.isLoading = false;
+          this.title = 'Vagas da empresa';
+          this.vacancy = res;
+          this.vacancySearch = this.pagination(this.vacancy);
+          this.totalRecords = this.vacancySearch.length;
+          this.toShow = this.isEmptylist(this.vacancy);
+          this.onPageChange({page: 0, first: 0, rows: 5, pageCount: 1});
+        })
+        .catch(          
+          error => {
+            this.isLoading = false;
+            this.toShow = false;
+            this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível carregar as vagas' });
+        });
+    } else if (this.authService.isAuthenticated() && this.authService.getRole().includes('GESTOR')){
+      this.isBusiness = true;
+      this.vacancyService.listVacanciesByLoggedBusiness().subscribe(
+        (res: any) => {
+          this.isLoading = false;
+          this.title = 'Vagas criadas';
+          this.vacancy = res;
+          this.vacancySearch = this.pagination(this.vacancy);
+          this.totalRecords = this.vacancySearch.length;
+          this.toShow = this.isEmptylist(this.vacancy);
+          this.onPageChange({page: 0, first: 0, rows: 5, pageCount: 1});
+        },
+        error => {
+          this.isLoading = false;
+          this.toShow = false;
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível carregar as vagas' });
+        });
+    } else if (this.authService.isAuthenticated() && this.authService.getRole().includes('PROFISSIONAL')) {
+      this.professionalService.listInterestedVacancies().subscribe(
+        (res: any) => {
+          this.isLoading = false;
+          this.title = 'Vagas que mostrou interesse';
+          this.vacancy = res;
+          this.vacancySearch = this.pagination(this.vacancy);
+          this.totalRecords = this.vacancySearch.length;
+          this.toShow = this.isEmptylist(this.vacancy);
+          this.onPageChange({page: 0, first: 0, rows: 5, pageCount: 1});
+        },
+        error => {
+          this.isLoading = false;
+          this.toShow = false;
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Não foi possível carregar as vagas' });
+        }
+      )
+    } else {
+      this.router.navigate(['/']);
+    }
+  } 
+
+  protected title: string = '';
+  protected id: number = 0;
+  protected isBusiness: boolean = false;
+  protected isLoading: boolean = false;
   protected readonly rows: number = 10;
   protected toShow: boolean = true;
   protected visible: boolean = false;
   protected card?: Vacancy;
 
-  protected vacancy: Array<Vacancy> = this.vacancyService.listCompanyVacancies()
-  protected vacancySearch: Array<Vacancy> = this.vacancy;
+  protected vacancy: Array<Vacancy> = [];
+  protected vacancySearch: Array<Vacancy> = [];
 
   protected first: number = 0;
-  protected totalRecords: number = this.vacancySearch.length || 0
+  protected totalRecords: number = 0;
   private searchObj: Search | undefined;
+  protected showInterestBtn: boolean = false;
+
+  protected showBtnCreate: boolean = false;
+  protected showShortVacancy: boolean = false;
 
   protected setSearch(event: Search) {
     this.first = 0
@@ -33,7 +109,7 @@ export class VacanciesCreatedComponent {
       this.vacancySearch = this.applySearch(this.vacancy, event);
       this.totalRecords = this.vacancySearch.length;
 
-      this.vacancySearch = this.pagination(this.vacancySearch)
+      this.vacancySearch = this.pagination(this.vacancySearch);
 
     } else {
       this.searchObj = undefined
@@ -117,15 +193,16 @@ export class VacanciesCreatedComponent {
   }
 
   private searchBySkill(list: Array<Vacancy>, search: string): Array<Vacancy> {
-    const newList = list
-      .filter(card => card.skills
-        .map(skill => skill.toLowerCase())
-        .includes(formatText(search.toLowerCase())));
+    const newList: Array<Vacancy> = list.filter(card => {
+      const lowerSearch = formatText(search.toLowerCase());
+      return card.habilidades.some(skill => formatText(skill.toLowerCase()).startsWith(lowerSearch));
+    });
+
     return newList;
   }
 
   private searchByPosition(list: Array<Vacancy>, search: string): Array<Vacancy> {
-    const newList: Array<Vacancy> = list.filter(card => formatText(card.serniority.toLowerCase()) === formatText(search.toLowerCase()))
+    const newList: Array<Vacancy> = list.filter(card => formatText(card.senioridade.toLowerCase()).includes(formatText(search.toLowerCase())))
     return newList
   }
 
@@ -145,5 +222,19 @@ export class VacanciesCreatedComponent {
   protected showDialog(card: Vacancy) {
     this.card = card
     this.visible = true;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.showBtnCreate = window.innerWidth <= 1057;
+    this.showShortVacancy = window.innerWidth <= 767;
+  }
+
+  scrollToFilter() {
+    const filterElement = document.getElementById('create');
+  
+    if (filterElement) {
+      filterElement.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 }

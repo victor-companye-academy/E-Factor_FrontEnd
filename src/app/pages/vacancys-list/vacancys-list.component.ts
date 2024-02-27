@@ -12,7 +12,7 @@ export class VacancysListComponent {
 
   constructor (private vacancyService: VacancyService) { }
 
-  protected vacanciesList: Array<Vacancy> = this.vacancyService.listVacancies();
+  protected vacanciesList!: Array<Vacancy>;
   protected filterSelected: string = '';
   protected solicitationError: boolean = false;
 
@@ -22,26 +22,48 @@ export class VacancysListComponent {
   onSort(event: SortEvent) {
     event.data?.sort((a: any, b: any) => {
       let result = 0;
-      if (new Date(a.creationDate) < new Date(b.creationDate)) {
+      if (new Date(a.createDate) < new Date(b.createDate)) {
         result = 1;
       }
-      if (new Date(a.creationDate) > new Date(b.creationDate)) {
+      if (new Date(a.createDate) > new Date(b.createDate)) {
         result = -1;
       }
-      if (new Date(a.creationDate) == new Date(b.creationDate)) {
+      if (new Date(a.createDate) == new Date(b.createDate)) {
         result = 0;
       }
       return event.order ? event.order * result : 0;
     });
   }
 
-  filterVacancies(){
-    this.vacanciesList = this.vacancyService.listVacancies();
-    if(this.nameSearch.length > 0){
-      this.vacanciesList = this.vacanciesList.filter(vacancy => vacancy.businessInfo.name.toLowerCase().includes(this.nameSearch.toLowerCase()));
+  async filterVacancies() {
+    try {
+      this.vacanciesList = await this.vacancyService.listVacancies();
+  
+      if (this.nameSearch.length > 0) {
+        this.vacanciesList = this.vacanciesList.filter(vacancy =>
+          vacancy.nomeEmpresa.toLowerCase().includes(this.nameSearch.toLowerCase())
+        );
+      }
+  
+      if (this.positionSearch.length > 0) {
+        this.vacanciesList = this.vacanciesList.filter(vacancy =>
+          vacancy.senioridade.toLowerCase().includes(this.positionSearch.toLowerCase())
+        );
+      }
+    } catch (error) {
+      console.error('Erro ao filtrar vagas:', error);
     }
-    if(this.positionSearch.length > 0){
-      this.vacanciesList = this.vacanciesList.filter(vacancy => vacancy.serniority.toLowerCase().includes(this.positionSearch.toLowerCase()));
+  }
+
+  protected async initializeVacanciesList(): Promise<void> {
+    try {
+      this.vacanciesList = await this.vacancyService.listVacancies();
+    } catch (error) {
+      console.error('Erro ao inicializar a lista de vagas:', error);
     }
+  }
+
+  async ngOnInit(){
+    await this.initializeVacanciesList();
   }
 }

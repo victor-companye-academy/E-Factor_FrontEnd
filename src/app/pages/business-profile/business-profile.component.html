@@ -15,39 +15,43 @@
 <main class="d-flex w-100 main">
     <app-sidebar class="sidebar"></app-sidebar>
     <div class="w-100 fadeIn overflow-hidden">
-        <div class="container py-5 px-3" *ngIf="businessInfo">
+        <div class="container">
+            <app-header></app-header>
+        </div>
+        <div class="container py-5 px-3 main-page fadeIn" *ngIf="!isLoading && !profileNotFound">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <h5 class="fw-bold">Dados Jurídicos</h5>
                 <button class="edit py-1 px-2" *ngIf="isLogged" (click)="openEditModal(0)">Editar<img src="assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
             </div>
             <section>
                 <div class="d-flex align-items-center p-4 dados-juridicos">
-                    <img class="profile-photo ms-3" [src]="businessInfo.photo || 'assets/imgs/default-profile.svg'" alt="Foto do perfil">
+                    <img class="profile-photo ms-3" [src]="businessInfo.fotoPerfil ? businessInfo.fotoPerfil : 'assets/imgs/default-profile.svg'" 
+                        (error)="onImageError($event)" alt="Foto do perfil">
                     <div class="ms-5">
-                        <h5 class="name fw-bold">{{businessInfo.name}}</h5>
-                        <p class="info-text fw-light">{{businessInfo.city}}, {{businessInfo.state}}</p>
+                        <h5 class="name fw-bold">{{businessInfo.nomeFantasia}}</h5>
+                        <p class="info-text fw-light">{{businessInfo.endereco.cidade}}, {{businessInfo.endereco.estado}}</p>
                         <div class="d-flex gap-3 mt-3 info-div">
                             <div>
                                 <p class="info-text mb-1 fw-light">E-mail</p>
-                                <p>{{businessInfo.email}}</p>
+                                <p>{{businessInfo.contato.email}}</p>
                             </div>
                             <div *ngIf="showCellphone">
                                 <p class="info-text mb-1 fw-light">Telefone</p>
-                                <p>{{businessInfo.cellphone}}</p>
+                                <p>{{businessInfo.contato.telefone}}</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
             <div class="about-div d-flex gap-3">
-                <div *ngIf="!isLogged ? businessInfo.about.trim().length > 0 : true" [ngClass]="isLogged ? 'about w-75' : 'w-100'">
+                <div *ngIf="!isLogged ? businessInfo.sobre.trim().length > 0 : true" [ngClass]="isLogged ? 'about w-75' : 'w-100'">
                     <div class="d-flex justify-content-between align-items-center mt-4">
                         <h5 class="fw-bold">Sobre a empresa</h5>
                         <button class="edit py-1 px-2 mb-2" *ngIf="isLogged" (click)="openEditModal(1)">Editar<img src="assets/icons/edit.svg" alt="Editar" class="ms-2"></button>
                     </div>
                     <section>
                         <div class="p-4">
-                            <p class="my-1">{{ businessInfo.about.trim() == '' ? 'Nenhuma informação inserida' : businessInfo.about }}</p>
+                            <p class="my-1">{{ businessInfo.sobre.trim() == '' ? 'Nenhuma informação inserida' : businessInfo.sobre }}</p>
                         </div>
                     </section>
                 </div>
@@ -58,34 +62,48 @@
                     <section class="d-flex flex-column align-items-center gap-3 p-4">
                         <h6 class="fw-light">Você possui</h6>
                         <img src="assets/imgs/coin-factor.svg" alt="Coin Factor" class="coin-factor">
-                        <p class="text-green d-flex align-items-center gap-2 mb-0"><span class="fw-bold fs-1">105</span> coin factor</p>
+                        <p class="text-green d-flex align-items-center gap-2 mb-0"><span class="fw-bold fs-1">{{coins}}</span> coin factor</p>
                         <p class="coin-text">Olá! Aqui está o seu saldo atual na nossa plataforma. Se precisar de mais, basta solicitar através do botão, e nossa equipe irá avaliar sua solicitação com carinho. Estamos à disposição para ajudar!</p>
                         <button class="btn btn-view-all" [routerLink]="['/request-coin-factor']">Solicitar mais</button>
                     </section>
                 </div>
             </div>
-            <div class="vacancys-div d-flex gap-3">
-                <div *ngIf="!isLogged && !(cardVacancy.length > 0) ? false : true" [ngClass]="isLogged ? 'about w-75' : 'w-100'">
+            <div class="vacancys-div d-flex gap-3 mb-5">
+                <div *ngIf="!isLogged && !(cardVacancy.length > 0) ? false : true" [ngClass]="isLogged && isGestorEmpresa ? 'about w-75' : 'w-100'">
                     <h5 class="fw-bold mt-4">Vagas recentes</h5>
-                    <div class="d-flex flex-column align-items-center gap-3" *ngIf="(cardVacancy.length > 0)">
-                        <span *ngFor="let card of cardVacancy; let i = index" class="mx-1">
-                            <card-vacancy [short]="isCollapsed ? true : false" [card]="card" class="mt-4" *ngIf="i < 3"></card-vacancy>
-                        </span>
-                        <button class=" w-25 btn btn-view-all fw-bold mt-3" [routerLink]="['{{businessInfo.id}}-all-vacancies']">Ver tudo</button>
+                    <div class="d-flex flex-column gap-3">
+                        <ng-container *ngFor="let card of cardVacancy; let i = index">
+                          <span *ngIf="i < 3" class="mx-1">
+                            <card-vacancy [short]="isCollapsed ? true : false" [card]="card" class="mt-4" (click)="showDialog(card)"></card-vacancy>
+                          </span>
+                        </ng-container>
+
+                        <div class="card  border-0 flex justify-content-center" [ngClass]="!visible ? 'd-none' : ''">
+                            <p-toast></p-toast>
+    
+                            <p-dialog [(visible)]="visible" [modal]="true" [style]="{ width: '90vw'}"
+                                [draggable]="false" [resizable]="true" [maximizable]="true" styleClass="modal">
+    
+                                <about-vacancy [card]="card" [showInterest]="isLogged ? false : true"></about-vacancy>
+                            </p-dialog>
+                        </div>
+                        <div class="d-flex justify-content-center" *ngIf="cardVacancy.length && (isProfessional || isLogged)">
+                            <button class="w-25 btn btn-view-all fw-bold mt-3" [routerLink]="[isLogged ? '/create-vacancy' : ('/view-vacancy/' + id)]">Ver tudo</button>
+                        </div>
                     </div>
-                    <div class="d-flex flex-column align-items-center gap-3 py-4" *ngIf="!(cardVacancy.length > 0)">
+                    <div class="d-flex flex-column align-items-center gap-3 py-4" *ngIf="cardVacancy.length == 0">
                         <p>Parece que você ainda não possui nenhuma vaga cadastrada, sinta-se a vontade para publicar uma agora mesmo.</p>
-                        <button class="w-25 btn btn-view-all fw-bold mt-3" [routerLink]="['{{businessInfo.id}}-all-vacancies']">Publicar vaga</button>
+                        <button class="w-25 btn btn-view-all fw-bold mt-3" [routerLink]="['/create-vacancy']">Publicar vaga</button>
                     </div>
                 </div>
-                <div *ngIf="isLogged && true" class="w-25">
+                <div *ngIf="isLogged && isGestorEmpresa" class="w-25">
                     <div class="d-flex justify-content-between align-items-center">
                         <h5 class="fw-bold mt-4 mb-2">Usuários</h5>
                     </div>
                     <div class="d-flex flex-column gap-3">
                         <section class="d-flex flex-column align-items-center gap-3 p-4">
                             <img src="assets/icons/sidebar/profissionais.svg" alt="Coin Factor" class="user-img">
-                            <p class="user-text">Você tem a opção de cadastrar moderadores que estarão lá para auxiliá-lo na publicação de vagas, análise de candidatos e muito mais. Porém, é importante lembrar que cada moderador custará <span class="text-green">10 Coin Factor.</span> Os moderadores utilizarão os Coin Factor disponíveis em sua conta, e estamos aqui para responder a quaisquer dúvidas. Sinta-se à vontade para entrar em contato conosco pelo e-mail efactor@ajuda.com, estamos aqui para ajudar!</p>
+                            <p class="user-text">Você tem a opção de cadastrar moderadores que estarão lá para auxiliá-lo na publicação de vagas, análise de candidatos e muito mais. Porém, é importante lembrar que cada moderador custará <span class="text-green">1 Coin Factor.</span> Os moderadores utilizarão os Coin Factor disponíveis em sua conta, e estamos aqui para responder a quaisquer dúvidas. Sinta-se à vontade para entrar em contato conosco pelo e-mail suporteefactor@gmail.com, estamos aqui para ajudar!</p>
                             <button class="btn btn-view-all" [routerLink]="['/new-business-user']">Criar moderador</button>
                         </section>
                         <section class="d-flex flex-column align-items-center gap-3 p-4">
@@ -96,7 +114,14 @@
                 </div>
             </div>
         </div>
-        <div class="container py-5 px-3 error-page" *ngIf="!businessInfo">
+        <div class="container py-5 px-3 error-page" *ngIf="isLoading">
+            <div class="h-100 d-flex flex-column p-5 align-items-center justify-content-center">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+        <div class="container py-5 px-3 error-page" *ngIf="profileNotFound">
             <div class="h-100 d-flex flex-column p-5 align-items-center justify-content-center">
                 <img src="assets/imgs/sem-resultado.svg" alt="Não encontramos nada..."
                     title="Não encontramos nada." class="notFound mb-4 fadeIn">
@@ -109,6 +134,12 @@
                 </p>
             </div>
         </div>
+        <div class="d-flex justify-content-center align-items-center mb-5">
+            <button class="btn btn-danger logout" *ngIf="isLogged" (click)="logout()">
+                SAIR
+            </button>
+        </div>
+        <p-toast></p-toast>
         <app-footer class="footer"></app-footer>
     </div>
 </main>

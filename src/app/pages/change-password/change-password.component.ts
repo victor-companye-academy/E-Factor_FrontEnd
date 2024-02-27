@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { EmailService } from 'src/app/core/service/email/email.service';
 
 @Component({
   selector: 'app-change-password',
@@ -12,11 +13,23 @@ export class ChangePasswordComponent {
   protected isContinueBtnActive: boolean = false;
   protected input: Array<string> = ['', ''];
   protected showPassword: Array<boolean> = [false, false];
+  protected isLoading: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private emailService: EmailService) { }
 
   changePassword(){
-    this.router.navigate(['/login']);
+    this.isLoading = true;
+    this.emailService.infoChangePassword.novaSenha = this.input[0];
+    this.emailService.changePassword().subscribe(
+      res => {
+        this.isLoading = false;
+        this.router.navigate(['/login']);
+      },
+      error => {
+        this.isLoading = false;
+        this.msgError = 'Erro ao alterar senha. Tente novamente.'
+      }
+    )
   }
 
 

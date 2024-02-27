@@ -22,7 +22,7 @@ export class AboutComponent implements OnInit {
       {
         breakpoint: '1199px',
         numVisible: 2,
-        numScroll: 3
+        numScroll: 1
       },
       {
         breakpoint: '992px',

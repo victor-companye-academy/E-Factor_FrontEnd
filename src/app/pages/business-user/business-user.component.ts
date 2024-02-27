@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { BusinessUserInputs } from 'src/app/core/interfaces/business-user-inputs';
+import { RegisterBusinessService } from 'src/app/core/service/register-business/register-business.service';
 
 @Component({
   selector: 'app-business-user',
@@ -10,6 +13,7 @@ export class BusinessUserComponent {
   
   protected isContinueBtnActive: boolean = false;
   protected errMsg: string = '';
+  protected isLoading: boolean = false;
 
   protected arrayInputsBussinesUser: Array<BusinessUserInputs> = [
     {
@@ -27,7 +31,9 @@ export class BusinessUserComponent {
       parameters: ['date', 'dd/mm/aaaa'],
       value: ''
     }
-  ]
+  ];
+
+  constructor(private router: Router, private registerBusinessService: RegisterBusinessService, private messageService: MessageService) { }
 
   verifyInputs(event: any, index: number){
     let value = event.target.value;
@@ -112,5 +118,32 @@ export class BusinessUserComponent {
   numberMask(event: any){
     event.target.value = event.target.value.replace(/[^0-9-]/g, '');
     return event.target.value;
+  }
+
+  getLinkDestinationContinue(){
+    this.router.navigate(['/login']);
+  }
+
+  populateManagerInformations(){
+    this.registerBusinessService.managerInformations.cpf = this.arrayInputsBussinesUser[0].value;
+    this.registerBusinessService.managerInformations.nome = this.arrayInputsBussinesUser[1].value;
+    this.registerBusinessService.managerInformations.dataNascimento = this.arrayInputsBussinesUser[2].value;
+
+    this.createBusinessManager();
+  }
+
+  createBusinessManager() {
+    this.isLoading = true;
+    this.registerBusinessService.registerManager().subscribe(
+      response => {
+        this.messageService.add({severity:'success', summary: 'Sucesso', detail: 'Usuário cadastrado com sucesso!'});
+        this.isLoading = false;
+        this.getLinkDestinationContinue();
+      },
+      error => {
+        this.messageService.add({severity:'error', summary: 'Erro', detail: 'Ocorreu um erro ao cadastrar o usuário. Por favor, verifique os dados e tente novamente.'});
+        this.isLoading = false;
+      }
+    )
   }
 }

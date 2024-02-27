@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { lastValueFrom } from 'rxjs';
+import { Skill } from 'src/app/core/interfaces/skill';
 import { CreateVacancyService } from 'src/app/core/service/create-vacancy/create-vacancy.service';
+import { SkillsService } from 'src/app/core/service/skills/skills.service';
 
 @Component({
   selector: 'app-create-vacancy-details',
@@ -9,20 +12,19 @@ import { CreateVacancyService } from 'src/app/core/service/create-vacancy/create
   styleUrls: ['./create-vacancy-details.component.scss']
 })
 export class CreateVacancyDetailsComponent {
-  constructor(private router: Router, private vacancyService: CreateVacancyService) { }
+  constructor(private router: Router, private vacancyService: CreateVacancyService, private skillService: SkillsService) { }
 
   protected skillsInput: string = '';
   protected suggestionsSkills!: string[];
 
-  protected skills: string[] | undefined;
-  protected serniority: string | undefined;
-  protected vacancyArea: string | undefined;
-  protected modality: string | undefined;
+  protected habilidades!: string[];
+  protected senioridade: string | undefined;
+  protected modalidade: string | undefined;
   protected daysOfWeek!: string[] | undefined;
-  protected contract: string | undefined;
+  protected tipoContrato: string | undefined;
   protected period: string | undefined;
   protected shift: string | undefined;
-  protected expirationDate!: string;
+  protected vacancyArea: string | undefined;
 
   protected validation: any;
   protected vacancyData: any;
@@ -30,63 +32,36 @@ export class CreateVacancyDetailsComponent {
   protected mesageError: string | undefined;
 
   protected formDetails = new FormGroup({
-    skills: new FormControl('', [Validators.nullValidator, Validators.required]),
-    serniority: new FormControl('', [Validators.nullValidator, Validators.required]),
+    habilidades: new FormControl('', [Validators.nullValidator, Validators.required]),
+    senioridade: new FormControl('', [Validators.nullValidator, Validators.required]),
     vacancyArea: new FormControl('', [Validators.nullValidator, Validators.required]),
-    modality: new FormControl('', [Validators.nullValidator, Validators.required]),
+    modalidade: new FormControl('', [Validators.nullValidator, Validators.required]),
     daysOfWeek: new FormControl(''),
-    contract: new FormControl('', [Validators.nullValidator, Validators.required]),
+    tipoContrato: new FormControl('', [Validators.nullValidator, Validators.required]),
     period: new FormControl('', [Validators.nullValidator, Validators.required]),
     shift: new FormControl('', [Validators.nullValidator, Validators.required]),
-    expirationDate: new FormControl('', [Validators.nullValidator, Validators.required]),
   })
 
-  protected skillsList: Array<string> = [
-    'HTML', 'CSS', 'JavaScript', 'TypeScript', 'Angular', 'React', 'Vue.js',
-    'Node.js', 'Express.js', 'Deno', 'Python', 'Django', 'Flask', 'FastAPI',
-    'Ruby', 'Ruby on Rails', 'C#', 'ASP.NET', 'Swift', 'iOS Development',
-    'Java', 'Spring Boot', 'Kotlin', 'Android Development',
-    'PHP', 'Laravel', 'Symfony', 'CodeIgniter',
-    'MySQL', 'PostgreSQL', 'MongoDB', 'Firebase', 'SQLite', 'DynamoDB',
-    'RESTful APIs', 'GraphQL', 'Apollo Server', 'Apollo Client', 'Prisma',
-    'Git', 'GitHub', 'GitLab', 'Bitbucket', 'SourceTree', 'GitKraken',
-    'Visual Studio Code', 'Sublime Text', 'Atom', 'Eclipse', 'IntelliJ IDEA',
-    'Docker', 'Kubernetes', 'Vagrant', 'Heroku', 'AWS', 'Azure', 'Google Cloud Platform',
-    'CI/CD', 'Jenkins', 'Travis CI', 'CircleCI', 'GitHub Actions',
-    'Agile', 'Scrum', 'Kanban', 'JIRA', 'Confluence', 'Trello',
-    'Responsive Design', 'SASS', 'LESS', 'Bootstrap', 'Tailwind CSS', 'Materialize',
-    'WebSockets', 'WebRTC', 'RxJS', 'Redux', 'Vuex', 'MobX', 'Ngrx',
-    'Jest', 'Mocha', 'Chai', 'Cypress', 'Testing Library', 'Enzyme', 'Storybook',
-    'Webpack', 'Rollup', 'Parcel', 'Babel', 'ESLint', 'Prettier', 'Husky',
-    'OAuth', 'JWT', 'OpenID Connect', 'Authentication', 'Authorization',
-    'Microservices', 'Serverless', 'Distributed Systems', 'Service Mesh',
-    'Design Patterns', 'Clean Code', 'Code Review', 'Continuous Learning',
-    'Problem Solving', 'Debugging', 'Agile Development', 'Pair Programming',
-    'Version Control', 'Git Flow', 'GitHub Flow', 'Linux', 'Bash', 'Shell Scripting',
-    'Machine Learning', 'Data Science', 'NLP', 'Computer Vision', 'TensorFlow', 'PyTorch',
-    'Big Data', 'Hadoop', 'Spark', 'Apache Flink', 'Blockchain', 'Smart Contracts',
-    'Cryptocurrency', 'Solidity', 'AR/VR', 'Unity', 'Unreal Engine', 'Blender',
-    'UI/UX Design', 'Figma', 'Sketch', 'Adobe XD', 'InVision',
-    'Technical Writing', 'Blogging', 'Content Creation', 'Public Speaking',
-    'Open Source Contribution', 'Community Building'
-  ];
+  // skilss service get
+  protected skillsList: Array<string> = ['dsf']
+
 
   private inValidate(formName: string): void {
     switch (formName) {
-      case 'skills':
-        if (this.formDetails.controls['skills']?.status === 'INVALID') {
-          this.validation.skills = true;
+      case 'habilidades':
+        if (this.formDetails.controls['habilidades']?.status === 'INVALID') {
+          this.validation.habilidades = true;
           break;
         }
-        this.validation.skills = false;
+        this.validation.habilidades = false;
         break;
 
-      case 'serniority':
-        if (this.formDetails.controls['serniority']?.status === 'INVALID') {
-          this.validation.serniority = true;
+      case 'senioridade':
+        if (this.formDetails.controls['senioridade']?.status === 'INVALID') {
+          this.validation.senioridade = true;
           break;
         }
-        this.validation.serniority = false;
+        this.validation.senioridade = false;
         break;
 
       case 'vacancyArea':
@@ -97,28 +72,28 @@ export class CreateVacancyDetailsComponent {
         this.validation.vacancyArea = false;
         break;
 
-      case 'modality':
-        if (this.formDetails.controls['modality']?.status === 'INVALID') {
-          this.validation.modality = true;
+      case 'modalidade':
+        if (this.formDetails.controls['modalidade']?.status === 'INVALID') {
+          this.validation.modalidade = true;
           break;
         }
-        this.validation.modality = false;
+        this.validation.modalidade = false;
         break;
 
       case 'daysOfWeek':
-        if ((this.formDetails.controls['daysOfWeek']?.status === 'INVALID' || !this.daysOfWeek || this.daysOfWeek.length === 0) && this.modality !== 'remoto') {
+        if ((this.formDetails.controls['daysOfWeek']?.status === 'INVALID' || !this.daysOfWeek || this.daysOfWeek.length === 0) && this.modalidade !== 'remoto') {
           this.validation.daysOfWeek = true;
           break;
         }
         this.validation.daysOfWeek = false;
         break;
 
-      case 'contract':
-        if (this.formDetails.controls['contract']?.status === 'INVALID') {
-          this.validation.contract = true;
+      case 'tipoContrato':
+        if (this.formDetails.controls['tipoContrato']?.status === 'INVALID') {
+          this.validation.tipoContrato = true;
           break;
         }
-        this.validation.contract = false;
+        this.validation.tipoContrato = false;
         break;
 
       case 'period':
@@ -137,79 +112,25 @@ export class CreateVacancyDetailsComponent {
         this.validation.shift = false;
         break;
 
-      case 'expirationDate':
-        if (this.formDetails.controls['expirationDate']?.status === 'INVALID' || this.dateInvalid()) {
-          this.validation.expirationDate = true;
-          break;
-        }
-        this.validation.expirationDate = false;
-        break;
-
       default:
         console.log('erro')
     }
   }
 
-  private dateInvalid(): boolean {
-    try {
-      this.mesageError = ''
-
-      const partesData = this.expirationDate.split('-');
-      const year = parseInt(partesData[0], 10);
-      const month = parseInt(partesData[1], 10);
-      const day = parseInt(partesData[2], 10);
-
-      if (year.toString().length !== 4) {
-        this.mesageError = 'Erro ao validar a data';
-        return true;
-      }
-
-      const expirationDate = new Date(year, month - 1, day);
-      const today = new Date();
-
-      expirationDate.setHours(0, 0, 0, 0);
-      today.setHours(0, 0, 0, 0);
-
-      const compare = (expirationDate.getTime() < today.getTime()) && (expirationDate.getTime() !== today.getTime());
-
-      if (compare) {
-        this.mesageError = 'A data inserida é anterior à data de hoje';
-        return true;
-      }
-      else {
-        this.mesageError = '';
-        if (
-          expirationDate.getFullYear() === year &&
-          expirationDate.getMonth() === month - 1 &&
-          expirationDate.getDate() === day
-        ) {
-          return false;
-        }
-        else {
-          this.mesageError = 'Formato de data inválido';
-          return true;
-        }
-      }
-    } catch (error) {
-      this.mesageError = 'Erro ao validar a data';
-      return true;
-    }
-  }
-
-  onAddSkill(skill: string): void {
+  onAddSkill(habilidades: string): void {
     this.skillsInput = ''
 
-    if (this.skills) {
-      let index = this.skills.indexOf(skill);
+    if (this.habilidades) {
+      let index = this.habilidades.indexOf(habilidades);
 
       if (index === -1) {
-        this.skills?.push(skill)
+        this.habilidades?.push(habilidades)
       }
     }
   }
 
-  onRemoveSkill(skill: string): void {
-    this.skills = this.skills?.filter(element => element !== skill)
+  onRemoveSkill(habilidades: string): void {
+    this.habilidades = this.habilidades?.filter(element => element !== habilidades)
   }
 
   onSuggestionItems(event: Event): void {
@@ -248,17 +169,18 @@ export class CreateVacancyDetailsComponent {
   }
 
   onSubmit() {
-    this.formDetails.get('skills')?.setValue(this.skills as any);
-    this.formDetails.get('serniority')?.setValue(this.serniority as any);
+    this.formDetails.get('habilidades')?.setValue(this.habilidades as any);
+    this.formDetails.get('senioridade')?.setValue(this.senioridade as any);
     this.formDetails.get('vacancyArea')?.setValue(this.vacancyArea as any);
-    this.formDetails.get('modality')?.setValue(this.modality as any);
+    this.formDetails.get('modalidade')?.setValue(this.modalidade as any);
     this.formDetails.get('daysOfWeek')?.setValue(this.daysOfWeek as any);
-    this.formDetails.get('contract')?.setValue(this.contract as any);
+    this.formDetails.get('tipoContrato')?.setValue(this.tipoContrato as any);
     this.formDetails.get('period')?.setValue(this.period as any);
     this.formDetails.get('shift')?.setValue(this.shift as any);
-    this.formDetails.get('expirationDate')?.setValue(this.expirationDate as any);
 
-    const vacancy: any = this.vacancyService.getVacancy();
+    let moreDetails;
+
+    const vacancy: any = this.vacancyService.getCreateVacancy();
 
     let isInvalid: boolean = false;
 
@@ -281,29 +203,51 @@ export class CreateVacancyDetailsComponent {
 
     if (this.formDetails.valid && vacancy && !isInvalid) {
 
-      this.vacancyService.insertDetails(this.skills as string[], this.serniority as string, this.vacancyArea as string, this.modality as string, this.daysOfWeek as string[], this.contract as string, this.period as string, this.shift as string, this.expirationDate as string)
+      moreDetails = `
+      <span class="fw-semibold">Área da vaga: </span>${this.vacancyArea}<br> 
+      <span class="fw-semibold">Período: </span>${this.period}<br>
+      <span class="fw-semibold">Turno: </span>${this.shift}<br>
+      `;
+
+      if (this.daysOfWeek && this.daysOfWeek?.length > 0) {
+        moreDetails += `
+      <span class="fw-semibold">Dias da semana: </span>${this.daysOfWeek}<br>
+        `;
+      }
+
+      moreDetails += `<br>`
+
+      this.vacancyService.insertDetails(this.habilidades as string[], this.senioridade as string, this.modalidade as string, this.tipoContrato as string, moreDetails as string)
 
       this.router.navigateByUrl("/create-vacancy/create");
     }
   }
 
-  ngOnInit() {
-    const vacancy = this.vacancyService.getVacancy()
+  async ngOnInit() {
+    const vacancy = this.vacancyService.getCreateVacancy();
 
-    if (vacancy.title === undefined || '' && vacancy.description === undefined || '') {
+    try {
+      const res = await lastValueFrom(this.skillService.getSkills());
+      this.skillsList = res.map(skill => skill.habilidade);
+
+    } catch (error) {
+      console.log('Erro ao processar a requisição da listagem de skills');
+    }
+
+
+    if (vacancy.titulo === undefined || '' && vacancy.descricao === undefined || '') {
       this.router.navigateByUrl("/create-vacancy");
     } else {
       this.validation = {};
 
       this.daysOfWeek = [];
-      this.skills = [];
+      this.habilidades = [];
       this.vacancyArea = '';
-      this.modality = '';
-      this.contract = '';
+      this.modalidade = '';
+      this.tipoContrato = '';
       this.period = '';
-      this.serniority = '';
+      this.senioridade = '';
       this.shift = '';
-
     }
   }
 }

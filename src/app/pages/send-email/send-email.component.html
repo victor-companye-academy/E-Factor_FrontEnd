@@ -2,15 +2,20 @@
     <img src="assets/logo-efactor.svg" alt="Logo e-factor" class="logo position-absolute" [routerLink]="['/']"> 
     <div class="content d-flex flex-column p-3 justify-content-center w-50">
         <h1 class="fw-bold mb-5">Encontre sua conta</h1>
-        <p>{{text}}</p>
-        <input title="email" type="email" class="form-control mb-2" placeholder="Ex: efator@email.com" (input)="inputEmail($event)" *ngIf="!confirmEmail">
-        <p class="email" *ngIf="confirmEmail">{{email}}</p>
+        <p>Insira seu email para procurar sua conta.</p>
+        <input title="email" type="email" class="form-control mb-2" placeholder="Ex: efator@email.com" 
+            (keyup.enter)="isSearchBtnActive ? searchEmail() : ''" (input)="inputEmail($event)">
         <p class="msgError">{{msgError}}</p>
         <br>
         <div class="d-flex gap-3 justify-content-end">
             <button class="btn btn-cancel fw-bold" [routerLink]="['/login']">Cancelar</button>
-            <button class="btn btn-search fw-bold" [disabled]="!isSearchBtnActive" (click)="searchEmail()" *ngIf="!confirmEmail">{{btnSearch}}</button>
-            <button class="btn btn-search fw-bold" [disabled]="!isSearchBtnActive" (click)="searchEmail()" *ngIf="confirmEmail" [routerLink]="['/confirm-code', email]">{{btnSearch}}</button>
+            <button class="btn btn-search fw-bold" [disabled]="!isSearchBtnActive" (click)="searchEmail()">
+                <div class="spinner-border" role="status" style="width: 1.3rem; height: 1.3rem;"
+                    *ngIf="isLoading">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p *ngIf="!isLoading" class="m-0">Pesquisar</p>
+            </button>
         </div>
     </div>
 </body>

@@ -33,7 +33,7 @@
 
                     <p-toast></p-toast>
 
-                    <button type="button" (click)="onConfirm()" class="button border-0 py-2 rounded-3 my-5 fs-5">
+                    <button type="button" (click)="onConfirm()" class="button border-0 py-2 rounded-3 my-5 fs-5" [ngClass]="{'button-disabled': wasClicked}">
                         Criar vaga
                     </button>
 

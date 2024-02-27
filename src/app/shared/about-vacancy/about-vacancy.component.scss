@@ -7,6 +7,17 @@
     .primary-color {
         color: var(--primary);
     }
+ 
+    .div-img-logo{
+        height: 13rem;
+        width: 13rem;
+    }
+
+    .logo {
+        min-width: 100%;
+        min-height: 100%
+    }
+
     .section-main {
         .about {
             span.status {
@@ -16,7 +27,7 @@
             }
             section {
                 .card {
-                    // background: var(--white); 
+                    // background: var(--white);
                     background-color: white;
                     color: var(--text);
                 }
@@ -34,8 +45,11 @@
 
             section {
                 background: var(--white);
+                border-radius: 1rem;
+                padding: 1.5rem;
 
                 img {
+                    object-fit: cover;
                     border: none;
                     box-shadow: 5px 5px 20px #b3b3b3;
                 }
@@ -51,5 +65,27 @@
                 }
             }
         }
+    }
+
+    .interestedList{
+        width: 100%;
+        background-color: var(--background);
+    }
+
+    @media (max-width: 991px) {
+        .profile{
+            width: 90vw !important;
+        }
+        .vacancy-data{
+            width: 90vw !important;
+        }
+    }
+}
+:host ::ng-deep {
+    .p-dialog .p-dialog-footer {
+        background: var(--background);
+    }
+    .p-dialog .p-dialog-header {
+        padding: 1rem !important;
     }
 }

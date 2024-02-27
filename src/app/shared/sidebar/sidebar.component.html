@@ -1,8 +1,9 @@
-<div id="sidebar" class="h-100 justify-content-between flex-column py-5 px-4 position-relative">
+<div id="sidebar" class="h-100 justify-content-between flex-column py-5 px-4 position-relative" *ngIf="!isCollapsed">
     <img [src]="isCollapsed ? (isAdm ? 'assets/favicon-adm.svg' : 'assets/favicon.svg') : (isAdm ? 'assets/logo-efactor-adm.svg' : 'assets/logo-efactor.svg')" alt="logo e-factor" title="e-factor" id="logo" class="mb-5 position-fixed" [ngClass]="{'ms-4': !isCollapsed}">
     <nav class="position-fixed menu flex-column justify-content-between position-fixed mt-5" [ngClass]="{'px-2 ': isCollapsed}">
         <div id="nav-links" *ngFor="let link of (isAdm ? arrayLinksAdminSidebar : arrayLinksSidebar); let i = index" class="p-2">
-            <span [routerLinkActive]="(isAdm ? 'active-link-adm' : 'active-link')" [routerLink]="link.parameters[0]" [routerLinkActiveOptions]="{exact: true}" class="d-flex justify-content-start align-items-center">
+            <span [routerLinkActive]="(isAdm ? 'active-link-adm' : 'active-link')" [routerLink]="link.parameters[0]" 
+                [routerLinkActiveOptions]="{exact: true}" class="d-flex justify-content-start align-items-center" *ngIf="this.role.includes('GESTOR') ? true : i <= 4">
                 <div class="position-absolute"></div>
                 <img src="{{link.parameters[1]}}" alt="{{link.title}}" class="me-3">
                 <a class="text-decoration-none" *ngIf="!isCollapsed">
@@ -13,11 +14,31 @@
     </nav>
 
     <button type="button" id="login" class="justify-content-between align-items-center p-3 position-fixed border-0"
-        [routerLink]="['/login']" [ngClass]="{'login-adm': isAdm}">
-        <div class="p-0 mt-2 mb-1">
+        (click)="getLinkDestination()" [ngClass]="{'login-adm': isAdm}">
+        <div class="p-0 mt-2 mb-1" *ngIf="role == 'undefined'">
             <img src="assets/icons/sidebar/entrar.svg" alt="Entrar" class="nav-icons me-2 mb-2 mt-1">
             <a class="fw-bold text-decoration-none" *ngIf="!isCollapsed">Entrar</a>
         </div>
+        <div class="p-0 mt-2 mb-1" *ngIf="role == 'ADMINISTRADOR'">
+            <img src="assets/icons/sidebar/logout.svg" alt="Entrar" class="nav-icons me-2 mb-2 mt-1">
+            <a class="fw-bold text-decoration-none" *ngIf="!isCollapsed">Sair</a>
+        </div>
+        <div class="p-0 mt-2 mb-1 d-flex" *ngIf="role != 'ADMINISTRADOR' && role != 'undefined'">
+            <div class="bg-white rounded-circle photo-circle mb-1">
+                <img [src]="profilePicture" (error)="onImageError($event)" alt="" class="nav-icons mb-1" 
+                    [ngClass]="{'profilePicture': profilePicture}" style="height: 1.5rem; width: 1.5rem">
+            </div>
+            <a class="fw-bold text-decoration-none ms-2" *ngIf="!isCollapsed">{{ userName.substring(0, 10) + (userName.length > 10 ? '...' : '') }}</a>
+        </div>
         <img src="assets/icons/sidebar/arrow.svg" alt="Entrar" class="nav-icons" *ngIf="!isCollapsed">
     </button>
+</div>
+<div *ngIf="isCollapsed">
+    <div class="card" [ngStyle]="{'height': authService.getRole() == 'ADMINISTRADOR' ? '406px' : authService.getRole().includes('GESTOR') ? '518px' : authService.getRole() == 'PROFISSIONAL' ? '406px' : '406px'}">
+        <div class="speeddial-tooltip-demo">
+            <p-toast></p-toast>
+            <p-speedDial [model]="tooltipItems" className="speeddial-left" direction="up" type="linear" (onVisibleChange)="changePhotoSpeedDial()"></p-speedDial>
+        </div>
+    </div>
+    <img [src]="profilePicture" (error)="onImageError($event)" alt="" class="img-speedDial rounded-circle" id="img-speedDial">
 </div>

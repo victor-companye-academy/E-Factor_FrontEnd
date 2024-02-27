@@ -23,4 +23,17 @@
             background: var(--primary);
         }
     }
+
+    .card-margin{
+        margin: 0 0.5rem;
+        @media(max-width: 1200px){
+            margin: 0;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .div-main{
+            padding: 0 0.5rem !important;
+        }
+    }
 }

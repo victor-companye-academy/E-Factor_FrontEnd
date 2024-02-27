@@ -4,28 +4,26 @@
     </div>
 
     <div class="w-100 fadeIn overflow-hidden h-100">
-        <div class="w-100 container px-4">
+        <div class="w-100 container px-4 div-main">
             <app-header></app-header>
 
             <h1 class="fw-bold fs-5 mt-1 w-100 py-4">
                 Sobre a E-Factor
             </h1>
 
-            <section class="mt-5 w-100 py-4">
-                <div class="div-aboult">
+            <section class="mt-5 w-100 py-4 container-fluid">
+                <div class="div-howitworks">
                     <h2 class="fw-bold fs-5 text-center">
                         Como funciona a E-factor
                     </h2>
 
-                    <div class="row mt-4">
-                        <span *ngFor="let card of about" class="col-lg-6 col-xl-4">
-                            <card-details [card]="card" class="mt-4"></card-details>
-                        </span>
-                    </div>
+                    <div class="banner1 fadeInLeft"></div>
+                    <div class="banner2 fadeInRight"></div>
+                    <div class="banner3 fadeInLeft"></div>
                 </div>
             </section>
 
-            <section class="d-flex flex-column align-items-center mt-5 overflow-hidden px-4">
+            <!-- <section class="d-flex flex-column align-items-center mt-5 overflow-hidden px-4">
                 <h2 class="fw-bold fs-5">
                     Objetivos
                 </h2>
@@ -51,7 +49,7 @@
             <section class="overflow-hidden mt-5 w-100 d-flex justify-content-center">
                 <img src="assets/imgs/brazilian-regions.svg" class="mt-4 mb-4 col-12 col-xl-10"
                     alt="Mapa do Brasil com destaque onde há maior números de pessoas impactadas." title="Mapa">
-            </section>
+            </section> -->
 
             <section class="mt-5 mb-5 py-4 w-100">
                 <div class="text-center">
@@ -59,13 +57,13 @@
                         Depoimentos
                     </h2>
                     <div class="text-start mt-5">
-                        <div class="row m-0">
+                        <div class="row">
                             <p-carousel [value]="testimonials" [numVisible]="3" [numScroll]="3"
                                 [responsiveOptions]="responsiveOptions" [circular]="true" [autoplayInterval]="4000"
-                                class="col-12">
+                                class="col-12" [showNavigators]="false">
 
                                 <ng-template let-card pTemplate="item">
-                                    <card-details [card]="card" class="mx-2"></card-details>
+                                    <card-details [card]="card" class="card-margin"></card-details>
                                 </ng-template>
 
                             </p-carousel>
